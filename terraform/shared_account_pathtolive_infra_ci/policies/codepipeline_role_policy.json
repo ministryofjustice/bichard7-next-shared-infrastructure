@@ -1,0 +1,97 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "${bucket_arn}",
+        "${bucket_arn}/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr:DescribeImages",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
+        "ecr:PutImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload"
+      ],
+      "Resource": [
+        "arn:aws:ecr:${region}:${account_id}:repository/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kms:ListKeys",
+        "kms:ListAliases",
+        "ecr:GetAuthorizationToken"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codestar-connections:CreateConnection",
+        "codestar-notifications:ListNotificationRules",
+        "codestar-connections:GetInstallationUrl",
+        "codestar-connections:ListConnections",
+        "codestar-connections:GetIndividualAccessToken",
+        "codestar-notifications:ListEventTypes",
+        "codestar-connections:ListInstallationTargets",
+        "codestar-notifications:ListTargets",
+        "codestar-connections:StartOAuthHandshake",
+        "codestar-connections:ListHosts",
+        "codestar-connections:StartAppRegistrationHandshake",
+        "codestar-connections:RegisterAppCode",
+        "codestar-notifications:DeleteTarget",
+        "codestar-connections:CreateHost"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codestar-notifications:*",
+        "codestar-connections:*"
+      ],
+      "Resource": [
+        "arn:aws:codestar-notifications:*:${account_id}:notificationrule/*",
+        "arn:aws:codestar-connections:*:${account_id}:host/*",
+        "arn:aws:codestar-connections:*:${account_id}:connection/*"
+      ]
+    },
+    {
+      "Sid": "AllowAccountSNSPublish",
+      "Effect": "Allow",
+      "Action": [
+        "sns:Publish",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
