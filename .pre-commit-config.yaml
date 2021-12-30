@@ -45,5 +45,5 @@ repos:
         name: terraform-docs
         language: docker_image
         entry: quay.io/terraform-docs/terraform-docs:0.16.0
-        args: [ "markdown", "--recursive", "--recursive-path", ".", "--output-file", "README.md", "./modules" ]
+        args: [ "markdown", "--recursive", "--recursive-path", ".", "--output-file", "README.md", "./terraform" ]
         pass_filenames: false
