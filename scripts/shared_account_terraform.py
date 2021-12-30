@@ -76,6 +76,7 @@ class TerraformRunner(object):
         try:
             os.chdir(
                 os.path.join(
+                    "terraform",
                     "shared_account_{}_{}".format(
                         self._args.environment,
                         self._args.module
