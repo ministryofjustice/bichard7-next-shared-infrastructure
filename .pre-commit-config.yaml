@@ -14,13 +14,15 @@ repos:
       - id: mixed-line-ending
 
   - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.45.0
+    rev: v1.62.1
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
         args:
           - "--args=--module"
           - "--args=--force"
+          - "--args=--config=__GIT_WORKING_DIR__/.tflint.hcl"
+          - "--args=--disable-rule=aws_lambda_function_deprecated_runtime"
       - id: terraform_validate
       - id: terraform_tfsec
         args:
@@ -38,7 +40,10 @@ repos:
         name: Check validity of JSON files and templates
         entry: scripts/check_json_files.sh
         language: script
+
       - id: terraform-docs
-        name: Update READMEs with terraform-docs
-        entry: scripts/update_docs.sh
-        language: script
+        name: terraform-docs
+        language: docker_image
+        entry: quay.io/terraform-docs/terraform-docs:0.16.0
+        args: [ "markdown", "--recursive", "--recursive-path", ".", "--output-file", "README.md", "./modules" ]
+        pass_filenames: false
