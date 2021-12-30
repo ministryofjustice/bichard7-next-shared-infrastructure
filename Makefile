@@ -28,7 +28,7 @@ shared-account-sandbox-infra:
 shared-account-sandbox-infra-ci:
 	./scripts/shared_account_terraform.py sandbox infra_ci
 
-.PHONY: shared-account-sandbox-infra-sonarqube
+.PHONY: shared-account-sandbox-infra-ci-sonarqube
 shared-account-sandbox-infra-ci-sonarqube:
 	./scripts/shared_account_terraform.py sandbox infra_ci_sonarqube
 
