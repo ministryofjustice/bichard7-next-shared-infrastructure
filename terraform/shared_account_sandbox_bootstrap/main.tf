@@ -25,7 +25,7 @@ module "label" {
     "environment-name" = "sharedaccount-sandbox-bootstrap"
     "account-name"     = "bichard7-sandbox-shared"
     "provisioned-by"   = "shared_account_bootstrap code see make shared_account_bootstrap in Makefile"
-    "source-code"      = "https://github.com/ministryofjustice/bichard7-next-infrastructure/tree/master/terraform/shared_account_sandbox_bootstrap"
+    "source-code"      = "https://github.com/ministryofjustice/bichard7-next-shared-infrastructure/tree/master/terraform/shared_account_sandbox_bootstrap"
     "owner"            = module.tag_vars.owner_email
     "region"           = data.aws_region.current_region.name
   }
