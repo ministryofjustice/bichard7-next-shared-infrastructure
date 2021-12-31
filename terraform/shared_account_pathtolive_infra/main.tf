@@ -18,7 +18,7 @@ module "label" {
     "environment-name" = "pathtolive-shared-infra"
     "account-name"     = "bichard7-shared"
     "provisioned-by"   = "shared_account_pathtolive_infra code see make shared-account-pathtolive-infra in Makefile"
-    "source-code"      = "https://github.com/ministryofjustice/bichard7-next-infrastructure/tree/master/shared_terraform/shared_account_pathtolive_infra"
+    "source-code"      = "https://github.com/ministryofjustice/bichard7-next-shared-infrastructure/tree/master/shared_terraform/shared_account_pathtolive_infra"
     "owner"            = module.tag_vars.owner_email
     "region"           = data.aws_region.current_region.name
   }
