@@ -59,7 +59,7 @@ ENVIRONMENT=foo WORKSPACE=bar aws-vault exec <AWS_ACCOUNT_NAME> -- make upload-c
 ## Shared Terraform infrastructure
 
 We have 2 shared environments configured. Sandbox and PathToLive. These accounts can be accessed via shared credentials. If you have a user account on the parent account of either
-of these environments, you can see how to assume roles on either [the sandbox](terraform/shared_account_pathtolive_infra/README.md) or [path to live](terraform/shared_account_pathtolive_infra/README.md) accounts.
+of these environments, you can see how to assume roles on either [the sandbox](terraform/shared_account_sandbox_infra/README.md) or [path to live](terraform/shared_account_pathtolive_infra/README.md) accounts.
 The CI keys are stored in the 1password vault.
 
 To deploy to the shared environments we need a few more environment variables.
