@@ -22,7 +22,7 @@ phases:
         unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip
         chmod +x terraform
         mv terraform /usr/bin/.
-        cd bichard7-next-infrastructure
+        cd bichard7-next-shared-infrastructure
   build:
     commands:
       - set -e
