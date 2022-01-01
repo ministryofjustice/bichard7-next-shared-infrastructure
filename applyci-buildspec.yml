@@ -29,7 +29,7 @@ phases:
       - |
         echo "Waiting 30 seconds for IAM permissions to apply"
         sleep 30
-        cd shared_terraform/shared_account_${ENVIRONMENT}_infra_ci
+        cd terraform/shared_account_${ENVIRONMENT}_infra_ci
         TF_VAR_is_cd=true terraform init
         TF_VAR_is_cd=true terraform apply -auto-approve
   post_build:
