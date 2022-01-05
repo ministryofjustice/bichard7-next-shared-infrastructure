@@ -86,10 +86,6 @@ module "deploy_preprod_terraform" {
       type  = "PARAMETER_STORE"
     },
     {
-      name  = "BICHARD_DEPLOY_TAG"
-      value = data.external.latest_bichard_image.result.tags
-    },
-    {
       name  = "TF_VAR_override_deploy_tags"
       value = "true"
     },
