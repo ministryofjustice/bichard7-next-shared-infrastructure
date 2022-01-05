@@ -461,6 +461,7 @@ module "reset_preprod_smtp_bastion" {
 }
 
 module "reset_preprod_smtp_bastion_schedule" {
+  count           = 0
   source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
   codebuild_arn   = module.reset_preprod_smtp_bastion.pipeline_arn
   name            = module.reset_preprod_smtp_bastion.pipeline_name
