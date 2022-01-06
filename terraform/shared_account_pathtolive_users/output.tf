@@ -16,7 +16,7 @@ output "admin_users" {
 output "readonly_users" {
   description = "A list of read-only users"
   sensitive   = true
-  value = sort([])
+  value       = sort([])
 }
 
 output "non_sc_user_arns" {
