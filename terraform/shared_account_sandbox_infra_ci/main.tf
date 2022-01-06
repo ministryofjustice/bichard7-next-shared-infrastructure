@@ -34,9 +34,9 @@ module "codebuild_base_resources" {
 
   allow_accounts = [
     data.aws_caller_identity.current.account_id,
-    "454061736096",
-    "108839434327",
-    "744728743481"
+    data.aws_caller_identity.sandbox_a.account_id,
+    data.aws_caller_identity.sandbox_b.account_id,
+    data.aws_caller_identity.sandbox_c.account_id
   ]
 }
 
@@ -67,3 +67,4 @@ module "common_build_jobs" {
   common_cd_vars            = local.common_cd_vars
   tags                      = module.label.tags
 }
+

@@ -1,6 +1,6 @@
 module "pull_offline_binaries" {
   source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
-  build_description      = "Pull trivy db, trivy binary, goss binary and dgoss binary then store them in s3, so we avoid hitting github rate limits when we pull from there"
+  build_description      = "Pull trivy db, trivy binary, aws-nuke, goss binary and dgoss binary then store them in s3, so we avoid hitting github rate limits when we pull from there"
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   name                   = "pull-offline-binaries"
   repository_name        = "bichard7-next-infrastructure"
