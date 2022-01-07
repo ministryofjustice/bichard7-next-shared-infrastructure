@@ -5,6 +5,26 @@ locals {
   sandbox_c_arn      = var.is_cd ? data.terraform_remote_state.shared_infra.outputs.sandbox_c_ci_arn : data.terraform_remote_state.shared_infra.outputs.sandbox_c_admin_arn
   environment        = "sandbox"
 
+
+
+  nuke_vars = [
+    {
+      id              = data.aws_caller_identity.sandbox_a.account_id
+      target          = "sandbox-a"
+      assume_role_arn = local.sandbox_a_arn
+    },
+    {
+      id              = data.aws_caller_identity.sandbox_b.account_id
+      target          = "sandbox-b"
+      assume_role_arn = local.sandbox_b_arn
+    },
+    {
+      id              = data.aws_caller_identity.sandbox_c.account_id
+      target          = "sandbox-c"
+      assume_role_arn = local.sandbox_c_arn
+    }
+  ]
+
   # We're merging as we do in path to live, the variable is repeated in this list, but will be overwritten by the common
   # var list, if you want to add more vars to this add them to the empty set
   bichard_cd_vars = concat(
