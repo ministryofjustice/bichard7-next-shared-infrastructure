@@ -26,10 +26,12 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_apply_nuke_sandbox_schedule"></a> [apply\_nuke\_sandbox\_schedule](#module\_apply\_nuke\_sandbox\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
 | <a name="module_codebuild_base_resources"></a> [codebuild\_base\_resources](#module\_codebuild\_base\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_base_resources | n/a |
 | <a name="module_codebuild_docker_resources"></a> [codebuild\_docker\_resources](#module\_codebuild\_docker\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/aws_ecr_repositories | n/a |
 | <a name="module_common_build_jobs"></a> [common\_build\_jobs](#module\_common\_build\_jobs) | ../modules/shared_cd_common_jobs | n/a |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.24.1 |
+| <a name="module_nuke_sandbox"></a> [nuke\_sandbox](#module\_nuke\_sandbox) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_scoutsuite_scan_sandbox_a"></a> [scoutsuite\_scan\_sandbox\_a](#module\_scoutsuite\_scan\_sandbox\_a) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_scoutsuite_scan_sandbox_a_schedule"></a> [scoutsuite\_scan\_sandbox\_a\_schedule](#module\_scoutsuite\_scan\_sandbox\_a\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
 | <a name="module_scoutsuite_scan_sandbox_b"></a> [scoutsuite\_scan\_sandbox\_b](#module\_scoutsuite\_scan\_sandbox\_b) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
