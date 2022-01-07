@@ -112,25 +112,6 @@ resource "aws_iam_user_group_membership" "mihai_popa_matai" {
   user = aws_iam_user.mihai_popa_matai.name
 }
 
-#Samuel Blackwell
-data "aws_ssm_parameter" "samuel_blackwell" {
-  name = "/users/samuel_blackwell"
-}
-
-resource "aws_iam_user" "samuel_blackwell" {
-  name = data.aws_ssm_parameter.samuel_blackwell.value
-
-  tags = module.label.tags
-}
-
-resource "aws_iam_user_group_membership" "samuel_blackwell" {
-  groups = [
-    data.aws_iam_group.admin_group.group_name,
-    data.aws_iam_group.mfa_group.group_name
-  ]
-  user = aws_iam_user.samuel_blackwell.name
-}
-
 #Jazz Sarkaria
 data "aws_ssm_parameter" "jazz_sarkaria" {
   name = "/users/jazz_sarkaria"
