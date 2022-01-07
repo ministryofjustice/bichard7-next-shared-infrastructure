@@ -1,5 +1,5 @@
 module "nuke_sandbox" {
-  for_each = { for s in local.nuke_vars : s.id => s }
+  for_each               = { for s in local.nuke_vars : s.id => s }
   source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
   build_description      = "Run aws nuke over the sandboxes"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -11,19 +11,19 @@ module "nuke_sandbox" {
 
   environment_variables = [
     {
-      name = "SANDBOX_ID"
+      name  = "SANDBOX_ID"
       value = each.value.id
     },
     {
-      name = "SANDBOX_NAME"
+      name  = "SANDBOX_NAME"
       value = each.value.target
     },
     {
-      name = "ARTIFACT_BUCKET"
-      value = module.codebuild_base_resources.codepipeline_bucket 
+      name  = "ARTIFACT_BUCKET"
+      value = module.codebuild_base_resources.codepipeline_bucket
     },
     {
-      name = "ASSUME_ROLE_ARN"
+      name  = "ASSUME_ROLE_ARN"
       value = each.value.assume_role_arn
     }
   ]
@@ -32,7 +32,7 @@ module "nuke_sandbox" {
 }
 
 module "apply_nuke_sandbox_schedule" {
-  for_each = module.nuke_sandbox
+  for_each        = module.nuke_sandbox
   source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
   codebuild_arn   = each.value.pipeline_arn
   name            = each.value.pipeline_name

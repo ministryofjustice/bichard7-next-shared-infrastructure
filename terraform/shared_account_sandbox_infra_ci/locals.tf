@@ -9,18 +9,18 @@ locals {
 
   nuke_vars = [
     {
-      id =     data.aws_caller_identity.sandbox_a.account_id
-      target = "sandbox-a"
+      id              = data.aws_caller_identity.sandbox_a.account_id
+      target          = "sandbox-a"
       assume_role_arn = local.sandbox_a_arn
     },
     {
-      id = data.aws_caller_identity.sandbox_b.account_id
-      target = "sandbox-b"
+      id              = data.aws_caller_identity.sandbox_b.account_id
+      target          = "sandbox-b"
       assume_role_arn = local.sandbox_b_arn
     },
     {
-      id = data.aws_caller_identity.sandbox_c.account_id
-      target = "sandbox-c"
+      id              = data.aws_caller_identity.sandbox_c.account_id
+      target          = "sandbox-c"
       assume_role_arn = local.sandbox_c_arn
     }
   ]
