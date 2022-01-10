@@ -21,10 +21,6 @@ module "nuke_sandbox" {
     {
       name  = "ARTIFACT_BUCKET"
       value = module.codebuild_base_resources.codepipeline_bucket
-    },
-    {
-      name  = "ASSUME_ROLE_ARN"
-      value = each.value.assume_role_arn
     }
   ]
 
