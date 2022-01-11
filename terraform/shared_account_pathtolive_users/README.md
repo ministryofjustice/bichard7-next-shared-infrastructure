@@ -2,6 +2,8 @@
 
 Manages user access to AWS
 
+AdminAccess group users require the tag `"user-role" = "operations"` and readonly require the tag `"user-role" = "readonly""`
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
