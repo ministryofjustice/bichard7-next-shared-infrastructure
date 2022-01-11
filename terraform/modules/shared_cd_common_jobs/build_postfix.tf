@@ -4,7 +4,7 @@ module "build_postfix_docker_image" {
   name              = "build-postfix-docker"
   build_description = "Codebuild for Building Postfix Image"
   repository_name   = "bichard7-next-infrastructure-docker-images"
-  buildspec_file    = "./Amazon_Linux_Base/buildspec.yml"
+  buildspec_file    = "./Postfix/buildspec.yml"
 
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   sns_notification_arn   = var.sns_notifications_arn
