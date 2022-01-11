@@ -6,7 +6,12 @@ data "aws_ssm_parameter" "brett_minnie" {
 resource "aws_iam_user" "brett_minnie" {
   name = data.aws_ssm_parameter.brett_minnie.value
 
-  tags = module.label.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "operations"
+    }
+  )
 }
 
 resource "aws_iam_user_group_membership" "brett_minnie" {
@@ -25,7 +30,12 @@ data "aws_ssm_parameter" "ben_pirt" {
 resource "aws_iam_user" "ben_pirt" {
   name = data.aws_ssm_parameter.ben_pirt.value
 
-  tags = module.label.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "operations"
+    }
+  )
 }
 
 resource "aws_iam_user_group_membership" "ben_pirt" {
@@ -44,7 +54,12 @@ data "aws_ssm_parameter" "simon_oldham" {
 resource "aws_iam_user" "simon_oldham" {
   name = data.aws_ssm_parameter.simon_oldham.value
 
-  tags = module.label.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "operations"
+    }
+  )
 }
 
 resource "aws_iam_user_group_membership" "simon_oldham" {
@@ -63,7 +78,12 @@ data "aws_ssm_parameter" "emad_karamad" {
 resource "aws_iam_user" "emad_karamad" {
   name = data.aws_ssm_parameter.emad_karamad.value
 
-  tags = module.label.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "operations"
+    }
+  )
 }
 
 resource "aws_iam_user_group_membership" "emad_karamad" {
@@ -82,7 +102,12 @@ data "aws_ssm_parameter" "jamie_davies" {
 resource "aws_iam_user" "jamie_davies" {
   name = data.aws_ssm_parameter.jamie_davies.value
 
-  tags = module.label.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "operations"
+    }
+  )
 }
 
 resource "aws_iam_user_group_membership" "jamie_davies" {
@@ -101,7 +126,12 @@ data "aws_ssm_parameter" "mihai_popa_matai" {
 resource "aws_iam_user" "mihai_popa_matai" {
   name = data.aws_ssm_parameter.mihai_popa_matai.value
 
-  tags = module.label.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "operations"
+    }
+  )
 }
 
 resource "aws_iam_user_group_membership" "mihai_popa_matai" {
@@ -120,7 +150,12 @@ data "aws_ssm_parameter" "jazz_sarkaria" {
 resource "aws_iam_user" "jazz_sarkaria" {
   name = data.aws_ssm_parameter.jazz_sarkaria.value
 
-  tags = module.label.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "operations"
+    }
+  )
 }
 
 resource "aws_iam_user_group_membership" "jazz_sarkaria" {
