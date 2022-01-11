@@ -1,8 +1,8 @@
 # tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "allow_sandbox_a_codebuild_bucket" {
   for_each = toset(["Bichard7-CI-Access", "Bichard7-Aws-Nuke-Access"])
-  name = "AllCodeBuildBucketAccess"
-  role = each.key
+  name     = "AllCodeBuildBucketAccess"
+  role     = each.key
 
   policy = <<-EOF
   {
@@ -39,8 +39,8 @@ resource "aws_iam_role_policy" "allow_sandbox_a_codebuild_bucket" {
 # tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "allow_sandbox_b_codebuild_bucket" {
   for_each = toset(["Bichard7-CI-Access", "Bichard7-Aws-Nuke-Access"])
-  name = "AllCodeBuildBucketAccess"
-  role = each.key
+  name     = "AllCodeBuildBucketAccess"
+  role     = each.key
 
   policy = <<-EOF
   {
@@ -77,8 +77,8 @@ resource "aws_iam_role_policy" "allow_sandbox_b_codebuild_bucket" {
 # tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "allow_sandbox_c_codebuild_bucket" {
   for_each = toset(["Bichard7-CI-Access", "Bichard7-Aws-Nuke-Access"])
-  name = "AllCodeBuildBucketAccess"
-  role = each.key
+  name     = "AllCodeBuildBucketAccess"
+  role     = each.key
 
   policy = <<-EOF
   {
