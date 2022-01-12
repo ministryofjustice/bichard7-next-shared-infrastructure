@@ -222,23 +222,24 @@ resource "aws_codepipeline" "path_to_live" {
       ]
     }
 
-    action {
-      category  = "Build"
-      name      = "deploy-e2e-test-environment-smtp-service"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 3
-
-      configuration = {
-        ProjectName   = module.deploy_e2e_test_smtp_service.pipeline_name
-        PrimarySource = "infrastructure"
-      }
-
-      input_artifacts = [
-        "infrastructure"
-      ]
-    }
+    # Temporarily disable this build stage whilst we are testing the new ecs cluster
+    #    action {
+    #      category  = "Build"
+    #      name      = "deploy-e2e-test-environment-smtp-service"
+    #      owner     = "AWS"
+    #      provider  = "CodeBuild"
+    #      version   = "1"
+    #      run_order = 3
+    #
+    #      configuration = {
+    #        ProjectName   = module.deploy_e2e_test_smtp_service.pipeline_name
+    #        PrimarySource = "infrastructure"
+    #      }
+    #
+    #      input_artifacts = [
+    #        "infrastructure"
+    #      ]
+    #    }
 
     action {
       category  = "Build"
