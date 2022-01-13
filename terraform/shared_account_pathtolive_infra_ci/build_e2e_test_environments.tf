@@ -193,69 +193,6 @@ module "destroy_e2e_test_terraform" {
   tags  = module.label.tags
 }
 
-module "deploy_e2e_test_smtp_service" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
-
-  build_description      = "Codebuild job for applying smtp layer to e2e-test env"
-  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "deploy-e2e-test-smtp"
-  buildspec_file         = "buildspec-layer.yml"
-
-  repository_name      = "bichard7-next-infrastructure"
-  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
-  sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
-
-  build_timeout = 180
-
-  deploy_account_name = "integration_next"
-  deployment_name     = "e2e-test"
-
-  environment_variables = [
-    {
-      name  = "DEPLOY_ENV"
-      value = "pathtolive"
-    },
-    {
-      name  = "WORKSPACE"
-      value = "e2e-test"
-    },
-    {
-      name  = "USER_TYPE"
-      value = "ci"
-    },
-    {
-      name  = "AWS_ACCOUNT_NAME"
-      value = "integration_next"
-    },
-    {
-      name  = "AUTO_APPROVE"
-      value = true
-    },
-    {
-      name  = "ASSUME_ROLE_ARN"
-      value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
-    },
-    {
-      name  = "PARENT_ACCOUNT_ID"
-      value = data.aws_caller_identity.current.account_id
-    },
-    {
-      name  = "USE_PEERING"
-      value = "true"
-    },
-    {
-      name  = "USE_SMTP"
-      value = "true"
-    },
-    {
-      name  = "LAYER"
-      value = "smtp-service"
-    }
-  ]
-  tags = module.label.tags
-}
-
 module "deploy_e2e_test_monitoring_layer" {
   source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 

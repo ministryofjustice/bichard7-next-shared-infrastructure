@@ -234,24 +234,6 @@ resource "aws_codepipeline" "rc_promotion_pipeline" {
 
     action {
       category  = "Build"
-      name      = "deploy-e2e-test-smtp-service"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 2
-
-      configuration = {
-        ProjectName   = module.deploy_e2e_test_smtp_service.pipeline_name
-        PrimarySource = "infrastructure"
-      }
-
-      input_artifacts = [
-        "infrastructure"
-      ]
-    }
-
-    action {
-      category  = "Build"
       name      = "deploy-e2e-test-monitoring"
       owner     = "AWS"
       provider  = "CodeBuild"
