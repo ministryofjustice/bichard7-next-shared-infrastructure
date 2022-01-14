@@ -206,24 +206,6 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "deploy-e2e-test-environment-monitoring-layer"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 2
-
-      configuration = {
-        ProjectName   = module.deploy_e2e_test_monitoring_layer.pipeline_name
-        PrimarySource = "infrastructure"
-      }
-
-      input_artifacts = [
-        "infrastructure"
-      ]
-    }
-
-    action {
-      category  = "Build"
       name      = "run-e2e-test-migrations"
       owner     = "AWS"
       provider  = "CodeBuild"

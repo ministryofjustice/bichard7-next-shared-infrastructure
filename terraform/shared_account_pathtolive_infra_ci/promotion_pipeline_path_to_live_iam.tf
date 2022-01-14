@@ -102,12 +102,6 @@ resource "aws_iam_role_policy" "restart_pnc_emulator_e2e_tests" {
   role   = module.run_e2e_tests_restart_pnc_container.pipeline_service_role_name
 }
 
-resource "aws_iam_role_policy" "deploy_e2e_test_monitoring_layer" {
-  name   = "allow-codestar-connection"
-  policy = data.template_file.allow_codebuild_codestar_connection.rendered
-  role   = module.deploy_e2e_test_monitoring_layer.pipeline_service_role_name
-}
-
 resource "aws_iam_role_policy" "run_e2e_test_migrations" {
   name   = "allow-codestar-connection"
   policy = data.template_file.allow_codebuild_codestar_connection.rendered
