@@ -24,7 +24,7 @@ The preprod and production access keys can be acquired by sourcing the `get_sts_
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.10 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | = 3.72.0 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | ~> 2.0.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | ~> 3.0.0 |
 | <a name="requirement_template"></a> [template](#requirement\_template) | ~> 2.2.0 |
@@ -34,13 +34,13 @@ The preprod and production access keys can be acquired by sourcing the `get_sts_
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.56.0 |
-| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | 3.56.0 |
-| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | 3.56.0 |
-| <a name="provider_aws.preprod"></a> [aws.preprod](#provider\_aws.preprod) | 3.56.0 |
-| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.56.0 |
-| <a name="provider_aws.sandbox"></a> [aws.sandbox](#provider\_aws.sandbox) | 3.56.0 |
-| <a name="provider_aws.shared"></a> [aws.shared](#provider\_aws.shared) | 3.56.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.72.0 |
+| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | 3.72.0 |
+| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | 3.72.0 |
+| <a name="provider_aws.preprod"></a> [aws.preprod](#provider\_aws.preprod) | 3.72.0 |
+| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.72.0 |
+| <a name="provider_aws.sandbox"></a> [aws.sandbox](#provider\_aws.sandbox) | 3.72.0 |
+| <a name="provider_aws.shared"></a> [aws.shared](#provider\_aws.shared) | 3.72.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
@@ -68,14 +68,14 @@ The preprod and production access keys can be acquired by sourcing the `get_sts_
 
 | Name | Type |
 |------|------|
-| [aws_route53_record.bichard7_pathtolive_name_servers](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
-| [aws_route53_zone.bichard7_pathtolive_delegated_zone](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_caller_identity.integration_baseline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_caller_identity.integration_next](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_caller_identity.preprod](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_caller_identity.production](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [aws_route53_record.bichard7_pathtolive_name_servers](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/route53_record) | resource |
+| [aws_route53_zone.bichard7_pathtolive_delegated_zone](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/route53_zone) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.integration_baseline](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.integration_next](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.preprod](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.production](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
+| [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/region) | data source |
 | [terraform_remote_state.path_to_live_users](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs

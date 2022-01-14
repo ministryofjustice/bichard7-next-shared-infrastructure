@@ -37,11 +37,8 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | <a name="module_codebuild_docker_resources"></a> [codebuild\_docker\_resources](#module\_codebuild\_docker\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/aws_ecr_repositories | n/a |
 | <a name="module_common_build_jobs"></a> [common\_build\_jobs](#module\_common\_build\_jobs) | ../modules/shared_cd_common_jobs | n/a |
 | <a name="module_deploy_e2e_test_terraform"></a> [deploy\_e2e\_test\_terraform](#module\_deploy\_e2e\_test\_terraform) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
-| <a name="module_deploy_load_test_monitoring_layer"></a> [deploy\_load\_test\_monitoring\_layer](#module\_deploy\_load\_test\_monitoring\_layer) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_deploy_load_test_terraform"></a> [deploy\_load\_test\_terraform](#module\_deploy\_load\_test\_terraform) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
-| <a name="module_deploy_preprod_monitoring_layer"></a> [deploy\_preprod\_monitoring\_layer](#module\_deploy\_preprod\_monitoring\_layer) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_deploy_preprod_terraform"></a> [deploy\_preprod\_terraform](#module\_deploy\_preprod\_terraform) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
-| <a name="module_deploy_production_monitoring_layer"></a> [deploy\_production\_monitoring\_layer](#module\_deploy\_production\_monitoring\_layer) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_deploy_production_terraform"></a> [deploy\_production\_terraform](#module\_deploy\_production\_terraform) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_destroy_e2e_test_terraform"></a> [destroy\_e2e\_test\_terraform](#module\_destroy\_e2e\_test\_terraform) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_destroy_load_test_terraform"></a> [destroy\_load\_test\_terraform](#module\_destroy\_load\_test\_terraform) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
@@ -83,9 +80,6 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | <a name="module_scoutsuite_scan_shared"></a> [scoutsuite\_scan\_shared](#module\_scoutsuite\_scan\_shared) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_scoutsuite_scan_shared_schedule"></a> [scoutsuite\_scan\_shared\_schedule](#module\_scoutsuite\_scan\_shared\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
 | <a name="module_self_signed_certificate"></a> [self\_signed\_certificate](#module\_self\_signed\_certificate) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/self_signed_certificate | n/a |
-| <a name="module_tag_develop_release"></a> [tag\_develop\_release](#module\_tag\_develop\_release) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
-| <a name="module_tag_production_release"></a> [tag\_production\_release](#module\_tag\_production\_release) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
-| <a name="module_tag_rc_release"></a> [tag\_rc\_release](#module\_tag\_rc\_release) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_tag_vars"></a> [tag\_vars](#module\_tag\_vars) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars | n/a |
 | <a name="module_update_environment_ssm_params"></a> [update\_environment\_ssm\_params](#module\_update\_environment\_ssm\_params) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 
@@ -111,8 +105,6 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | [aws_iam_role_policy.apply_dev_sg_to_e2e_test](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.apply_dev_sg_to_preprod](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.codepipeline_policy](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
-| [aws_iam_role_policy.deploy_load_test_monitoring_layer](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
-| [aws_iam_role_policy.deploy_production_monitoring_layer](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.remove_dev_sg_from_e2e_test](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.remove_dev_sg_from_preprod](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.restart_pnc_emulator_e2e_tests](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
