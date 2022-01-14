@@ -230,66 +230,6 @@ module "run_destroy_load_test_env_schedule" {
   tags = module.label.tags
 }
 
-module "deploy_load_test_monitoring_layer" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
-
-  build_description      = "Codebuild job for applying monitoring layer to load test environment"
-  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "deploy-load-test-monitoring"
-  buildspec_file         = "buildspec-layer.yml"
-
-  repository_name      = "bichard7-next-infrastructure"
-  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
-  sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
-
-  build_timeout = 180
-
-  deploy_account_name = "integration_baseline"
-  deployment_name     = "load-test"
-
-  environment_variables = [
-    {
-      name  = "DEPLOY_ENV"
-      value = "pathtolive"
-    },
-    {
-      name  = "WORKSPACE"
-      value = "load-test"
-    },
-    {
-      name  = "USER_TYPE"
-      value = "ci"
-    },
-    {
-      name  = "AWS_ACCOUNT_NAME"
-      value = "integration_baseline"
-    },
-    {
-      name  = "AUTO_APPROVE"
-      value = true
-    },
-    {
-      name  = "ASSUME_ROLE_ARN"
-      value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
-    },
-    {
-      name  = "PARENT_ACCOUNT_ID"
-      value = data.aws_caller_identity.current.account_id
-    },
-    {
-      name  = "USE_PEERING"
-      value = "true"
-    },
-    {
-      name  = "LAYER"
-      value = "monitoring"
-    }
-  ]
-  tags = module.label.tags
-}
-
-
 module "run_load_test_migrations" {
   source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 

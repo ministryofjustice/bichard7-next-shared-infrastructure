@@ -114,22 +114,10 @@ resource "aws_iam_role_policy" "run_preprod_migrations" {
   role   = module.run_preprod_migrations.pipeline_service_role_name
 }
 
-resource "aws_iam_role_policy" "deploy_load_test_monitoring_layer" {
-  name   = "allow-codestar-connection"
-  policy = data.template_file.allow_codebuild_codestar_connection.rendered
-  role   = module.deploy_load_test_monitoring_layer.pipeline_service_role_name
-}
-
 resource "aws_iam_role_policy" "run_load_test_migrations" {
   name   = "allow-codestar-connection"
   policy = data.template_file.allow_codebuild_codestar_connection.rendered
   role   = module.run_load_test_migrations.pipeline_service_role_name
-}
-
-resource "aws_iam_role_policy" "deploy_production_monitoring_layer" {
-  name   = "allow-codestar-connection"
-  policy = data.template_file.allow_codebuild_codestar_connection.rendered
-  role   = module.deploy_production_monitoring_layer.pipeline_service_role_name
 }
 
 resource "aws_iam_role_policy" "run_production_migrations" {
