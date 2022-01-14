@@ -8,14 +8,14 @@ Deploys Sonarqube to the sandbox account for static code analysis on our codebas
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.56 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | = 3.72.0 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | ~> 2.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.56 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.72.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
@@ -31,8 +31,8 @@ Deploys Sonarqube to the sandbox account for static code analysis on our codebas
 
 | Name | Type |
 |------|------|
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.56/docs/data-sources/caller_identity) | data source |
-| [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.56/docs/data-sources/region) | data source |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
+| [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/region) | data source |
 | [terraform_remote_state.shared_infra](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs
