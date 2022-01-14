@@ -83,3 +83,8 @@ shared-account-pathtolive-users:
 .PHONY: destroy-shared-account-pathtolive-users
 destroy-shared-account-pathtolive-users:
 	./scripts/shared_account_terraform.py pathtolive users destroy
+
+.PHONY: terraform-clean-all
+terraform-clean-all:
+	bash -c "find . -name .terraform -type d | xargs rm -rf"
+	bash -c "find . -name .terraform.lock.hcl -type f | xargs rm -rf"
