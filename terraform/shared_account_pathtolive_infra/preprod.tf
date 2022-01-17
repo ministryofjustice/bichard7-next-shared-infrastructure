@@ -24,6 +24,8 @@ module "shared_account_access_preprod" {
   providers = {
     aws = aws.shared
   }
+
+  tags = module.label.tags
 }
 
 module "shared_account_preprod_lambda_cloudtrail" {

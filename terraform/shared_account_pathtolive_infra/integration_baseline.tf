@@ -25,6 +25,8 @@ module "shared_account_access_integration_baseline" {
   providers = {
     aws = aws.shared
   }
+
+  tags = module.label.tags
 }
 
 module "shared_account_access_integration_baseline_lambda_cloudtrail" {

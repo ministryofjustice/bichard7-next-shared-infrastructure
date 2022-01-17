@@ -15,7 +15,7 @@ module "label" {
     "business-unit"    = module.tag_vars.business_unit
     "application"      = module.tag_vars.application
     "is-production"    = false
-    "environment-name" = "sharedaccount-bootstrap"
+    "environment-name" = "sharedaccount-infra"
     "account-name"     = "bichard7-sandbox-shared"
     "provisioned-by"   = "shared_account_sandbox_infra code see make shared-account-sandbox-infra in Makefile"
     "source-code"      = "https://github.com/ministryofjustice/bichard7-next-shared-infrastructure/tree/master/shared_terraform/shared_account_sandbox_infra"
@@ -106,6 +106,8 @@ module "shared_account_access_sandbox_a" {
   depends_on = [
     module.sandbox_a_child_access
   ]
+
+  tags = module.label.tags
 }
 
 module "shared_account_access_sandbox_b" {
@@ -126,6 +128,8 @@ module "shared_account_access_sandbox_b" {
   depends_on = [
     module.sandbox_b_child_access
   ]
+
+  tags = module.label.tags
 }
 
 module "shared_account_access_sandbox_c" {
@@ -146,4 +150,6 @@ module "shared_account_access_sandbox_c" {
   depends_on = [
     module.sandbox_c_child_access
   ]
+
+  tags = module.label.tags
 }
