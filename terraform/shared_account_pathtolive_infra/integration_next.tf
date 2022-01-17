@@ -26,6 +26,8 @@ module "shared_account_access_integration_next" {
   providers = {
     aws = aws.shared
   }
+
+  tags = module.label.tags
 }
 
 module "shared_account_access_integration_next_lambda_cloudtrail" {
