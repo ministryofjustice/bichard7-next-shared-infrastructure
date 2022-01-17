@@ -15,7 +15,7 @@ module "label" {
     "business-unit"    = module.tag_vars.business_unit
     "application"      = module.tag_vars.application
     "is-production"    = false
-    "environment-name" = "sharedaccount-bootstrap"
+    "environment-name" = "sharedaccount-infra"
     "account-name"     = "bichard7-sandbox-shared"
     "provisioned-by"   = "shared_account_sandbox_infra code see make shared-account-sandbox-infra in Makefile"
     "source-code"      = "https://github.com/ministryofjustice/bichard7-next-shared-infrastructure/tree/master/shared_terraform/shared_account_sandbox_infra"
@@ -34,7 +34,7 @@ module "aws_logs" {
 }
 
 module "sandbox_a_child_access" {
-  source              = "../../../bichard7-next-infrastructure-modules/modules/shared_account_child_access"
+  source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access"
   root_account_id     = data.aws_caller_identity.current.account_id
   tags                = module.label.tags
   bucket_name         = local.remote_bucket_name
