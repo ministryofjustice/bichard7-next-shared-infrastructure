@@ -92,6 +92,7 @@ terraform-clean-all:
 .PHONY: terraform-validate
 terraform-validate: terraform-init
 	{ \
+		set -e; \
   	for dir in ./terraform/*/; \
 		do \
 		 echo "Validating terraform in $${dir}"; \
