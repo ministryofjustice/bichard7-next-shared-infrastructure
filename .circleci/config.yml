@@ -8,7 +8,7 @@ workflows:
   test_and_deploy:
     jobs:
       - terraform_test:
-          version: 1.0.3
+          version: 1.1.3
 
 commands:
   install_dependencies:
@@ -40,14 +40,7 @@ commands:
     steps:
       - run:
           command: |
-            make terraform-init
-            for dir in ./terraform/*/;
-            do
-              echo "Validating terraform in ${dir}"
-              cd "${dir}"
-              AWS_REGION=placeholder-region-name terraform validate
-              cd ../../
-            done
+            make terraform-validate
           name: "Check: Validate tf files (terraform validate)"
   terraform_tfsec:
     description: Run TFSec on our terraform files

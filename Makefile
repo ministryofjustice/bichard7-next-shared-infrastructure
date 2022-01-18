@@ -88,3 +88,15 @@ destroy-shared-account-pathtolive-users:
 terraform-clean-all:
 	bash -c "find . -name .terraform -type d | xargs rm -rf"
 	bash -c "find . -name .terraform.lock.hcl -type f | xargs rm -rf"
+
+.PHONY: terraform-validate
+terraform-validate: terraform-init
+	{ \
+  	for dir in ./terraform/*/; \
+		do \
+		 echo "Validating terraform in $${dir}"; \
+		 cd "$${dir}"; \
+		 AWS_REGION=placeholder-region-name terraform validate; \
+		 cd ../../; \
+	 done \
+	}
