@@ -67,4 +67,3 @@ module "common_build_jobs" {
   common_cd_vars            = local.common_cd_vars
   tags                      = module.label.tags
 }
-
