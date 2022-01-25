@@ -37,4 +37,3 @@ module "apply_nuke_sandbox_schedule" {
   cron_expression = "cron(0 0 ? * SAT *)" # run every Sunday at midnight
   tags            = module.label.tags
 }
-

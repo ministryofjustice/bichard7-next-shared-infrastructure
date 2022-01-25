@@ -30,6 +30,7 @@ AdminAccess group users require the tag `"user-role" = "operations"` and readonl
 
 | Name | Type |
 |------|------|
+| [aws_iam_user.alice_lee](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user) | resource |
 | [aws_iam_user.ben_pirt](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user) | resource |
 | [aws_iam_user.brett_minnie](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user) | resource |
 | [aws_iam_user.emad_karamad](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user) | resource |
@@ -37,6 +38,7 @@ AdminAccess group users require the tag `"user-role" = "operations"` and readonl
 | [aws_iam_user.jazz_sarkaria](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user) | resource |
 | [aws_iam_user.mihai_popa_matai](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user) | resource |
 | [aws_iam_user.simon_oldham](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user) | resource |
+| [aws_iam_user_group_membership.alice_lee](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user_group_membership) | resource |
 | [aws_iam_user_group_membership.ben_pirt](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user_group_membership) | resource |
 | [aws_iam_user_group_membership.brett_minnie](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user_group_membership) | resource |
 | [aws_iam_user_group_membership.emad_karamad](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user_group_membership) | resource |
@@ -49,6 +51,7 @@ AdminAccess group users require the tag `"user-role" = "operations"` and readonl
 | [aws_iam_group.mfa_group](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/iam_group) | data source |
 | [aws_iam_group.readonly_group](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/iam_group) | data source |
 | [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/region) | data source |
+| [aws_ssm_parameter.alice_lee](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.ben_pirt](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.brett_minnie](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.emad_karamad](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ssm_parameter) | data source |
