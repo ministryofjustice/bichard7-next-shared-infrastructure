@@ -9,7 +9,8 @@ output "admin_users" {
     aws_iam_user.emad_karamad.name,
     aws_iam_user.simon_oldham.name,
     aws_iam_user.mihai_popa_matai.name,
-    aws_iam_user.jazz_sarkaria.name
+    aws_iam_user.jazz_sarkaria.name,
+    aws_iam_user.alice_lee.name
   ])
 }
 
@@ -23,5 +24,6 @@ output "non_sc_user_arns" {
   description = "A list of arns of non sc cleared users to add to the deny list on assume role into production"
   value = [
     aws_iam_user.jazz_sarkaria.arn,
+    aws_iam_user.alice_lee.arn,
   ]
 }

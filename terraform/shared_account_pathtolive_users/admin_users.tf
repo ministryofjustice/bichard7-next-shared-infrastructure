@@ -165,3 +165,27 @@ resource "aws_iam_user_group_membership" "jazz_sarkaria" {
   ]
   user = aws_iam_user.jazz_sarkaria.name
 }
+
+#Alice Lee
+data "aws_ssm_parameter" "alice_lee" {
+  name = "/users/alice_lee"
+}
+
+resource "aws_iam_user" "alice_lee" {
+  name = data.aws_ssm_parameter.alice_lee.value
+
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "operations"
+    }
+  )
+}
+
+resource "aws_iam_user_group_membership" "alice_lee" {
+  groups = [
+    data.aws_iam_group.admin_group.group_name,
+    data.aws_iam_group.mfa_group.group_name
+  ]
+  user = aws_iam_user.alice_lee.name
+}

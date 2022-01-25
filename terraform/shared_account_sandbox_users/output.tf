@@ -9,7 +9,8 @@ output "admin_users" {
     aws_iam_user.emad_karamad.name,
     aws_iam_user.jamie_davies.name,
     aws_iam_user.mihai_popa_matai.name,
-    aws_iam_user.jazz_sarkaria.name
+    aws_iam_user.jazz_sarkaria.name,
+    aws_iam_user.alice_lee.name
   ])
 }
 
