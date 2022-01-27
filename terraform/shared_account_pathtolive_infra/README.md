@@ -41,7 +41,6 @@ The preprod and production access keys can be acquired by sourcing the `get_sts_
 | <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.72.0 |
 | <a name="provider_aws.sandbox"></a> [aws.sandbox](#provider\_aws.sandbox) | 3.72.0 |
 | <a name="provider_aws.shared"></a> [aws.shared](#provider\_aws.shared) | 3.72.0 |
-| <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
 
@@ -76,7 +75,7 @@ The preprod and production access keys can be acquired by sourcing the `get_sts_
 | [aws_caller_identity.preprod](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
 | [aws_caller_identity.production](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
 | [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/region) | data source |
-| [terraform_remote_state.path_to_live_users](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
+| [aws_ssm_parameter.non_sc_users](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ssm_parameter) | data source |
 
 ## Inputs
 
