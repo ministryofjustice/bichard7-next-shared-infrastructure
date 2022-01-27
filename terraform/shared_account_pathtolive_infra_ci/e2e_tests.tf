@@ -40,10 +40,6 @@ module "run_e2e_tests" {
     {
       name  = "STACK_TYPE"
       value = "next"
-    },
-    {
-      name  = "CODEPIPELINE_EXECUTION_ID"
-      value = "#{codepipeline.PipelineExecutionId}"
     }
   ]
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket

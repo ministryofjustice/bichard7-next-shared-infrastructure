@@ -250,6 +250,14 @@ resource "aws_codepipeline" "path_to_live" {
       run_order = 2
       configuration = {
         ProjectName = module.run_e2e_tests.pipeline_name
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "CODEPIPELINE_EXECUTION_ID"
+              value = "#{codepipeline.PipelineExecutionId}"
+            }
+          ]
+        )
       }
 
       input_artifacts = ["tests"]
