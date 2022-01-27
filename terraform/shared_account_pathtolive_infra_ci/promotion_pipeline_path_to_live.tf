@@ -210,7 +210,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 4
+      run_order = 1
 
       configuration = {
         ProjectName   = module.run_e2e_test_migrations.pipeline_name
@@ -374,7 +374,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 2
+      run_order = 1
 
       configuration = {
         ProjectName   = module.run_preprod_migrations.pipeline_name
@@ -502,7 +502,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 2
+      run_order = 1
 
       configuration = {
         ProjectName   = module.deploy_production_terraform.pipeline_name
