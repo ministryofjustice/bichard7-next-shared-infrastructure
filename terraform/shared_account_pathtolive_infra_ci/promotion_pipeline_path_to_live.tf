@@ -135,7 +135,6 @@ resource "aws_codepipeline" "path_to_live" {
       provider        = "CodeBuild"
       version         = "1"
       namespace       = "ImageHashes"
-      run_order       = 1
       input_artifacts = ["infrastructure"]
 
       configuration = {
@@ -149,7 +148,6 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 2
 
       input_artifacts = ["infrastructure"]
 
@@ -167,7 +165,6 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 1
 
       configuration = {
         ProjectName   = module.deploy_e2e_test_terraform.pipeline_name
@@ -210,7 +207,6 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 1
 
       configuration = {
         ProjectName   = module.run_e2e_test_migrations.pipeline_name
@@ -331,7 +327,6 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 1
 
       configuration = {
         ProjectName   = module.deploy_preprod_terraform.pipeline_name
@@ -374,7 +369,6 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 1
 
       configuration = {
         ProjectName   = module.run_preprod_migrations.pipeline_name
@@ -502,7 +496,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 1
+      run_order = 2
 
       configuration = {
         ProjectName   = module.deploy_production_terraform.pipeline_name
@@ -545,7 +539,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 3
+      run_order = 2
 
       configuration = {
         ProjectName   = module.run_production_migrations.pipeline_name
