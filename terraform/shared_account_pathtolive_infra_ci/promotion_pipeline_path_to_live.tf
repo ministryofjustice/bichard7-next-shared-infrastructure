@@ -143,11 +143,11 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category  = "Build"
-      name      = "restart-e2e-test-pnc-emulator-before-tests"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
+      category = "Build"
+      name     = "restart-e2e-test-pnc-emulator-before-tests"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
       input_artifacts = ["infrastructure"]
 
@@ -160,11 +160,11 @@ resource "aws_codepipeline" "path_to_live" {
   stage {
     name = "deploy-e2e-test-environment"
     action {
-      category  = "Build"
-      name      = "deploy-e2e-test-environment"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
+      category = "Build"
+      name     = "deploy-e2e-test-environment"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
       configuration = {
         ProjectName   = module.deploy_e2e_test_terraform.pipeline_name
@@ -202,11 +202,11 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category  = "Build"
-      name      = "run-e2e-test-migrations"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
+      category = "Build"
+      name     = "run-e2e-test-migrations"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
       configuration = {
         ProjectName   = module.run_e2e_test_migrations.pipeline_name
@@ -322,11 +322,11 @@ resource "aws_codepipeline" "path_to_live" {
   stage {
     name = "deploy-preprod-environment"
     action {
-      category  = "Build"
-      name      = "deploy-preprod-environment"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
+      category = "Build"
+      name     = "deploy-preprod-environment"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
       configuration = {
         ProjectName   = module.deploy_preprod_terraform.pipeline_name
@@ -364,11 +364,11 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category  = "Build"
-      name      = "run-preprod-migrations"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
+      category = "Build"
+      name     = "run-preprod-migrations"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
       configuration = {
         ProjectName   = module.run_preprod_migrations.pipeline_name
