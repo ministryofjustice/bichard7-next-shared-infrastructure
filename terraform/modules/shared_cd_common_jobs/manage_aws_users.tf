@@ -10,7 +10,7 @@ module "manage_aws_users" {
 
   environment_variables = [
     {
-      name  = "ENVIRONMENT"
+      name  = "WORKSPACE"
       value = var.environment
     }
   ]
