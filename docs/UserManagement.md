@@ -30,5 +30,7 @@ resource "aws_iam_user_group_membership" "firstname_lastname" {
 ```
 
 ### Removing Users
+Terraform cannot easily manage user created keys, mfa devices and passwords. These need to be removed manually from the AWS
+console.
 
-To remove the users, simply delete the blocks and then run the terraform. Once applied you can delete the ssm parameter.
+Log into the console then navigate to the user you want to delete in IAM->Users. Remove their IAM keys, MFA device and Console access. Then simply delete the blocks and then run the terraform. Once successfully applied you can delete the ssm parameter.
