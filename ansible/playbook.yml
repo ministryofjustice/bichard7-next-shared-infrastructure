@@ -4,7 +4,7 @@
   gather_facts: false
   become: false
   vars_files:
-    - "./vars/{{ lookup('env', 'ENVIRONMENT') | default('ptl', True) }}.yml"
+    - "./vars/{{ lookup('env', 'ENVIRONMENT') | default('pathtolive', True) }}.yml"
     - ./vars/tags.yml
     - ./vars/users.yml
 
