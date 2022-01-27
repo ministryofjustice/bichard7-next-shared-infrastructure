@@ -16,7 +16,7 @@ phases:
       - |
         echo "Waiting 30 seconds for IAM permissions to apply"
         sleep 30
-      - ./scripts/configure_users.sh
+      - ./scripts/manage_users.sh
   post_build:
     commands:
       - echo "Removing CI user credentials elevation"

@@ -85,3 +85,7 @@ terraform-validate: terraform-init
 		 cd ../../; \
 	 done \
 	}
+
+.PHONY: manage-users
+manage-users:
+	./scripts/manage_users.sh
