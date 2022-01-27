@@ -1,0 +1,47 @@
+---
+
+- user_attributes:
+    admin:
+      groups:
+        - EnforceMFA
+        - AdminAccess
+      aws_tags:
+        "user-role": operations
+    readonly:
+      groups:
+        - EnforceMFA
+        - ReadonlyAccess
+      aws_tags:
+        "user-role": readonly
+
+- users_enabled:
+    - name: ben_pirt
+      type: admin
+    - name: brett_minnie
+      type: admin
+    - name: emad_karamad
+      type: admin
+    - name: jamie_davies
+      type: admin
+    - name: jazz_sarkaria
+      type: admin
+    - name: mihai_popa_matai
+      type: admin
+    - name: simon_oldham
+      type: admin
+    - name: alice_lee
+      type: admin
+
+- non_sc_users:
+    - jazz_sarkaria
+    - alice_lee
+
+- users_removed:
+    - name: christopher_ryan
+    - name: david_roberts
+    - name: gurpinder_basi
+    - name: iain_smart
+    - name: sam_slade
+    - name: samuel_blackwell
+    - name: satvinder_hullait
+...

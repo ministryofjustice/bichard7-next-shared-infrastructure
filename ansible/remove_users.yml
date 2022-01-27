@@ -1,0 +1,19 @@
+---
+
+- name: "Get user {{ user.name }}'s details from ssm"
+  set_fact:
+    user_name: "{{ lookup('aws_ssm', '/users/{{ user.name }}') }}"
+
+- name: "Ensure user {{ user.name }} no longer exists in aws"
+  community.aws.iam_user:
+    name: "{{ user_name }}"
+    state: absent
+  when: user_name
+  no_log: true
+
+- name: "Remove {{ user.name }} ssm parameter so that we can't recreate them"
+  community.aws.aws_ssm_parameter_store:
+    name: "/users/{{ user.name }}"
+    state: absent
+  when: user_name
+...

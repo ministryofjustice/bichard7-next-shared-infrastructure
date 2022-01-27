@@ -1,0 +1,16 @@
+---
+
+aws_tags: {
+  "source-code": https://github.com/ministryofjustice/bichard7-next-shared-infrastructure/tree/master/ansible/playbook.yml,
+  Name: "cjse-bichard7-default-{{ target_environment }}-users",
+  "provisioned-by": "ansible playbook see make manage-users in Makefile",
+  "is-production": False,
+  "environment-name": "{{ target_environment }}-shared",
+  "account-name": "{{ account_name }}",
+  Environment: default,
+  "business-unit": CJSE,
+  application: "bichard-7",
+  region: "eu-west-2",
+  Namespace: "cjse-bichard7",
+  owner: cjse@madetech.com
+}

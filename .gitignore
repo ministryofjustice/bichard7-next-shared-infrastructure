@@ -53,3 +53,4 @@ packer.log
 
 scripts/library/semvertag/build/
 scripts/library/semvertag/semvertag.egg-info/
+.venv

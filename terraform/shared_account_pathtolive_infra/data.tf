@@ -22,12 +22,6 @@ data "aws_caller_identity" "production" {
   provider = aws.production
 }
 
-data "terraform_remote_state" "path_to_live_users" {
-  backend = "s3"
-  config = {
-    bucket         = local.remote_bucket_name
-    dynamodb_table = "${local.remote_bucket_name}-lock"
-    key            = "users/tfstatefile"
-    region         = "eu-west-2"
-  }
+data "aws_ssm_parameter" "non_sc_users" {
+  name = "/users/provisioned/non_sc_users"
 }

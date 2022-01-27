@@ -32,14 +32,6 @@ shared-account-sandbox-infra-ci:
 shared-account-sandbox-infra-ci-sonarqube:
 	./scripts/shared_account_terraform.py sandbox infra_ci_sonarqube
 
-.PHONY: shared-account-sandbox-users
-shared-account-sandbox-users:
-	./scripts/shared_account_terraform.py sandbox users
-
-.PHONY: destroy-shared-account-sandbox-users
-destroy-shared-account-sandbox-users:
-	./scripts/shared_account_terraform.py sandbox users destroy
-
 .PHONY: destroy-shared-account-sandbox-infra
 destroy-shared-account-sandbox-infra:
 	./scripts/shared_account_terraform.py sandbox infra destroy
@@ -76,14 +68,6 @@ shared-account-pathtolive-infra-ci:
 destroy-shared-account-pathtolive-infra-ci:
 	./scripts/shared_account_terraform.py pathtolive infra destroy
 
-.PHONY: shared-account-pathtolive-users
-shared-account-pathtolive-users:
-	./scripts/shared_account_terraform.py pathtolive users
-
-.PHONY: destroy-shared-account-pathtolive-users
-destroy-shared-account-pathtolive-users:
-	./scripts/shared_account_terraform.py pathtolive users destroy
-
 .PHONY: terraform-clean-all
 terraform-clean-all:
 	bash -c "find . -name .terraform -type d | xargs rm -rf"
@@ -101,3 +85,7 @@ terraform-validate: terraform-init
 		 cd ../../; \
 	 done \
 	}
+
+.PHONY: manage-users
+manage-users:
+	./scripts/manage_users.sh
