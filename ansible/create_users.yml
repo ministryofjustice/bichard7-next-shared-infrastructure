@@ -1,0 +1,33 @@
+---
+
+- name: "Get user {{ user.name }}'s details from ssm"
+  set_fact:
+    user_name: "{{ lookup('aws_ssm', '/users/{{ user.name }}') }}"
+
+- name: "Ensure user {{ user.name }} exists in aws"
+  community.aws.iam_user:
+    name: "{{ user_name }}"
+    state: present
+    tags: "{{ aws_tags | combine( user_attributes[user.type].aws_tags) }}"
+  register: iam_user
+  when: user_name
+  no_log: true
+
+- name: "Ensure user {{ user.name }} has correct group memberships"
+  community.aws.iam_group:
+    name: "{{ item }}"
+    users:
+      - "{{ user_name }}"
+    state: present
+  with_items: "{{ user_attributes[user.type].groups }}"
+  no_log: true
+  when: user_name
+
+- name: "Check if {{ user.name }} exists in the non_sc construct, if so append them to the non_sc_arns var"
+  set_fact:
+    non_sc_arns: "{{ non_sc_arns + [ iam_user.iam_user.user.arn ] }}"
+  when:
+    - user_name
+    - user.name in non_sc_users
+
+...

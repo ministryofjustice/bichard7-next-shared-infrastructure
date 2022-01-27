@@ -1,0 +1,42 @@
+---
+
+- hosts: localhost
+  gather_facts: false
+  become: false
+  vars_files:
+    - "./vars/{{ lookup('env', 'ENVIRONMENT') | default('ptl', True) }}.yml"
+    - ./vars/tags.yml
+    - ./vars/users.yml
+
+  pre_tasks:
+    - name: Check that our environment variable is set
+      assert:
+        that:
+          - lookup('env', 'ENVIRONMENT') | default("unset", True) != 'unset'
+        fail_msg: "Please set the ENVIRONMENT variable"
+
+  tasks:
+    - name: Create our non_sc_arns variable
+      set_fact:
+        non_sc_arns: []
+
+    - name: Create IAM users and assign group memberships
+      include_tasks: create_users.yml
+      with_items: "{{ users_enabled | default([]) }}"
+      loop_control:
+        loop_var: user
+
+    - name: Persist Non SC users to ssm
+      community.aws.aws_ssm_parameter_store:
+        name: "/users/provisioned/non_sc_users"
+        description: "A list of non sc user arns"
+        string_type: "StringList"
+        tier: "Advanced"
+        value: "{{ non_sc_arns | join(',') }}"
+
+    - name: Remove deleted IAM users and their ssm params
+      include_tasks: remove_users.yml
+      with_items: "{{ users_removed | default([]) }}"
+      loop_control:
+        loop_var: user
+...
