@@ -47,3 +47,9 @@ repos:
         entry: quay.io/terraform-docs/terraform-docs:0.16.0
         args: [ "markdown", "--recursive", "--recursive-path", ".", "--output-file", "README.md", "./terraform" ]
         pass_filenames: false
+
+  - repo: https://github.com/ansible/ansible-lint.git
+    rev: v4.2.0
+    hooks:
+      - id: ansible-lint
+        files: \.(yaml|yml)$
