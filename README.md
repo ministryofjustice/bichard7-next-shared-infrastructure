@@ -6,7 +6,7 @@ A collection of terraform layers for shared infrastructure used to provision our
 
 You will need an AWS account api credentials (secret and id)
 
-- install the aws cli. We're using brew on both OSX and Linux for simplicity
+- install the aws cli. We're using brew on both OSX and Linux for simplicity. Installation instructions for brew can be found [here](https://brew.sh/)
 
 ```bash
 brew install --user awscli
@@ -20,14 +20,6 @@ tfenv install 1.1.3
 tfenv use 1.1.3
 ```
 
-### Install Easy-RSA for certificate generation
-On a mac/linux you can install easy-rsa with homebrew (if you do this, you don't need the ./ in front of easyrsa in the later steps):
-
-```bash
-brew tap riboseinc/easy-rsa
-brew install easy-rsa
-```
-
 ### Install required tooling for terraform checks
 
 ```shell
@@ -38,18 +30,6 @@ brew install tfsec terraform-docs tflint yamllint jq pre-commit
 
 ```shell
 pre-commit install
-```
-
-## Generating a VPN certificate set
-
-After installing `easy-rsa` you can use the helper commands to generate and upload a vpn certificate
-set for a managed environment. The commands below will generate the
-certificates and copy them to the relevant shared infra directory, then upload
-them to ssm so that they can be consumed by codebuild.
-
-```shell
-ENVIRONMENT=foo WORKSPACE=bar make generate-certificates
-ENVIRONMENT=foo WORKSPACE=bar aws-vault exec <AWS_ACCOUNT_NAME> -- make upload-certificates
 ```
 ## Other documentation
 - [Deploying Shared Parent Infrastructure](./docs/SharedParentInfra.md)
@@ -68,10 +48,10 @@ To deploy to the shared environments we need a few more environment variables.
     WORKSPACE - the name of your workspace you are going to be deploying to
     USER_TYPE (Optional) - If you are using your credentials it will attempt to assume the Bichard7-Administrator-Access role by default, if this is set to ci, then it will assume the relevant role.
 
-As an example, to deploy as a ci user to sandbox_a you will run something like the following:-
+As an example, to deploy as a ci user to sandbox_a, you will need to run something like the following:-
 
 ```shell
 WORKSPACE=development AWS_ACCOUNT_NAME=sandbox_c USER_TYPE=ci aws-vault exec bichard7-sandbox-ci -- make shared-base-infra
 ```
 
-This then in turn calls [a python](scripts/shared_terraform.py) script which will handle the create and destroy commands for each of the portions of infrastructure.
+This then in turn calls [a python](scripts/shared_account_terraform.py) script which will handle the create and destroy commands for each of the portions of infrastructure.
