@@ -9,6 +9,15 @@ module "scoutsuite_scan_shared" {
 
   event_type_ids = []
 
+  build_environments = [
+    {
+      compute_type    = "BUILD_GENERAL1_SMALL"
+      image           = module.codebuild_docker_resources.scoutsuite_docker_image
+      type            = "LINUX_CONTAINER"
+      privileged_mode = true
+    }
+  ]
+
   environment_variables = [
     {
       name  = "ACCOUNT_ID"
