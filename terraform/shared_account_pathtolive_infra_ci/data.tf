@@ -50,18 +50,18 @@ data "external" "latest_bichard_image" {
   ]
 }
 
-data "aws_ecr_repository" "nodejs" {
-  name = "nodejs"
+data "aws_ecr_repository" "codebuild_base" {
+  name = "codebuild-base"
 
   depends_on = [
     module.codebuild_base_resources
   ]
 }
 
-data "external" "latest_nodejs_image" {
+data "external" "latest_codebuild_base" {
   program = [
     "aws", "ecr", "describe-images",
-    "--repository-name", data.aws_ecr_repository.nodejs.name,
+    "--repository-name", data.aws_ecr_repository.codebuild_base.name,
     "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
   ]
 
