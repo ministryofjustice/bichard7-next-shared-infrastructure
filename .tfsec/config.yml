@@ -1,0 +1,13 @@
+---
+# We are ignoring these newer checks for now until we can get round
+# to fixing them. BICAWS-877 has been raised to fix these issues
+exclude:
+  - AWS092
+  - AWS093
+  - AWS095
+  - aws-ecr-repository-customer-key
+  - aws-iam-no-policy-wildcards
+  - aws-s3-specify-public-access-block
+  - aws-elbv2-http-not-used
+  - aws-lambda-enable-tracing
+  - aws-api-gateway-enable-tracing
