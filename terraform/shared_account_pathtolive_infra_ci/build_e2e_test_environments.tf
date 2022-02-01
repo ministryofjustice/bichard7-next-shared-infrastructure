@@ -10,6 +10,18 @@ module "deploy_e2e_test_terraform" {
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
   build_timeout = 180
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   codebuild_secondary_sources = [
     {
       type              = "GITHUB"
@@ -21,6 +33,7 @@ module "deploy_e2e_test_terraform" {
       }
     }
   ]
+
   deploy_account_name = "integration_next"
   deployment_name     = "e2e-test"
   event_type_ids      = []
@@ -29,8 +42,10 @@ module "deploy_e2e_test_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     module.codebuild_docker_resources.nodejs_repository_arn,
-    data.aws_ecr_repository.bichard.arn
+    data.aws_ecr_repository.bichard.arn,
+    data.aws_ecr_repository.codebuild_base.arn
   ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -124,12 +139,26 @@ module "destroy_e2e_test_terraform" {
 
   deploy_account_name = "integration_next"
   deployment_name     = "e2e-test"
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     module.codebuild_docker_resources.nodejs_repository_arn,
-    data.aws_ecr_repository.bichard.arn
+    data.aws_ecr_repository.bichard.arn,
+    data.aws_ecr_repository.codebuild_base.arn
   ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -279,9 +308,24 @@ module "apply_dev_sg_to_e2e_test" {
 
   build_timeout = 180
 
-  deploy_account_name   = "integration_next"
-  deployment_name       = "e2e-test"
-  allowed_resource_arns = []
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
+  deploy_account_name = "integration_next"
+  deployment_name     = "e2e-test"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -327,9 +371,24 @@ module "remove_dev_sg_from_e2e_test" {
 
   build_timeout = 180
 
-  deploy_account_name   = "integration_next"
-  deployment_name       = "e2e-test"
-  allowed_resource_arns = []
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
+  deploy_account_name = "integration_next"
+  deployment_name     = "e2e-test"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"

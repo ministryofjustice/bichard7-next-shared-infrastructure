@@ -10,7 +10,7 @@ module "run_load_tests" {
   event_type_ids = []
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.nodejs.arn
+    data.aws_ecr_repository.codebuild_base.arn
   ]
 
   build_environments = [

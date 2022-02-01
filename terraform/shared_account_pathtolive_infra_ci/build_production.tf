@@ -12,12 +12,15 @@ module "deploy_production_terraform" {
 
   build_environments = [
     {
-      compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
-      type            = "LINUX_CONTAINER"
-      privileged_mode = true
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
     }
   ]
+
   build_timeout = 180
   codebuild_secondary_sources = [
     {
@@ -37,8 +40,10 @@ module "deploy_production_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     module.codebuild_docker_resources.nodejs_repository_arn,
-    data.aws_ecr_repository.bichard.arn
+    data.aws_ecr_repository.bichard.arn,
+    data.aws_ecr_repository.codebuild_base.arn
   ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -227,12 +232,26 @@ module "destroy_production_terraform" {
 
   deploy_account_name = "production"
   deployment_name     = "production"
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     module.codebuild_docker_resources.nodejs_repository_arn,
-    data.aws_ecr_repository.bichard.arn
+    data.aws_ecr_repository.bichard.arn,
+    data.aws_ecr_repository.codebuild_base.arn
   ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -351,9 +370,24 @@ module "apply_dev_sg_to_prod" {
 
   build_timeout = 180
 
-  deploy_account_name   = "production"
-  deployment_name       = "production"
-  allowed_resource_arns = []
+  deploy_account_name = "production"
+  deployment_name     = "production"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -399,9 +433,24 @@ module "remove_dev_sg_from_prod" {
 
   build_timeout = 180
 
-  deploy_account_name   = "production"
-  deployment_name       = "production"
-  allowed_resource_arns = []
+  deploy_account_name = "production"
+  deployment_name     = "production"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"

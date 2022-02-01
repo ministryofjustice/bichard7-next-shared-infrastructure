@@ -21,6 +21,18 @@ module "deploy_load_test_terraform" {
       }
     }
   ]
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   deploy_account_name = "integration_baseline"
   deployment_name     = "load-test"
   event_type_ids      = []
@@ -29,8 +41,10 @@ module "deploy_load_test_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     module.codebuild_docker_resources.nodejs_repository_arn,
-    data.aws_ecr_repository.bichard.arn
+    data.aws_ecr_repository.bichard.arn,
+    data.aws_ecr_repository.codebuild_base.arn
   ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -151,12 +165,26 @@ module "destroy_load_test_terraform" {
 
   deploy_account_name = "integration_baseline"
   deployment_name     = "load-test"
+
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     module.codebuild_docker_resources.nodejs_repository_arn,
-    data.aws_ecr_repository.bichard.arn
+    data.aws_ecr_repository.bichard.arn,
+    data.aws_ecr_repository.codebuild_base.arn
   ]
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -316,9 +344,24 @@ module "apply_dev_sg_to_load_test" {
 
   build_timeout = 180
 
-  deploy_account_name   = "integration_baseline"
-  deployment_name       = "load-test"
-  allowed_resource_arns = []
+  deploy_account_name = "integration_baseline"
+  deployment_name     = "load-test"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -364,9 +407,24 @@ module "remove_dev_sg_from_load_test" {
 
   build_timeout = 180
 
-  deploy_account_name   = "integration_baseline"
-  deployment_name       = "load-test"
-  allowed_resource_arns = []
+  deploy_account_name = "integration_baseline"
+  deployment_name     = "load-test"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
