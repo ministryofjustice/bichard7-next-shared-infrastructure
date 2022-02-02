@@ -36,11 +36,11 @@ module "aws_logs" {
 module "sandbox_a_child_access" {
   source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access"
   root_account_id     = data.aws_caller_identity.current.account_id
-  tags                = module.label.tags
   bucket_name         = local.remote_bucket_name
   logging_bucket_name = module.aws_logs.aws_logs_bucket
+  create_nuke_user    = true
 
-  create_nuke_user = true
+  tags = module.label.tags
 
   providers = {
     aws = aws.sandbox_a
@@ -50,11 +50,11 @@ module "sandbox_a_child_access" {
 module "sandbox_b_child_access" {
   source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access"
   root_account_id     = data.aws_caller_identity.current.account_id
-  tags                = module.label.tags
   bucket_name         = local.remote_bucket_name
   logging_bucket_name = module.aws_logs.aws_logs_bucket
+  create_nuke_user    = true
 
-  create_nuke_user = true
+  tags = module.label.tags
 
   providers = {
     aws = aws.sandbox_b
@@ -64,11 +64,11 @@ module "sandbox_b_child_access" {
 module "sandbox_c_child_access" {
   source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access"
   root_account_id     = data.aws_caller_identity.current.account_id
-  tags                = module.label.tags
   bucket_name         = local.remote_bucket_name
   logging_bucket_name = module.aws_logs.aws_logs_bucket
+  create_nuke_user    = true
 
-  create_nuke_user = true
+  tags = module.label.tags
 
   providers = {
     aws = aws.sandbox_c

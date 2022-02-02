@@ -35,5 +35,6 @@ module "apply_nuke_sandbox_schedule" {
   codebuild_arn   = each.value.pipeline_arn
   name            = each.value.pipeline_name
   cron_expression = "cron(0 0 ? * SAT *)" # run every Sunday at midnight
-  tags            = module.label.tags
+
+  tags = module.label.tags
 }

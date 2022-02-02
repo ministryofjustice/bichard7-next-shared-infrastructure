@@ -47,6 +47,8 @@ data "template_file" "allow_route53" {
 resource "aws_iam_policy" "allow_route53" {
   policy = data.template_file.allow_route53.rendered
   name   = "AllowPathToLiveRoute53"
+
+  tags = module.label.tags
 }
 
 resource "aws_iam_role_policy_attachment" "allow_pathtolive_assume_route53" {
