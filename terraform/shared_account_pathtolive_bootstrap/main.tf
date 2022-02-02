@@ -34,10 +34,11 @@ module "label" {
 #set up terraform_remote_state storage/management for shared_account resources (S3/DynamoDB backend)
 module "account_resources_terraform_remote_state" {
   source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/terraform_remote_state"
-  tags                = module.label.tags
   name                = module.label.id
   bucket-object-name  = "tfstatefile"
   logging_bucket_name = module.aws_logs.aws_logs_bucket
+
+  tags = module.label.tags
 }
 
 module "aws_logs" {
@@ -46,4 +47,6 @@ module "aws_logs" {
   s3_bucket_name    = "${module.label.id}-logging"
   force_destroy     = false
   enable_versioning = true
+
+  tags = module.label.tags
 }
