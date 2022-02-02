@@ -2,6 +2,8 @@ resource "aws_iam_role" "codepipeline_role" {
   name = "cjse-bichard7-path-to-live-deploy-role"
 
   assume_role_policy = file("${path.module}/policies/codepipeline_policy.json")
+
+  tags = module.label.tags
 }
 
 data "template_file" "codepipeline_policy_template" {
@@ -32,8 +34,6 @@ data "template_file" "kms_permissions" {
 
 
 #### Addenda to service roles
-
-
 data "template_file" "allow_codebuild_codestar_connection" {
   template = file("${path.module}/policies/allow_codebuild_codestar_connection.json")
 
