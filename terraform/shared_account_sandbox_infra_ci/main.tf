@@ -29,15 +29,15 @@ module "codebuild_base_resources" {
 
   aws_logs_bucket = data.terraform_remote_state.shared_infra.outputs.s3_logging_bucket_name
   name            = module.label.name
-  tags            = module.label.tags
   slack_webhook   = var.slack_webhook
-
   allow_accounts = [
     data.aws_caller_identity.current.account_id,
     data.aws_caller_identity.sandbox_a.account_id,
     data.aws_caller_identity.sandbox_b.account_id,
     data.aws_caller_identity.sandbox_c.account_id
   ]
+
+  tags = module.label.tags
 }
 
 module "codebuild_docker_resources" {
@@ -65,5 +65,6 @@ module "common_build_jobs" {
   reporting_cd_env_vars     = local.bichard_cd_vars
   scanning_results_bucket   = module.codebuild_base_resources.scanning_results_bucket
   common_cd_vars            = local.common_cd_vars
-  tags                      = module.label.tags
+
+  tags = module.label.tags
 }
