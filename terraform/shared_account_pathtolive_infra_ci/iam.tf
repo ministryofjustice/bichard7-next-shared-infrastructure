@@ -145,9 +145,13 @@ resource "aws_iam_role_policy" "allow_qsolution_codebuild_bucket" {
 }
 
 # tfsec:ignore:aws-iam-no-policy-wildcards
+# This is currently set to Count 0 as the PAAS has certain policies in place that
+# prevent us from adding role policies, we need them to lift this temporarily to apply the role policy, when this is done,
+# the count can be removed and the role policy applied
 resource "aws_iam_role_policy" "allow_production_codebuild_bucket" {
-  name = "AllCodeBuildBucketAccess"
-  role = "Bichard7-CI-Access"
+  count = 0
+  name  = "AllCodeBuildBucketAccess"
+  role  = "Bichard7-CI-Access"
 
   policy = <<-EOF
   {
