@@ -6,8 +6,9 @@ This layer sets up the prerequisites for all terraform runs.
 ```shell
 $ cd terraform/shared_account_(pathtolive/sandbox)_bootstrap
 $ aws-vault exec your-shared-parent-credentials -- terraform init -upgrade
-$ aws-vault exec your-shared-parent-credentials -- terraform state pull
+$ aws-vault exec your-shared-parent-credentials -- aws s3 cp s3://bucket/bootstrap/terraform.tfstate terraform.tfstate
 $ aws-vault exec your-shared-parent-credentials -- terraform state apply
+$ aws-vault exec your-shared-parent-credentials -- aws s3 cp terraform.tfstate s3://bucket/bootstrap/terraform.tfstate
 ```
 
 ##### Shared Infra Layer
@@ -16,6 +17,7 @@ This layer sets up IAM roles and cross account access.
 
 Ensure you have aws credentials exported for the relevant accounts. For sandbox you will
 need the following vars
+
 ```shell
 export TF_VAR_sandbox_a_access_key=""
 export TF_VAR_sandbox_a_secret_key=""

@@ -47,4 +47,6 @@ module "aws_logs" {
   s3_bucket_name    = "${module.label.id}-logging"
   force_destroy     = false
   enable_versioning = true
+
+  tags = module.label.tags
 }
