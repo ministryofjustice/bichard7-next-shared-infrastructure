@@ -80,7 +80,7 @@ resource "aws_codebuild_webhook" "e2e_tests_pr_webhook" {
 
     filter {
       type                    = "HEAD_REF"
-      pattern                 = "refs/heads/master"
+      pattern                 = "refs/heads/main"
       exclude_matched_pattern = true
     }
   }
@@ -94,7 +94,7 @@ resource "aws_codebuild_webhook" "e2e_tests_pr_webhook" {
 
     filter {
       type    = "HEAD_REF"
-      pattern = "refs/heads/master"
+      pattern = "refs/heads/main"
     }
   }
 

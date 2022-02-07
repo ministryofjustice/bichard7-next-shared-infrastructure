@@ -85,7 +85,7 @@ resource "aws_codepipeline" "path_to_live" {
       configuration = {
         ConnectionArn        = aws_codestarconnections_connection.github.arn
         FullRepositoryId     = "ministryofjustice/bichard7-next-infrastructure"
-        BranchName           = "master"
+        BranchName           = "main"
         OutputArtifactFormat = "CODEBUILD_CLONE_REF"
         DetectChanges        = true
       }
@@ -102,7 +102,7 @@ resource "aws_codepipeline" "path_to_live" {
       configuration = {
         ConnectionArn        = aws_codestarconnections_connection.github.arn
         FullRepositoryId     = "ministryofjustice/bichard7-next"
-        BranchName           = "master"
+        BranchName           = "main"
         OutputArtifactFormat = "CODEBUILD_CLONE_REF"
         DetectChanges        = true
       }
@@ -119,7 +119,7 @@ resource "aws_codepipeline" "path_to_live" {
       configuration = {
         ConnectionArn        = aws_codestarconnections_connection.github.arn
         FullRepositoryId     = "ministryofjustice/bichard7-next-tests"
-        BranchName           = "master"
+        BranchName           = "main"
         OutputArtifactFormat = "CODEBUILD_CLONE_REF"
         DetectChanges        = false
       }
@@ -601,7 +601,7 @@ module "update_environment_ssm_params" {
   repository_name        = "bichard7-next-infrastructure"
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
-  git_ref                = "master"
+  git_ref                = "main"
   buildspec_file         = "update-ssm-params.buildspec.yml"
 
   environment_variables = [

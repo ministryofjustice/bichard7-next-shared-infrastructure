@@ -2,7 +2,6 @@ module "build_bichard7_next_docker_image" {
   source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
   repository_name        = "bichard7-next"
-  git_ref                = "master"
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   vpc_config             = var.vpc_config_block
   name                   = "build-bichard7-next"

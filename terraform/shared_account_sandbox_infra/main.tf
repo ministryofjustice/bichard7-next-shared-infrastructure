@@ -18,7 +18,7 @@ module "label" {
     "environment-name" = "sharedaccount-infra"
     "account-name"     = "bichard7-sandbox-shared"
     "provisioned-by"   = "shared_account_sandbox_infra code see make shared-account-sandbox-infra in Makefile"
-    "source-code"      = "https://github.com/ministryofjustice/bichard7-next-shared-infrastructure/tree/master/shared_terraform/shared_account_sandbox_infra"
+    "source-code"      = "https://github.com/ministryofjustice/bichard7-next-shared-infrastructure/tree/main/shared_terraform/shared_account_sandbox_infra"
     "owner"            = module.tag_vars.owner_email
     "region"           = data.aws_region.current_region.id
   }
