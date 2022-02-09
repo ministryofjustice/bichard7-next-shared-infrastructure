@@ -37,3 +37,8 @@ output "build_auth_proxy_service_role_name" {
   description = "The name of our auth proxy service job service role"
   value       = module.build_nginx_auth_proxy_docker_image.pipeline_service_role_name
 }
+
+output "trivy_scan_containers_name" {
+  description = "The name of our trivy container scan job"
+  value       = module.trivy_scan.pipeline_name
+}
