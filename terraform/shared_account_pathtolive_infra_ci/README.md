@@ -89,6 +89,8 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 |------|------|
 | [aws_acm_certificate.bichard7_pathtolive_delegated_zone](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/acm_certificate) | resource |
 | [aws_acm_certificate_validation.base_infra_certificate_validation](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/acm_certificate_validation) | resource |
+| [aws_cloudwatch_dashboard.codebuild_automation_dashboard](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/cloudwatch_dashboard) | resource |
+| [aws_cloudwatch_dashboard.codebuild_scanners_dashboard](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/cloudwatch_dashboard) | resource |
 | [aws_codebuild_webhook.e2e_tests_pr_webhook](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/codebuild_webhook) | resource |
 | [aws_codepipeline.path_to_live](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/codepipeline) | resource |
 | [aws_codestarconnections_connection.github](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/codestarconnections_connection) | resource |
@@ -134,6 +136,8 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | [external_external.latest_bichard_image](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [external_external.latest_codebuild_base](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [template_file.allow_codebuild_codestar_connection](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
+| [template_file.codebuild_automation_dashboard](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
+| [template_file.codebuild_scanners_dashboard](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.codepipeline_policy_template](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.kms_permissions](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [terraform_remote_state.shared_infra](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |

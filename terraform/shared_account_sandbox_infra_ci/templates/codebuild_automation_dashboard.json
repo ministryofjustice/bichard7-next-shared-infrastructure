@@ -1,0 +1,109 @@
+{
+  "widgets": [
+    {
+      "height": 7,
+      "width": 12,
+      "y": 0,
+      "x": 0,
+      "type": "metric",
+      "properties": {
+        "metrics": [
+          [
+            "AWS/CodeBuild",
+            "SucceededBuilds",
+            "ProjectName",
+            "manage-aws-users",
+            {
+              "id": "m1"
+            }
+          ],
+          [
+            ".",
+            "FailedBuilds",
+            ".",
+            ".",
+            {
+              "id": "m2"
+            }
+          ]
+        ],
+        "view": "singleValue",
+        "stacked": true,
+        "region": "${region}",
+        "stat": "Average",
+        "period": 86400,
+        "title": "Manage AWS Users"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 0,
+      "width": 12,
+      "height": 7,
+      "properties": {
+        "metrics": [
+          [
+            "AWS/CodeBuild",
+            "SucceededBuilds",
+            "ProjectName",
+            "pull-offline-binaries",
+            {
+              "id": "m1"
+            }
+          ],
+          [
+            "AWS/CodeBuild",
+            "FailedBuilds",
+            ".",
+            ".",
+            {
+              "id": "m2"
+            }
+          ]
+        ],
+        "view": "singleValue",
+        "stacked": true,
+        "region": "${region}",
+        "stat": "Average",
+        "period": 86400,
+        "title": "Pull Offline Binaries"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 8,
+      "width": 12,
+      "height": 7,
+      "properties": {
+        "metrics": [
+          [
+            "AWS/CodeBuild",
+            "SucceededBuilds",
+            "ProjectName",
+            "apply-codebuild-layer",
+            {
+              "id": "m1"
+            }
+          ],
+          [
+            ".",
+            "FailedBuilds",
+            ".",
+            ".",
+            {
+              "id": "m2"
+            }
+          ]
+        ],
+        "view": "singleValue",
+        "stacked": true,
+        "region": "${region}",
+        "stat": "Average",
+        "period": 86400,
+        "title": "Update Codebuild Jobs"
+      }
+    }
+  ]
+}
