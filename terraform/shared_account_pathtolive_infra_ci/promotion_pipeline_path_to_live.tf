@@ -134,7 +134,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner           = "AWS"
       provider        = "CodeBuild"
       version         = "1"
-      namespace       = "ImageHashes"
+      namespace       = "Hashes"
       input_artifacts = ["infrastructure"]
 
       configuration = {
@@ -177,19 +177,19 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_bichard_deploy_tag"
-              value = "#{ImageHashes.WAS_APPLICATION_HASH}"
+              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_audit_logging_deploy_tag"
-              value = "#{ImageHashes.AUDIT_LOGGING_HASH}"
+              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
-              value = "#{ImageHashes.USER_SERVICE_HASH}"
+              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
-              value = "#{ImageHashes.NGINX_AUTH_PROXY_HASH}"
+              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -298,20 +298,20 @@ resource "aws_codepipeline" "path_to_live" {
               value = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
             },
             {
-              name  = "WAS_APPLICATION_HASH"
-              value = "#{ImageHashes.WAS_APPLICATION_HASH}"
+              name  = "WAS_APPLICATION_IMAGE_HASH"
+              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
-              name  = "AUDIT_LOGGING_HASH"
-              value = "#{ImageHashes.AUDIT_LOGGING_HASH}"
+              name  = "AUDIT_LOGGING_IMAGE_HASH"
+              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
-              name  = "USER_SERVICE_HASH"
-              value = "#{ImageHashes.USER_SERVICE_HASH}"
+              name  = "USER_SERVICE_IMAGE_HASH"
+              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
             },
             {
-              name  = "NGINX_AUTH_PROXY_HASH"
-              value = "#{ImageHashes.NGINX_AUTH_PROXY_HASH}"
+              name  = "NGINX_AUTH_PROXY_IMAGE_HASH"
+              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -339,19 +339,19 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_bichard_deploy_tag"
-              value = "#{ImageHashes.WAS_APPLICATION_HASH}"
+              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_audit_logging_deploy_tag"
-              value = "#{ImageHashes.AUDIT_LOGGING_HASH}"
+              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
-              value = "#{ImageHashes.USER_SERVICE_HASH}"
+              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
-              value = "#{ImageHashes.NGINX_AUTH_PROXY_HASH}"
+              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -432,6 +432,44 @@ resource "aws_codepipeline" "path_to_live" {
 
   stage {
     name = "manual-approval-for-deploy-production"
+
+    action {
+      category = "Build"
+      name     = "generate-code-to-be-deployed-diff"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+
+      configuration = {
+        ProjectName   = module.code_to_be_deployed.pipeline_name
+        PrimarySource = "infrastructure"
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "WAS_APPLICATION_COMMIT_HASH"
+              value = "#{Hashes.WAS_APPLICATION_COMMIT_HASH}"
+            },
+            {
+              name  = "AUDIT_LOGGING_COMMIT_HASH"
+              value = "#{Hashes.AUDIT_LOGGING_COMMIT_HASH}"
+            },
+            {
+              name  = "USER_SERVICE_COMMIT_HASH"
+              value = "#{Hashes.USER_SERVICE_COMMIT_HASH}"
+            },
+            {
+              name  = "NGINX_AUTH_PROXY_COMMIT_HASH"
+              value = "#{HASHES.NGINX_AUTH_PROXY_COMMIT_HASH}"
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure"
+      ]
+    }
+
     action {
       name     = "manual-approval-for-deploy-to-production"
       category = "Approval"
@@ -470,20 +508,20 @@ resource "aws_codepipeline" "path_to_live" {
               value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
             },
             {
-              name  = "WAS_APPLICATION_HASH"
-              value = "#{ImageHashes.WAS_APPLICATION_HASH}"
+              name  = "WAS_APPLICATION_IMAGE_HASH"
+              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
-              name  = "AUDIT_LOGGING_HASH"
-              value = "#{ImageHashes.AUDIT_LOGGING_HASH}"
+              name  = "AUDIT_LOGGING_IMAGE_HASH"
+              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
-              name  = "USER_SERVICE_HASH"
-              value = "#{ImageHashes.USER_SERVICE_HASH}"
+              name  = "USER_SERVICE_IMAGE_HASH"
+              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
             },
             {
-              name  = "NGINX_AUTH_PROXY_HASH"
-              value = "#{ImageHashes.NGINX_AUTH_PROXY_HASH}"
+              name  = "NGINX_AUTH_PROXY_IMAGE_HASH"
+              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -509,19 +547,19 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_bichard_deploy_tag"
-              value = "#{ImageHashes.WAS_APPLICATION_HASH}"
+              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_audit_logging_deploy_tag"
-              value = "#{ImageHashes.AUDIT_LOGGING_HASH}"
+              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
-              value = "#{ImageHashes.USER_SERVICE_HASH}"
+              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
-              value = "#{ImageHashes.NGINX_AUTH_PROXY_HASH}"
+              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -628,6 +666,35 @@ module "update_environment_ssm_params" {
     {
       name  = "NGINX_AUTH_PROXY_REPO"
       value = module.codebuild_docker_resources.nginx_auth_proxy.name
+    }
+  ]
+
+  tags = module.label.tags
+}
+
+module "code_to_be_deployed" {
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+
+  build_description      = "Output a diff of the code to be deployed"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "generate-code-to-be-deployed-diff"
+  repository_name        = "bichard7-next-infrastructure"
+  sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn   = module.codebuild_base_resources.notifications_arn
+  buildspec_file         = "code-to-be-deployed.yml"
+  event_type_ids         = []
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
     }
   ]
 
