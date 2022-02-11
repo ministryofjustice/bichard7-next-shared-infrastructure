@@ -432,7 +432,7 @@ resource "aws_codepipeline" "path_to_live" {
 
   stage {
     name = "manual-approval-for-deploy-production"
-    
+
     action {
       category = "Build"
       name     = "generate-code-to-be-deployed-diff"
