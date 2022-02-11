@@ -134,7 +134,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner           = "AWS"
       provider        = "CodeBuild"
       version         = "1"
-      namespace       = "Hashes"
+      namespace       = "HASHES"
       input_artifacts = ["infrastructure"]
 
       configuration = {
@@ -177,19 +177,19 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_bichard_deploy_tag"
-              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
+              value = "#{HASHES.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_audit_logging_deploy_tag"
-              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
+              value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
-              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
+              value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
-              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
+              value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -299,19 +299,19 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "WAS_APPLICATION_IMAGE_HASH"
-              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
+              value = "#{HASHES.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
               name  = "AUDIT_LOGGING_IMAGE_HASH"
-              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
+              value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
               name  = "USER_SERVICE_IMAGE_HASH"
-              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
+              value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
             },
             {
               name  = "NGINX_AUTH_PROXY_IMAGE_HASH"
-              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
+              value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -339,19 +339,19 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_bichard_deploy_tag"
-              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
+              value = "#{HASHES.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_audit_logging_deploy_tag"
-              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
+              value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
-              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
+              value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
-              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
+              value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -447,15 +447,15 @@ resource "aws_codepipeline" "path_to_live" {
           [
             {
               name  = "WAS_APPLICATION_COMMIT_HASH"
-              value = "#{Hashes.WAS_APPLICATION_COMMIT_HASH}"
+              value = "#{HASHES.WAS_APPLICATION_COMMIT_HASH}"
             },
             {
               name  = "AUDIT_LOGGING_COMMIT_HASH"
-              value = "#{Hashes.AUDIT_LOGGING_COMMIT_HASH}"
+              value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
             },
             {
               name  = "USER_SERVICE_COMMIT_HASH"
-              value = "#{Hashes.USER_SERVICE_COMMIT_HASH}"
+              value = "#{HASHES.USER_SERVICE_COMMIT_HASH}"
             },
             {
               name  = "NGINX_AUTH_PROXY_COMMIT_HASH"
@@ -509,19 +509,19 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "WAS_APPLICATION_IMAGE_HASH"
-              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
+              value = "#{HASHES.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
               name  = "AUDIT_LOGGING_IMAGE_HASH"
-              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
+              value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
               name  = "USER_SERVICE_IMAGE_HASH"
-              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
+              value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
             },
             {
               name  = "NGINX_AUTH_PROXY_IMAGE_HASH"
-              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
+              value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
@@ -547,19 +547,19 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_bichard_deploy_tag"
-              value = "#{Hashes.WAS_APPLICATION_IMAGE_HASH}"
+              value = "#{HASHES.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_audit_logging_deploy_tag"
-              value = "#{Hashes.AUDIT_LOGGING_IMAGE_HASH}"
+              value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
-              value = "#{Hashes.USER_SERVICE_IMAGE_HASH}"
+              value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
             },
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
-              value = "#{Hashes.NGINX_AUTH_PROXY_IMAGE_HASH}"
+              value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
             }
           ]
         )
