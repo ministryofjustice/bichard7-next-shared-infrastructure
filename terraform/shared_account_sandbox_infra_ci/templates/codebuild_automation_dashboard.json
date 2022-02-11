@@ -97,7 +97,7 @@
             }
           ]
         ],
-        "view": "singleValue",
+        "view": "timeSeries",
         "stacked": true,
         "region": "${region}",
         "stat": "Average",

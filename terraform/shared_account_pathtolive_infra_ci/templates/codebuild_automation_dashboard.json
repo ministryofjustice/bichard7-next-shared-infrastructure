@@ -71,11 +71,11 @@
       }
     },
     {
-      "type": "metric",
-      "x": 0,
-      "y": 8,
-      "width": 12,
       "height": 7,
+      "width": 12,
+      "y": 7,
+      "x": 0,
+      "type": "metric",
       "properties": {
         "metrics": [
           [
@@ -97,12 +97,100 @@
             }
           ]
         ],
-        "view": "singleValue",
-        "stacked": true,
-        "region": "${region}",
-        "stat": "Average",
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "eu-west-2",
+        "stat": "Sum",
         "period": 86400,
         "title": "Update Codebuild Jobs"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 7,
+      "width": 12,
+      "height": 7,
+      "properties": {
+        "metrics": [
+          [
+            "AWS/CodeBuild",
+            "FailedBuilds",
+            "ProjectName",
+            "${remove_e2e_test_dev_sgs}",
+            {
+              "id": "m1"
+            }
+          ],
+          [
+            ".",
+            "SucceededBuilds",
+            ".",
+            ".",
+            {
+              "id": "m2"
+            }
+          ],
+          [
+            "AWS/CodeBuild",
+            "FailedBuilds",
+            "ProjectName",
+            "${remove_load_test_dev_sgs}",
+            {
+              "id": "m3"
+            }
+          ],
+          [
+            ".",
+            "SucceededBuilds",
+            ".",
+            ".",
+            {
+              "id": "m4"
+            }
+          ],
+          [
+            "AWS/CodeBuild",
+            "FailedBuilds",
+            "ProjectName",
+            "${remove_preprod_dev_sgs}",
+            {
+              "id": "m5"
+            }
+          ],
+          [
+            ".",
+            "SucceededBuilds",
+            ".",
+            ".",
+            {
+              "id": "m6"
+            }
+          ],
+          [
+            "AWS/CodeBuild",
+            "FailedBuilds",
+            "ProjectName",
+            "${remove_prod_dev_sgs}",
+            {
+              "id": "m7"
+            }
+          ],
+          [
+            ".",
+            "SucceededBuilds",
+            ".",
+            ".",
+            {
+              "id": "m8"
+            }
+          ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "eu-west-2",
+        "period": 86400,
+        "stat": "Sum"
       }
     }
   ]
