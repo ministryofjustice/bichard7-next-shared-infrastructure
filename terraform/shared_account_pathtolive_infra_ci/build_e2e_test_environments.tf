@@ -423,7 +423,7 @@ module "remove_dev_sg_from_e2e_test_schedule" {
   source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
   codebuild_arn   = module.remove_dev_sg_from_e2e_test.pipeline_arn
   name            = module.remove_dev_sg_from_e2e_test.pipeline_name
-  cron_expression = "cron(0 0 * * ? *)"
+  cron_expression = "cron(0 01 * * ? *)"
 
   tags = module.label.tags
 }
