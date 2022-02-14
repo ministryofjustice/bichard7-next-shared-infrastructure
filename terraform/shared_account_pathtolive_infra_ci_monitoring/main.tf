@@ -27,15 +27,17 @@ module "label" {
 module "codebuild_monitoring" {
   source = "../../../bichard7-next-infrastructure-modules/modules/codebuild_monitoring"
 
-  fargate_cpu         = 2048
-  fargate_memory      = 4096
-  logging_bucket_name = data.terraform_remote_state.shared_infra_ci.outputs.codepipeline_bucket
-  name                = module.label.id
-  public_zone_id      = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_zone_id
-  service_subnets     = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_public_subnet_ids
-  ssl_certificate_arn = data.terraform_remote_state.shared_infra_ci.outputs.ssl_certificate_arn
-  vpc_id              = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_vpc_id
-  grafana_image       = data.external.latest_grafana_codebuild_image.result.tags
+  fargate_cpu            = 2048
+  fargate_memory         = 4096
+  logging_bucket_name    = data.terraform_remote_state.shared_infra_ci.outputs.codepipeline_bucket
+  name                   = module.label.id
+  public_zone_id         = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_zone_id
+  service_subnets        = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_public_subnet_ids
+  ssl_certificate_arn    = data.terraform_remote_state.shared_infra_ci.outputs.ssl_certificate_arn
+  vpc_id                 = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_vpc_id
+  grafana_image          = data.external.latest_grafana_codebuild_image.result.tags
+  private_subnets        = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_subnet_ids
+  grafana_repository_arn = data.aws_ecr_repository.grafana_codebuild.arn
 
   tags = module.label.tags
 }

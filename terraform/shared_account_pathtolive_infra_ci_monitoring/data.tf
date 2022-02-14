@@ -26,7 +26,7 @@ data "terraform_remote_state" "shared_infra_ci" {
 
 
 data "aws_ecr_repository" "grafana_codebuild" {
-  name = "grafana_codebuild"
+  name = "grafana-codebuild"
 }
 
 data "external" "latest_grafana_codebuild_image" {
