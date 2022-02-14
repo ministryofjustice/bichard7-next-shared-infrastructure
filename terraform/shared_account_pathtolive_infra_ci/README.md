@@ -33,6 +33,7 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | <a name="module_apply_dev_sg_to_preprod"></a> [apply\_dev\_sg\_to\_preprod](#module\_apply\_dev\_sg\_to\_preprod) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_apply_dev_sg_to_prod"></a> [apply\_dev\_sg\_to\_prod](#module\_apply\_dev\_sg\_to\_prod) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_build_nginx_scan_portal"></a> [build\_nginx\_scan\_portal](#module\_build\_nginx\_scan\_portal) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
+| <a name="module_code_to_be_deployed"></a> [code\_to\_be\_deployed](#module\_code\_to\_be\_deployed) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_codebuild_base_resources"></a> [codebuild\_base\_resources](#module\_codebuild\_base\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_base_resources | n/a |
 | <a name="module_codebuild_docker_resources"></a> [codebuild\_docker\_resources](#module\_codebuild\_docker\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/aws_ecr_repositories | n/a |
 | <a name="module_common_build_jobs"></a> [common\_build\_jobs](#module\_common\_build\_jobs) | ../modules/shared_cd_common_jobs | n/a |
@@ -89,8 +90,6 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 |------|------|
 | [aws_acm_certificate.bichard7_pathtolive_delegated_zone](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/acm_certificate) | resource |
 | [aws_acm_certificate_validation.base_infra_certificate_validation](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/acm_certificate_validation) | resource |
-| [aws_cloudwatch_dashboard.codebuild_automation_dashboard](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/cloudwatch_dashboard) | resource |
-| [aws_cloudwatch_dashboard.codebuild_scanners_dashboard](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/cloudwatch_dashboard) | resource |
 | [aws_codebuild_webhook.e2e_tests_pr_webhook](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/codebuild_webhook) | resource |
 | [aws_codepipeline.path_to_live](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/codepipeline) | resource |
 | [aws_codestarconnections_connection.github](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/codestarconnections_connection) | resource |
@@ -136,8 +135,6 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | [external_external.latest_bichard_image](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [external_external.latest_codebuild_base](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [template_file.allow_codebuild_codestar_connection](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
-| [template_file.codebuild_automation_dashboard](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
-| [template_file.codebuild_scanners_dashboard](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.codepipeline_policy_template](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.kms_permissions](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [terraform_remote_state.shared_infra](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
