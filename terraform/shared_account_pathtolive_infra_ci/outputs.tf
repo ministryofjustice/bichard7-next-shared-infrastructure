@@ -23,6 +23,11 @@ output "codebuild_subnet_ids" {
   value       = module.codebuild_base_resources.codebuild_subnet_ids
 }
 
+output "codebuild_public_subnet_ids" {
+  description = "A list of public subnet ids"
+  value       = module.codebuild_base_resources.codebuild_public_subnet_ids
+}
+
 output "codebuild_private_cidr_blocks" {
   description = "A list of private cidr blocks"
   value       = module.codebuild_base_resources.codebuild_private_cidrs
@@ -65,4 +70,20 @@ output "prometheus_cloudwatch_exporter_repository_arn" {
 output "bichard_liberty_ecr" {
   description = "The Bichard Liberty ecr repository details"
   value       = module.codebuild_docker_resources.bichard_liberty_ecr
+}
+
+output "codebuild_zone_id" {
+  description = "The public zone id for our codebuild VPC route53 zone"
+  value       = aws_route53_zone.codebuild_public_zone.id
+}
+
+output "ssl_certificate_arn" {
+  description = "The arn for our ACM ssl certificate"
+  value       = aws_acm_certificate.bichard7_pathtolive_delegated_zone.arn
+}
+
+output "codepipeline_bucket" {
+  description = "The name of the codebuild/pipeline bucket"
+  value       = module.codebuild_base_resources.codepipeline_bucket
+
 }
