@@ -171,3 +171,38 @@ module "build_logstash_docker_schedule" {
   cron_expression = "cron(0 5 ? * 1 *)"
   tags            = var.tags
 }
+
+module "build_grafana_codebuild_ssl_docker" {
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+
+  name              = "build-grafana-codebuild-ssl-docker"
+  build_description = "Codebuild for Building Customised Grafana Codebuild Images"
+  repository_name   = "bichard7-next-infrastructure-docker-images"
+  buildspec_file    = "./Grafana_Codebuild/buildspec.yml"
+  vpc_config        = var.vpc_config_block
+
+  environment_variables = [
+    {
+      name  = "DOCKER_IMAGE_HASH"
+      value = ""
+    },
+    {
+      name  = "ARTIFACT_BUCKET"
+      value = var.codebuild_s3_bucket
+    }
+  ]
+
+  codepipeline_s3_bucket = var.codebuild_s3_bucket
+  sns_notification_arn   = var.sns_notifications_arn
+  sns_kms_key_arn        = var.notifications_kms_key_arn
+
+  tags = var.tags
+}
+
+module "build_grafana_codebuild_ssl_docker_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_grafana_codebuild_ssl_docker.pipeline_arn
+  name            = module.build_grafana_codebuild_ssl_docker.pipeline_name
+  cron_expression = "cron(0 5 ? * 1 *)"
+  tags            = var.tags
+}
