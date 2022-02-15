@@ -20,7 +20,6 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | <a name="provider_aws.sandbox_b"></a> [aws.sandbox\_b](#provider\_aws.sandbox\_b) | 3.72.0 |
 | <a name="provider_aws.sandbox_c"></a> [aws.sandbox\_c](#provider\_aws.sandbox\_c) | 3.72.0 |
 | <a name="provider_external"></a> [external](#provider\_external) | 2.1.0 |
-| <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
@@ -28,6 +27,8 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_apply_nuke_sandbox_schedule"></a> [apply\_nuke\_sandbox\_schedule](#module\_apply\_nuke\_sandbox\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
+| <a name="module_apply_sonarqube"></a> [apply\_sonarqube](#module\_apply\_sonarqube) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
+| <a name="module_apply_sonarqube_schedule"></a> [apply\_sonarqube\_schedule](#module\_apply\_sonarqube\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
 | <a name="module_codebuild_base_resources"></a> [codebuild\_base\_resources](#module\_codebuild\_base\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_base_resources | n/a |
 | <a name="module_codebuild_docker_resources"></a> [codebuild\_docker\_resources](#module\_codebuild\_docker\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/aws_ecr_repositories | n/a |
 | <a name="module_common_build_jobs"></a> [common\_build\_jobs](#module\_common\_build\_jobs) | ../modules/shared_cd_common_jobs | n/a |
@@ -47,8 +48,6 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 
 | Name | Type |
 |------|------|
-| [aws_cloudwatch_dashboard.codebuild_automation_dashboard](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/cloudwatch_dashboard) | resource |
-| [aws_cloudwatch_dashboard.codebuild_scanners_dashboard](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/cloudwatch_dashboard) | resource |
 | [aws_iam_role_policy.allow_sandbox_a_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.allow_sandbox_b_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.allow_sandbox_c_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
@@ -57,11 +56,11 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | [aws_caller_identity.sandbox_a](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
 | [aws_caller_identity.sandbox_b](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
 | [aws_caller_identity.sandbox_c](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
+| [aws_ecr_repository.codebuild_base](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ecr_repository) | data source |
 | [aws_ecr_repository.was](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ecr_repository) | data source |
 | [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/region) | data source |
+| [external_external.latest_codebuild_base](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [external_external.latest_was_image](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
-| [template_file.codebuild_automation_dashboard](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
-| [template_file.codebuild_scanners_dashboard](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [terraform_remote_state.shared_infra](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
 
 ## Inputs

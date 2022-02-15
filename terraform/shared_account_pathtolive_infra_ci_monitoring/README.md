@@ -23,7 +23,7 @@ Creates a Grafana ECS cluster that pulls metrics from Cloudwatch
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_codebuild_monitoring"></a> [codebuild\_monitoring](#module\_codebuild\_monitoring) | ../../../bichard7-next-infrastructure-modules/modules/codebuild_monitoring | n/a |
+| <a name="module_codebuild_monitoring"></a> [codebuild\_monitoring](#module\_codebuild\_monitoring) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_monitoring | n/a |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.24.1 |
 | <a name="module_tag_vars"></a> [tag\_vars](#module\_tag\_vars) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars | n/a |
 
