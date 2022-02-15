@@ -66,7 +66,15 @@ shared-account-pathtolive-infra-ci:
 
 .PHONY: destroy-shared-account-pathtolive-infra-ci
 destroy-shared-account-pathtolive-infra-ci:
-	./scripts/shared_account_terraform.py pathtolive infra destroy
+	./scripts/shared_account_terraform.py pathtolive infra_ci destroy
+
+.PHONY: shared-account-pathtolive-infra-ci-monitoring
+shared-account-pathtolive-infra-ci-monitoring:
+	./scripts/shared_account_terraform.py pathtolive infra_ci_monitoring
+
+.PHONY: destroy-shared-account-pathtolive-infra-ci-monitoring
+destroy-shared-account-pathtolive-infra-ci-monitoring:
+	./scripts/shared_account_terraform.py pathtolive infra_ci_monitoring destroy
 
 .PHONY: terraform-clean-all
 terraform-clean-all:
