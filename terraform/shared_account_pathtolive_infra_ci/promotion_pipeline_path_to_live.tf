@@ -681,7 +681,7 @@ module "code_to_be_deployed" {
   repository_name        = "bichard7-next-infrastructure"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  buildspec_file         = "code-to-be-deployed.yml"
+  buildspec_file         = "buildspecs/code-to-be-deployed.yml"
   event_type_ids         = []
 
   allowed_resource_arns = [
