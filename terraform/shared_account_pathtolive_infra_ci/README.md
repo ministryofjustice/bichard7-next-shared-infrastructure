@@ -108,6 +108,7 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | [aws_iam_role_policy.allow_qsolution_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.apply_dev_sg_to_e2e_test](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.apply_dev_sg_to_preprod](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy.code_to_be_deployed](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.codepipeline_policy](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.remove_dev_sg_from_e2e_test](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.remove_dev_sg_from_preprod](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
