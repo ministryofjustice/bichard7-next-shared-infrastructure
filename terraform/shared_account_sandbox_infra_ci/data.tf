@@ -37,3 +37,24 @@ data "external" "latest_was_image" {
     "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
   ]
 }
+
+
+data "aws_ecr_repository" "codebuild_base" {
+  name = "codebuild-base"
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
+data "external" "latest_codebuild_base" {
+  program = [
+    "aws", "ecr", "describe-images",
+    "--repository-name", data.aws_ecr_repository.codebuild_base.name,
+    "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
+  ]
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
