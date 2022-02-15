@@ -9,7 +9,9 @@ Creates a Grafana ECS cluster that pulls metrics from Cloudwatch
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | = 3.72.0 |
-| <a name="requirement_local"></a> [local](#requirement\_local) | ~> 2.0.0 |
+| <a name="requirement_grafana"></a> [grafana](#requirement\_grafana) | 1.19.0 |
+| <a name="requirement_local"></a> [local](#requirement\_local) | = 2.0.0 |
+| <a name="requirement_template"></a> [template](#requirement\_template) | = 2.2.0 |
 
 ## Providers
 
@@ -44,5 +46,7 @@ No inputs.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_grafana_url"></a> [grafana\_url](#output\_grafana\_url) | The url of our grafana server |
 <!-- END_TF_DOCS -->
