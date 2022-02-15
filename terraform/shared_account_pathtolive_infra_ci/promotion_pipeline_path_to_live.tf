@@ -682,7 +682,6 @@ module "code_to_be_deployed" {
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   buildspec_file         = "buildspecs/code-to-be-deployed.yml"
-  event_type_ids         = []
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn
