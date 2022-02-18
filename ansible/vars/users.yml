@@ -17,8 +17,6 @@
 - users_enabled:
     - name: ben_pirt
       type: admin
-    - name: brett_minnie
-      type: admin
     - name: emad_karamad
       type: admin
     - name: jamie_davies
@@ -44,4 +42,5 @@
     - name: sam_slade
     - name: samuel_blackwell
     - name: satvinder_hullait
+    - name: brett_minnie
 ...
