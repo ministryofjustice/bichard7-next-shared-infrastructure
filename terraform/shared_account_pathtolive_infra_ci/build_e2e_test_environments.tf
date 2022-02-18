@@ -11,16 +11,7 @@ module "deploy_e2e_test_terraform" {
 
   build_timeout = 180
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   codebuild_secondary_sources = [
     {
@@ -140,16 +131,7 @@ module "destroy_e2e_test_terraform" {
   deploy_account_name = "integration_next"
   deployment_name     = "e2e-test"
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
@@ -308,16 +290,7 @@ module "apply_dev_sg_to_e2e_test" {
 
   build_timeout = 180
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   deploy_account_name = "integration_next"
   deployment_name     = "e2e-test"
@@ -371,16 +344,7 @@ module "remove_dev_sg_from_e2e_test" {
 
   build_timeout = 180
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   deploy_account_name = "integration_next"
   deployment_name     = "e2e-test"

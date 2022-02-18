@@ -44,4 +44,15 @@ locals {
     data.aws_caller_identity.preprod.account_id,
     data.aws_caller_identity.production.account_id
   ])
+
+  pipeline_build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
 }

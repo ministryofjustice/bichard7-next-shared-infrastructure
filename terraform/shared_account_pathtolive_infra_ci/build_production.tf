@@ -10,16 +10,7 @@ module "deploy_production_terraform" {
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
   event_type_ids         = []
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   build_timeout = 180
   codebuild_secondary_sources = [
@@ -233,16 +224,7 @@ module "destroy_production_terraform" {
   deploy_account_name = "production"
   deployment_name     = "production"
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
@@ -377,16 +359,7 @@ module "apply_dev_sg_to_prod" {
     data.aws_ecr_repository.codebuild_base.arn
   ]
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   environment_variables = [
     {
@@ -440,16 +413,7 @@ module "remove_dev_sg_from_prod" {
     data.aws_ecr_repository.codebuild_base.arn
   ]
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   environment_variables = [
     {
