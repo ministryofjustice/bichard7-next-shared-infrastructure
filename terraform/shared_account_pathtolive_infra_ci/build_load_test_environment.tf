@@ -10,6 +10,9 @@ module "deploy_load_test_terraform" {
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
   build_timeout = 180
+
+  build_environments = local.pipeline_build_environments
+
   codebuild_secondary_sources = [
     {
       type              = "GITHUB"
@@ -19,17 +22,6 @@ module "deploy_load_test_terraform" {
       git_submodules_config = {
         fetch_submodules = true
       }
-    }
-  ]
-
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
     }
   ]
 
@@ -166,23 +158,14 @@ module "destroy_load_test_terraform" {
   deploy_account_name = "integration_baseline"
   deployment_name     = "load-test"
 
+  build_environments = local.pipeline_build_environments
+
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     module.codebuild_docker_resources.nodejs_repository_arn,
     data.aws_ecr_repository.bichard.arn,
     data.aws_ecr_repository.codebuild_base.arn
-  ]
-
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
   ]
 
   environment_variables = [
@@ -351,16 +334,7 @@ module "apply_dev_sg_to_load_test" {
     data.aws_ecr_repository.codebuild_base.arn
   ]
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   environment_variables = [
     {
@@ -414,16 +388,7 @@ module "remove_dev_sg_from_load_test" {
     data.aws_ecr_repository.codebuild_base.arn
   ]
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-
-    }
-  ]
+  build_environments = local.pipeline_build_environments
 
   environment_variables = [
     {
