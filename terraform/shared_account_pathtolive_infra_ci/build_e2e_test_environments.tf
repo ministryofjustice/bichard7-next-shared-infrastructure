@@ -106,6 +106,10 @@ module "deploy_e2e_test_terraform" {
     {
       name  = "USE_SMTP"
       value = "true"
+    },
+    {
+      name  = "ARTIFACT_BUCKET"
+      value = module.codebuild_base_resources.codepipeline_bucket
     }
   ]
   is_cd = true
