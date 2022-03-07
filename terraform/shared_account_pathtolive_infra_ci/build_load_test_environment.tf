@@ -134,6 +134,10 @@ module "deploy_load_test_terraform" {
     {
       name  = "TF_VAR_desired_auth_proxy_instance_count"
       value = 3 # One per AZ
+    },
+    {
+      name  = "ARTIFACT_BUCKET"
+      value = module.codebuild_base_resources.codepipeline_bucket
     }
   ]
 

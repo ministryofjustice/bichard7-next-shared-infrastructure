@@ -200,6 +200,10 @@ module "deploy_production_terraform" {
     {
       name  = "TF_VAR_pagerduty_integration"
       value = "true"
+    },
+    {
+      name  = "ARTIFACT_BUCKET"
+      value = module.codebuild_base_resources.codepipeline_bucket
     }
   ]
 
