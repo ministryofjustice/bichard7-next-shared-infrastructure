@@ -23,16 +23,19 @@
       type: admin
     - name: jazz_sarkaria
       type: admin
-    - name: mihai_popa_matai
-      type: admin
     - name: simon_oldham
       type: admin
     - name: alice_lee
       type: admin
+    - name: csaba_gyorfi
+      type: admin
+    - name: tom_vaughan
+      type: admin
 
 - non_sc_users:
-    - jazz_sarkaria
     - alice_lee
+    - tom_vaughan
+    - csaba_gyorfi
 
 - users_removed:
     - name: christopher_ryan
@@ -43,4 +46,5 @@
     - name: samuel_blackwell
     - name: satvinder_hullait
     - name: brett_minnie
+    - name: mihai_popa_matai
 ...
