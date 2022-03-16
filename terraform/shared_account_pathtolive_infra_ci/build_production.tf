@@ -528,3 +528,95 @@ module "run_production_migrations" {
   ]
   tags = module.label.tags
 }
+
+module "enable_maintenance_page_prod" {
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for enabling maintenance page in prod"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "enable-maintenance-page-prod"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  buildspec_file       = "maintenance-buildspec.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  deploy_account_name = "production"
+  deployment_name     = "production"
+
+  build_environments = local.pipeline_build_environments
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "production"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "production"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+    },
+    {
+      name  = "ENABLE_MAINTENANCE"
+      value = "true"
+    }
+  ]
+
+  tags = module.label.tags
+}
+
+module "disable_maintenance_page_prod" {
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for disabling maintenance page in prod"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "disable-maintenance-page-prod"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  buildspec_file       = "maintenance-buildspec.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  deploy_account_name = "production"
+  deployment_name     = "production"
+
+  build_environments = local.pipeline_build_environments
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "production"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "production"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+    },
+    {
+      name  = "ENABLE_MAINTENANCE"
+      value = "false"
+    }
+  ]
+
+  tags = module.label.tags
+}

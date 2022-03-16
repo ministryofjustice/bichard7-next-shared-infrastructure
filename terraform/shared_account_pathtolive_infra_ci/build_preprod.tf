@@ -538,3 +538,95 @@ module "remove_dev_sg_from_preprod_schedule" {
 
   tags = module.label.tags
 }
+
+module "enable_maintenance_page_preprod" {
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for enabling maintenance page in preprod"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "enable-maintenance-page-preprod"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  buildspec_file       = "maintenance-buildspec.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  deploy_account_name = "q_solution"
+  deployment_name     = "preprod"
+
+  build_environments = local.pipeline_build_environments
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "preprod"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "q_solution"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
+    },
+    {
+      name  = "ENABLE_MAINTENANCE"
+      value = "true"
+    }
+  ]
+
+  tags = module.label.tags
+}
+
+module "disable_maintenance_page_preprod" {
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for disabling maintenance page in preprod"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "disable-maintenance-page-preprod"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  buildspec_file       = "maintenance-buildspec.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  deploy_account_name = "q_solution"
+  deployment_name     = "preprod"
+
+  build_environments = local.pipeline_build_environments
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "preprod"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "q_solution"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
+    },
+    {
+      name  = "ENABLE_MAINTENANCE"
+      value = "false"
+    }
+  ]
+
+  tags = module.label.tags
+}
