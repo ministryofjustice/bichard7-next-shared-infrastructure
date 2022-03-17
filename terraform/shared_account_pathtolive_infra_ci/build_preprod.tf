@@ -557,8 +557,6 @@ module "enable_maintenance_page_preprod" {
   deploy_account_name = "q_solution"
   deployment_name     = "preprod"
 
-  build_environments = local.pipeline_build_environments
-
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -602,8 +600,6 @@ module "disable_maintenance_page_preprod" {
 
   deploy_account_name = "q_solution"
   deployment_name     = "preprod"
-
-  build_environments = local.pipeline_build_environments
 
   environment_variables = [
     {
