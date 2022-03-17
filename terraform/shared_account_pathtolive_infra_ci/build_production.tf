@@ -547,8 +547,6 @@ module "enable_maintenance_page_prod" {
   deploy_account_name = "production"
   deployment_name     = "production"
 
-  build_environments = local.pipeline_build_environments
-
   environment_variables = [
     {
       name  = "DEPLOY_ENV"
@@ -592,8 +590,6 @@ module "disable_maintenance_page_prod" {
 
   deploy_account_name = "production"
   deployment_name     = "production"
-
-  build_environments = local.pipeline_build_environments
 
   environment_variables = [
     {
