@@ -2,7 +2,7 @@ module "apply_sonarqube" {
   source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
   name              = "apply-sandbox-ci-sonarqube"
   build_description = "Codebuild Pipeline To reprovision the SonarQube deployment"
-  repository_name   = "bichard7-next-shard-infrastructure"
+  repository_name   = "bichard7-next-shared-infrastructure"
 
   report_build_status = true
 
