@@ -35,6 +35,8 @@
       type: readonly
     - name: heather_roberts
       type: readonly
+    - name: joe_folkard
+      type: admin
 
 - non_sc_users:
     - alice_lee
@@ -42,6 +44,7 @@
     - csaba_gyorfi
     - tolu_johnson
     - heather_roberts
+    - joe_folkard
 
 - users_removed:
     - name: christopher_ryan
