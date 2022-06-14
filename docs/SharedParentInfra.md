@@ -85,15 +85,3 @@ $ cd terraform/shared_account_(pathtolive/sandbox)_infra_ci
 $ aws-vault exec your-shared-parent-credentials -- terraform init -upgrade
 $ aws-vault exec your-shared-parent-credentials -- terraform state apply
 ```
-
-#### Shared Account Sandbox Infra CI Sonarqube
-
-Deploys a sonarqube container into the sandbox environment which performs static code analysis on
-the application source code.
-
-To apply the layer
-```shell
-$ cd terraform/shared_account_sandbox_infra_ci_sonarqube
-$ aws-vault exec your-shared-parent-credentials -- terraform init -upgrade
-$ aws-vault exec your-shared-parent-credentials -- terraform state apply
-```

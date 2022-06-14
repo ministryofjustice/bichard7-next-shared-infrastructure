@@ -29,7 +29,6 @@ class TerraformRunner(object):
     _state_files = {
         "infra": "tfstatefile",
         "infra_ci": "ci/tfstatefile",
-        "infra_ci_sonarqube": "sonarqube/tfstatefile",
         "users": "users/tfstatefile"
     }
 

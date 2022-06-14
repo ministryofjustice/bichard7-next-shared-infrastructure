@@ -28,10 +28,6 @@ shared-account-sandbox-infra:
 shared-account-sandbox-infra-ci:
 	./scripts/shared_account_terraform.py sandbox infra_ci
 
-.PHONY: shared-account-sandbox-infra-ci-sonarqube
-shared-account-sandbox-infra-ci-sonarqube:
-	./scripts/shared_account_terraform.py sandbox infra_ci_sonarqube
-
 .PHONY: destroy-shared-account-sandbox-infra
 destroy-shared-account-sandbox-infra:
 	./scripts/shared_account_terraform.py sandbox infra destroy
@@ -39,10 +35,6 @@ destroy-shared-account-sandbox-infra:
 .PHONY: destroy-shared-account-sandbox-infra-ci
 destroy-shared-account-sandbox-infra-ci:
 	./scripts/shared_account_terraform.py sandbox infra_ci destroy
-
-.PHONY: destroy-shared-account-sandbox-infra-sonarqube
-destroy-shared-account-sandbox-infra-ci-sonarqube:
-	./scripts/shared_account_terraform.py sandbox infra_ci_sonarqube destroy
 
 .PHONY: shared-account-pathtolive-bootstrap
 shared-account-pathtolive-bootstrap:
