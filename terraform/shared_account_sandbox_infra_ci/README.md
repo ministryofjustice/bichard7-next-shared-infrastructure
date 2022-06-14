@@ -27,8 +27,6 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_apply_nuke_sandbox_schedule"></a> [apply\_nuke\_sandbox\_schedule](#module\_apply\_nuke\_sandbox\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
-| <a name="module_apply_sonarqube"></a> [apply\_sonarqube](#module\_apply\_sonarqube) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
-| <a name="module_apply_sonarqube_schedule"></a> [apply\_sonarqube\_schedule](#module\_apply\_sonarqube\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
 | <a name="module_codebuild_base_resources"></a> [codebuild\_base\_resources](#module\_codebuild\_base\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_base_resources | n/a |
 | <a name="module_codebuild_docker_resources"></a> [codebuild\_docker\_resources](#module\_codebuild\_docker\_resources) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/aws_ecr_repositories | n/a |
 | <a name="module_common_build_jobs"></a> [common\_build\_jobs](#module\_common\_build\_jobs) | ../modules/shared_cd_common_jobs | n/a |
