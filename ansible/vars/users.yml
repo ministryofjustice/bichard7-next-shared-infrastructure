@@ -39,9 +39,6 @@
       type: admin
 
 - non_sc_users:
-    - alice_lee
-    - tom_vaughan
-    - csaba_gyorfi
     - tolu_johnson
     - heather_roberts
     - joe_folkard
