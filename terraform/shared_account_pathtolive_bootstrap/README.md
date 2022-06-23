@@ -23,13 +23,13 @@ $ aws-vault exec bichard7-shared -- aws s3 cp terraform.tfstate s3://cjse-bichar
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | = 3.72.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | = 3.75.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.72.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
 
 ## Modules
 
@@ -44,8 +44,8 @@ $ aws-vault exec bichard7-shared -- aws s3 cp terraform.tfstate s3://cjse-bichar
 
 | Name | Type |
 |------|------|
-| [aws_s3_account_public_access_block.protect](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/s3_account_public_access_block) | resource |
-| [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/region) | data source |
+| [aws_s3_account_public_access_block.protect](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/s3_account_public_access_block) | resource |
+| [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/region) | data source |
 
 ## Inputs
 

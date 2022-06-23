@@ -8,17 +8,17 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | = 3.72.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | = 3.75.2 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | ~> 2.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.72.0 |
-| <a name="provider_aws.sandbox_a"></a> [aws.sandbox\_a](#provider\_aws.sandbox\_a) | 3.72.0 |
-| <a name="provider_aws.sandbox_b"></a> [aws.sandbox\_b](#provider\_aws.sandbox\_b) | 3.72.0 |
-| <a name="provider_aws.sandbox_c"></a> [aws.sandbox\_c](#provider\_aws.sandbox\_c) | 3.72.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
+| <a name="provider_aws.sandbox_a"></a> [aws.sandbox\_a](#provider\_aws.sandbox\_a) | 3.75.2 |
+| <a name="provider_aws.sandbox_b"></a> [aws.sandbox\_b](#provider\_aws.sandbox\_b) | 3.75.2 |
+| <a name="provider_aws.sandbox_c"></a> [aws.sandbox\_c](#provider\_aws.sandbox\_c) | 3.75.2 |
 | <a name="provider_external"></a> [external](#provider\_external) | 2.1.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
@@ -46,17 +46,17 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 
 | Name | Type |
 |------|------|
-| [aws_iam_role_policy.allow_sandbox_a_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
-| [aws_iam_role_policy.allow_sandbox_b_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
-| [aws_iam_role_policy.allow_sandbox_c_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_role_policy) | resource |
-| [aws_iam_user_policy.allow_ci_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/resources/iam_user_policy) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
-| [aws_caller_identity.sandbox_a](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
-| [aws_caller_identity.sandbox_b](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
-| [aws_caller_identity.sandbox_c](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/caller_identity) | data source |
-| [aws_ecr_repository.codebuild_base](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ecr_repository) | data source |
-| [aws_ecr_repository.was](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/ecr_repository) | data source |
-| [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.72.0/docs/data-sources/region) | data source |
+| [aws_iam_role_policy.allow_sandbox_a_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy.allow_sandbox_b_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy.allow_sandbox_c_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_role_policy) | resource |
+| [aws_iam_user_policy.allow_ci_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_user_policy) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.sandbox_a](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.sandbox_b](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/caller_identity) | data source |
+| [aws_caller_identity.sandbox_c](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/caller_identity) | data source |
+| [aws_ecr_repository.codebuild_base](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/ecr_repository) | data source |
+| [aws_ecr_repository.was](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/ecr_repository) | data source |
+| [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/region) | data source |
 | [external_external.latest_codebuild_base](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [external_external.latest_was_image](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 | [terraform_remote_state.shared_infra](https://registry.terraform.io/providers/hashicorp/terraform/latest/docs/data-sources/remote_state) | data source |
