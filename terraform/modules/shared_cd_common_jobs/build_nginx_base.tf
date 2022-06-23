@@ -1,5 +1,5 @@
 module "build_nginx_java_supervisord_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-nginx-java-supervisord-docker"
   build_description = "Codebuild for Building Nginx and Supervisord On OpenJDK 11"
@@ -16,7 +16,7 @@ module "build_nginx_java_supervisord_docker_image" {
 }
 
 module "build_nginx_nodejs_supervisord_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-nginx-nodejs-supervisord-docker"
   build_description = "Codebuild for Building Nginx and Supervisord On NodeJS 16 Base"
@@ -32,7 +32,7 @@ module "build_nginx_nodejs_supervisord_docker_image" {
 }
 
 module "build_nginx_supervisord_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name                  = "build-nginx-supervisord-docker"
   build_description     = "Codebuild for Building Nginx and Supervisord On Amazon Linux 2 Base"

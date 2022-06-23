@@ -1,5 +1,5 @@
 module "build_ci_monitoring" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "apply-ci-monitoring-layer"
   build_description = "Apply our CI Monitoring Layer"
@@ -25,7 +25,7 @@ module "build_ci_monitoring" {
 }
 
 module "build_ci_monitoring_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
   codebuild_arn   = module.build_ci_monitoring.pipeline_arn
   name            = module.build_ci_monitoring.pipeline_name
   cron_expression = "cron(1 0 ? * THU *)"

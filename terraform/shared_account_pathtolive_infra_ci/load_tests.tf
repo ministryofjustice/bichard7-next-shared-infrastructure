@@ -1,5 +1,5 @@
 module "run_load_tests" {
-  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
   name              = "run-load-test"
   build_description = "Codebuild Pipeline Running load tests against load-test environment"
   repository_name   = "bichard7-next-tests"
@@ -52,7 +52,7 @@ module "run_load_tests" {
 }
 
 module "run_load_tests_terminate_pnc_container" {
-  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
   name              = "restart-load-test-pnc-emulator-container"
   build_description = "Terminate the PNC emulator container so that it will restart automatically"
   repository_name   = "bichard7-next-infrastructure"

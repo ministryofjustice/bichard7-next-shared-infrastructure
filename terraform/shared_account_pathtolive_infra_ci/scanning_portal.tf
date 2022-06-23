@@ -1,11 +1,11 @@
 module "self_signed_certificate" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/self_signed_certificate"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/self_signed_certificate?ref=upgrade-aws-provider"
 
   tags = module.label.tags
 }
 
 module "ecs_scanning_portal" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules//scanning_results_ecs"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules//scanning_results_ecs?ref=upgrade-aws-provider"
 
   fargate_cpu             = 2048
   fargate_memory          = 4096

@@ -1,5 +1,5 @@
 module "build_audit_logging" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
   build_description      = "Codebuild Pipeline for building and deploying the artifacts from the Audit Logging repository"
   name                   = "build-audit-logging-artifacts"
   repository_name        = "bichard7-next-audit-logging"
@@ -36,7 +36,7 @@ module "build_audit_logging" {
 }
 
 module "build_audit_logging_trigger" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook?ref=upgrade-aws-provider"
 
   codebuild_project_name = module.build_audit_logging.pipeline_name
 }

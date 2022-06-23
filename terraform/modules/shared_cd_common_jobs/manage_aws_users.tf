@@ -1,5 +1,5 @@
 module "manage_aws_users" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
   build_description      = "Run user management jobs on a schedule"
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   name                   = "manage-aws-users"
@@ -19,7 +19,7 @@ module "manage_aws_users" {
 }
 
 module "manage_aws_users_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
   codebuild_arn   = module.manage_aws_users.pipeline_arn
   name            = module.manage_aws_users.pipeline_name
   cron_expression = "cron(0 1 * * ? *)"

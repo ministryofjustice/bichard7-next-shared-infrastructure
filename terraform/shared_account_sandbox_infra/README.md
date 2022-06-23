@@ -52,14 +52,14 @@ export TF_VAR_sandbox_c_secret_key=""
 |------|--------|---------|
 | <a name="module_aws_logs"></a> [aws\_logs](#module\_aws\_logs) | trussworks/logs/aws | ~> 10.3.0  |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.24.1 |
-| <a name="module_sandbox_a_child_access"></a> [sandbox\_a\_child\_access](#module\_sandbox\_a\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access | n/a |
-| <a name="module_sandbox_b_child_access"></a> [sandbox\_b\_child\_access](#module\_sandbox\_b\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access | n/a |
-| <a name="module_sandbox_c_child_access"></a> [sandbox\_c\_child\_access](#module\_sandbox\_c\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access | n/a |
-| <a name="module_shared_account_access_sandbox_a"></a> [shared\_account\_access\_sandbox\_a](#module\_shared\_account\_access\_sandbox\_a) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access | n/a |
-| <a name="module_shared_account_access_sandbox_b"></a> [shared\_account\_access\_sandbox\_b](#module\_shared\_account\_access\_sandbox\_b) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access | n/a |
-| <a name="module_shared_account_access_sandbox_c"></a> [shared\_account\_access\_sandbox\_c](#module\_shared\_account\_access\_sandbox\_c) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access | n/a |
-| <a name="module_shared_account_user_access"></a> [shared\_account\_user\_access](#module\_shared\_account\_user\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent | n/a |
-| <a name="module_tag_vars"></a> [tag\_vars](#module\_tag\_vars) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars | n/a |
+| <a name="module_sandbox_a_child_access"></a> [sandbox\_a\_child\_access](#module\_sandbox\_a\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access?ref=upgrade-aws-provider | n/a |
+| <a name="module_sandbox_b_child_access"></a> [sandbox\_b\_child\_access](#module\_sandbox\_b\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access?ref=upgrade-aws-provider | n/a |
+| <a name="module_sandbox_c_child_access"></a> [sandbox\_c\_child\_access](#module\_sandbox\_c\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access?ref=upgrade-aws-provider | n/a |
+| <a name="module_shared_account_access_sandbox_a"></a> [shared\_account\_access\_sandbox\_a](#module\_shared\_account\_access\_sandbox\_a) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access?ref=upgrade-aws-provider | n/a |
+| <a name="module_shared_account_access_sandbox_b"></a> [shared\_account\_access\_sandbox\_b](#module\_shared\_account\_access\_sandbox\_b) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access?ref=upgrade-aws-provider | n/a |
+| <a name="module_shared_account_access_sandbox_c"></a> [shared\_account\_access\_sandbox\_c](#module\_shared\_account\_access\_sandbox\_c) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access?ref=upgrade-aws-provider | n/a |
+| <a name="module_shared_account_user_access"></a> [shared\_account\_user\_access](#module\_shared\_account\_user\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent?ref=upgrade-aws-provider | n/a |
+| <a name="module_tag_vars"></a> [tag\_vars](#module\_tag\_vars) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars?ref=upgrade-aws-provider | n/a |
 
 ## Resources
 

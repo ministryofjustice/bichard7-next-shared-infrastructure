@@ -1,5 +1,5 @@
 module "preprod_child_access" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access?ref=upgrade-aws-provider"
   root_account_id = data.aws_caller_identity.current.account_id
   tags            = module.label.tags
   bucket_name     = local.remote_bucket_name
@@ -12,7 +12,7 @@ module "preprod_child_access" {
 }
 
 module "shared_account_access_preprod" {
-  source                     = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access"
+  source                     = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access?ref=upgrade-aws-provider"
   child_account_id           = data.aws_caller_identity.preprod.account_id
   ci_access_group_name       = module.shared_account_user_access.ci_access_group.name
   ci_access_arn              = module.preprod_child_access.ci_access_role.arn
@@ -29,7 +29,7 @@ module "shared_account_access_preprod" {
 }
 
 module "shared_account_preprod_lambda_cloudtrail" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/lambda_cloudtrail"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/lambda_cloudtrail?ref=upgrade-aws-provider"
 
   name           = "q-solution"
   logging_bucket = module.aws_logs.aws_logs_bucket

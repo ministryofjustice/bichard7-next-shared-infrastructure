@@ -1,5 +1,5 @@
 module "deploy_production_terraform" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -211,7 +211,7 @@ module "deploy_production_terraform" {
 }
 
 module "destroy_production_terraform" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -342,7 +342,7 @@ module "destroy_production_terraform" {
 }
 
 module "apply_dev_sg_to_prod" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -396,7 +396,7 @@ module "apply_dev_sg_to_prod" {
 }
 
 module "remove_dev_sg_from_prod" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -450,7 +450,7 @@ module "remove_dev_sg_from_prod" {
 }
 
 module "remove_dev_sg_from_prod_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
   codebuild_arn   = module.remove_dev_sg_from_prod.pipeline_arn
   name            = module.remove_dev_sg_from_prod.pipeline_name
   cron_expression = "cron(0 01 * * ? *)"
@@ -459,7 +459,7 @@ module "remove_dev_sg_from_prod_schedule" {
 }
 
 module "run_production_migrations" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Codebuild job for running migrations against production environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -530,7 +530,7 @@ module "run_production_migrations" {
 }
 
 module "enable_maintenance_page_prod" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Codebuild Pipeline for enabling maintenance page in prod"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -574,7 +574,7 @@ module "enable_maintenance_page_prod" {
 }
 
 module "disable_maintenance_page_prod" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Codebuild Pipeline for disabling maintenance page in prod"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket

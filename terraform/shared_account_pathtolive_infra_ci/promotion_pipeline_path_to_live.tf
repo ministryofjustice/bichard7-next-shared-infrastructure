@@ -615,7 +615,7 @@ resource "aws_codepipeline" "path_to_live" {
 }
 
 module "notify_pipeline" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codestar_notification"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codestar_notification?ref=upgrade-aws-provider"
 
   ci_cd_service_role_name = aws_iam_role.codepipeline_role.name
   name                    = aws_codepipeline.path_to_live.name
@@ -632,7 +632,7 @@ module "notify_pipeline" {
 }
 
 module "update_environment_ssm_params" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
   name                   = "update-environment-ssm-params"
   build_description      = "Updates our tagged ssm params for a deploy on e2e-test"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -673,7 +673,7 @@ module "update_environment_ssm_params" {
 }
 
 module "code_to_be_deployed" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Output a diff of the code to be deployed"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -701,7 +701,7 @@ module "code_to_be_deployed" {
 }
 
 module "run_prod_smoketests" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   build_description      = "Runs a basic smoketest against the prod environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket

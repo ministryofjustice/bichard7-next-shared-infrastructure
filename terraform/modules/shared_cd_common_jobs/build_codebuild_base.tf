@@ -1,5 +1,5 @@
 module "build_codebuild_base_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-codebuild-base"
   build_description = "Codebuild for Building CodeBuild Base Image"

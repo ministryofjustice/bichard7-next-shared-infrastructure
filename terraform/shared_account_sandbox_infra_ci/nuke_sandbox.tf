@@ -1,6 +1,6 @@
 module "nuke_sandbox" {
   for_each                       = { for s in local.nuke_vars : s.id => s }
-  source                         = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                         = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
   build_description              = "Run aws nuke over the sandboxes"
   codepipeline_s3_bucket         = module.codebuild_base_resources.codepipeline_bucket
   name                           = "nuke-${each.value.target}"
@@ -31,7 +31,7 @@ module "nuke_sandbox" {
 
 module "apply_nuke_sandbox_schedule" {
   for_each        = module.nuke_sandbox
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
   codebuild_arn   = each.value.pipeline_arn
   name            = each.value.pipeline_name
   cron_expression = "cron(0 0 ? * SAT *)" # run every Friday at midnight

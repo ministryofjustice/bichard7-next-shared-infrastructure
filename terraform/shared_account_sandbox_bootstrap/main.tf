@@ -1,5 +1,5 @@
 module "tag_vars" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars?ref=upgrade-aws-provider"
 }
 
 resource "aws_s3_account_public_access_block" "protect" {
@@ -33,7 +33,7 @@ module "label" {
 
 #set up terraform_remote_state storage/management for shared_account resources (S3/DynamoDB backend)
 module "account_resources_terraform_remote_state" {
-  source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/terraform_remote_state"
+  source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/terraform_remote_state?ref=upgrade-aws-provider"
   name                = module.label.id
   bucket-object-name  = "tfstatefile"
   logging_bucket_name = module.aws_logs.aws_logs_bucket

@@ -1,5 +1,5 @@
 module "build_nginx_auth_proxy_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-nginx-auth-proxy-docker"
   build_description = "Codebuild for Building Nginx Authentication Proxy"

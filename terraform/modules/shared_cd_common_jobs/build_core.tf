@@ -1,5 +1,5 @@
 module "build_core" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
   build_description      = "Codebuild Job for building the artifacts from the Core repository"
   name                   = "build-core-repo-artifacts"
   repository_name        = "bichard7-next-core"
@@ -36,7 +36,7 @@ module "build_core" {
 }
 
 module "build_core_trigger" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook?ref=upgrade-aws-provider"
 
   codebuild_project_name = module.build_core.pipeline_name
 }

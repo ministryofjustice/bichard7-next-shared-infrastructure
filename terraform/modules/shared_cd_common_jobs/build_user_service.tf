@@ -1,5 +1,5 @@
 module "build_bichard7_user_service_docker_image" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   sns_notification_arn   = var.sns_notifications_arn
   sns_kms_key_arn        = var.notifications_kms_key_arn
@@ -14,6 +14,6 @@ module "build_bichard7_user_service_docker_image" {
 }
 
 module "build_bichard7_user_service_docker_image_trigger" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook?ref=upgrade-aws-provider"
   codebuild_project_name = module.build_bichard7_user_service_docker_image.pipeline_name
 }

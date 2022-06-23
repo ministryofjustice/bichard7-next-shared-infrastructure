@@ -35,10 +35,10 @@ $ aws-vault exec bichard7-shared -- aws s3 cp terraform.tfstate s3://cjse-bichar
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_account_resources_terraform_remote_state"></a> [account\_resources\_terraform\_remote\_state](#module\_account\_resources\_terraform\_remote\_state) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/terraform_remote_state | n/a |
+| <a name="module_account_resources_terraform_remote_state"></a> [account\_resources\_terraform\_remote\_state](#module\_account\_resources\_terraform\_remote\_state) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/terraform_remote_state?ref=upgrade-aws-provider | n/a |
 | <a name="module_aws_logs"></a> [aws\_logs](#module\_aws\_logs) | trussworks/logs/aws | ~> 10.3.0  |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.24.1 |
-| <a name="module_tag_vars"></a> [tag\_vars](#module\_tag\_vars) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars | n/a |
+| <a name="module_tag_vars"></a> [tag\_vars](#module\_tag\_vars) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars?ref=upgrade-aws-provider | n/a |
 
 ## Resources
 

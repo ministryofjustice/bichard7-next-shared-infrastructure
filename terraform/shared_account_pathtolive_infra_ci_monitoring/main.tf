@@ -1,5 +1,5 @@
 module "tag_vars" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars?ref=upgrade-aws-provider"
 }
 
 module "label" {
@@ -25,7 +25,7 @@ module "label" {
 }
 
 module "codebuild_monitoring" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_monitoring"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_monitoring?ref=upgrade-aws-provider"
 
   fargate_cpu            = 2048
   fargate_memory         = 4096

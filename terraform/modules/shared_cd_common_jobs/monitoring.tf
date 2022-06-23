@@ -1,5 +1,5 @@
 module "build_openjdk_jre11_slim" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-openjdk-jre11-slim-docker"
   build_description = "Codebuild for Building OpenJDK11 JRE Slim Image"
@@ -22,7 +22,7 @@ module "build_openjdk_jre11_slim" {
 }
 
 module "build_prometheus_blackbox_exporter" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-prometheus-blackbox-exporter-docker"
   build_description = "Codebuild for Building Prometheus Blackbox Exporter Images"
@@ -49,7 +49,7 @@ module "build_prometheus_blackbox_exporter" {
 }
 
 module "build_prometheus_cloudwatch_exporter" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-prometheus-cloudwatch-exporter-docker"
   build_description = "Codebuild for Building Prometheus Cloudwatch Exporter Images"
@@ -76,7 +76,7 @@ module "build_prometheus_cloudwatch_exporter" {
 }
 
 module "build_prometheus_docker" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-prometheus-docker"
   build_description = "Codebuild for Building Prometheus Images"
@@ -103,7 +103,7 @@ module "build_prometheus_docker" {
 }
 
 module "build_grafana_ssl_docker" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-grafana-ssl-docker"
   build_description = "Codebuild for Building Customised Grafana Images"
@@ -130,7 +130,7 @@ module "build_grafana_ssl_docker" {
 }
 
 module "build_grafana_ssl_docker_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
   codebuild_arn   = module.build_grafana_ssl_docker.pipeline_arn
   name            = module.build_grafana_ssl_docker.pipeline_name
   cron_expression = "cron(0 5 ? * 1 *)"
@@ -138,7 +138,7 @@ module "build_grafana_ssl_docker_schedule" {
 }
 
 module "build_logstash_docker" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-logstash-docker"
   build_description = "Codebuild for Building Customised Logstash Images"
@@ -165,7 +165,7 @@ module "build_logstash_docker" {
 }
 
 module "build_logstash_docker_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
   codebuild_arn   = module.build_logstash_docker.pipeline_arn
   name            = module.build_logstash_docker.pipeline_name
   cron_expression = "cron(0 5 ? * 1 *)"
@@ -173,7 +173,7 @@ module "build_logstash_docker_schedule" {
 }
 
 module "build_grafana_codebuild_ssl_docker" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
 
   name              = "build-grafana-codebuild-ssl-docker"
   build_description = "Codebuild for Building Customised Grafana Codebuild Images"
@@ -200,7 +200,7 @@ module "build_grafana_codebuild_ssl_docker" {
 }
 
 module "build_grafana_codebuild_ssl_docker_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
   codebuild_arn   = module.build_grafana_codebuild_ssl_docker.pipeline_arn
   name            = module.build_grafana_codebuild_ssl_docker.pipeline_name
   cron_expression = "cron(0 5 ? * 1 *)"
