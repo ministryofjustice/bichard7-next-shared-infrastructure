@@ -1,6 +1,7 @@
 ---
 
 - name: "Get user {{ user.name }}'s details from ssm"
+  ignore_errors: yes
   set_fact:
     user_name: "{{ lookup('aws_ssm', '/users/'+ user.name ) }}"
 
