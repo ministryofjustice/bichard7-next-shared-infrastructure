@@ -29,7 +29,7 @@ $ aws-vault exec bichard7-sandbox-shared -- aws s3 cp terraform.tfstate s3://cjs
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.72.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
 
 ## Modules
 

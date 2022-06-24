@@ -1,5 +1,5 @@
 module "integration_baseline_child_access" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access?ref=hotfix-scoutsuite-perms"
   root_account_id = data.aws_caller_identity.current.account_id
   tags            = module.label.tags
   bucket_name     = local.remote_bucket_name

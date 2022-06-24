@@ -40,20 +40,20 @@ For the delegated hosted zone parent see [this readme](../shared_account_sandbox
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.72.0 |
-| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | 3.72.0 |
-| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | 3.72.0 |
-| <a name="provider_aws.preprod"></a> [aws.preprod](#provider\_aws.preprod) | 3.72.0 |
-| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.72.0 |
-| <a name="provider_aws.sandbox"></a> [aws.sandbox](#provider\_aws.sandbox) | 3.72.0 |
-| <a name="provider_aws.shared"></a> [aws.shared](#provider\_aws.shared) | 3.72.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
+| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | 3.75.2 |
+| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | 3.75.2 |
+| <a name="provider_aws.preprod"></a> [aws.preprod](#provider\_aws.preprod) | 3.75.2 |
+| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.75.2 |
+| <a name="provider_aws.sandbox"></a> [aws.sandbox](#provider\_aws.sandbox) | 3.75.2 |
+| <a name="provider_aws.shared"></a> [aws.shared](#provider\_aws.shared) | 3.75.2 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_aws_logs"></a> [aws\_logs](#module\_aws\_logs) | trussworks/logs/aws | ~> 10.3.0  |
-| <a name="module_integration_baseline_child_access"></a> [integration\_baseline\_child\_access](#module\_integration\_baseline\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access | n/a |
+| <a name="module_integration_baseline_child_access"></a> [integration\_baseline\_child\_access](#module\_integration\_baseline\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access | hotfix-scoutsuite-perms |
 | <a name="module_integration_next_child_access"></a> [integration\_next\_child\_access](#module\_integration\_next\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access | n/a |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.24.1 |
 | <a name="module_preprod_child_access"></a> [preprod\_child\_access](#module\_preprod\_child\_access) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access | n/a |
