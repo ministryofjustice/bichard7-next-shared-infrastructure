@@ -1,5 +1,5 @@
 module "production_child_access" {
-  source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access?ref=upgrade-aws-provider"
+  source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access"
   root_account_id     = data.aws_caller_identity.current.account_id
   tags                = module.label.tags
   bucket_name         = local.remote_bucket_name
@@ -12,7 +12,7 @@ module "production_child_access" {
 }
 
 module "shared_account_access_production" {
-  source                     = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access?ref=upgrade-aws-provider"
+  source                     = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access"
   child_account_id           = data.aws_caller_identity.production.account_id
   ci_access_group_name       = module.shared_account_user_access.ci_access_group.name
   ci_access_arn              = module.production_child_access.ci_access_role.arn
@@ -29,7 +29,7 @@ module "shared_account_access_production" {
 }
 
 module "shared_account_production_next_lambda_cloudtrail" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/lambda_cloudtrail?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/lambda_cloudtrail"
 
   name           = "production"
   logging_bucket = module.aws_logs.aws_logs_bucket

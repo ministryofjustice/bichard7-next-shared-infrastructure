@@ -1,5 +1,5 @@
 module "tag_vars" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars"
 }
 
 module "label" {
@@ -25,7 +25,7 @@ module "label" {
 }
 
 module "codebuild_base_resources" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_base_resources?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_base_resources"
 
   aws_logs_bucket = data.terraform_remote_state.shared_infra.outputs.s3_logging_bucket_name
   name            = module.label.name
@@ -41,7 +41,7 @@ module "codebuild_base_resources" {
 }
 
 module "codebuild_docker_resources" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/aws_ecr_repositories?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/aws_ecr_repositories"
   child_account_ids = [
     data.aws_caller_identity.sandbox_a.account_id,
     data.aws_caller_identity.sandbox_b.account_id,

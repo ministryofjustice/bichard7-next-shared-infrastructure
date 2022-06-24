@@ -1,5 +1,5 @@
 module "deploy_e2e_test_terraform" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -118,7 +118,7 @@ module "deploy_e2e_test_terraform" {
 }
 
 module "destroy_e2e_test_terraform" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
   build_description      = "Codebuild Pipeline for destroying e2e test terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -209,7 +209,7 @@ module "destroy_e2e_test_terraform" {
 }
 
 module "run_e2e_test_migrations" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
   build_description      = "Codebuild job for running migrations against e2e-test"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -280,7 +280,7 @@ module "run_e2e_test_migrations" {
 }
 
 module "apply_dev_sg_to_e2e_test" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -334,7 +334,7 @@ module "apply_dev_sg_to_e2e_test" {
 }
 
 module "remove_dev_sg_from_e2e_test" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -388,7 +388,7 @@ module "remove_dev_sg_from_e2e_test" {
 }
 
 module "remove_dev_sg_from_e2e_test_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
   codebuild_arn   = module.remove_dev_sg_from_e2e_test.pipeline_arn
   name            = module.remove_dev_sg_from_e2e_test.pipeline_name
   cron_expression = "cron(0 01 * * ? *)"

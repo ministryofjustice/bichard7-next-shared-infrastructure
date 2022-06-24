@@ -1,5 +1,5 @@
 module "build_bichard7_e2etests_docker_image" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   sns_notification_arn   = var.sns_notifications_arn
   sns_kms_key_arn        = var.notifications_kms_key_arn
@@ -12,12 +12,12 @@ module "build_bichard7_e2etests_docker_image" {
 }
 
 module "build_bichard7_e2etests_docker_image_trigger" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook?ref=upgrade-aws-provider"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook"
   codebuild_project_name = module.build_bichard7_e2etests_docker_image.pipeline_name
 }
 
 module "build_bichard7_e2etests_docker_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
   codebuild_arn   = module.build_bichard7_e2etests_docker_image.pipeline_arn
   name            = module.build_bichard7_e2etests_docker_image.pipeline_name
   cron_expression = "cron(0 5 ? * 1 *)"

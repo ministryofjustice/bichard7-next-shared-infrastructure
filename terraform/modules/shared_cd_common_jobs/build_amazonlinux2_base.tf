@@ -1,5 +1,5 @@
 module "build_amazon_linux2_base_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
   name              = "build-amazon-linux-2-base-docker"
   build_description = "Codebuild for Building Amazon Linux 2 Base Image"
@@ -17,7 +17,7 @@ module "build_amazon_linux2_base_docker_image" {
 }
 
 module "build_amazon_linux2_base_docker_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule?ref=upgrade-aws-provider"
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
   codebuild_arn   = module.build_amazon_linux2_base_docker_image.pipeline_arn
   name            = module.build_amazon_linux2_base_docker_image.pipeline_name
   cron_expression = "cron(0 6 ? * 1 *)"
@@ -25,6 +25,6 @@ module "build_amazon_linux2_base_docker_image_schedule" {
 }
 
 module "build_amazon_linux2_base_docker_image_trigger" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook?ref=upgrade-aws-provider"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook"
   codebuild_project_name = module.build_amazon_linux2_base_docker_image.pipeline_name
 }

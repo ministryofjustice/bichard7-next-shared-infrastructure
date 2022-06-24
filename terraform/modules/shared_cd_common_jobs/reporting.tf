@@ -1,5 +1,5 @@
 module "build_reporting" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
   build_description      = "Codebuild Pipeline for building and deploying the artifacts from the Reporting"
   name                   = "build-reporting-artifacts"
   repository_name        = "bichard7-next-reporting"
@@ -35,7 +35,7 @@ module "build_reporting" {
 }
 
 module "build_reporting_trigger" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook"
 
   codebuild_project_name = module.build_reporting.pipeline_name
 }

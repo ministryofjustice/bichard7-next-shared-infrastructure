@@ -1,5 +1,5 @@
 module "build_nodejs_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job?ref=upgrade-aws-provider"
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
   name                  = "build-nodejs-16-docker"
   build_description     = "Codebuild for Building NodeJS v16 Image"
