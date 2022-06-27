@@ -34,6 +34,26 @@ resource "aws_iam_user_policy" "allow_ci_codebuild_bucket" {
 }
 
 # tfsec:ignore:aws-iam-no-policy-wildcards
+resource "aws_iam_user_policy" "allow_ci_cloudfront" {
+  name = "CloudfrontAccess"
+  user = "cjse.ci"
+
+  policy = <<-EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "ListCloudfrontDistributions",
+        "Effect": "Allow",
+        "Action": ["cloudfront:ListDistributions"],
+        "Resource": ["*"]
+      }
+    ]
+  }
+  EOF
+}
+
+# tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "allow_integration_next_codebuild_bucket" {
   name = "AllCodeBuildBucketAccess"
   role = "Bichard7-CI-Access"

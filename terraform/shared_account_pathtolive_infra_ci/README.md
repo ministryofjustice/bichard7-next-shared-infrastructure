@@ -15,11 +15,11 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.72.0 |
-| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | 3.72.0 |
-| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | 3.72.0 |
-| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.72.0 |
-| <a name="provider_aws.qsolution"></a> [aws.qsolution](#provider\_aws.qsolution) | 3.72.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
+| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | 3.75.2 |
+| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | 3.75.2 |
+| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.75.2 |
+| <a name="provider_aws.qsolution"></a> [aws.qsolution](#provider\_aws.qsolution) | 3.75.2 |
 | <a name="provider_external"></a> [external](#provider\_external) | 2.1.0 |
 | <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
@@ -124,6 +124,7 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | [aws_iam_role_policy.run_preprod_tests](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.run_production_migrations](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy.update_e2e_test_ssm_params](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_role_policy) | resource |
+| [aws_iam_user_policy.allow_ci_cloudfront](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_user_policy) | resource |
 | [aws_iam_user_policy.allow_ci_codebuild_bucket](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/iam_user_policy) | resource |
 | [aws_kms_alias.codepipeline_deploy_key](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/kms_alias) | resource |
 | [aws_kms_key.codepipeline_deploy_key](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/kms_key) | resource |

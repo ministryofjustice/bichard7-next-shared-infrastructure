@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0  # Use the ref you want to point at
+    rev: v4.3.0  # Use the ref you want to point at
     hooks:
       - id: trailing-whitespace
       - id: detect-aws-credentials
@@ -13,8 +13,8 @@ repos:
           - '--no-sort-keys'
       - id: mixed-line-ending
 
-  - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.62.1
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.72.1
     hooks:
       - id: terraform_fmt
       - id: terraform_tflint
@@ -30,7 +30,7 @@ repos:
           - "--exclude-downloaded-modules"
 
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.17.0
+    rev: v1.26.3
     hooks:
       - id: yamllint
 
