@@ -31,13 +31,10 @@
       type: admin
     - name: tom_vaughan
       type: admin
-    - name: heather_roberts
-      type: readonly
     - name: joe_folkard
       type: admin
-
-- non_sc_users:
-    - heather_roberts
+    - name: heather_roberts
+      type: readonly
 
 - users_removed:
     - name: tolu_johnson

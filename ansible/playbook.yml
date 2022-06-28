@@ -27,6 +27,7 @@
         loop_var: user
 
     - name: Persist Non SC users to ssm
+      when: non_sc_arns is defined and (non_sc_arns|length>0)
       community.aws.aws_ssm_parameter_store:
         name: "/users/provisioned/non_sc_users"
         description: "A list of non sc user arns"

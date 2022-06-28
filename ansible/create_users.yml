@@ -24,10 +24,9 @@
       no_log: true
 
     - name: "Check if {{ user.name }} exists in the non_sc construct, if so append them to the non_sc_arns var"
+      when: non_sc_arns is defined and (non_sc_arns|length>0) and user.name in non_sc_arns
       set_fact:
         non_sc_arns: "{{ non_sc_arns + [ iam_user.iam_user.user.arn ] }}"
-      when:
-        - user.name in non_sc_users
   when: user_name
 
 ...
