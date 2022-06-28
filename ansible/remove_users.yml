@@ -1,15 +1,15 @@
 ---
 
 - name: "Get user {{ user.name }}'s details from ssm"
-  ignore_errors: yes
+  ignore_errors: true
   set_fact:
-    user_name: "{{ lookup('aws_ssm', '/users/'+ user.name ) }}"
+    user_name_to_remove: "{{ lookup('aws_ssm', '/users/'+ user.name ) }}"
 
 - name: Remove user
   block:
     - name: "Ensure user {{ user.name }} no longer exists in aws"
       community.aws.iam_user:
-        name: "{{ user_name }}"
+        name: "{{ user_name_to_remove }}"
         state: absent
       no_log: true
 
@@ -17,5 +17,5 @@
       community.aws.aws_ssm_parameter_store:
         name: "/users/{{ user.name }}"
         state: absent
-  when: user_name
+  when: user_name_to_remove is defined
 ...
