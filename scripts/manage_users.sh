@@ -8,6 +8,6 @@ source .venv/bin/activate
 pip3 install ansible==5.2.0 boto3==1.20.45
 ansible-galaxy collection install community.aws
 cd ansible
-ENVIRONMENT=${WORKSPACE:-sandbox} ansible-playbook playbook.yml
+ENVIRONMENT=${WORKSPACE:-sandbox} ansible-playbook -vvv playbook.yml
 cd ../
 deactivate

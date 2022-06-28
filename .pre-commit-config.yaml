@@ -13,7 +13,7 @@ repos:
           - '--no-sort-keys'
       - id: mixed-line-ending
 
-  - repo: git://github.com/antonbabenko/pre-commit-terraform
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.62.1
     hooks:
       - id: terraform_fmt
