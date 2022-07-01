@@ -65,6 +65,8 @@ module "common_build_jobs" {
   reporting_cd_env_vars     = local.bichard_cd_vars
   scanning_results_bucket   = module.codebuild_base_resources.scanning_results_bucket
   common_cd_vars            = local.common_cd_vars
+  ui_cd_env_vars            = local.bichard_cd_vars
+  core_cd_env_vars          = local.bichard_cd_vars
 
   tags = module.label.tags
 }
