@@ -206,10 +206,6 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
               value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
-            },
-            {
-              name  = "TF_VAR_ui_deploy_tag"
-              value = "#{HASHES.UI_IMAGE_HASH}"
             }
           ]
         )
@@ -332,10 +328,6 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "NGINX_AUTH_PROXY_IMAGE_HASH"
               value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
-            },
-            {
-              name  = "UI_IMAGE_HASH"
-              value = "#{HASHES.UI_IMAGE_HASH}"
             }
           ]
         )
@@ -376,10 +368,6 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
               value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
-            },
-            {
-              name  = "TF_VAR_ui_deploy_tag"
-              value = "#{HASHES.UI_IMAGE_HASH}"
             }
           ]
         )
@@ -488,10 +476,6 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "NGINX_AUTH_PROXY_COMMIT_HASH"
               value = "#{HASHES.NGINX_AUTH_PROXY_COMMIT_HASH}"
-            },
-            {
-              name  = "UI_IMAGE_HASH"
-              value = "#{HASHES.UI_IMAGE_HASH}"
             }
           ]
         )
@@ -554,10 +538,6 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "NGINX_AUTH_PROXY_IMAGE_HASH"
               value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
-            },
-            {
-              name  = "UI_IMAGE_HASH"
-              value = "#{HASHES.UI_IMAGE_HASH}"
             }
           ]
         )
@@ -596,10 +576,6 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
               value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
-            },
-            {
-              name  = "TF_VAR_ui_deploy_tag"
-              value = "#{HASHES.UI_IMAGE_HASH}"
             }
           ]
         )
