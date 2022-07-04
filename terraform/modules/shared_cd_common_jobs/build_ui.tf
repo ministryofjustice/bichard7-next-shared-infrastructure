@@ -8,7 +8,12 @@ module "build_bichard7_ui_docker_image" {
   name                   = "build-ui-docker"
   repository_name        = "bichard7-next-ui"
 
-  environment_variables = var.ui_cd_env_vars
+  environment_variables = [
+    {
+      name  = "ARTIFACT_BUCKET"
+      value = var.codebuild_s3_bucket
+    }
+  ]
 
   tags = var.tags
 }
