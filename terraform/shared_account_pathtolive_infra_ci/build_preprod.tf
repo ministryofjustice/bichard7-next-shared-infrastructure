@@ -31,6 +31,7 @@ module "deploy_preprod_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     module.codebuild_docker_resources.nodejs_repository_arn,
+    module.codebuild_docker_resources.ui_repository_arn,
     data.aws_ecr_repository.bichard.arn,
     data.aws_ecr_repository.codebuild_base.arn
   ]
