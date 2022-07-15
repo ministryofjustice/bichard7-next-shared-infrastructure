@@ -81,9 +81,9 @@ resource "aws_lambda_function" "query_images_fn" {
   function_name = "${terraform.workspace}-query-ecr-images"
   description   = "Query the number of images in an ecr repo"
 
-  filename         = data.archive_file.query_num_of_repo_images.output_path
-  source_code_hash = data.archive_file.query_num_of_repo_images.output_base64sha256
-  handler          = "query_number_of_repo_images.lambda_handler"
+  filename         = data.archive_file.query_num_ecr_images.output_path
+  source_code_hash = data.archive_file.query_num_ecr_images.output_base64sha256
+  handler          = "query_num_ecr_images.lambda_handler"
 
   vpc_config {
     subnet_ids         = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_subnet_ids

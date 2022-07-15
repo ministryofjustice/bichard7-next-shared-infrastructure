@@ -37,17 +37,17 @@ data "external" "latest_grafana_codebuild_image" {
   ]
 }
 
-data "archive_file" "query_num_of_repo_images" {
+data "archive_file" "query_num_ecr_images" {
   output_path = "/tmp/query_long_running_fns.zip"
   type        = "zip"
 
   source {
-    content = templatefile("${path.module}/source/query_num_of_repo_images.py.tpl", {
+    content = templatefile("${path.module}/source/query_num_ecr_images.py.tpl", {
       region     = data.aws_region.current_region.name
       account_id = data.aws_caller_identity.current.account_id
       env        = terraform.workspace
     })
-    filename = "query_long_running_fns.py"
+    filename = "query_num_ecr_images.py"
   }
 }
 

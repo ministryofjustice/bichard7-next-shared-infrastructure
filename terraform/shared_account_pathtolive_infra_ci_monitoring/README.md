@@ -43,7 +43,7 @@ Creates a Grafana ECS cluster that pulls metrics from Cloudwatch
 | [aws_lambda_permission.allow_cloudwatch_to_invoke_query_ecr_repo](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/lambda_permission) | resource |
 | [aws_security_group.slack_lambda_access_to_vpc](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/security_group) | resource |
 | [aws_security_group_rule.resource_to_vpc_egress](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/resources/security_group_rule) | resource |
-| [archive_file.query_num_of_repo_images](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [archive_file.query_num_ecr_images](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/caller_identity) | data source |
 | [aws_ecr_repository.grafana_codebuild](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/ecr_repository) | data source |
 | [aws_region.current_region](https://registry.terraform.io/providers/hashicorp/aws/3.75.2/docs/data-sources/region) | data source |
