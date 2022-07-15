@@ -162,10 +162,11 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | <a name="output_bichard_liberty_ecr"></a> [bichard\_liberty\_ecr](#output\_bichard\_liberty\_ecr) | The Bichard Liberty ecr repository details |
 | <a name="output_codebuild_cidr_block"></a> [codebuild\_cidr\_block](#output\_codebuild\_cidr\_block) | The cidr block for our codebuild vpc |
 | <a name="output_codebuild_private_cidr_blocks"></a> [codebuild\_private\_cidr\_blocks](#output\_codebuild\_private\_cidr\_blocks) | A list of private cidr blocks |
+| <a name="output_codebuild_private_subnet_ids"></a> [codebuild\_private\_subnet\_ids](#output\_codebuild\_private\_subnet\_ids) | A list of all the subnet ids |
 | <a name="output_codebuild_public_cidr_blocks"></a> [codebuild\_public\_cidr\_blocks](#output\_codebuild\_public\_cidr\_blocks) | A list of private cidr blocks |
 | <a name="output_codebuild_public_subnet_ids"></a> [codebuild\_public\_subnet\_ids](#output\_codebuild\_public\_subnet\_ids) | A list of public subnet ids |
 | <a name="output_codebuild_security_group_id"></a> [codebuild\_security\_group\_id](#output\_codebuild\_security\_group\_id) | The VPC security group id used by codebuild |
-| <a name="output_codebuild_subnet_ids"></a> [codebuild\_subnet\_ids](#output\_codebuild\_subnet\_ids) | A list of private subnet ids |
+| <a name="output_codebuild_subnet_ids"></a> [codebuild\_subnet\_ids](#output\_codebuild\_subnet\_ids) | A list of all the subnet ids |
 | <a name="output_codebuild_vpc_id"></a> [codebuild\_vpc\_id](#output\_codebuild\_vpc\_id) | The vpc ID for our codebuild vpc |
 | <a name="output_codebuild_zone_id"></a> [codebuild\_zone\_id](#output\_codebuild\_zone\_id) | The public zone id for our codebuild VPC route53 zone |
 | <a name="output_codepipeline_bucket"></a> [codepipeline\_bucket](#output\_codepipeline\_bucket) | The name of the codebuild/pipeline bucket |

@@ -19,8 +19,13 @@ output "codebuild_cidr_block" {
 }
 
 output "codebuild_subnet_ids" {
-  description = "A list of private subnet ids"
+  description = "A list of all the subnet ids"
   value       = module.codebuild_base_resources.codebuild_subnet_ids
+}
+
+output "codebuild_private_subnet_ids" {
+  description = "A list of all the subnet ids"
+  value       = module.codebuild_base_resources.codebuild_private_subnet_ids
 }
 
 output "codebuild_public_subnet_ids" {
