@@ -490,7 +490,7 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.NGINX_AUTH_PROXY_COMMIT_HASH}"
             },
             {
-              name  = "UI_IMAGE_COMMIT_HASH"
+              name  = "UI_COMMIT_HASH"
               value = "#{HASHES.UI_COMMIT_HASH}"
             }
           ]
