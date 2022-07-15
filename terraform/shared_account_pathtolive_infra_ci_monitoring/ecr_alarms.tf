@@ -69,7 +69,7 @@ resource "aws_lambda_function" "query_images_fn" {
     security_group_ids = []
   }
 
-  role        = aws_iam_role.ecr_repo_images
+  role        = aws_iam_role.ecr_repo_images.arn
   memory_size = "128"
   runtime     = "python3.8"
   timeout     = "5"
