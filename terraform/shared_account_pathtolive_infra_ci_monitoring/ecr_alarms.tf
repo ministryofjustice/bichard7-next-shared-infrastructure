@@ -49,7 +49,7 @@ resource "aws_iam_policy" "lambda_allow_to_list_images" {
 
 
 resource "aws_iam_role" "ecr_repo_images" {
-  name               = "bichard-7-${terraform.workspace}-allow-query-long-running-fns"
+  name               = "bichard-7-${terraform.workspace}-allow-query_num_of_images"
   assume_role_policy = file("${path.module}/policies/allow_lambda_query.json")
 
   managed_policy_arns = [aws_iam_policy.lambda_num_of_repos_manage_ec2_network_interfaces.arn, aws_iam_policy.lambda_allow_to_list_images.arn, "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"]
