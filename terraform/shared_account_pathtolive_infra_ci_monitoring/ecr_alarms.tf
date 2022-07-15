@@ -55,6 +55,26 @@ resource "aws_iam_role" "ecr_repo_images" {
   tags                = module.label.tags
 }
 
+resource "aws_security_group" "slack_lambda_access_to_vpc" {
+  name        = "slack-lambda-to-vpc"
+  description = "A Security Group for the resource to VPC"
+  vpc_id      = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_vpc_id
+
+  tags = merge(module.label.tags, { Name = "slack-lambda-to-vpc" })
+}
+
+resource "aws_security_group_rule" "resource_to_vpc_egress" {
+  description = "Allow traffic from the resource to the VPC"
+
+  security_group_id = aws_security_group.slack_lambda_access_to_vpc.id
+  type              = "egress"
+  protocol          = "tcp"
+  from_port         = 443
+  to_port           = 443
+
+  cidr_blocks = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_subnet_ids
+}
+
 # tfsec:ignore:aws-lambda-enable-tracing
 resource "aws_lambda_function" "query_images_fn" {
   function_name = "${terraform.workspace}-query-ecr-images"
@@ -66,7 +86,7 @@ resource "aws_lambda_function" "query_images_fn" {
 
   vpc_config {
     subnet_ids         = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_subnet_ids
-    security_group_ids = []
+    security_group_ids = [aws_security_group.slack_lambda_access_to_vpc.id]
   }
 
   role        = aws_iam_role.ecr_repo_images.arn
