@@ -10,6 +10,7 @@ resource "aws_iam_policy" "lambda_num_of_repos_manage_ec2_network_interfaces" {
         Action = [
           "ec2:AttachNetworkInterface",
           "ec2:CreateNetworkInterface",
+          "ec2:DeleteNetworkInterface",
           "ec2:DescribeInstances",
           "ec2:DescribeNetworkInterfaces",
           "ec2:DescribeVpcs",
