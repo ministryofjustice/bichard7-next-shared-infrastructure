@@ -88,7 +88,7 @@ resource "aws_lambda_function" "query_images_fn" {
   handler          = "query_num_ecr_images.lambda_handler"
 
   vpc_config {
-    subnet_ids         = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_public_subnet_ids
+    subnet_ids         = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_subnet_ids
     security_group_ids = [aws_security_group.slack_lambda_access_to_internet.id]
   }
 
