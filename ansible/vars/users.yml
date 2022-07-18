@@ -35,6 +35,8 @@
       type: admin
     - name: heather_roberts
       type: readonly
+    - name: hannah_goraya
+      type: readonly
 
 - users_removed:
     - name: tolu_johnson
