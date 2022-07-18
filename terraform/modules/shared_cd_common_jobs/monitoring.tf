@@ -21,6 +21,15 @@ module "build_openjdk_jre11_slim" {
   tags = var.tags
 }
 
+module "build_openjdk_jre11_slim_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_openjdk_jre11_slim.pipeline_arn
+  name            = module.build_openjdk_jre11_slim.pipeline_name
+  cron_expression = "cron(0 6 ? * SUN *)"
+
+  tags = var.tags
+}
+
 module "build_prometheus_blackbox_exporter" {
   source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
@@ -44,6 +53,15 @@ module "build_prometheus_blackbox_exporter" {
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   sns_notification_arn   = var.sns_notifications_arn
   sns_kms_key_arn        = var.notifications_kms_key_arn
+
+  tags = var.tags
+}
+
+module "build_prometheus_blackbox_exporter_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_prometheus_blackbox_exporter.pipeline_arn
+  name            = module.build_prometheus_blackbox_exporter.pipeline_name
+  cron_expression = "cron(0 6 ? * SUN *)"
 
   tags = var.tags
 }
@@ -75,6 +93,15 @@ module "build_prometheus_cloudwatch_exporter" {
   tags = var.tags
 }
 
+module "build_prometheus_cloudwatch_exporter_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_prometheus_cloudwatch_exporter.pipeline_arn
+  name            = module.build_prometheus_cloudwatch_exporter.pipeline_name
+  cron_expression = "cron(0 6 ? * SUN *)"
+
+  tags = var.tags
+}
+
 module "build_prometheus_docker" {
   source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
@@ -98,6 +125,15 @@ module "build_prometheus_docker" {
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   sns_notification_arn   = var.sns_notifications_arn
   sns_kms_key_arn        = var.notifications_kms_key_arn
+
+  tags = var.tags
+}
+
+module "build_prometheus_docker_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_prometheus_docker.pipeline_arn
+  name            = module.build_prometheus_docker.pipeline_name
+  cron_expression = "cron(0 6 ? * SUN *)"
 
   tags = var.tags
 }

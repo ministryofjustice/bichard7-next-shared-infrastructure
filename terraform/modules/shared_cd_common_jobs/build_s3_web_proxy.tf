@@ -19,6 +19,6 @@ module "build_s3_web_proxy_image_schedule" {
   source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
   codebuild_arn   = module.build_s3_web_proxy.pipeline_arn
   name            = module.build_s3_web_proxy.pipeline_name
-  cron_expression = "cron(0 6 ? * 2 *)"
+  cron_expression = "cron(0 4 ? * 2 *)"
   tags            = var.tags
 }

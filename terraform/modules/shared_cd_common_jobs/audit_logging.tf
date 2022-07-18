@@ -40,3 +40,11 @@ module "build_audit_logging_trigger" {
 
   codebuild_project_name = module.build_audit_logging.pipeline_name
 }
+
+module "build_audit_logging_image_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_audit_logging.pipeline_arn
+  name            = module.build_audit_logging.pipeline_name
+  cron_expression = "cron(0 6 ? * SUN *)"
+  tags            = var.tags
+}
