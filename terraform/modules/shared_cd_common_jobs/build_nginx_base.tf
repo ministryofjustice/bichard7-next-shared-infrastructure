@@ -15,6 +15,15 @@ module "build_nginx_java_supervisord_docker_image" {
   tags = var.tags
 }
 
+module "build_nginx_java_supervisord_docker_image_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_nginx_java_supervisord_docker_image.pipeline_arn
+  name            = module.build_nginx_java_supervisord_docker_image.pipeline_name
+  cron_expression = "cron(0 4 ? * SUN *)"
+
+  tags = var.tags
+}
+
 module "build_nginx_nodejs_supervisord_docker_image" {
   source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
@@ -31,6 +40,15 @@ module "build_nginx_nodejs_supervisord_docker_image" {
   tags                   = var.tags
 }
 
+module "build_nginx_nodejs_supervisord_docker_image_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_nginx_nodejs_supervisord_docker_image.pipeline_arn
+  name            = module.build_nginx_nodejs_supervisord_docker_image.pipeline_name
+  cron_expression = "cron(0 4 ? * SUN *)"
+
+  tags = var.tags
+}
+
 module "build_nginx_supervisord_docker_image" {
   source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
 
@@ -44,6 +62,15 @@ module "build_nginx_supervisord_docker_image" {
   sns_notification_arn   = var.sns_notifications_arn
   sns_kms_key_arn        = var.notifications_kms_key_arn
   vpc_config             = var.vpc_config_block
+
+  tags = var.tags
+}
+
+module "build_nginx_supervisord_docker_image_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_nginx_supervisord_docker_image.pipeline_arn
+  name            = module.build_nginx_supervisord_docker_image.pipeline_name
+  cron_expression = "cron(0 4 ? * SUN *)"
 
   tags = var.tags
 }

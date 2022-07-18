@@ -39,3 +39,12 @@ module "build_reporting_trigger" {
 
   codebuild_project_name = module.build_reporting.pipeline_name
 }
+
+module "build_reporting_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_reporting.pipeline_arn
+  name            = module.build_reporting.pipeline_name
+  cron_expression = "cron(0 6 ? * SUN *)"
+
+  tags = var.tags
+}

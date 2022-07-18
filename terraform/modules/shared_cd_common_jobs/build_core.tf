@@ -23,3 +23,11 @@ module "build_core_trigger" {
 
   codebuild_project_name = module.build_core.pipeline_name
 }
+
+module "build_core_schedule" {
+  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  codebuild_arn   = module.build_core.pipeline_arn
+  name            = module.build_core.pipeline_name
+  cron_expression = "cron(0 6 ? * SUN *)"
+  tags            = var.tags
+}

@@ -39,12 +39,12 @@ export TF_VAR_sandbox_c_secret_key=""
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | = 3.75.2 |
-| <a name="provider_aws.sandbox_a"></a> [aws.sandbox\_a](#provider\_aws.sandbox\_a) | = 3.75.2 |
-| <a name="provider_aws.sandbox_b"></a> [aws.sandbox\_b](#provider\_aws.sandbox\_b) | = 3.75.2 |
-| <a name="provider_aws.sandbox_c"></a> [aws.sandbox\_c](#provider\_aws.sandbox\_c) | = 3.75.2 |
-| <a name="provider_aws.sandbox_shared"></a> [aws.sandbox\_shared](#provider\_aws.sandbox\_shared) | = 3.75.2 |
-| <a name="provider_template"></a> [template](#provider\_template) | ~> 2.2.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
+| <a name="provider_aws.sandbox_a"></a> [aws.sandbox\_a](#provider\_aws.sandbox\_a) | 3.75.2 |
+| <a name="provider_aws.sandbox_b"></a> [aws.sandbox\_b](#provider\_aws.sandbox\_b) | 3.75.2 |
+| <a name="provider_aws.sandbox_c"></a> [aws.sandbox\_c](#provider\_aws.sandbox\_c) | 3.75.2 |
+| <a name="provider_aws.sandbox_shared"></a> [aws.sandbox\_shared](#provider\_aws.sandbox\_shared) | 3.75.2 |
+| <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
 
 ## Modules
 
