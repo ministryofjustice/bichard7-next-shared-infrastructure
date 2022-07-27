@@ -33,15 +33,6 @@ module "trivy_scan" {
   repository_name   = "bichard7-next-infrastructure"
   buildspec_file    = "trivy-buildspec.yml"
 
-  build_environments = [
-    {
-      compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
-      type            = "LINUX_CONTAINER"
-      privileged_mode = true
-    }
-  ]
-
   event_type_ids = []
 
   environment_variables = [
