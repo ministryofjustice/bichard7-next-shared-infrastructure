@@ -15,6 +15,15 @@ module "build_core" {
     }
   ]
 
+  build_environments = [
+    {
+      compute_type    = "BUILD_GENERAL1_MEDIUM"
+      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      type            = "LINUX_CONTAINER"
+      privileged_mode = true
+    }
+  ]
+
   tags = var.tags
 }
 
