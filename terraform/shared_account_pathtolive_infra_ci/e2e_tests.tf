@@ -13,7 +13,14 @@ module "run_e2e_tests" {
     data.aws_ecr_repository.codebuild_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = [
+    {
+      compute_type    = "BUILD_GENERAL1_MEDIUM"
+      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      type            = "LINUX_CONTAINER"
+      privileged_mode = true
+    }
+  ]
 
   environment_variables = [
     {
