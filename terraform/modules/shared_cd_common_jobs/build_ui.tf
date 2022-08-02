@@ -10,6 +10,15 @@ module "build_bichard7_ui_docker_image" {
 
   environment_variables = var.ui_cd_env_vars
 
+  build_environments = [
+    {
+      compute_type    = "BUILD_GENERAL1_MEDIUM"
+      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      type            = "LINUX_CONTAINER"
+      privileged_mode = true
+    }
+  ]
+
   tags = var.tags
 }
 
