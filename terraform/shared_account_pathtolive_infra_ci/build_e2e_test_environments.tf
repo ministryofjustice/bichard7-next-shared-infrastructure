@@ -110,7 +110,11 @@ module "deploy_e2e_test_terraform" {
     {
       name  = "ARTIFACT_BUCKET"
       value = module.codebuild_base_resources.codepipeline_bucket
-    }
+    },
+    {
+      name  = "TF_VAR_is_e2e"
+      value = true
+    },
   ]
   is_cd = true
 
@@ -202,7 +206,11 @@ module "destroy_e2e_test_terraform" {
     {
       name  = "USE_PEERING"
       value = "true"
-    }
+    },
+    {
+      name  = "TF_VAR_is_e2e"
+      value = true
+    },
   ]
   is_cd = true
   tags  = module.label.tags
