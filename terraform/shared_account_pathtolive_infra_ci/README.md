@@ -15,13 +15,13 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
-| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | 3.75.2 |
-| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | 3.75.2 |
-| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.75.2 |
-| <a name="provider_aws.qsolution"></a> [aws.qsolution](#provider\_aws.qsolution) | 3.75.2 |
-| <a name="provider_external"></a> [external](#provider\_external) | 2.1.0 |
-| <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | = 3.75.2 |
+| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | = 3.75.2 |
+| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | = 3.75.2 |
+| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | = 3.75.2 |
+| <a name="provider_aws.qsolution"></a> [aws.qsolution](#provider\_aws.qsolution) | = 3.75.2 |
+| <a name="provider_external"></a> [external](#provider\_external) | n/a |
+| <a name="provider_template"></a> [template](#provider\_template) | n/a |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
