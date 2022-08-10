@@ -423,12 +423,3 @@ module "remove_dev_sg_from_load_test" {
 
   tags = module.label.tags
 }
-
-module "remove_dev_sg_from_load_test_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
-  codebuild_arn   = module.remove_dev_sg_from_load_test.pipeline_arn
-  name            = module.remove_dev_sg_from_load_test.pipeline_name
-  cron_expression = "cron(0 01 * * ? *)"
-
-  tags = module.label.tags
-}
