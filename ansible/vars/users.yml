@@ -1,5 +1,4 @@
 ---
-
 - user_attributes:
     admin:
       groups:
@@ -50,4 +49,3 @@
     - name: brett_minnie
     - name: mihai_popa_matai
     - name: heather_roberts
-...
