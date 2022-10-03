@@ -33,10 +33,10 @@
       type: admin
     - name: joe_folkard
       type: admin
-    - name: heather_roberts
-      type: readonly
     - name: hannah_goraya
       type: readonly
+    - name: donny_hyon
+      type: admin
 
 - users_removed:
     - name: tolu_johnson
@@ -49,4 +49,5 @@
     - name: satvinder_hullait
     - name: brett_minnie
     - name: mihai_popa_matai
+    - name: heather_roberts
 ...
