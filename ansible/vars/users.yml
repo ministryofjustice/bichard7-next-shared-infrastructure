@@ -36,6 +36,8 @@
       type: readonly
     - name: donny_hyon
       type: admin
+    - name: comfort_osobu
+      type: readonly
 
 - users_removed:
     - name: tolu_johnson

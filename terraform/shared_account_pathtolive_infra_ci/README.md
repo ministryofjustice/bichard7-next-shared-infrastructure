@@ -15,13 +15,13 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.75.2 |
-| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | 3.75.2 |
-| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | 3.75.2 |
-| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | 3.75.2 |
-| <a name="provider_aws.qsolution"></a> [aws.qsolution](#provider\_aws.qsolution) | 3.75.2 |
-| <a name="provider_external"></a> [external](#provider\_external) | 2.1.0 |
-| <a name="provider_template"></a> [template](#provider\_template) | 2.2.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | = 3.75.2 |
+| <a name="provider_aws.integration_baseline"></a> [aws.integration\_baseline](#provider\_aws.integration\_baseline) | = 3.75.2 |
+| <a name="provider_aws.integration_next"></a> [aws.integration\_next](#provider\_aws.integration\_next) | = 3.75.2 |
+| <a name="provider_aws.production"></a> [aws.production](#provider\_aws.production) | = 3.75.2 |
+| <a name="provider_aws.qsolution"></a> [aws.qsolution](#provider\_aws.qsolution) | = 3.75.2 |
+| <a name="provider_external"></a> [external](#provider\_external) | n/a |
+| <a name="provider_template"></a> [template](#provider\_template) | n/a |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Modules
@@ -63,7 +63,6 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 | <a name="module_remove_dev_sg_from_e2e_test"></a> [remove\_dev\_sg\_from\_e2e\_test](#module\_remove\_dev\_sg\_from\_e2e\_test) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_remove_dev_sg_from_e2e_test_schedule"></a> [remove\_dev\_sg\_from\_e2e\_test\_schedule](#module\_remove\_dev\_sg\_from\_e2e\_test\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
 | <a name="module_remove_dev_sg_from_load_test"></a> [remove\_dev\_sg\_from\_load\_test](#module\_remove\_dev\_sg\_from\_load\_test) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
-| <a name="module_remove_dev_sg_from_load_test_schedule"></a> [remove\_dev\_sg\_from\_load\_test\_schedule](#module\_remove\_dev\_sg\_from\_load\_test\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
 | <a name="module_remove_dev_sg_from_preprod"></a> [remove\_dev\_sg\_from\_preprod](#module\_remove\_dev\_sg\_from\_preprod) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
 | <a name="module_remove_dev_sg_from_preprod_schedule"></a> [remove\_dev\_sg\_from\_preprod\_schedule](#module\_remove\_dev\_sg\_from\_preprod\_schedule) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule | n/a |
 | <a name="module_remove_dev_sg_from_prod"></a> [remove\_dev\_sg\_from\_prod](#module\_remove\_dev\_sg\_from\_prod) | github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job | n/a |
