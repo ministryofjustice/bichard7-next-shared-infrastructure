@@ -38,15 +38,15 @@ For the delegated hosted zone parent see [this readme](../shared_account_sandbox
 
 ## Providers
 
-| Name                                                                                                            | Version  |
-| --------------------------------------------------------------------------------------------------------------- | -------- |
-| <a name="provider_aws"></a> [aws](#provider_aws)                                                                | = 3.75.2 |
-| <a name="provider_aws.integration_baseline"></a> [aws.integration_baseline](#provider_aws.integration_baseline) | = 3.75.2 |
-| <a name="provider_aws.integration_next"></a> [aws.integration_next](#provider_aws.integration_next)             | = 3.75.2 |
-| <a name="provider_aws.preprod"></a> [aws.preprod](#provider_aws.preprod)                                        | = 3.75.2 |
-| <a name="provider_aws.production"></a> [aws.production](#provider_aws.production)                               | = 3.75.2 |
-| <a name="provider_aws.sandbox"></a> [aws.sandbox](#provider_aws.sandbox)                                        | = 3.75.2 |
-| <a name="provider_aws.shared"></a> [aws.shared](#provider_aws.shared)                                           | = 3.75.2 |
+| Name                                                                                                            | Version |
+| --------------------------------------------------------------------------------------------------------------- | ------- |
+| <a name="provider_aws"></a> [aws](#provider_aws)                                                                | 3.75.2  |
+| <a name="provider_aws.integration_baseline"></a> [aws.integration_baseline](#provider_aws.integration_baseline) | 3.75.2  |
+| <a name="provider_aws.integration_next"></a> [aws.integration_next](#provider_aws.integration_next)             | 3.75.2  |
+| <a name="provider_aws.preprod"></a> [aws.preprod](#provider_aws.preprod)                                        | 3.75.2  |
+| <a name="provider_aws.production"></a> [aws.production](#provider_aws.production)                               | 3.75.2  |
+| <a name="provider_aws.sandbox"></a> [aws.sandbox](#provider_aws.sandbox)                                        | 3.75.2  |
+| <a name="provider_aws.shared"></a> [aws.shared](#provider_aws.shared)                                           | 3.75.2  |
 
 ## Modules
 

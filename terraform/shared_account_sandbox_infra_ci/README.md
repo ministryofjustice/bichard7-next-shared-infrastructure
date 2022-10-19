@@ -14,14 +14,14 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 
 ## Providers
 
-| Name                                                                           | Version  |
-| ------------------------------------------------------------------------------ | -------- |
-| <a name="provider_aws"></a> [aws](#provider_aws)                               | = 3.75.2 |
-| <a name="provider_aws.sandbox_a"></a> [aws.sandbox_a](#provider_aws.sandbox_a) | = 3.75.2 |
-| <a name="provider_aws.sandbox_b"></a> [aws.sandbox_b](#provider_aws.sandbox_b) | = 3.75.2 |
-| <a name="provider_aws.sandbox_c"></a> [aws.sandbox_c](#provider_aws.sandbox_c) | = 3.75.2 |
-| <a name="provider_external"></a> [external](#provider_external)                | n/a      |
-| <a name="provider_terraform"></a> [terraform](#provider_terraform)             | n/a      |
+| Name                                                                           | Version |
+| ------------------------------------------------------------------------------ | ------- |
+| <a name="provider_aws"></a> [aws](#provider_aws)                               | 3.75.2  |
+| <a name="provider_aws.sandbox_a"></a> [aws.sandbox_a](#provider_aws.sandbox_a) | 3.75.2  |
+| <a name="provider_aws.sandbox_b"></a> [aws.sandbox_b](#provider_aws.sandbox_b) | 3.75.2  |
+| <a name="provider_aws.sandbox_c"></a> [aws.sandbox_c](#provider_aws.sandbox_c) | 3.75.2  |
+| <a name="provider_external"></a> [external](#provider_external)                | 2.1.0   |
+| <a name="provider_terraform"></a> [terraform](#provider_terraform)             | n/a     |
 
 ## Modules
 

@@ -14,16 +14,16 @@ Creates various codebuild/codepipeline jobs and a codebuild vpc for our path to 
 
 ## Providers
 
-| Name                                                                                                            | Version  |
-| --------------------------------------------------------------------------------------------------------------- | -------- |
-| <a name="provider_aws"></a> [aws](#provider_aws)                                                                | = 3.75.2 |
-| <a name="provider_aws.integration_baseline"></a> [aws.integration_baseline](#provider_aws.integration_baseline) | = 3.75.2 |
-| <a name="provider_aws.integration_next"></a> [aws.integration_next](#provider_aws.integration_next)             | = 3.75.2 |
-| <a name="provider_aws.production"></a> [aws.production](#provider_aws.production)                               | = 3.75.2 |
-| <a name="provider_aws.qsolution"></a> [aws.qsolution](#provider_aws.qsolution)                                  | = 3.75.2 |
-| <a name="provider_external"></a> [external](#provider_external)                                                 | n/a      |
-| <a name="provider_template"></a> [template](#provider_template)                                                 | n/a      |
-| <a name="provider_terraform"></a> [terraform](#provider_terraform)                                              | n/a      |
+| Name                                                                                                            | Version |
+| --------------------------------------------------------------------------------------------------------------- | ------- |
+| <a name="provider_aws"></a> [aws](#provider_aws)                                                                | 3.75.2  |
+| <a name="provider_aws.integration_baseline"></a> [aws.integration_baseline](#provider_aws.integration_baseline) | 3.75.2  |
+| <a name="provider_aws.integration_next"></a> [aws.integration_next](#provider_aws.integration_next)             | 3.75.2  |
+| <a name="provider_aws.production"></a> [aws.production](#provider_aws.production)                               | 3.75.2  |
+| <a name="provider_aws.qsolution"></a> [aws.qsolution](#provider_aws.qsolution)                                  | 3.75.2  |
+| <a name="provider_external"></a> [external](#provider_external)                                                 | 2.1.0   |
+| <a name="provider_template"></a> [template](#provider_template)                                                 | 2.2.0   |
+| <a name="provider_terraform"></a> [terraform](#provider_terraform)                                              | n/a     |
 
 ## Modules
 

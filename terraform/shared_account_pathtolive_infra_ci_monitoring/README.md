@@ -14,12 +14,12 @@ Creates a Grafana ECS cluster that pulls metrics from Cloudwatch
 
 ## Providers
 
-| Name                                                               | Version  |
-| ------------------------------------------------------------------ | -------- |
-| <a name="provider_archive"></a> [archive](#provider_archive)       | n/a      |
-| <a name="provider_aws"></a> [aws](#provider_aws)                   | = 3.75.2 |
-| <a name="provider_external"></a> [external](#provider_external)    | n/a      |
-| <a name="provider_terraform"></a> [terraform](#provider_terraform) | n/a      |
+| Name                                                               | Version |
+| ------------------------------------------------------------------ | ------- |
+| <a name="provider_archive"></a> [archive](#provider_archive)       | 2.2.0   |
+| <a name="provider_aws"></a> [aws](#provider_aws)                   | 3.75.2  |
+| <a name="provider_external"></a> [external](#provider_external)    | 2.2.2   |
+| <a name="provider_terraform"></a> [terraform](#provider_terraform) | n/a     |
 
 ## Modules
 
