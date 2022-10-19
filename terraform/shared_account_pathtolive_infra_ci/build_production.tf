@@ -102,6 +102,10 @@ module "deploy_production_terraform" {
       value = true
     },
     {
+      name  = "TF_VAR_is_production"
+      value = true
+    },
+    {
       name  = "TF_VAR_pnc_ip"
       value = "172.31.4.204"
     },
