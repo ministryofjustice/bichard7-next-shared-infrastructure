@@ -1,13 +1,13 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0  # Use the ref you want to point at
+    rev: v4.3.0 # Use the ref you want to point at
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: detect-private-key
       - id: pretty-format-json
         args:
-          - '--no-sort-keys'
+          - "--no-sort-keys"
       - id: mixed-line-ending
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
@@ -42,7 +42,7 @@ repos:
         name: terraform-docs
         language: docker_image
         entry: quay.io/terraform-docs/terraform-docs:0.16.0
-        args: [ "markdown", "--recursive", "--recursive-path", ".", "--output-file", "README.md", "./terraform" ]
+        args: ["markdown", "--recursive", "--recursive-path", ".", "--output-file", "README.md", "./terraform"]
         pass_filenames: false
 
   - repo: https://github.com/ansible/ansible-lint.git
