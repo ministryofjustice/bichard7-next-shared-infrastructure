@@ -200,6 +200,10 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
             },
             {
+              name  = "TF_VAR_audit_logging_fn_hash"
+              value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
+            },
+            {
               name  = "TF_VAR_user_service_deploy_tag"
               value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
             },
@@ -372,6 +376,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_audit_logging_deploy_tag"
               value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_audit_logging_fn_hash"
+              value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
@@ -552,6 +560,10 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.WAS_APPLICATION_IMAGE_HASH}"
             },
             {
+              name  = "AUDIT_LOGGING_COMMIT_HASH"
+              value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
+            },
+            {
               name  = "AUDIT_LOGGING_IMAGE_HASH"
               value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
             },
@@ -596,6 +608,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_audit_logging_deploy_tag"
               value = "#{HASHES.AUDIT_LOGGING_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_audit_logging_fn_hash"
+              value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
