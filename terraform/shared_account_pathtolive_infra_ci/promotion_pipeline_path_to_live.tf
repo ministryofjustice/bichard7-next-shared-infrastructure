@@ -149,6 +149,7 @@ resource "aws_codepipeline" "path_to_live" {
       name            = "fetch-and-update-e2e-test-deploy-tags"
       owner           = "AWS"
       provider        = "CodeBuild"
+      run_order       = 1
       version         = "1"
       namespace       = "HASHES"
       input_artifacts = ["infrastructure"]
@@ -159,11 +160,12 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category = "Build"
-      name     = "restart-e2e-test-pnc-emulator-before-tests"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "restart-e2e-test-pnc-emulator-before-tests"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      run_order = 1
+      version   = "1"
 
       input_artifacts = ["infrastructure"]
 
