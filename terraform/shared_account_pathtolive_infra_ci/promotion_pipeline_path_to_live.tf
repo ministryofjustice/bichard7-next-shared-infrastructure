@@ -799,7 +799,7 @@ module "notify_deploying_to_prod" {
       type                        = "LINUX_CONTAINER"
       privileged_mode             = false
       image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
-      image_pull_credentials_type = "SERVICE_ROLE"
+      image_pull_credentials_type = "CODEBUILD"
     }
   ]
 
