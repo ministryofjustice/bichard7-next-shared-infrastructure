@@ -515,7 +515,7 @@ resource "aws_codepipeline" "path_to_live" {
 
       configuration = {
         NotificationArn = module.codebuild_base_resources.notifications_arn
-        CustomData      = "Release to Load Test requires manual approval"
+        CustomData      = "Release to Production requires manual approval"
       }
     }
   }
@@ -563,6 +563,32 @@ resource "aws_codepipeline" "path_to_live" {
               name  = "UI_IMAGE_HASH"
               value = "#{HASHES.UI_IMAGE_HASH}"
             }
+          ]
+        )
+      }
+    }
+
+    action {
+      category        = "Build"
+      name            = "post-deploying-to-prod-notification"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      version         = "1"
+      run_order       = 1
+      input_artifacts = ["infrastructure"]
+
+      configuration = {
+        ProjectName = module.notify_deploying_to_prod.pipeline_name
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "production"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+            },
           ]
         )
       }
@@ -745,6 +771,34 @@ module "code_to_be_deployed" {
       type                        = "LINUX_CONTAINER"
       privileged_mode             = true
       image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+    }
+  ]
+
+  tags = module.label.tags
+}
+
+module "notify_deploying_to_prod" {
+  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+
+  build_description      = "Post a 'Deploying to prod' notification to the alerts channel"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "deploying-to-prod-notification"
+  repository_name        = "bichard7-next-infrastructure"
+  sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn   = module.codebuild_base_resources.notifications_arn
+  buildspec_file         = "buildspecs/deploying-to-prod-notification.yml"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_SMALL"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = false
+      image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
       image_pull_credentials_type = "SERVICE_ROLE"
     }
   ]
