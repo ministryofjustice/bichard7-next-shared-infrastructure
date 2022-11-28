@@ -800,8 +800,8 @@ module "notify_deploying_to_prod" {
       compute_type                = "BUILD_GENERAL1_SMALL"
       type                        = "LINUX_CONTAINER"
       privileged_mode             = false
-      image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
-      image_pull_credentials_type = "CODEBUILD"
+      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
     }
   ]
 
