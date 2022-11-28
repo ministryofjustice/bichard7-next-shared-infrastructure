@@ -155,3 +155,9 @@ resource "aws_iam_role_policy" "code_to_be_deployed" {
   policy = data.template_file.allow_codebuild_codestar_connection.rendered
   role   = module.code_to_be_deployed.pipeline_service_role_name
 }
+
+resource "aws_iam_role_policy" "notify_deploying_to_prod" {
+  name   = "allow-codestar-connection"
+  policy = data.template_file.allow_codebuild_codestar_connection.rendered
+  role   = module.notify_deploying_to_prod.pipeline_service_role_name
+}
