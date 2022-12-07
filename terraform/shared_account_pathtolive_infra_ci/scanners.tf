@@ -4,7 +4,7 @@ module "scoutsuite_scan_shared" {
   name              = "scoutsuite-scan-shared"
   build_description = "Scoutsuite scan on account bichard7-shared"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "scoutsuite-buildspec.yml"
+  buildspec_file    = "buildspecs/scoutsuite-buildspec.yml"
 
   build_environments = [
     {
@@ -62,7 +62,7 @@ module "scoutsuite_scan_integration_next" {
   name              = "scoutsuite-scan-integration-next"
   build_description = "Scoutsuite scan on account bichard7-integration-next"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "scoutsuite-buildspec.yml"
+  buildspec_file    = "buildspecs/scoutsuite-buildspec.yml"
 
   build_environments = [
     {
@@ -120,7 +120,7 @@ module "scoutsuite_scan_integration_baseline" {
   name              = "scoutsuite-scan-integration-baseline"
   build_description = "Scoutsuite scan on account bichard7-integration-baseline"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "scoutsuite-buildspec.yml"
+  buildspec_file    = "buildspecs/scoutsuite-buildspec.yml"
 
   build_environments = [
     {
