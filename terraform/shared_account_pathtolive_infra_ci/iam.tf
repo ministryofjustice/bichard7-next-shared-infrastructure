@@ -54,6 +54,28 @@ resource "aws_iam_user_policy" "allow_ci_cloudfront" {
 }
 
 # tfsec:ignore:aws-iam-no-policy-wildcards
+resource "aws_iam_role_policy" "allow_integration_next_codebuild_airflow" {
+  name = "CodeBuildAirflowAccess"
+  role = "Bichard7-CI-Access"
+
+  policy = <<-EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "TagUntagAirflow",
+        "Effect": "Allow",
+        "Action": ["airflow:TagResource", "airflow:UntagResource"],
+        "Resource": ["arn:aws:airflow:*:*:environment/*"]
+      }
+    ]
+  }
+  EOF
+
+  provider = aws.integration_next
+}
+
+# tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_role_policy" "allow_integration_next_codebuild_bucket" {
   name = "AllCodeBuildBucketAccess"
   role = "Bichard7-CI-Access"
@@ -82,7 +104,23 @@ resource "aws_iam_role_policy" "allow_integration_next_codebuild_bucket" {
           "${module.codebuild_base_resources.codepipeline_bucket_arn}",
           "${module.codebuild_base_resources.codepipeline_bucket_arn}/*"
         ]
-      },
+      }
+    ]
+  }
+  EOF
+
+  provider = aws.integration_next
+}
+
+# tfsec:ignore:aws-iam-no-policy-wildcards
+resource "aws_iam_role_policy" "allow_integration_baseline_codebuild_airflow" {
+  name = "CodeBuildAirflowAccess"
+  role = "Bichard7-CI-Access"
+
+  policy = <<-EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
       {
         "Sid": "TagUntagAirflow",
         "Effect": "Allow",
@@ -93,7 +131,7 @@ resource "aws_iam_role_policy" "allow_integration_next_codebuild_bucket" {
   }
   EOF
 
-  provider = aws.integration_next
+  provider = aws.integration_baseline
 }
 
 # tfsec:ignore:aws-iam-no-policy-wildcards
@@ -125,7 +163,23 @@ resource "aws_iam_role_policy" "allow_integration_baseline_codebuild_bucket" {
           "${module.codebuild_base_resources.codepipeline_bucket_arn}",
           "${module.codebuild_base_resources.codepipeline_bucket_arn}/*"
         ]
-      },
+      }
+    ]
+  }
+  EOF
+
+  provider = aws.integration_baseline
+}
+
+# tfsec:ignore:aws-iam-no-policy-wildcards
+resource "aws_iam_role_policy" "allow_qsolution_codebuild_airflow" {
+  name = "CodeBuildAirflowAccess"
+  role = "Bichard7-CI-Access"
+
+  policy = <<-EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
       {
         "Sid": "TagUntagAirflow",
         "Effect": "Allow",
@@ -136,7 +190,7 @@ resource "aws_iam_role_policy" "allow_integration_baseline_codebuild_bucket" {
   }
   EOF
 
-  provider = aws.integration_baseline
+  provider = aws.qsolution
 }
 
 # tfsec:ignore:aws-iam-no-policy-wildcards
@@ -168,7 +222,23 @@ resource "aws_iam_role_policy" "allow_qsolution_codebuild_bucket" {
           "${module.codebuild_base_resources.codepipeline_bucket_arn}",
           "${module.codebuild_base_resources.codepipeline_bucket_arn}/*"
         ]
-      },
+      }
+    ]
+  }
+  EOF
+
+  provider = aws.qsolution
+}
+
+# tfsec:ignore:aws-iam-no-policy-wildcards
+resource "aws_iam_role_policy" "allow_production_codebuild_airflow" {
+  name = "CodeBuildAirflowAccess"
+  role = "Bichard7-CI-Access"
+
+  policy = <<-EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
       {
         "Sid": "TagUntagAirflow",
         "Effect": "Allow",
@@ -179,7 +249,7 @@ resource "aws_iam_role_policy" "allow_qsolution_codebuild_bucket" {
   }
   EOF
 
-  provider = aws.qsolution
+  provider = aws.production
 }
 
 # tfsec:ignore:aws-iam-no-policy-wildcards
@@ -215,12 +285,6 @@ resource "aws_iam_role_policy" "allow_production_codebuild_bucket" {
           "${module.codebuild_base_resources.codepipeline_bucket_arn}",
           "${module.codebuild_base_resources.codepipeline_bucket_arn}/*"
         ]
-      },
-      {
-        "Sid": "TagUntagAirflow",
-        "Effect": "Allow",
-        "Action": ["airflow:TagResource", "airflow:UntagResource"],
-        "Resource": ["arn:aws:airflow:*:*:environment/*"]
       }
     ]
   }
