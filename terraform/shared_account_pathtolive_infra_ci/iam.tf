@@ -82,12 +82,6 @@ resource "aws_iam_role_policy" "allow_integration_next_codebuild_bucket" {
           "${module.codebuild_base_resources.codepipeline_bucket_arn}",
           "${module.codebuild_base_resources.codepipeline_bucket_arn}/*"
         ]
-      },
-      {
-        "Sid": "TagUntagAirflow",
-        "Effect": "Allow",
-        "Action": ["airflow:TagResource", "airflow:UntagResource"],
-        "Resource": ["arn:aws:airflow:*:*:environment/*"]
       }
     ]
   }
@@ -125,12 +119,6 @@ resource "aws_iam_role_policy" "allow_integration_baseline_codebuild_bucket" {
           "${module.codebuild_base_resources.codepipeline_bucket_arn}",
           "${module.codebuild_base_resources.codepipeline_bucket_arn}/*"
         ]
-      },
-      {
-        "Sid": "TagUntagAirflow",
-        "Effect": "Allow",
-        "Action": ["airflow:TagResource", "airflow:UntagResource"],
-        "Resource": ["arn:aws:airflow:*:*:environment/*"]
       }
     ]
   }
@@ -168,12 +156,6 @@ resource "aws_iam_role_policy" "allow_qsolution_codebuild_bucket" {
           "${module.codebuild_base_resources.codepipeline_bucket_arn}",
           "${module.codebuild_base_resources.codepipeline_bucket_arn}/*"
         ]
-      },
-      {
-        "Sid": "TagUntagAirflow",
-        "Effect": "Allow",
-        "Action": ["airflow:TagResource", "airflow:UntagResource"],
-        "Resource": ["arn:aws:airflow:*:*:environment/*"]
       }
     ]
   }
@@ -215,12 +197,6 @@ resource "aws_iam_role_policy" "allow_production_codebuild_bucket" {
           "${module.codebuild_base_resources.codepipeline_bucket_arn}",
           "${module.codebuild_base_resources.codepipeline_bucket_arn}/*"
         ]
-      },
-      {
-        "Sid": "TagUntagAirflow",
-        "Effect": "Allow",
-        "Action": ["airflow:TagResource", "airflow:UntagResource"],
-        "Resource": ["arn:aws:airflow:*:*:environment/*"]
       }
     ]
   }
