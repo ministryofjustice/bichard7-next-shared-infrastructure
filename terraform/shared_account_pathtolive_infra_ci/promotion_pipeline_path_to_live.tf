@@ -75,6 +75,22 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
+      name     = "core-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["core-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/core.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
       name     = "nginx-auth-proxy-semaphore"
       category = "Source"
       owner    = "AWS"
@@ -200,6 +216,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_audit_logging_fn_hash"
               value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
+            },
+            {
+              name  = "AIRFLOW_ASSETS_COMMIT_HASH"
+              value = "#{HASHES.CORE_COMMIT_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
@@ -376,6 +396,10 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
             },
             {
+              name  = "AIRFLOW_ASSETS_COMMIT_HASH"
+              value = "#{HASHES.CORE_COMMIT_HASH}"
+            },
+            {
               name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
               value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
             },
@@ -486,6 +510,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "AUDIT_LOGGING_COMMIT_HASH"
               value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
+            },
+            {
+              name  = "CORE_COMMIT_HASH"
+              value = "#{HASHES.CORE_COMMIT_HASH}"
             },
             {
               name  = "USER_SERVICE_COMMIT_HASH"
@@ -620,6 +648,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_audit_logging_fn_hash"
               value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
+            },
+            {
+              name  = "AIRFLOW_ASSETS_COMMIT_HASH"
+              value = "#{HASHES.CORE_COMMIT_HASH}"
             },
             {
               name  = "TF_VAR_user_service_deploy_tag"
