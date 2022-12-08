@@ -4,7 +4,7 @@ module "scoutsuite_scan_shared" {
   name              = "scoutsuite-scan-sandbox-shared"
   build_description = "Scoutsuite scan on account bichard7-sandbox-shared"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "scoutsuite-buildspec.yml"
+  buildspec_file    = "buildspecs/scoutsuite-buildspec.yml"
   vpc_config        = module.codebuild_base_resources.codebuild_vpc_config_block
 
   event_type_ids = []
@@ -67,7 +67,7 @@ module "scoutsuite_scan_sandbox_a" {
   name              = "scoutsuite-scan-sandbox-a"
   build_description = "Scoutsuite scan on account bichard7-sandbox-a"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "scoutsuite-buildspec.yml"
+  buildspec_file    = "buildspecs/scoutsuite-buildspec.yml"
   vpc_config        = module.codebuild_base_resources.codebuild_vpc_config_block
 
   build_environments = [
@@ -130,7 +130,7 @@ module "scoutsuite_scan_sandbox_b" {
   name              = "scoutsuite-scan-sandbox-b"
   build_description = "Scoutsuite scan on account bichard7-sandbox-b"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "scoutsuite-buildspec.yml"
+  buildspec_file    = "buildspecs/scoutsuite-buildspec.yml"
   vpc_config        = module.codebuild_base_resources.codebuild_vpc_config_block
 
   build_environments = [
@@ -193,7 +193,7 @@ module "scoutsuite_scan_sandbox_c" {
   name              = "scoutsuite-scan-sandbox-c"
   build_description = "Scoutsuite scan on account bichard7-sandbox-c"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "scoutsuite-buildspec.yml"
+  buildspec_file    = "buildspecs/scoutsuite-buildspec.yml"
   vpc_config        = module.codebuild_base_resources.codebuild_vpc_config_block
 
   build_environments = [
