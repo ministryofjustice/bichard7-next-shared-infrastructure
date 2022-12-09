@@ -59,6 +59,7 @@ module "common_build_jobs" {
   vpc_config_block          = module.codebuild_base_resources.codebuild_vpc_config_block
   environment               = local.environment
   bichard_cd_env_vars       = local.bichard_cd_vars
+  core_cd_env_vars          = local.bichard_cd_vars
   audit_logging_cd_env_vars = local.bichard_cd_vars
   user_service_cd_env_vars  = local.bichard_cd_vars
   beanconnect_cd_env_vars   = local.bichard_cd_vars
@@ -66,7 +67,6 @@ module "common_build_jobs" {
   scanning_results_bucket   = module.codebuild_base_resources.scanning_results_bucket
   common_cd_vars            = local.common_cd_vars
   ui_cd_env_vars            = local.bichard_cd_vars
-  core_cd_env_vars          = local.bichard_cd_vars
 
   tags = module.label.tags
 }
