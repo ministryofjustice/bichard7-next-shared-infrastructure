@@ -8,14 +8,7 @@ module "build_core" {
   sns_kms_key_arn        = var.notifications_kms_key_arn
   vpc_config             = var.vpc_config_block
 
-  environment_variables = concat([
-    {
-      name  = "ARTIFACT_BUCKET"
-      value = var.codebuild_s3_bucket
-    }
-    ],
-    var.core_cd_env_vars
-  )
+  environment_variables = var.core_cd_env_vars
 
   build_environments = [
     {
