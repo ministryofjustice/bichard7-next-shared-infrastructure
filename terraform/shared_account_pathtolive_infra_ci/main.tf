@@ -56,6 +56,7 @@ module "common_build_jobs" {
   environment               = local.environment
   bichard_cd_env_vars       = local.bichard_cd_vars
   audit_logging_cd_env_vars = local.bichard_cd_vars
+  core_cd_env_vars          = local.bichard_cd_vars
   user_service_cd_env_vars  = local.bichard_cd_vars
   ui_cd_env_vars            = local.bichard_cd_vars
   beanconnect_cd_env_vars   = local.bichard_cd_vars
