@@ -6,7 +6,7 @@ module "apply_codebuild_layer" {
   sns_kms_key_arn        = var.notifications_kms_key_arn
   sns_notification_arn   = var.sns_notifications_arn
   repository_name        = "bichard7-next-shared-infrastructure"
-  buildspec_file         = "applyci-buildspec.yml"
+  buildspec_file         = "buildspecs/applyci-buildspec.yml"
 
   environment_variables = [
     {

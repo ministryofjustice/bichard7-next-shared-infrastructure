@@ -716,7 +716,7 @@ module "update_environment_ssm_params" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   git_ref                = "main"
-  buildspec_file         = "update-ssm-params.buildspec.yml"
+  buildspec_file         = "buildspecs/update-ssm-params.buildspec.yml"
 
   environment_variables = [
     {
@@ -817,7 +817,7 @@ module "run_prod_smoketests" {
   repository_name        = "bichard7-next-infrastructure"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  buildspec_file         = "prod-smoketest-buildspec.yml"
+  buildspec_file         = "buildspecs/prod-smoketest-buildspec.yml"
   event_type_ids         = []
 
   allowed_resource_arns = [

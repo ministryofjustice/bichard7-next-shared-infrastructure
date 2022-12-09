@@ -5,6 +5,7 @@ module "deploy_preprod_terraform" {
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "deploy-qsolution-preprod"
   repository_name        = "bichard7-next-infrastructure"
+  buildspec_file         = "buildspecs/buildspec.yml"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
@@ -174,7 +175,7 @@ module "destroy_preprod_terraform" {
   name                   = "destroy-qsolution-preprod"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "destroy-buildspec.yml"
+  buildspec_file       = "buildspecs/destroy-buildspec.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
@@ -357,7 +358,7 @@ module "run_preprod_migrations" {
   build_description      = "Codebuild job for running migrations against preprod environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "run-preprod-migrations"
-  buildspec_file         = "buildspec-run-migrations.yml"
+  buildspec_file         = "buildspecs/buildspec-run-migrations.yml"
 
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
@@ -430,7 +431,7 @@ module "apply_dev_sg_to_preprod" {
   name                   = "apply-dev-sgs-to-preprod"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "vpc-sg-access.yml"
+  buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
@@ -484,7 +485,7 @@ module "remove_dev_sg_from_preprod" {
   name                   = "remove-dev-sgs-from-preprod"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "vpc-sg-access.yml"
+  buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
@@ -547,7 +548,7 @@ module "enable_maintenance_page_preprod" {
   name                   = "enable-maintenance-page-preprod"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "maintenance-buildspec.yml"
+  buildspec_file       = "buildspecs/maintenance-buildspec.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
@@ -591,7 +592,7 @@ module "disable_maintenance_page_preprod" {
   name                   = "disable-maintenance-page-preprod"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "maintenance-buildspec.yml"
+  buildspec_file       = "buildspecs/maintenance-buildspec.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn

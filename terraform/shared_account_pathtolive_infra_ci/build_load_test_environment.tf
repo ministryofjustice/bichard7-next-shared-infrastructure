@@ -8,6 +8,7 @@ module "deploy_load_test_terraform" {
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  buildspec_file         = "buildspecs/buildspec.yml"
 
   build_timeout = 180
 
@@ -150,7 +151,7 @@ module "destroy_load_test_terraform" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "destroy-integration-baseline-load-test"
-  buildspec_file         = "destroy-buildspec.yml"
+  buildspec_file         = "buildspecs/destroy-buildspec.yml"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
   repository_name      = "bichard7-next-infrastructure"
@@ -251,7 +252,7 @@ module "run_load_test_migrations" {
   build_description      = "Codebuild job for running migrations against load test environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "run-load-test-migrations"
-  buildspec_file         = "buildspec-run-migrations.yml"
+  buildspec_file         = "buildspecs/buildspec-run-migrations.yml"
 
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
@@ -324,7 +325,7 @@ module "apply_dev_sg_to_load_test" {
   name                   = "apply-dev-sgs-to-load-test"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "vpc-sg-access.yml"
+  buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
@@ -378,7 +379,7 @@ module "remove_dev_sg_from_load_test" {
   name                   = "remove-dev-sgs-from-load-test"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "vpc-sg-access.yml"
+  buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn

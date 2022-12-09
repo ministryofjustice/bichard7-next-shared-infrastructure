@@ -5,6 +5,7 @@ module "deploy_e2e_test_terraform" {
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "deploy-integration-next-e2e-test"
   repository_name        = "bichard7-next-infrastructure"
+  buildspec_file         = "buildspecs/buildspec.yml"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
@@ -127,7 +128,7 @@ module "destroy_e2e_test_terraform" {
   build_description      = "Codebuild Pipeline for destroying e2e test terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "destroy-integration-next-e2e-test"
-  buildspec_file         = "destroy-buildspec.yml"
+  buildspec_file         = "buildspecs/destroy-buildspec.yml"
 
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
@@ -222,7 +223,7 @@ module "run_e2e_test_migrations" {
   build_description      = "Codebuild job for running migrations against e2e-test"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "run-e2e-test-migrations"
-  buildspec_file         = "buildspec-run-migrations.yml"
+  buildspec_file         = "buildspecs/buildspec-run-migrations.yml"
 
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
@@ -295,7 +296,7 @@ module "apply_dev_sg_to_e2e_test" {
   name                   = "apply-dev-sgs-to-e2e-test"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "vpc-sg-access.yml"
+  buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
@@ -349,7 +350,7 @@ module "remove_dev_sg_from_e2e_test" {
   name                   = "remove-dev-sgs-from-e2e-test"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  buildspec_file       = "vpc-sg-access.yml"
+  buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
