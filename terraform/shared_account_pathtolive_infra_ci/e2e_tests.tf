@@ -103,7 +103,7 @@ module "run_e2e_tests_restart_pnc_container" {
   name              = "restart-e2e-test-pnc-emulator-container"
   build_description = "Terminate the PNC emulator container so that it will restart automatically"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "restart-pnc-buildspec.yml"
+  buildspec_file    = "buildspecs/restart-pnc-buildspec.yml"
 
   environment_variables = [
     {

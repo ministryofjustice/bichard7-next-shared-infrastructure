@@ -177,7 +177,7 @@ module "owasp_scan_e2e_test" {
   name              = "owasp-scan-e2e-test"
   build_description = "Codebuild Pipeline for running OWASP scans on our infrastructure"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "zap-owasp-buildspec.yml"
+  buildspec_file    = "buildspecs/zap-owasp-buildspec.yml"
 
   build_environments = [
     {
@@ -241,7 +241,7 @@ module "owasp_scan_e2e_test_user_service" {
   name              = "owasp-scan-e2e-test-user-service"
   build_description = "Codebuild Pipeline for running OWASP scans on our infrastructure"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "zap-owasp-buildspec.yml"
+  buildspec_file    = "buildspecs/zap-owasp-buildspec.yml"
 
   build_environments = [
     {
@@ -309,7 +309,7 @@ module "owasp_scan_e2e_test_audit_logging" {
   name              = "owasp-audit-logging-scan-e2e-test"
   build_description = "Codebuild Pipeline for running OWASP scans on our infrastructure"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "zap-owasp-buildspec.yml"
+  buildspec_file    = "buildspecs/zap-owasp-buildspec.yml"
 
   build_environments = [
     {

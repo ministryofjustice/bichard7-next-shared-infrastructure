@@ -4,7 +4,7 @@ module "pull_offline_binaries" {
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   name                   = "pull-offline-binaries"
   repository_name        = "bichard7-next-infrastructure"
-  buildspec_file         = "pull-offline-binaries-buildspec.yml"
+  buildspec_file         = "buildspecs/pull-offline-binaries-buildspec.yml"
   sns_notification_arn   = var.sns_notifications_arn
   sns_kms_key_arn        = var.notifications_kms_key_arn
 
@@ -31,7 +31,7 @@ module "trivy_scan" {
   name              = "trivy-scan-containers"
   build_description = "Weekly Trivy scans on our deployable containers"
   repository_name   = "bichard7-next-infrastructure"
-  buildspec_file    = "trivy-buildspec.yml"
+  buildspec_file    = "buildspecs/trivy-buildspec.yml"
 
   event_type_ids = []
 
