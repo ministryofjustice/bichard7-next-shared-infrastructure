@@ -38,6 +38,8 @@
       type: admin
     - name: comfort_osobu
       type: readonly
+    - name: ian_king
+      type: admin
 
 - users_removed:
     - name: tolu_johnson
