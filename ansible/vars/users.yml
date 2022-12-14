@@ -40,6 +40,8 @@
       type: readonly
     - name: ian_king
       type: admin
+    - name: agnieszka_zbikowska
+      type: admin
 
 - users_removed:
     - name: tolu_johnson
