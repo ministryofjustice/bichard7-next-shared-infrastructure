@@ -31,11 +31,7 @@
     {
       "Sid": "AllowReadingTagsInstancesRegionsFromEC2",
       "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeTags",
-        "ec2:DescribeInstances",
-        "ec2:DescribeRegions"
-      ],
+      "Action": ["ec2:DescribeTags", "ec2:DescribeInstances", "ec2:DescribeRegions"],
       "Resource": "*"
     },
     {

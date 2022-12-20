@@ -115,9 +115,7 @@
                     "phase-status": "SUCCEEDED"
                   },
                   {
-                    "phase-context": [
-                      ": "
-                    ],
+                    "phase-context": [": "],
                     "start-time": "Sep 23, 2021 2:30:34 PM",
                     "end-time": "Sep 23, 2021 2:31:04 PM",
                     "duration-in-seconds": 29.0,
@@ -125,9 +123,7 @@
                     "phase-status": "SUCCEEDED"
                   },
                   {
-                    "phase-context": [
-                      ": "
-                    ],
+                    "phase-context": [": "],
                     "start-time": "Sep 23, 2021 2:31:04 PM",
                     "end-time": "Sep 23, 2021 2:31:12 PM",
                     "duration-in-seconds": 7.0,
@@ -135,9 +131,7 @@
                     "phase-status": "SUCCEEDED"
                   },
                   {
-                    "phase-context": [
-                      ": "
-                    ],
+                    "phase-context": [": "],
                     "start-time": "Sep 23, 2021 2:31:12 PM",
                     "end-time": "Sep 23, 2021 2:32:46 PM",
                     "duration-in-seconds": 93.0,
@@ -145,9 +139,7 @@
                     "phase-status": "SUCCEEDED"
                   },
                   {
-                    "phase-context": [
-                      ": "
-                    ],
+                    "phase-context": [": "],
                     "start-time": "Sep 23, 2021 2:32:46 PM",
                     "end-time": "Sep 23, 2021 2:32:46 PM",
                     "duration-in-seconds": 0.0,
@@ -165,9 +157,7 @@
                     "phase-status": "FAILED"
                   },
                   {
-                    "phase-context": [
-                      ": "
-                    ],
+                    "phase-context": [": "],
                     "start-time": "Sep 23, 2021 2:40:45 PM",
                     "end-time": "Sep 23, 2021 2:40:49 PM",
                     "duration-in-seconds": 4.0,
@@ -175,9 +165,7 @@
                     "phase-status": "SUCCEEDED"
                   },
                   {
-                    "phase-context": [
-                      ": "
-                    ],
+                    "phase-context": [": "],
                     "start-time": "Sep 23, 2021 2:40:49 PM",
                     "end-time": "Sep 23, 2021 2:40:49 PM",
                     "duration-in-seconds": 0.0,
@@ -185,9 +173,7 @@
                     "phase-status": "SUCCEEDED"
                   },
                   {
-                    "phase-context": [
-                      ": "
-                    ],
+                    "phase-context": [": "],
                     "start-time": "Sep 23, 2021 2:40:49 PM",
                     "end-time": "Sep 23, 2021 2:40:51 PM",
                     "duration-in-seconds": 2.0,
@@ -205,9 +191,7 @@
               "current-phase-context": "[: ]",
               "version": "1"
             },
-            "resources": [
-              "arn:aws:codebuild:eu-west-2:123456789:build/integration-test-e2e-test:03e9d601-3f18-4041-9c71-642bbf213dca"
-            ],
+            "resources": ["arn:aws:codebuild:eu-west-2:123456789:build/integration-test-e2e-test:03e9d601-3f18-4041-9c71-642bbf213dca"],
             "additionalAttributes": {}
           }
         ],

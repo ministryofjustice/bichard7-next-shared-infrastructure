@@ -10,16 +10,16 @@ def parse_codepipeline_message(content):
     parsed_message = ":{}: *{} {}* on account {}\n\n" \
                      "{} stage {} has changed to {} at {}\n\n" \
                      "Login <https://{}.signin.aws.amazon.com/console|here>\n".format(
-        emoji,
-        content["source"],
-        content["detail"]["pipeline"],
-        content["account"],
-        content["detailType"],
-        content["detail"]["stage"],
-        content["detail"]["state"],
-        content["time"],
-        content["account"]
-    )
+                         emoji,
+                         content["source"],
+                         content["detail"]["pipeline"],
+                         content["account"],
+                         content["detailType"],
+                         content["detail"]["stage"],
+                         content["detail"]["state"],
+                         content["time"],
+                         content["account"]
+                     )
 
     return parsed_message
 
@@ -29,12 +29,12 @@ def parse_codepipeline_approval(content):
     parsed_message = ":{}: *{} requires approval for stage {}*\n\n" \
                      "@channel {} requires manual approval \n\n" \
                      "Please review via <{}|this link> \n".format(
-        emoji,
-        content["approval"]["pipelineName"],
-        content["approval"]["stageName"],
-        content["approval"]["stageName"],
-        content["approval"]["approvalReviewLink"]
-    )
+                         emoji,
+                         content["approval"]["pipelineName"],
+                         content["approval"]["stageName"],
+                         content["approval"]["stageName"],
+                         content["approval"]["approvalReviewLink"]
+                     )
 
     return parsed_message
 
@@ -48,17 +48,17 @@ def parse_codebuild_message(content):
                      "Building branch *{}* has {} on {}\n\n" \
                      "Login <https://{}.signin.aws.amazon.com/console|here>\n" \
                      "<{}|Cloudwatch Logs>".format(
-        emoji,
-        content["detail"]["build-status"].capitalize(),
-        content["detail"]["project-name"],
-        content["account"],
-        content["detail"]["additional-information"]["source-version"] if content["detail"]["additional-information"][
-            "source-version"] else "head",
-        content["detail"]["build-status"].capitalize(),
-        content["time"],
-        content["account"],
-        content["detail"]["additional-information"]["logs"]["deep-link"]
-    )
+                         emoji,
+                         content["detail"]["build-status"].capitalize(),
+                         content["detail"]["project-name"],
+                         content["account"],
+                         content["detail"]["additional-information"]["source-version"] if content["detail"]["additional-information"][
+                             "source-version"] else "head",
+                         content["detail"]["build-status"].capitalize(),
+                         content["time"],
+                         content["account"],
+                         content["detail"]["additional-information"]["logs"]["deep-link"]
+                     )
 
     return parsed_message
 

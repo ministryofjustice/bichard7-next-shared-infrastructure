@@ -3,14 +3,7 @@
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": [
-        "acm:*",
-        "ec2:*",
-        "elasticloadbalancing:*",
-        "cloudwatch:*",
-        "autoscaling:*",
-        "dynamodb:*"
-      ],
+      "Action": ["acm:*", "ec2:*", "elasticloadbalancing:*", "cloudwatch:*", "autoscaling:*", "dynamodb:*"],
       "Resource": "*"
     },
     {
@@ -108,18 +101,12 @@
       "Resource": "arn:aws:cloudwatch:*:*:insight-rule/DynamoDBContributorInsights*"
     },
     {
-      "Action": [
-        "iam:PassRole"
-      ],
+      "Action": ["iam:PassRole"],
       "Effect": "Allow",
       "Resource": "*",
       "Condition": {
         "StringLike": {
-          "iam:PassedToService": [
-            "application-autoscaling.amazonaws.com",
-            "application-autoscaling.amazonaws.com.cn",
-            "dax.amazonaws.com"
-          ]
+          "iam:PassedToService": ["application-autoscaling.amazonaws.com", "application-autoscaling.amazonaws.com.cn", "dax.amazonaws.com"]
         }
       }
     },
@@ -159,11 +146,7 @@
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "iam:DeleteServiceLinkedRole",
-        "iam:GetServiceLinkedRoleDeletionStatus",
-        "iam:GetRole"
-      ],
+      "Action": ["iam:DeleteServiceLinkedRole", "iam:GetServiceLinkedRoleDeletionStatus", "iam:GetRole"],
       "Resource": "arn:aws:iam::*:role/aws-service-role/acm.amazonaws.com/AWSServiceRoleForCertificateManager*"
     },
     {
@@ -178,22 +161,14 @@
       "Resource": "arn:aws:lambda:*:*:function:SecretsManager*"
     },
     {
-      "Action": [
-        "serverlessrepo:CreateCloudFormationChangeSet",
-        "serverlessrepo:GetApplication"
-      ],
+      "Action": ["serverlessrepo:CreateCloudFormationChangeSet", "serverlessrepo:GetApplication"],
       "Effect": "Allow",
       "Resource": "arn:aws:serverlessrepo:*:*:applications/SecretsManager*"
     },
     {
-      "Action": [
-        "s3:GetObject"
-      ],
+      "Action": ["s3:GetObject"],
       "Effect": "Allow",
-      "Resource": [
-        "arn:aws:s3:::awsserverlessrepo-changesets*",
-        "arn:aws:s3:::secrets-manager-rotation-apps-*/*"
-      ]
+      "Resource": ["arn:aws:s3:::awsserverlessrepo-changesets*", "arn:aws:s3:::secrets-manager-rotation-apps-*/*"]
     }
   ]
 }

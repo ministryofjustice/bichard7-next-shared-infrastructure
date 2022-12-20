@@ -7,6 +7,7 @@ import os
 http = urllib3.PoolManager()
 os.environ["TZ"] = "UTC"
 
+
 def parse_message(json_message):
     content = json.loads(json_message)
     bucket = ""
@@ -22,7 +23,8 @@ def parse_message(json_message):
         if phase["phase-type"] == "BUILD":
             build_start_time = phase["start-time"]
 
-    start_time = datetime.datetime.strptime(build_start_time, "%b %d, %Y %I:%M:%S %p")
+    start_time = datetime.datetime.strptime(
+        build_start_time, "%b %d, %Y %I:%M:%S %p")
 
     for env_var in content["detail"]["additional-information"]["environment"]["environment-variables"]:
         if env_var["name"] == "S3_BUCKET":
@@ -35,28 +37,29 @@ def parse_message(json_message):
             workspace = env_var["value"]
         if env_var["name"] == "JOB_NAME":
             if env_var["value"] == "TRIVY":
-              job_name = "Trivy Vulnerability Scanner"
-              folder = "trivy"
+                job_name = "Trivy Vulnerability Scanner"
+                folder = "trivy"
         if env_var["name"] == "ACCOUNT_ALIAS":
             if workspace:
-              child_account_name = workspace
+                child_account_name = workspace
             else:
-              child_account_name = "bichard7-{}".format(env_var["value"].replace("_", "-"))
+                child_account_name = "bichard7-{}".format(
+                    env_var["value"].replace("_", "-"))
 
     environment_name = child_account_id if not child_account_name else child_account_name
     parsed_message = \
         ":{}: {} has run successfully against account *{}*\n\n" \
         "Login <https://{}.signin.aws.amazon.com/console|here>\n" \
         "\nReports avaible via S3 <s3://{}/{}/{}/{}/| available here>".format(
-          "aws",
-          job_name,
-          environment_name if not workspace else workspace,
-          content["account"],
-          bucket,
-          folder,
-          child_account_id,
-          "{}".format(start_time.strftime("%d%m%Y"))
-)
+            "aws",
+            job_name,
+            environment_name if not workspace else workspace,
+            content["account"],
+            bucket,
+            folder,
+            child_account_id,
+            "{}".format(start_time.strftime("%d%m%Y"))
+        )
 
     return parsed_message, job_name
 
