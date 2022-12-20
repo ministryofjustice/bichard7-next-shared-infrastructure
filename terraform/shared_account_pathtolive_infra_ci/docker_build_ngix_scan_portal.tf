@@ -1,5 +1,5 @@
 module "build_nginx_scan_portal" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   name              = "build-nginx-scan-portal-docker"
   build_description = "Codebuild for Building the Scan Portal Image"

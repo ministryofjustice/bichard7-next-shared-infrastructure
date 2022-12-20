@@ -1,5 +1,5 @@
 module "scoutsuite_scan_shared" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   name              = "scoutsuite-scan-shared"
   build_description = "Scoutsuite scan on account bichard7-shared"
@@ -48,7 +48,7 @@ module "scoutsuite_scan_shared" {
 }
 
 module "scoutsuite_scan_shared_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.scoutsuite_scan_shared.pipeline_arn
   name            = module.scoutsuite_scan_shared.pipeline_name
   cron_expression = "cron(0 14 ? * MON-FRI *)"
@@ -57,7 +57,7 @@ module "scoutsuite_scan_shared_schedule" {
 }
 
 module "scoutsuite_scan_integration_next" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   name              = "scoutsuite-scan-integration-next"
   build_description = "Scoutsuite scan on account bichard7-integration-next"
@@ -106,7 +106,7 @@ module "scoutsuite_scan_integration_next" {
 }
 
 module "scoutsuite_scan_integration_next_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.scoutsuite_scan_integration_next.pipeline_arn
   name            = module.scoutsuite_scan_integration_next.pipeline_name
   cron_expression = "cron(15 14 ? * MON-FRI *)"
@@ -115,7 +115,7 @@ module "scoutsuite_scan_integration_next_schedule" {
 }
 
 module "scoutsuite_scan_integration_baseline" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   name              = "scoutsuite-scan-integration-baseline"
   build_description = "Scoutsuite scan on account bichard7-integration-baseline"
@@ -164,7 +164,7 @@ module "scoutsuite_scan_integration_baseline" {
 }
 
 module "scoutsuite_scan_integration_baseline_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.scoutsuite_scan_integration_baseline.pipeline_arn
   name            = module.scoutsuite_scan_integration_baseline.pipeline_name
   cron_expression = "cron(30 14 ? * MON-FRI *)"
@@ -173,7 +173,7 @@ module "scoutsuite_scan_integration_baseline_schedule" {
 }
 
 module "owasp_scan_e2e_test" {
-  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source            = "../modules/codebuild_job"
   name              = "owasp-scan-e2e-test"
   build_description = "Codebuild Pipeline for running OWASP scans on our infrastructure"
   repository_name   = "bichard7-next-infrastructure"
@@ -237,7 +237,7 @@ module "owasp_scan_e2e_test" {
 }
 
 module "owasp_scan_e2e_test_user_service" {
-  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source            = "../modules/codebuild_job"
   name              = "owasp-scan-e2e-test-user-service"
   build_description = "Codebuild Pipeline for running OWASP scans on our infrastructure"
   repository_name   = "bichard7-next-infrastructure"
@@ -305,7 +305,7 @@ module "owasp_scan_e2e_test_user_service" {
 }
 
 module "owasp_scan_e2e_test_audit_logging" {
-  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source            = "../modules/codebuild_job"
   name              = "owasp-audit-logging-scan-e2e-test"
   build_description = "Codebuild Pipeline for running OWASP scans on our infrastructure"
   repository_name   = "bichard7-next-infrastructure"
@@ -377,7 +377,7 @@ module "owasp_scan_e2e_test_audit_logging" {
 }
 
 module "owasp_scan_e2e_test_trigger" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.owasp_scan_e2e_test.pipeline_arn
   cron_expression = "cron(15 13 ? * MON-FRI *)"
   name            = module.owasp_scan_e2e_test.pipeline_name
@@ -386,7 +386,7 @@ module "owasp_scan_e2e_test_trigger" {
 }
 
 module "owasp_scan_e2e_test_audit_logging_trigger" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.owasp_scan_e2e_test_audit_logging.pipeline_arn
   cron_expression = "cron(15 13 ? * MON-FRI *)"
   name            = module.owasp_scan_e2e_test_audit_logging.pipeline_name
@@ -396,7 +396,7 @@ module "owasp_scan_e2e_test_audit_logging_trigger" {
 
 module "owasp_scan_e2e_test_user_service_trigger" {
   count           = 0
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.owasp_scan_e2e_test_user_service.pipeline_arn
   cron_expression = "cron(15 13 ? * MON-FRI *)"
   name            = module.owasp_scan_e2e_test_user_service.pipeline_name

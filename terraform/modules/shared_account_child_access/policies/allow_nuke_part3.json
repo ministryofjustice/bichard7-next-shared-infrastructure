@@ -1,0 +1,48 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowNukePart3",
+      "Effect": "Allow",
+      "Action": [
+        "dms:CancelReplicationTaskAssessmentRun",
+        "dms:Delete*",
+        "dms:Describe*",
+        "dms:Replication*",
+        "dms:Modify*",
+        "dms:Certificate",
+        "dms:MoveReplicationTask",
+        "dms:RemoveTagsFromResource",
+        "dms:StopReplicationTask",
+        "events:DeactivateEventSource",
+        "events:DeauthorizeConnection",
+        "events:Delete*",
+        "events:Describe*",
+        "events:List*",
+        "events:Remove*",
+        "events:UntagResource",
+        "secretsmanager:Delete*",
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:List*",
+        "secretsmanager:RemoveRegionsFromReplication",
+        "secretsmanager:StopReplicationToReplica",
+        "secretsmanager:UntagResource",
+        "sts:Get*",
+        "s3:Delete*",
+        "s3:Describe*",
+        "s3:Get*",
+        "s3:List*",
+        "s3:ObjectOwnerOverrideToBucketOwner",
+        "s3:ReplicateDelete",
+        "elasticloadbalancing:Delete*",
+        "elasticloadbalancing:Describe*",
+        "elasticloadbalancing:DetachLoadBalancerFromSubnets",
+        "elasticloadbalancing:DisableAvailabilityZonesForLoadBalancer",
+        "elasticloadbalancing:Deregister*",
+        "elasticloadbalancing:Modify*",
+        "elasticloadbalancing:Remove*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

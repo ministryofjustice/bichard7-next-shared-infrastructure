@@ -1,5 +1,5 @@
 module "deploy_load_test_terraform" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -146,7 +146,7 @@ module "deploy_load_test_terraform" {
 }
 
 module "destroy_load_test_terraform" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -238,7 +238,7 @@ module "destroy_load_test_terraform" {
 
 module "run_destroy_load_test_env_schedule" {
   count           = 0
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.destroy_load_test_terraform.pipeline_arn
   name            = module.destroy_load_test_terraform.pipeline_name
   cron_expression = "cron(0 18 * * ? *)"
@@ -247,7 +247,7 @@ module "run_destroy_load_test_env_schedule" {
 }
 
 module "run_load_test_migrations" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   build_description      = "Codebuild job for running migrations against load test environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -318,7 +318,7 @@ module "run_load_test_migrations" {
 }
 
 module "apply_dev_sg_to_load_test" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -372,7 +372,7 @@ module "apply_dev_sg_to_load_test" {
 }
 
 module "remove_dev_sg_from_load_test" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket

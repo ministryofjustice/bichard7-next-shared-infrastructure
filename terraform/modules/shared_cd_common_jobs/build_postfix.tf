@@ -1,5 +1,5 @@
 module "build_postfix_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../codebuild_job"
 
   name              = "build-postfix-docker"
   build_description = "Codebuild for Building Postfix Image"
@@ -17,7 +17,7 @@ module "build_postfix_docker_image" {
 }
 
 module "build_postfix_docker_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.build_postfix_docker_image.pipeline_arn
   name            = module.build_postfix_docker_image.pipeline_name
   cron_expression = "cron(0 6 ? * SUN *)"

@@ -1,0 +1,207 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:eu-west-2:123456789:pathtolive-ci-codebuild-notifications:44b7265f-94ef-4a6a-8fe6-2b42fc9eb267",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "06e00172-0ea4-57f4-b6a1-58b49a98b3d5",
+        "TopicArn": "arn:aws:sns:eu-west-2:123456789:pathtolive-ci-codebuild-notifications",
+        "Subject": "None",
+        "Message": [
+          {
+            "account": "123456789",
+            "detailType": "CodeBuild Build State Change",
+            "region": "eu-west-2",
+            "source": "aws.codebuild",
+            "time": "2021-09-23T14:40:53Z",
+            "notificationRuleArn": "arn:aws:codestar-notifications:eu-west-2:123456789:notificationrule/abe6cb10df8156a93fc45a23337cf8c8b7693c24",
+            "detail": {
+              "build-status": "FAILED",
+              "project-name": "integration-test-e2e-test",
+              "build-id": "arn:aws:codebuild:eu-west-2:123456789:build/integration-test-e2e-test:03e9d601-3f18-4041-9c71-642bbf213dca",
+              "additional-information": {
+                "cache": {
+                  "type": "NO_CACHE"
+                },
+                "build-number": 1224.0,
+                "timeout-in-minutes": 180.0,
+                "build-complete": true,
+                "initiator": "rule/integration-test-e2e-test-trigger",
+                "build-start-time": "Sep 23, 2021 2:30:33 PM",
+                "source": {
+                  "report-build-status": true,
+                  "location": "https://github.com/ministryofjustice/bichard7-next-tests.git",
+                  "git-clone-depth": 1.0,
+                  "type": "GITHUB",
+                  "git-submodules-config": {
+                    "fetch-submodules": true
+                  }
+                },
+                "source-version": "master",
+                "artifact": {
+                  "location": ""
+                },
+                "environment": {
+                  "image": "123456789.dkr.ecr.eu-west-2.amazonaws.com/nodejs@sha256:a59fe401c1c0a16787527c89a007b286ec40d9fce7fe1e428914d09203e6e01b",
+                  "privileged-mode": true,
+                  "image-pull-credentials-type": "SERVICE_ROLE",
+                  "compute-type": "BUILD_GENERAL1_SMALL",
+                  "type": "LINUX_CONTAINER",
+                  "environment-variables": [
+                    {
+                      "name": "AWS_ACCOUNT_ID",
+                      "type": "PLAINTEXT",
+                      "value": "123456789"
+                    },
+                    {
+                      "name": "AWS_DEFAULT_REGION",
+                      "type": "PLAINTEXT",
+                      "value": "eu-west-2"
+                    },
+                    {
+                      "name": "AWS_ACCESS_KEY_ID",
+                      "type": "PARAMETER_STORE",
+                      "value": "/ci/user/access_key_id"
+                    },
+                    {
+                      "name": "AWS_SECRET_ACCESS_KEY",
+                      "type": "PARAMETER_STORE",
+                      "value": "/ci/user/secret_access_key"
+                    },
+                    {
+                      "name": "ASSUME_ROLE_ARN",
+                      "type": "PLAINTEXT",
+                      "value": "arn:aws:iam::581823340673:role/Bichard7-CI-Access"
+                    },
+                    {
+                      "name": "DEPLOY_ENV",
+                      "type": "PLAINTEXT",
+                      "value": "pathtolive"
+                    },
+                    {
+                      "name": "WORKSPACE",
+                      "type": "PLAINTEXT",
+                      "value": "e2e-test"
+                    },
+                    {
+                      "name": "STACK_TYPE",
+                      "type": "PLAINTEXT",
+                      "value": "next"
+                    }
+                  ]
+                },
+                "logs": {
+                  "group-name": "/aws/codebuild/integration-test-e2e-test",
+                  "stream-name": "03e9d601-3f18-4041-9c71-642bbf213dca",
+                  "deep-link": "https://console.aws.amazon.com/cloudwatch/home?region=eu-west-2#logEvent:group=/aws/codebuild/integration-test-e2e-test;stream=03e9d601-3f18-4041-9c71-642bbf213dca"
+                },
+                "phases": [
+                  {
+                    "phase-context": [],
+                    "start-time": "Sep 23, 2021 2:30:33 PM",
+                    "end-time": "Sep 23, 2021 2:30:33 PM",
+                    "duration-in-seconds": 0.0,
+                    "phase-type": "SUBMITTED",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "phase-context": [],
+                    "start-time": "Sep 23, 2021 2:30:33 PM",
+                    "end-time": "Sep 23, 2021 2:30:34 PM",
+                    "duration-in-seconds": 1.0,
+                    "phase-type": "QUEUED",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "phase-context": [": "],
+                    "start-time": "Sep 23, 2021 2:30:34 PM",
+                    "end-time": "Sep 23, 2021 2:31:04 PM",
+                    "duration-in-seconds": 29.0,
+                    "phase-type": "PROVISIONING",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "phase-context": [": "],
+                    "start-time": "Sep 23, 2021 2:31:04 PM",
+                    "end-time": "Sep 23, 2021 2:31:12 PM",
+                    "duration-in-seconds": 7.0,
+                    "phase-type": "DOWNLOAD_SOURCE",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "phase-context": [": "],
+                    "start-time": "Sep 23, 2021 2:31:12 PM",
+                    "end-time": "Sep 23, 2021 2:32:46 PM",
+                    "duration-in-seconds": 93.0,
+                    "phase-type": "INSTALL",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "phase-context": [": "],
+                    "start-time": "Sep 23, 2021 2:32:46 PM",
+                    "end-time": "Sep 23, 2021 2:32:46 PM",
+                    "duration-in-seconds": 0.0,
+                    "phase-type": "PRE_BUILD",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "phase-context": [
+                      "COMMAND_EXECUTION_ERROR: Error while executing command: CI=true RECORD=true npm run test. Reason: exit status 1"
+                    ],
+                    "start-time": "Sep 23, 2021 2:32:46 PM",
+                    "end-time": "Sep 23, 2021 2:40:45 PM",
+                    "duration-in-seconds": 478.0,
+                    "phase-type": "BUILD",
+                    "phase-status": "FAILED"
+                  },
+                  {
+                    "phase-context": [": "],
+                    "start-time": "Sep 23, 2021 2:40:45 PM",
+                    "end-time": "Sep 23, 2021 2:40:49 PM",
+                    "duration-in-seconds": 4.0,
+                    "phase-type": "POST_BUILD",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "phase-context": [": "],
+                    "start-time": "Sep 23, 2021 2:40:49 PM",
+                    "end-time": "Sep 23, 2021 2:40:49 PM",
+                    "duration-in-seconds": 0.0,
+                    "phase-type": "UPLOAD_ARTIFACTS",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "phase-context": [": "],
+                    "start-time": "Sep 23, 2021 2:40:49 PM",
+                    "end-time": "Sep 23, 2021 2:40:51 PM",
+                    "duration-in-seconds": 2.0,
+                    "phase-type": "FINALIZING",
+                    "phase-status": "SUCCEEDED"
+                  },
+                  {
+                    "start-time": "Sep 23, 2021 2:40:51 PM",
+                    "phase-type": "COMPLETED"
+                  }
+                ],
+                "queued-timeout-in-minutes": 480.0
+              },
+              "current-phase": "COMPLETED",
+              "current-phase-context": "[: ]",
+              "version": "1"
+            },
+            "resources": ["arn:aws:codebuild:eu-west-2:123456789:build/integration-test-e2e-test:03e9d601-3f18-4041-9c71-642bbf213dca"],
+            "additionalAttributes": {}
+          }
+        ],
+        "Timestamp": "2021-09-23T14:41:00.288Z",
+        "SignatureVersion": "1",
+        "Signature": "Ns4y5rSWdXUg0QC6FagV3zW7G4dOy9TorXeSoyiDEkacnQsMS2eNxO519jYMV27uQB85Y/PO/Fi9msC6JCfX3xeoPsANP+94bW06KSXHmneVsMAaFnFZNSxQx47i+VIK3G8CzWuswjFdFQuhfQWZaBaPXDInttYcfLTo3TMyjVxlA7ytNtWdFx6bHsk6RALcyroWQa9mTB/m3L8iLUO12MujvPKan2x70jy7wSQQX7KPWr+/Pd5OZW8/4G37oq28P3CmOQkg85z/OHBFvSMgrwSX3oQszgGUlORUZ5JGSSRisjzPh0gvgtKYvU5JP0cBj5lRKvHq18GESLMfuQ0BAA==",
+        "SigningCertUrl": "https://sns.eu-west-2.amazonaws.com/SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem",
+        "UnsubscribeUrl": "https://sns.eu-west-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-2:123456789:pathtolive-ci-codebuild-notifications:44b7265f-94ef-4a6a-8fe6-2b42fc9eb267",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

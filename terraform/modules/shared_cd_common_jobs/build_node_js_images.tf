@@ -1,5 +1,5 @@
 module "build_nodejs_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../codebuild_job"
 
   name                  = "build-nodejs-16-docker"
   build_description     = "Codebuild for Building NodeJS v16 Image"
@@ -16,7 +16,7 @@ module "build_nodejs_docker_image" {
 }
 
 module "build_nodejs_docker_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.build_nodejs_docker_image.pipeline_arn
   name            = module.build_nodejs_docker_image.pipeline_name
   cron_expression = "cron(0 4 ? * SUN *)"

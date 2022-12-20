@@ -1,5 +1,5 @@
 module "build_bichard7_next_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../codebuild_job"
 
   repository_name        = "bichard7-next"
   codepipeline_s3_bucket = var.codebuild_s3_bucket
@@ -15,12 +15,12 @@ module "build_bichard7_next_docker_image" {
 }
 
 module "build_bichard7_next_docker_image_trigger" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook"
+  source                 = "../codebuild_webhook"
   codebuild_project_name = module.build_bichard7_next_docker_image.pipeline_name
 }
 
 module "build_bichard7_next_docker_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.build_bichard7_next_docker_image.pipeline_arn
   name            = module.build_bichard7_next_docker_image.pipeline_name
   cron_expression = "cron(0 6 ? * SUN *)"

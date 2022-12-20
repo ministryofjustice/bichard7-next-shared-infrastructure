@@ -1,5 +1,5 @@
 module "build_core" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                 = "../codebuild_job"
   build_description      = "Codebuild Job for building the artifacts from the Core repository"
   name                   = "build-core-repo-artifacts"
   repository_name        = "bichard7-next-core"
@@ -23,13 +23,13 @@ module "build_core" {
 }
 
 module "build_core_trigger" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_webhook"
+  source = "../codebuild_webhook"
 
   codebuild_project_name = module.build_core.pipeline_name
 }
 
 module "build_core_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.build_core.pipeline_arn
   name            = module.build_core.pipeline_name
   cron_expression = "cron(0 6 ? * SUN *)"

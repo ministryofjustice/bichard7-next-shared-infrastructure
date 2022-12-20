@@ -1,5 +1,5 @@
 module "build_nginx_java_supervisord_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../codebuild_job"
 
   name              = "build-nginx-java-supervisord-docker"
   build_description = "Codebuild for Building Nginx and Supervisord On OpenJDK 11"
@@ -16,7 +16,7 @@ module "build_nginx_java_supervisord_docker_image" {
 }
 
 module "build_nginx_java_supervisord_docker_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.build_nginx_java_supervisord_docker_image.pipeline_arn
   name            = module.build_nginx_java_supervisord_docker_image.pipeline_name
   cron_expression = "cron(0 4 ? * SUN *)"
@@ -25,7 +25,7 @@ module "build_nginx_java_supervisord_docker_image_schedule" {
 }
 
 module "build_nginx_nodejs_supervisord_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../codebuild_job"
 
   name              = "build-nginx-nodejs-supervisord-docker"
   build_description = "Codebuild for Building Nginx and Supervisord On NodeJS 16 Base"
@@ -41,7 +41,7 @@ module "build_nginx_nodejs_supervisord_docker_image" {
 }
 
 module "build_nginx_nodejs_supervisord_docker_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.build_nginx_nodejs_supervisord_docker_image.pipeline_arn
   name            = module.build_nginx_nodejs_supervisord_docker_image.pipeline_name
   cron_expression = "cron(0 4 ? * SUN *)"
@@ -50,7 +50,7 @@ module "build_nginx_nodejs_supervisord_docker_image_schedule" {
 }
 
 module "build_nginx_supervisord_docker_image" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../codebuild_job"
 
   name                  = "build-nginx-supervisord-docker"
   build_description     = "Codebuild for Building Nginx and Supervisord On Amazon Linux 2 Base"
@@ -67,7 +67,7 @@ module "build_nginx_supervisord_docker_image" {
 }
 
 module "build_nginx_supervisord_docker_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.build_nginx_supervisord_docker_image.pipeline_arn
   name            = module.build_nginx_supervisord_docker_image.pipeline_name
   cron_expression = "cron(0 4 ? * SUN *)"
