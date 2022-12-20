@@ -1,5 +1,5 @@
 module "build_s3_web_proxy" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../codebuild_job"
 
   name              = "build-s3-web-proxy"
   build_description = "Codebuild for Building the S3 Web Proxy Image"
@@ -16,7 +16,7 @@ module "build_s3_web_proxy" {
 
 
 module "build_s3_web_proxy_image_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.build_s3_web_proxy.pipeline_arn
   name            = module.build_s3_web_proxy.pipeline_name
   cron_expression = "cron(0 4 ? * 2 *)"

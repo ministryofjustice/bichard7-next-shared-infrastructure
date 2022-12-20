@@ -1,5 +1,5 @@
 module "apply_codebuild_layer" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                 = "../codebuild_job"
   build_description      = "Apply the shared account ci layer on a schedule"
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   name                   = "apply-codebuild-layer"
@@ -19,7 +19,7 @@ module "apply_codebuild_layer" {
 }
 
 module "apply_codebuild_layer_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../codebuild_schedule"
   codebuild_arn   = module.apply_codebuild_layer.pipeline_arn
   name            = module.apply_codebuild_layer.pipeline_name
   cron_expression = "cron(0 0 * * ? *)"

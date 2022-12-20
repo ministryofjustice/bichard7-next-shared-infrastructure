@@ -33,7 +33,7 @@ module "label" {
 
 #set up terraform_remote_state storage/management for shared_account resources (S3/DynamoDB backend)
 module "account_resources_terraform_remote_state" {
-  source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/terraform_remote_state"
+  source              = "../modules/terraform_remote_state"
   name                = module.label.id
   bucket-object-name  = "tfstatefile"
   logging_bucket_name = module.aws_logs.aws_logs_bucket

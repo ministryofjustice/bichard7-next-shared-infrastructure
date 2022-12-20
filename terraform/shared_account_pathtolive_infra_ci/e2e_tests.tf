@@ -1,5 +1,5 @@
 module "run_e2e_tests" {
-  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source            = "../modules/codebuild_job"
   name              = "integration-test-e2e-test"
   build_description = "Codebuild Pipeline Running integration tests against e2e-test"
   repository_name   = "bichard7-next-tests"
@@ -53,7 +53,7 @@ module "run_e2e_tests" {
 
 module "run_e2e_tests_schedule" {
   count           = 0 // We are disabling this for now as it interferes with the pipeline testing, we'll probably remove it
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.run_e2e_tests.pipeline_arn
   name            = module.run_e2e_tests.pipeline_name
   cron_expression = "cron(30 8-18 ? * MON-FRI *)"
@@ -99,7 +99,7 @@ resource "aws_codebuild_webhook" "e2e_tests_pr_webhook" {
 }
 
 module "run_e2e_tests_restart_pnc_container" {
-  source            = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source            = "../modules/codebuild_job"
   name              = "restart-e2e-test-pnc-emulator-container"
   build_description = "Terminate the PNC emulator container so that it will restart automatically"
   repository_name   = "bichard7-next-infrastructure"

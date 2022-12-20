@@ -218,7 +218,7 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
             },
             {
-              name  = "AIRFLOW_ASSETS_COMMIT_HASH"
+              name  = "TF_VAR_core_fn_hash"
               value = "#{HASHES.CORE_COMMIT_HASH}"
             },
             {
@@ -396,7 +396,7 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
             },
             {
-              name  = "AIRFLOW_ASSETS_COMMIT_HASH"
+              name  = "TF_VAR_core_fn_hash"
               value = "#{HASHES.CORE_COMMIT_HASH}"
             },
             {
@@ -650,7 +650,7 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
             },
             {
-              name  = "AIRFLOW_ASSETS_COMMIT_HASH"
+              name  = "TF_VAR_core_fn_hash"
               value = "#{HASHES.CORE_COMMIT_HASH}"
             },
             {
@@ -723,7 +723,7 @@ resource "aws_codepipeline" "path_to_live" {
 }
 
 module "notify_pipeline" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codestar_notification"
+  source = "../modules/codestar_notification"
 
   ci_cd_service_role_name = aws_iam_role.codepipeline_role.name
   name                    = aws_codepipeline.path_to_live.name
@@ -740,7 +740,7 @@ module "notify_pipeline" {
 }
 
 module "update_environment_ssm_params" {
-  source                 = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source                 = "../modules/codebuild_job"
   name                   = "update-environment-ssm-params"
   build_description      = "Updates our tagged ssm params for a deploy on e2e-test"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -785,7 +785,7 @@ module "update_environment_ssm_params" {
 }
 
 module "code_to_be_deployed" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   build_description      = "Output a diff of the code to be deployed"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -813,7 +813,7 @@ module "code_to_be_deployed" {
 }
 
 module "notify_deploying_to_prod" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   build_description      = "Post a 'Deploying to prod' notification to the alerts channel"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
@@ -841,7 +841,7 @@ module "notify_deploying_to_prod" {
 }
 
 module "run_prod_smoketests" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   build_description      = "Runs a basic smoketest against the prod environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket

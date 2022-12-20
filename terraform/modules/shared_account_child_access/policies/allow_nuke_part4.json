@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowNukePart4",
+      "Effect": "Allow",
+      "Action": [
+        "elasticbeanstalk:AbortEnvironmentUpdate",
+        "elasticbeanstalk:Delete*",
+        "elasticbeanstalk:Describe*",
+        "elasticbeanstalk:DisassociateEnvironmentOperationsRole",
+        "elasticbeanstalk:List*",
+        "elasticbeanstalk:RemoveTags",
+        "elasticbeanstalk:RetrieveEnvironmentInfo",
+        "elasticbeanstalk:RequestEnvironmentInfo",
+        "elasticbeanstalk:TerminateEnvironment"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

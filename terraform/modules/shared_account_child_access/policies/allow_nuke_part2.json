@@ -1,0 +1,42 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowNukePart2",
+      "Effect": "Allow",
+      "Action": [
+        "rds:CancelExportTask",
+        "rds:Delete*",
+        "rds:DeregisterDBProxyTargets",
+        "rds:Describe*",
+        "rds:Modify*",
+        "rds:Remove*",
+        "rds:Reset*",
+        "rds:Stop*",
+        "rds:List*",
+        "route53:Change*",
+        "route53:DeactivateKeySigningKey",
+        "route53:Delete*",
+        "route53:DisableHostedZoneDNSSEC",
+        "route53:DisassociateVPCFromHostedZone",
+        "route53:Get*",
+        "route53:List*",
+        "route53resolver:Delete*",
+        "route53resolver:Disassociate*",
+        "route53resolver:Get*",
+        "route53resolver:List*",
+        "route53resolver:UntagResource",
+        "cloudtrail:CancelQuery",
+        "cloudtrail:Delete*",
+        "cloudtrail:Describe*",
+        "cloudtrail:List*",
+        "cloudtrail:LookupEvents",
+        "cloudtrail:RemoveTags",
+        "cloudtrail:StopLogging",
+        "execute-api:InvalidateCache",
+        "apigateway:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

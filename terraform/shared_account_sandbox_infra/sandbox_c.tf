@@ -1,5 +1,5 @@
 module "sandbox_c_child_access" {
-  source              = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_child_access"
+  source              = "../modules/shared_account_child_access"
   root_account_id     = data.aws_caller_identity.current.account_id
   bucket_name         = local.remote_bucket_name
   logging_bucket_name = module.aws_logs.aws_logs_bucket
@@ -13,7 +13,7 @@ module "sandbox_c_child_access" {
 }
 
 module "shared_account_access_sandbox_c" {
-  source                     = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/shared_account_parent_access"
+  source                     = "../modules/shared_account_parent_access"
   child_account_id           = data.aws_caller_identity.sandbox_c.account_id
   admin_access_group_name    = module.shared_account_user_access.administrator_access_group.name
   readonly_access_group_name = module.shared_account_user_access.readonly_access_group.name

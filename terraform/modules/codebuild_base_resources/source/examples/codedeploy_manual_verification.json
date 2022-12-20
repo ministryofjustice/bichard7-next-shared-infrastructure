@@ -1,0 +1,37 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:eu-west-2:123456789:pathtolive-ci-codebuild-notifications:44b7265f-94ef-4a6a-8fe6-2b42fc9eb267",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "508f7ffd-8c18-5699-b109-263b1f2988d1",
+        "TopicArn": "arn:aws:sns:eu-west-2:123456789:pathtolive-ci-codebuild-notifications",
+        "Subject": "APPROVAL NEEDED: AWS CodePipeline cjse-bichard7-path-to-li... for action manual-approval-for-depl...",
+        "Message": [
+          {
+            "region": "eu-west-2",
+            "consoleLink": "https://console.aws.amazon.com/codesuite/codepipeline/pipelines/cjse-bichard7-path-to-live-deploy-pipeline/view?region=eu-west-2",
+            "approval": {
+              "pipelineName": "cjse-bichard7-path-to-live-deploy-pipeline",
+              "stageName": "manual-approval-for-deploy-to-preprod",
+              "actionName": "manual-approval-for-deploy-to-preprod",
+              "token": "55380880-39d8-4d3d-85ff-27b8451d1f6f",
+              "expires": "2021-09-30T14:36Z",
+              "externalEntityLink": "http://example.com",
+              "approvalReviewLink": "https://console.aws.amazon.com/codesuite/codepipeline/pipelines/cjse-bichard7-path-to-live-deploy-pipeline/view?region=eu-west-2#/manual-approval-for-deploy-to-preprod/manual-approval-for-deploy-to-preprod/approve/55380880-39d8-4d3d-85ff-27b8451d1f6f",
+              "customData": "Approve me"
+            }
+          }
+        ],
+        "Timestamp": "2021-09-23T14:36:33.615Z",
+        "SignatureVersion": "1",
+        "Signature": "mtxQK7HIXURYV/yMhMH8meDnK3bVsHsbjnECY3kX8xHotImXXkvZNTgLQ1ouUkrdM60aMVWhdEZJeFHQz/Pk4axqST04yqCWg324eEGWbdqMXdRQzQJVsB+EWIgFqY3OcQd3r/UOg/A2eu7lZxnZRysHEJ8rsfiIa2cUZ8i5rM0leggLD0XX7JDIX03JMtmKTC33BBh6D2EqRtpf0ud7jlm1Mj4sefwx8okwANu1a0RLzvFpknwihpSlW3ua3irjC0MwbKlhDOlCylbseBaOjvTUuQpEo7z6eCxuV5cb6AL2OkQMbzp51pLKt3WaUtIEXUc83CCLHzFPZOWxqcvz4Q==",
+        "SigningCertUrl": "https://sns.eu-west-2.amazonaws.com/SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem",
+        "UnsubscribeUrl": "https://sns.eu-west-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-2:123456789:pathtolive-ci-codebuild-notifications:44b7265f-94ef-4a6a-8fe6-2b42fc9eb267",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

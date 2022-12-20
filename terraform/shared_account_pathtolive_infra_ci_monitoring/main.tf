@@ -25,7 +25,7 @@ module "label" {
 }
 
 module "codebuild_monitoring" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_monitoring"
+  source = "../modules/codebuild_monitoring"
 
   fargate_cpu            = 2048
   fargate_memory         = 4096

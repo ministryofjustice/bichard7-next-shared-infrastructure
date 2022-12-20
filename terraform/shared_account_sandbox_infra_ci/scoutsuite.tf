@@ -1,5 +1,5 @@
 module "scoutsuite_scan_shared" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   name              = "scoutsuite-scan-sandbox-shared"
   build_description = "Scoutsuite scan on account bichard7-sandbox-shared"
@@ -53,7 +53,7 @@ module "scoutsuite_scan_shared" {
 }
 
 module "scoutsuite_scan_shared_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.scoutsuite_scan_shared.pipeline_arn
   name            = module.scoutsuite_scan_shared.pipeline_name
   cron_expression = "cron(0 13 ? * MON-FRI *)"
@@ -62,7 +62,7 @@ module "scoutsuite_scan_shared_schedule" {
 }
 
 module "scoutsuite_scan_sandbox_a" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   name              = "scoutsuite-scan-sandbox-a"
   build_description = "Scoutsuite scan on account bichard7-sandbox-a"
@@ -116,7 +116,7 @@ module "scoutsuite_scan_sandbox_a" {
 }
 
 module "scoutsuite_scan_sandbox_a_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.scoutsuite_scan_sandbox_a.pipeline_arn
   name            = module.scoutsuite_scan_sandbox_a.pipeline_name
   cron_expression = "cron(15 13 ? * MON-FRI *)"
@@ -125,7 +125,7 @@ module "scoutsuite_scan_sandbox_a_schedule" {
 }
 
 module "scoutsuite_scan_sandbox_b" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   name              = "scoutsuite-scan-sandbox-b"
   build_description = "Scoutsuite scan on account bichard7-sandbox-b"
@@ -179,7 +179,7 @@ module "scoutsuite_scan_sandbox_b" {
 }
 
 module "scoutsuite_scan_sandbox_b_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.scoutsuite_scan_sandbox_b.pipeline_arn
   name            = module.scoutsuite_scan_sandbox_b.pipeline_name
   cron_expression = "cron(30 13 ? * MON-FRI *)"
@@ -188,7 +188,7 @@ module "scoutsuite_scan_sandbox_b_schedule" {
 }
 
 module "scoutsuite_scan_sandbox_c" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_job"
+  source = "../modules/codebuild_job"
 
   name              = "scoutsuite-scan-sandbox-c"
   build_description = "Scoutsuite scan on account bichard7-sandbox-c"
@@ -242,7 +242,7 @@ module "scoutsuite_scan_sandbox_c" {
 }
 
 module "scoutsuite_scan_sandbox_c_schedule" {
-  source          = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.scoutsuite_scan_sandbox_c.pipeline_arn
   name            = module.scoutsuite_scan_sandbox_c.pipeline_name
   cron_expression = "cron(45 13 ? * MON-FRI *)"
