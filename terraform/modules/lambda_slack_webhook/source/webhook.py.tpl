@@ -4,8 +4,10 @@ import json
 
 http = urllib3.PoolManager()
 
+
 def parse_message(json_message):
     return json.loads(json_message)
+
 
 def lambda_handler(event, context):
     url = "${webhook_url}"
