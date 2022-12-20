@@ -1,5 +1,5 @@
 module "tag_vars" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/tag_vars"
+  source = "../modules/tag_vars"
 }
 
 module "label" {

@@ -1,5 +1,5 @@
 module "self_signed_certificate" {
-  source = "github.com/ministryofjustice/bichard7-next-infrastructure-modules.git//modules/self_signed_certificate"
+  source = "../modules/self_signed_certificate"
 
   tags = module.label.tags
 }
