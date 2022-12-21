@@ -227,14 +227,6 @@
         "*",
         "arn:aws:ses:*:${account_id}:*/*"
       ]
-    },
-    {
-      "Sid": "Airflow",
-      "Effect": "Allow",
-      "Action": [
-        "airflow:*"
-      ],
-      "Resource": "*"
     }
   ]
 }

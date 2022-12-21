@@ -49,30 +49,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "artifact_bucket_lifecycle_audi
   }
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "artifact_bucket_lifecycle_airflow" {
-  bucket = aws_s3_bucket.codebuild_artifact_bucket.bucket
-
-  rule {
-    id = "airflow_clean_up"
-
-    expiration {
-      days = 90
-    }
-
-    filter {
-      and {
-        prefix = "airflow/"
-        tags = {
-          rule      = "airflow_clean_up"
-          autoclean = "true"
-        }
-      }
-    }
-
-    status = "Enabled"
-  }
-}
-
 resource "aws_s3_bucket_public_access_block" "codebuild_artifact_bucket" {
   bucket = aws_s3_bucket.codebuild_artifact_bucket.bucket
 
