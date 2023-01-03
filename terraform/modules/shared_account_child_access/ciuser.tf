@@ -54,6 +54,11 @@ resource "aws_iam_role_policy_attachment" "ci_access_policy_attachment_part2" {
   role       = aws_iam_role.assume_ci_access.name
 }
 
+resource "aws_iam_role_policy_attachment" "ci_access_policy_attachment_aws_backup" {
+  policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AWSBackupServiceLinkedRolePolicyForBackup"
+  role       = aws_iam_role.assume_ci_access.name
+}
+
 # tfsec:ignore:aws-iam-block-kms-policy-wildcard
 # tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_policy" "ci_policy" {
