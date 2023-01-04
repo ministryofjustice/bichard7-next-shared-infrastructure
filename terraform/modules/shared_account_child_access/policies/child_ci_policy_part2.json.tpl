@@ -227,6 +227,41 @@
         "*",
         "arn:aws:ses:*:${account_id}:*/*"
       ]
+    },
+    {
+      "Sid": "Backup",
+      "Effect": "Allow",
+      "Action": [
+          "backup:CreateBackupPlan",
+          "backup:CreateBackupSelection",
+          "backup:CreateBackupVault",
+          "backup-storage:MountCapsule",
+          "backup:DescribeBackupJob",
+          "backup:DescribeBackupVault",
+          "backup:DescribeProtectedResource",
+          "backup:DescribeRecoveryPoint",
+          "backup:ExportBackupPlanTemplate",
+          "backup:GetBackupPlan",
+          "backup:GetBackupSelection",
+          "backup:ListBackupJobs",
+          "backup:ListBackupPlans",
+          "backup:ListBackupPlanTemplates",
+          "backup:ListBackupPlanVersions",
+          "backup:ListBackupSelections",
+          "backup:ListBackupVaults",
+          "backup:ListProtectedResources",
+          "backup:ListRecoveryPointsByBackupVault",
+          "backup:ListRecoveryPointsByResource",
+          "backup:ListRestoreJobs",
+          "backup:ListTags",
+          "backup:PutBackupVaultAccessPolicy",
+          "backup:PutBackupVaultNotifications",
+          "backup:StartBackupJob",
+          "backup:TagResource"
+      ],
+      "Resource": [
+          "*"
+      ]
     }
   ]
 }
