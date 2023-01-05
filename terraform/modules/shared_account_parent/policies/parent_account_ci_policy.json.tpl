@@ -56,6 +56,7 @@
         "iam:GetRolePolicy",
         "iam:UntagRole",
         "iam:TagRole",
+        "iam:TagPolicy",
         "iam:DeletePolicy",
         "iam:CreateUser",
         "iam:GetGroup",

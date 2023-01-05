@@ -18,6 +18,16 @@ output "build_user_service_service_role_name" {
   value       = module.build_bichard7_user_service_docker_image.pipeline_service_role_name
 }
 
+output "build_conductor_name" {
+  description = "The name of our conductor docker image build job"
+  value       = module.build_conductor_image.pipeline_name
+}
+
+output "build_conductor_service_role_name" {
+  description = "The name of our build conductor job service role"
+  value       = module.build_conductor_image.pipeline_service_role_name
+}
+
 output "build_ui_name" {
   description = "The name of our ui docker image build job"
   value       = module.build_bichard7_ui_docker_image.pipeline_name
