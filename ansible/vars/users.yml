@@ -20,8 +20,6 @@
       type: admin
     - name: jamie_davies
       type: admin
-    - name: jazz_sarkaria
-      type: admin
     - name: alice_lee
       type: admin
     - name: csaba_gyorfi
@@ -53,3 +51,4 @@
     - name: heather_roberts
     - name: tom_vaughan
     - name: simon_oldham
+    - name: jazz_sarkaria
