@@ -36,6 +36,8 @@
       type: admin
     - name: agnieszka_zbikowska
       type: admin
+    - name: jess_neely
+      type: readonly
 
 - users_removed:
     - name: tolu_johnson
