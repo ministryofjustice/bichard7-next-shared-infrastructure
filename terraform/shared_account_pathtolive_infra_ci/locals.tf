@@ -55,4 +55,28 @@ locals {
 
     }
   ]
+
+  vpn_rotation_vars = [
+    {
+      id           = data.aws_caller_identity.integration_next.account_id
+      target       = "integration-next"
+      role_arn     = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+      workspace    = "e2e-test"
+      account_name = "integration_next"
+    },
+    {
+      id           = data.aws_caller_identity.preprod.account_id
+      target       = "preprod"
+      role_arn     = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
+      workspace    = "pre-prod"
+      account_name = "preprod"
+    },
+    {
+      id           = data.aws_caller_identity.production.account_id
+      target       = "production"
+      role_arn     = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+      workspace    = "production"
+      account_name = "production"
+    }
+  ]
 }
