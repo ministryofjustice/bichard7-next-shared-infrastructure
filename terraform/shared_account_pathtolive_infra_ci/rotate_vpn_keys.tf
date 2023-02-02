@@ -1,7 +1,7 @@
 module "rotate_vpn_keys" {
   for_each               = { for s in local.vpn_rotation_vars : s.id => s }
   source                 = "../modules/codebuild_job"
-  build_description      = "Rotate VPN keys"
+  build_description      = "Rotate VPN keys for ${each.value.target}"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "rotate-${each.value.target}-vpn-keys"
   repository_name        = "bichard7-next-infrastructure"
