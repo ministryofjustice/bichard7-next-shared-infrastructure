@@ -1,5 +1,5 @@
 module "rotate_vpn_keys" {
-  for_each               = { for s in local.rotate_vpn_keys : s.id => s }
+  for_each               = { for s in local.vpn_rotation_vars : s.id => s }
   source                 = "../modules/codebuild_job"
   build_description      = "Rotate VPN keys"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
