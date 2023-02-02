@@ -15,10 +15,6 @@ module "rotate_vpn_keys" {
       value = each.value.role_arn
     },
     {
-      name  = "WORKSPACE"
-      value = "e2e-test"
-    },
-    {
       name  = "DEPLOY_ENV"
       value = "pathtolive"
     },
