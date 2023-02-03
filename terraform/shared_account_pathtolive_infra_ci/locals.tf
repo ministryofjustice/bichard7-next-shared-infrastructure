@@ -75,14 +75,14 @@ locals {
       deploy_name         = "preprod"
       deploy_account_name = "q_solution"
     },
-    # {
-    #   id           = data.aws_caller_identity.production.account_id
-    #   target       = "production"
-    #   role_arn     = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
-    #   workspace    = "production"
-    #   account_name = "production"
-    #   deploy_name  = "production"
-    #   deploy_account_name = "production"
-    # }
+    {
+      id                  = data.aws_caller_identity.production.account_id
+      target              = "production"
+      role_arn            = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+      workspace           = "production"
+      account_name        = "production"
+      deploy_name         = "production"
+      deploy_account_name = "production"
+    }
   ]
 }
