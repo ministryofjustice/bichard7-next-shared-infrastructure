@@ -9,6 +9,20 @@ module "rotate_vpn_keys" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
 
+  build_environments = local.pipeline_build_environments
+
+  deploy_account_name = each.value.deploy_account_name
+  deployment_name     = each.value.deploy_name
+  event_type_ids      = []
+
+  allowed_resource_arns = [
+    module.codebuild_docker_resources.liquibase_repository_arn,
+    module.codebuild_docker_resources.amazon_linux_2_repository_arn,
+    module.codebuild_docker_resources.nodejs_repository_arn,
+    data.aws_ecr_repository.bichard.arn,
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
   environment_variables = [
     {
       name  = "ASSUME_ROLE_ARN"
