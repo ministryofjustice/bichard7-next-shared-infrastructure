@@ -52,3 +52,13 @@ module "rotate_vpn_keys" {
 
   tags = module.label.tags
 }
+
+module "apply_rotate_vpn_keys_schedule" {
+  for_each        = module.rotate_vpn_keys
+  source          = "../modules/codebuild_schedule"
+  codebuild_arn   = each.value.pipeline_arn
+  name            = each.value.pipeline_name
+  cron_expression = "cron(0 0 1 * ? *)" # 1st of each month at midnight
+
+  tags = module.label.tags
+}
