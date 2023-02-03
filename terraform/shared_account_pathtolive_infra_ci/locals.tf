@@ -67,12 +67,12 @@ locals {
       deploy_account_name = "integration_next"
     },
     {
-      id           = data.aws_caller_identity.preprod.account_id
-      target       = "preprod"
-      role_arn     = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
-      workspace    = "pre-prod"
-      account_name = "preprod"
-      deploy_name  = "preprod"
+      id                  = data.aws_caller_identity.preprod.account_id
+      target              = "preprod"
+      role_arn            = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
+      workspace           = "pre-prod"
+      account_name        = "preprod"
+      deploy_name         = "preprod"
       deploy_account_name = "q_solution"
     },
     # {
