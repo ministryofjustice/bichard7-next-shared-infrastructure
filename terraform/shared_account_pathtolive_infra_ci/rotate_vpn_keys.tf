@@ -16,10 +16,6 @@ module "rotate_vpn_keys" {
   event_type_ids      = []
 
   allowed_resource_arns = [
-    module.codebuild_docker_resources.liquibase_repository_arn,
-    module.codebuild_docker_resources.amazon_linux_2_repository_arn,
-    module.codebuild_docker_resources.nodejs_repository_arn,
-    data.aws_ecr_repository.bichard.arn,
     data.aws_ecr_repository.codebuild_base.arn
   ]
 
@@ -42,12 +38,32 @@ module "rotate_vpn_keys" {
     },
     {
       name  = "AWS_ACCOUNT_NAME"
-      value = each.value.account_name
+      value = each.value.deploy_account_name
     },
     {
       name  = "AUTO_APPROVE"
       value = true
-    }
+    },
+    {
+      name  = "PARENT_ACCOUNT_ID"
+      value = data.aws_caller_identity.current.account_id
+    },
+    {
+      name  = "USE_PEERING"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_is_e2e"
+      value = each.value.is_e2e
+    },
+    {
+      name  = "TF_VAR_is_qsolution"
+      value = each.value.is_qsolution
+    },
+    {
+      name  = "TF_VAR_is_production"
+      value = each.value.is_production
+    },
   ]
 
   tags = module.label.tags

@@ -65,6 +65,9 @@ locals {
       account_name        = "integration_next"
       deploy_name         = "e2e-test"
       deploy_account_name = "integration_next"
+      is_e2e              = true
+      is_qsolution        = false
+      is_production       = false
     },
     {
       id                  = data.aws_caller_identity.preprod.account_id
@@ -74,6 +77,9 @@ locals {
       account_name        = "preprod"
       deploy_name         = "preprod"
       deploy_account_name = "q_solution"
+      is_e2e              = false
+      is_qsolution        = true
+      is_production       = true
     },
     {
       id                  = data.aws_caller_identity.production.account_id
@@ -83,6 +89,9 @@ locals {
       account_name        = "production"
       deploy_name         = "production"
       deploy_account_name = "production"
+      is_e2e              = false
+      is_qsolution        = true
+      is_production       = true
     }
   ]
 }
