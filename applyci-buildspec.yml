@@ -1,5 +1,4 @@
 ---
-
 version: 0.2
 
 phases:
@@ -39,4 +38,3 @@ phases:
         aws iam detach-group-policy \
           --group-name "CIAccess" \
           --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess"
-...
