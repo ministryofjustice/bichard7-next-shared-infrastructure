@@ -1,5 +1,4 @@
 ---
-
 version: 0.2
 
 phases:
@@ -27,8 +26,8 @@ phases:
     commands:
       - set -e
       - |
-        echo "Waiting 30 seconds for IAM permissions to apply"
-        sleep 30
+        echo "Waiting 120 seconds for IAM permissions to apply"
+        sleep 120
         cd terraform/shared_account_${ENVIRONMENT}_infra_ci
         TF_VAR_is_cd=true terraform init
         TF_VAR_is_cd=true terraform apply -auto-approve
@@ -39,4 +38,3 @@ phases:
         aws iam detach-group-policy \
           --group-name "CIAccess" \
           --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess"
-...
