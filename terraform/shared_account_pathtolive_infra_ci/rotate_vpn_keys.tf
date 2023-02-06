@@ -74,7 +74,7 @@ module "apply_rotate_vpn_keys_schedule" {
   source          = "../modules/codebuild_schedule"
   codebuild_arn   = each.value.pipeline_arn
   name            = each.value.pipeline_name
-  cron_expression = "cron(0 0 1 * ? *)" # 1st of each month at midnight
+  cron_expression = "cron(0 6 ? * wed#1 *)" # 1st wednesday of the month at 6am
 
   tags = module.label.tags
 }
