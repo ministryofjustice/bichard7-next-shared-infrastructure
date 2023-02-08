@@ -85,7 +85,7 @@ resource "aws_codepipeline" "path_to_live" {
 
       configuration = {
         S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
-        S3ObjectKey          = "semaphores/coductor-worker.json"
+        S3ObjectKey          = "semaphores/conductor.json"
         PollForSourceChanges = true
       }
     }
