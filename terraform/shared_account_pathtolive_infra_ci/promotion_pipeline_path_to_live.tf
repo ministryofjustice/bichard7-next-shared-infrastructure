@@ -75,6 +75,22 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
+      name     = "conductor-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["conductor-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/coductor-worker.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
       name     = "core-semaphore"
       category = "Source"
       owner    = "AWS"
