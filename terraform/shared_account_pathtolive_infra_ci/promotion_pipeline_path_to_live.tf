@@ -252,6 +252,18 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "INFRA_MODULES_COMMIT_HASH",
               value = "#{HASHES.INFRA_MODULES_COMMIT_HASH}"
+            },
+            {
+              name  = "INFRA_MODULES_COMMIT_HASH",
+              value = "#{HASHES.INFRA_MODULES_COMMIT_HASH}"
+            },
+            {
+              name  = "TF_VAR_conductor_deploy_tag"
+              value = "#{HASHES.CONDUCTOR_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_core_worker_deploy_tag"
+              value = "#{HASHES.CORE_WORKER_IMAGE_HASH}"
             }
           ]
         )
@@ -426,6 +438,14 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "INFRA_MODULES_COMMIT_HASH",
               value = "#{HASHES.INFRA_MODULES_COMMIT_HASH}"
+            },
+            {
+              name  = "TF_VAR_conductor_deploy_tag"
+              value = "#{HASHES.CONDUCTOR_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_core_worker_deploy_tag"
+              value = "#{HASHES.CORE_WORKER_IMAGE_HASH}"
             }
           ]
         )
@@ -684,6 +704,14 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "INFRA_MODULES_COMMIT_HASH",
               value = "#{HASHES.INFRA_MODULES_COMMIT_HASH}"
+            },
+            {
+              name  = "TF_VAR_conductor_deploy_tag"
+              value = "#{HASHES.CONDUCTOR_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_core_worker_deploy_tag"
+              value = "#{HASHES.CORE_WORKER_IMAGE_HASH}"
             }
           ]
         )
