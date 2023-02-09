@@ -250,7 +250,7 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.UI_IMAGE_HASH}"
             },
             {
-              name  = "INFRA_MODULES_COMMIT_HASH",
+              name  = "INFRA_MODULES_COMMIT_HASH"
               value = "#{HASHES.INFRA_MODULES_COMMIT_HASH}"
             },
             {
@@ -432,7 +432,7 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.UI_IMAGE_HASH}"
             },
             {
-              name  = "INFRA_MODULES_COMMIT_HASH",
+              name  = "INFRA_MODULES_COMMIT_HASH"
               value = "#{HASHES.INFRA_MODULES_COMMIT_HASH}"
             },
             {
@@ -698,7 +698,7 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.UI_IMAGE_HASH}"
             },
             {
-              name  = "INFRA_MODULES_COMMIT_HASH",
+              name  = "INFRA_MODULES_COMMIT_HASH"
               value = "#{HASHES.INFRA_MODULES_COMMIT_HASH}"
             },
             {
