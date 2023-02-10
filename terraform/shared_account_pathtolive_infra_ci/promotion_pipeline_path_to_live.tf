@@ -330,12 +330,30 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
+      category = "Build"
+      name = "seed-e2e-data"
+      owner = "AWS"
+      provider = "CodeBuild"
+      version = "1"
+      run_order = 3
+      configuration = {
+        ProjectName = module.seed_e2e_data.pipeline_name
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "application",
+        "ui-semaphore"
+      ]
+    }
+
+    action {
       category  = "Build"
       name      = "remove-dev-sgs-from-e2e-test"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 3
+      run_order = 4
       configuration = {
         ProjectName = module.remove_dev_sg_from_e2e_test.pipeline_name
       }

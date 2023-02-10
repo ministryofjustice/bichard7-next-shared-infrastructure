@@ -127,3 +127,17 @@ module "run_e2e_tests_restart_pnc_container" {
 
   tags = module.label.tags
 }
+
+module "seed_e2e_data" {
+  source = "../modules/codebuild_job"
+  name = "seed-e2e-data"
+  build_description = "Seed the database with generated case data"
+  report_build_status = true
+
+  repository_name = "bichard7-next-ui"
+  buildspec_file = "seed-data-buildspec.yml"
+
+  environment_variables = local.bichard_cd_vars
+
+  tags = module.label.tags
+}
