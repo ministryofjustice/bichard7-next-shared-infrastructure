@@ -330,11 +330,11 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category = "Build"
-      name = "seed-e2e-data"
-      owner = "AWS"
-      provider = "CodeBuild"
-      version = "1"
+      category  = "Build"
+      name      = "seed-e2e-data"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
       run_order = 3
       configuration = {
         ProjectName = module.seed_e2e_data.pipeline_name

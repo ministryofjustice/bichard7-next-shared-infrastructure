@@ -129,21 +129,21 @@ module "run_e2e_tests_restart_pnc_container" {
 }
 
 module "seed_e2e_data" {
-  source = "../modules/codebuild_job"
-  name = "seed-e2e-data"
+  source            = "../modules/codebuild_job"
+  name              = "seed-e2e-data"
   build_description = "Seed the database with generated case data"
 
   repository_name = "bichard7-next-ui"
-  buildspec_file = "seed-data-buildspec.yml"
+  buildspec_file  = "seed-data-buildspec.yml"
 
   environment_variables = concat(
     [
       {
-        name = "WORKSPACE"
+        name  = "WORKSPACE"
         value = "e2e-test"
       }
     ],
-    local.bichard_cd_vars, )
+  local.bichard_cd_vars)
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn
