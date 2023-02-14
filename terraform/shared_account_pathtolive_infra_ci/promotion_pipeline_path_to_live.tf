@@ -172,6 +172,23 @@ resource "aws_codepipeline" "path_to_live" {
         DetectChanges        = false
       }
     }
+
+    action {
+      name             = "ui-source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["ui"]
+
+      configuration = {
+        ConnectionArn        = aws_codestarconnections_connection.github.arn
+        FullRepositoryId     = "ministryofjustice/bichard7-next-ui"
+        BranchName           = "main"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = false
+      }
+    }
   }
 
   stage {
@@ -340,11 +357,7 @@ resource "aws_codepipeline" "path_to_live" {
         ProjectName = module.seed_e2e_data.pipeline_name
       }
 
-      input_artifacts = [
-        "infrastructure",
-        "application",
-        "ui-semaphore"
-      ]
+      input_artifacts = ["ui"]
     }
 
     action {
