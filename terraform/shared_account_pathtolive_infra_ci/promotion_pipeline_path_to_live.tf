@@ -337,7 +337,7 @@ resource "aws_codepipeline" "path_to_live" {
       version   = "1"
       run_order = 3
       configuration = {
-        ProjectName = module.seed_e2e_data.pipeline_name
+        ProjectName   = module.seed_e2e_data.pipeline_name
         PrimarySource = "ui-semaphore"
       }
 
