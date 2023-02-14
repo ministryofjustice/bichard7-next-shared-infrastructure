@@ -54,6 +54,12 @@ resource "aws_iam_role_policy" "run_e2e_tests" {
   role   = module.run_e2e_tests.pipeline_service_role_name
 }
 
+resource "aws_iam_role_policy" "seed_e2e_data" {
+  name   = "allow-codestar-connection"
+  policy = data.template_file.allow_codebuild_codestar_connection.rendered
+  role   = module.seed_e2e_data.pipeline_service_role_name
+}
+
 resource "aws_iam_role_policy" "run_preprod_tests" {
   name   = "allow-codestar-connection"
   policy = data.template_file.allow_codebuild_codestar_connection.rendered
