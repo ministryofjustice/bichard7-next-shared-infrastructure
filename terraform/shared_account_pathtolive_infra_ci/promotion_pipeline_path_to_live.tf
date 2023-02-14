@@ -338,13 +338,10 @@ resource "aws_codepipeline" "path_to_live" {
       run_order = 3
       configuration = {
         ProjectName   = module.seed_e2e_data.pipeline_name
-        PrimarySource = "ui-semaphore"
       }
 
       input_artifacts = [
-        "infrastructure",
-        "application-semaphore",
-        "ui-semaphore"
+        "infrastructure"
       ]
     }
 
