@@ -340,9 +340,7 @@ resource "aws_codepipeline" "path_to_live" {
         ProjectName = module.seed_e2e_data.pipeline_name
       }
 
-      input_artifacts = [
-        "infrastructure"
-      ]
+      input_artifacts = ["tests"]
     }
 
     action {
