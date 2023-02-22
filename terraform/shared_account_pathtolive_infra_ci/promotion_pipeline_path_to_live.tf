@@ -333,7 +333,7 @@ resource "aws_codepipeline" "path_to_live" {
     #   version  = "1"
 
     #   configuration = {
-    #     ProjectName   = module.deploy_conductor_definitions.pipeline_name
+    #     ProjectName   = module.deploy_e2e_conductor_definitions.pipeline_name
     #     PrimarySource = "infrastructure"
     #   }
 
