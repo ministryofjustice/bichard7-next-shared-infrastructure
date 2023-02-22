@@ -288,12 +288,12 @@ module "run_e2e_test_migrations" {
   tags = module.label.tags
 }
 
-module "deploy_conductor_definitions" {
+module "deploy_e2e_test_conductor_definitions" {
   source = "../modules/codebuild_job"
 
   build_description      = "Codebuild job for updating JSON definitions for workflows, tasks and event listeners in Conductor"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "deploy-conductor-definitions"
+  name                   = "deploy-e2e-test-conductor-definitions"
   buildspec_file         = "buildspecs/deploy-conductor-definitions.yml"
 
   repository_name      = "bichard7-next-infrastructure"
