@@ -423,6 +423,69 @@ module "run_preprod_migrations" {
   tags = module.label.tags
 }
 
+module "deploy_preprod_conductor_definitions" {
+  source = "../modules/codebuild_job"
+
+  build_description      = "Codebuild job for updating JSON definitions for workflows, tasks and event listeners in Conductor"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "deploy-preprod-conductor-definitions"
+  buildspec_file         = "buildspecs/deploy-conductor-definitions.yml"
+
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  build_timeout = 180
+
+  deploy_account_name = "q_solution"
+  deployment_name     = "preprod"
+
+  codebuild_secondary_sources = [
+    {
+      type              = "GITHUB"
+      location          = "https://github.com/ministryofjustice/bichard7-next-core.git"
+      git_clone_depth   = 1
+      source_identifier = "bichard7_next_core"
+      git_submodules_config = {
+        fetch_submodules = true
+      }
+    }
+  ]
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "preprod"
+    },
+    {
+      name  = "USER_TYPE"
+      value = "ci"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "q_solution"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
+    },
+    {
+      name  = "PARENT_ACCOUNT_ID"
+      value = data.aws_caller_identity.current.account_id
+    },
+    {
+      name  = "USE_PEERING"
+      value = "true"
+    }
+  ]
+  tags = module.label.tags
+}
+
 module "apply_dev_sg_to_preprod" {
   source = "../modules/codebuild_job"
 
