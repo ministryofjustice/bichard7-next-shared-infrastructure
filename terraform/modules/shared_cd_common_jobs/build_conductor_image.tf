@@ -16,6 +16,11 @@ module "build_conductor_image" {
   tags = var.tags
 }
 
+module "build_bichard7_conductor_image_trigger" {
+  source                 = "../codebuild_webhook"
+  codebuild_project_name = module.build_conductor_image.pipeline_name
+}
+
 module "build_conductor_image_schedule" {
   source          = "../codebuild_schedule"
   codebuild_arn   = module.build_conductor_image.pipeline_arn
