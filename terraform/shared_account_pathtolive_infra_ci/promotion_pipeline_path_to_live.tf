@@ -156,23 +156,22 @@ resource "aws_codepipeline" "path_to_live" {
       }
     }
 
-    # Will be uncommented once the step has been tested outside of the pipeline
-    # action {
-    #   name             = "core-source"
-    #   category         = "Source"
-    #   owner            = "AWS"
-    #   provider         = "CodeStarSourceConnection"
-    #   version          = "1"
-    #   output_artifacts = ["core"]
+    action {
+      name             = "core-source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["core"]
 
-    #   configuration = {
-    #     ConnectionArn        = aws_codestarconnections_connection.github.arn
-    #     FullRepositoryId     = "ministryofjustice/bichard7-next-core"
-    #     BranchName           = "main"
-    #     OutputArtifactFormat = "CODEBUILD_CLONE_REF"
-    #     DetectChanges        = true
-    #   }
-    # }
+      configuration = {
+        ConnectionArn        = aws_codestarconnections_connection.github.arn
+        FullRepositoryId     = "ministryofjustice/bichard7-next-core"
+        BranchName           = "main"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = true
+      }
+    }
 
     action {
       name             = "tests-source"
@@ -324,24 +323,23 @@ resource "aws_codepipeline" "path_to_live" {
       ]
     }
 
-    # Will be uncommented once the step has been tested outside of the pipeline
-    # action {
-    #   category = "Build"
-    #   name     = "deploy-conductor-definitions"
-    #   owner    = "AWS"
-    #   provider = "CodeBuild"
-    #   version  = "1"
+    action {
+      category = "Build"
+      name     = "deploy-conductor-definitions"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
-    #   configuration = {
-    #     ProjectName   = module.deploy_e2e_conductor_definitions.pipeline_name
-    #     PrimarySource = "infrastructure"
-    #   }
+      configuration = {
+        ProjectName   = module.deploy_e2e_test_conductor_definitions.pipeline_name
+        PrimarySource = "infrastructure"
+      }
 
-    #   input_artifacts = [
-    #     "infrastructure",
-    #     "core"
-    #   ]
-    # }
+      input_artifacts = [
+        "infrastructure",
+        "core"
+      ]
+    }
   }
 
   stage {
