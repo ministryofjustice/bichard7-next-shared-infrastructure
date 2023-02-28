@@ -7,7 +7,7 @@ resource "aws_kms_key" "codebuild_github_auth" {
 }
 
 resource "aws_kms_alias" "codebuild_github_auth_alias" {
-  target_key_id = aws_kms_key.codebuild_lock_table.id
+  target_key_id = aws_kms_key.codebuild_github_auth.id
   name          = "alias/codebuild-github-auth"
 }
 
