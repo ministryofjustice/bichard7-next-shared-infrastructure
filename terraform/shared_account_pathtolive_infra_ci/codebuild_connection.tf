@@ -3,7 +3,7 @@ resource "aws_kms_key" "codebuild_github_auth" {
   deletion_window_in_days = 10
   enable_key_rotation     = true
 
-  tags = var.tags
+  tags = module.label.tags
 }
 
 resource "aws_kms_alias" "codebuild_github_auth_alias" {
