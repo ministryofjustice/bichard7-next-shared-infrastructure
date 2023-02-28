@@ -72,6 +72,12 @@ resource "aws_iam_role_policy" "allow_code_pipeline_connection_for_deploy_e2e_te
   role   = module.deploy_e2e_test_terraform.pipeline_service_role_name
 }
 
+resource "aws_iam_role_policy" "allow_code_pipeline_connection_for_deploy_conductor_definitions_e2e_test" {
+  name   = "Allow-Codestar-Connection"
+  policy = data.template_file.allow_codebuild_codestar_connection.rendered
+  role   = module.deploy_e2e_test_conductor_definitions.pipeline_service_role_name
+}
+
 resource "aws_iam_role_policy" "allow_code_pipeline_connection_for_deploy_pre_prod" {
   name   = "Allow-Codestar-Connection"
   policy = data.template_file.allow_codebuild_codestar_connection.rendered
