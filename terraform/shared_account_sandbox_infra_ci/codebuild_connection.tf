@@ -19,5 +19,5 @@ resource "aws_secretsmanager_secret" "github_token" {
 resource "aws_codebuild_source_credential" "github" {
   auth_type   = "PERSONAL_ACCESS_TOKEN"
   server_type = "GITHUB"
-  token       = aws_secretsmanager_secret.github_token.arn
+  token       = data.aws_secretsmanager_secret_version.github_token.secret_string
 }
