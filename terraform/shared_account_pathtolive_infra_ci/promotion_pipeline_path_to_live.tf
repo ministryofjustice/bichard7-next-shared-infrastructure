@@ -536,6 +536,24 @@ resource "aws_codepipeline" "path_to_live" {
         "application"
       ]
     }
+
+    action {
+      category = "Build"
+      name     = "deploy-conductor-definitions"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+
+      configuration = {
+        ProjectName   = module.deploy_preprod_conductor_definitions.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "core"
+      ]
+    }
   }
 
   stage {
@@ -801,6 +819,24 @@ resource "aws_codepipeline" "path_to_live" {
       input_artifacts = [
         "infrastructure",
         "application"
+      ]
+    }
+
+    action {
+      category = "Build"
+      name     = "deploy-conductor-definitions"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+
+      configuration = {
+        ProjectName   = module.deploy_production_conductor_definitions.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "core"
       ]
     }
   }
