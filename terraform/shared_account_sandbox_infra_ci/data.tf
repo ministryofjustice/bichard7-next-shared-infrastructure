@@ -58,3 +58,7 @@ data "external" "latest_codebuild_base" {
     module.codebuild_base_resources
   ]
 }
+
+data "aws_secretsmanager_secret_version" "github_token" {
+  secret_id = aws_secretsmanager_secret.github_token.id
+}
