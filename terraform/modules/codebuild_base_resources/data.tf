@@ -78,11 +78,11 @@ data "template_file" "codebuild_bucket_policy" {
   template = file("${path.module}/policies/codebuild_bucket_policy.json.tpl")
 
   vars = {
-    bucket_arn = aws_s3_bucket.codebuild_artifact_bucket.arn
-    account_id = data.aws_caller_identity.current.account_id
-    allowed_principals = jsonencode(local.allowed_principals)
+    bucket_arn                     = aws_s3_bucket.codebuild_artifact_bucket.arn
+    account_id                     = data.aws_caller_identity.current.account_id
+    allowed_principals             = jsonencode(local.allowed_principals)
     allowed_principals_with_lambda = jsonencode(local.allowed_principals_with_lambda)
-    ci_user_arn = data.aws_iam_user.ci_user.arn
+    ci_user_arn                    = data.aws_iam_user.ci_user.arn
   }
 }
 

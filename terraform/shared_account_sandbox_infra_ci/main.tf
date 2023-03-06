@@ -37,6 +37,8 @@ module "codebuild_base_resources" {
     data.aws_caller_identity.sandbox_c.account_id
   ]
 
+  is_sandbox_account = true
+
   tags = module.label.tags
 }
 

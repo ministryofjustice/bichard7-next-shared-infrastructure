@@ -40,3 +40,9 @@ variable "vpc_cidr_block" {
   type        = string
   default     = null
 }
+
+variable "is_sandbox_account" {
+  description = "Is this a sandbox account?"
+  type        = bool
+  default     = false
+}

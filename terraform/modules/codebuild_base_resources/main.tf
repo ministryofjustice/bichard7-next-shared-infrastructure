@@ -65,8 +65,8 @@ locals {
   allowed_principals = sort(
     concat(
       formatlist("arn:aws:iam::%s:root", var.allow_accounts),
-      formatlist("arn:aws:iam::%s:role/update-environment-ssm-params-service-role", data.aws_caller_identity.current.account_id),
-      formatlist("arn:aws:iam::%s:role/Bichard7-CI-Access", local.child_accounts)
+      formatlist("arn:aws:iam::%s:role/Bichard7-CI-Access", local.child_accounts),
+      var.is_sandbox_account ?  [] : formatlist("arn:aws:iam::%s:role/update-environment-ssm-params-service-role", data.aws_caller_identity.current.account_id)
     )
   )
 
