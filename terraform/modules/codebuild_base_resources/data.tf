@@ -80,23 +80,8 @@ data "template_file" "codebuild_bucket_policy" {
   vars = {
     bucket_arn = aws_s3_bucket.codebuild_artifact_bucket.arn
     account_id = data.aws_caller_identity.current.account_id
-    allowed_principals = jsonencode(
-      sort(
-        concat(
-          formatlist("arn:aws:iam::%s:root", var.allow_accounts),
-          formatlist("arn:aws:iam::%s:role/update-environment-ssm-params-service-role", data.aws_caller_identity.current.account_id),
-          formatlist("arn:aws:iam::%s:role/Bichard7-CI-Access", local.child_accounts)
-        )
-      )
-    )
-    allowed_principals_with_lambda = jsonencode(
-      sort(
-        concat(
-          formatlist("arn:aws:iam::%s:role/portal-host-lambda-role", local.child_accounts),
-          formatlist("arn:aws:iam::%s:role/Bichard7-CI-Access", local.child_accounts)
-        )
-      )
-    )
+    allowed_principals = jsonencode(local.allowed_principals)
+    allowed_principals_with_lambda = jsonencode(local.allowed_principals_with_lambda)
     ci_user_arn = data.aws_iam_user.ci_user.arn
   }
 }
