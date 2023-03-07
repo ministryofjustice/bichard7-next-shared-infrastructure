@@ -1,7 +1,7 @@
 if [[ "$ENVIRONMENT" == "sandbox" ]]; then
-  make shared-account-sandbox-infra
+  ./scripts/deploy_sandbox_infra.sh
 elif [[ "$ENVIRONMENT" == "pathtolive" ]]; then
-  make shared-account-pathtolive-infra
+  ./scripts/deploy_pathtolive_infra.sh
 else
   echo "Unknown environment"
   exit 1

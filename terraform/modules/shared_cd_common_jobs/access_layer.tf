@@ -12,6 +12,10 @@ module "apply_access_layer" {
     {
       name  = "ENVIRONMENT"
       value = var.environment
+    },
+    {
+      name = "AUTO_APPROVE"
+      value = true
     }
   ]
 
