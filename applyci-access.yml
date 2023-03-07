@@ -2,13 +2,6 @@
 version: 0.2
 
 phases:
-  pre_build:
-    commands:
-      - echo "Elevating CI user credentials"
-      - |
-        aws iam attach-group-policy \
-          --group-name "CIAccess" \
-          --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess"
   install:
     commands:
       - |
@@ -25,14 +18,4 @@ phases:
   build:
     commands:
       - set -e
-      - |
-        echo "Waiting 120 seconds for IAM permissions to apply"
-        sleep 120
-        ./scripts/deploy_infra.sh
-  post_build:
-    commands:
-      - echo "Removing CI user credentials elevation"
-      - |
-        aws iam detach-group-policy \
-          --group-name "CIAccess" \
-          --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess"
+      - ./scripts/deploy_infra.sh
