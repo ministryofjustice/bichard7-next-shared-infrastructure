@@ -1,0 +1,38 @@
+---
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Elevating CI user credentials"
+      - |
+        aws iam attach-group-policy \
+          --group-name "CIAccess" \
+          --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess"
+  install:
+    commands:
+      - |
+        cd ../
+        yum install -y unzip
+        readonly TERRAFORM_VERSION="1.1.3"
+        readonly TF_URL="https://releases.hashicorp.com/terraform"
+        readonly TF_ZIP="terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
+        wget ${TF_URL}/${TERRAFORM_VERSION}/${TF_ZIP}
+        unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+        chmod +x terraform
+        mv terraform /usr/bin/.
+        cd bichard7-next-shared-infrastructure
+  build:
+    commands:
+      - set -e
+      - |
+        echo "Waiting 120 seconds for IAM permissions to apply"
+        sleep 120
+        ./scripts/deploy_infra.sh
+  post_build:
+    commands:
+      - echo "Removing CI user credentials elevation"
+      - |
+        aws iam detach-group-policy \
+          --group-name "CIAccess" \
+          --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess"
