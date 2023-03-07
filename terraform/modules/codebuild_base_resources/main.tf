@@ -61,6 +61,21 @@ resource "aws_s3_bucket_public_access_block" "codebuild_artifact_bucket" {
 locals {
   child_accounts = compact([for x in var.allow_accounts : x == data.aws_caller_identity.current.account_id ? "" : x])
   cidr_block     = ((var.vpc_cidr_block == null) ? "10.0.0.0/16" : var.vpc_cidr_block)
+
+  allowed_principals = sort(
+    concat(
+      formatlist("arn:aws:iam::%s:root", var.allow_accounts),
+      formatlist("arn:aws:iam::%s:role/Bichard7-CI-Access", local.child_accounts),
+      var.is_sandbox_account ? [] : formatlist("arn:aws:iam::%s:role/update-environment-ssm-params-service-role", data.aws_caller_identity.current.account_id)
+    )
+  )
+
+  allowed_principals_with_lambda = sort(
+    concat(
+      formatlist("arn:aws:iam::%s:role/portal-host-lambda-role", local.child_accounts),
+      formatlist("arn:aws:iam::%s:role/Bichard7-CI-Access", local.child_accounts)
+    )
+  )
 }
 
 resource "aws_s3_bucket_policy" "allow_access_to_codebuild_bucket" {
