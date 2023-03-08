@@ -94,4 +94,6 @@ locals {
       is_production       = true
     }
   ]
+
+  latest_liquibase_image = "${data.aws_ecr_repository.liquibase.repository_url}@${data.external.latest_liquibase.result.tags}"
 }

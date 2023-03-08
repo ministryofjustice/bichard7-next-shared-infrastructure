@@ -92,7 +92,7 @@ module "deploy_production_terraform" {
     },
     {
       name  = "LIQUIBASE_IMAGE"
-      value = module.codebuild_docker_resources.liquibase_docker_image
+      value = local.latest_liquibase_image
     },
     {
       name  = "PARENT_ACCOUNT_ID"
@@ -524,7 +524,7 @@ module "run_production_migrations" {
     },
     {
       name  = "LIQUIBASE_IMAGE"
-      value = module.codebuild_docker_resources.liquibase_docker_image
+      value = local.latest_liquibase_image
     }
   ]
   tags = module.label.tags

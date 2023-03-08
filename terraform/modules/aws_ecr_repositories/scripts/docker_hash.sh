@@ -14,7 +14,7 @@ function get_hash() {
   jq -n \
     --arg hash "${SHORT_HASH}" \
     --arg short_hash "${TAG_HASH}" \
-    '{"image_hash": $hash, "short_hash", $short_hash}'
+    '{"image_hash": $hash, "short_hash": $short_hash}'
 }
 
 parse_input
