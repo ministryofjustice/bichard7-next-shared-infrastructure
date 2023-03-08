@@ -1,6 +1,6 @@
 resource "aws_iam_user" "ci_admin" {
-  name  = "ci-admin"
-  path  = "/system/"
+  name = "ci-admin"
+  path = "/system/"
 
   tags = merge(
     var.tags,
@@ -12,7 +12,7 @@ resource "aws_iam_user" "ci_admin" {
 
 # tfsec:ignore:aws-iam-enforce-group-mfa
 resource "aws_iam_group" "aws_ci_admin_group" {
-  name  = "CiAdmin"
+  name = "CiAdmin"
 }
 
 resource "aws_iam_user_group_membership" "ci_admin" {
@@ -29,7 +29,7 @@ resource "aws_iam_group_policy_attachment" "admin_user_allow_all_policy" {
 }
 
 resource "aws_iam_access_key" "ci_admin_user_key" {
-  user  = aws_iam_user.ci_admin.name
+  user = aws_iam_user.ci_admin.name
 }
 
 resource "aws_ssm_parameter" "ci_admin_user_access_key_id" {
