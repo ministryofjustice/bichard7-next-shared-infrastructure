@@ -31,7 +31,19 @@ data "template_file" "allow_assume_aws_nuke_access" {
   }
 }
 
+data "template_file" "allow_assume_ci_admin_access" {
+  template = file("${path.module}/policies/allow_assume_ci_admin_access.json.tpl")
+
+  vars = {
+    ci_admin_access_arn = var.ci_admin_access_arn
+  }
+}
+
 data "aws_iam_group" "nuke_user_group" {
   count      = (var.aws_nuke_access_arn != null) ? 1 : 0
   group_name = "AwsNuke"
+}
+
+data "aws_iam_group" "ci_admin_user_group" {
+  group_name = "CiAdmin"
 }

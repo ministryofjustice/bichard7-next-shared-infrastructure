@@ -86,3 +86,13 @@ data "template_file" "allow_assume_aws_nuke_access" {
     user_role         = "aws-nuke"
   }
 }
+
+data "template_file" "allow_assume_ci_admin_access" {
+  template = file("${path.module}/policies/${local.no_mfa_access_template}")
+
+  vars = {
+    parent_account_id = var.root_account_id
+    excluded_arns     = jsonencode(var.denied_user_arns)
+    user_role         = "ci-admin"
+  }
+}
