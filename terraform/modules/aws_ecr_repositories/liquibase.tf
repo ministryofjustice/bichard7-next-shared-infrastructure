@@ -1,6 +1,7 @@
 data "docker_registry_image" "liquibase" {
   name = "liquibase/liquibase"
 }
+
 # Get our image hashes
 data "external" "liquibase_hash" {
   program = ["bash", "${path.module}/scripts/docker_hash.sh"]
