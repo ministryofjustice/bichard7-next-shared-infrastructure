@@ -33,6 +33,11 @@ variable "ci_access_arn" {
   type        = string
 }
 
+variable "ci_admin_access_arn" {
+  description = "The child aws ci admin assume role arn"
+  type        = string
+}
+
 variable "aws_nuke_access_arn" {
   description = "The child aws nuke assume role arn"
   type        = string

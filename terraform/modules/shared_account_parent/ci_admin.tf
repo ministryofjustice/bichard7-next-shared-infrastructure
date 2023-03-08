@@ -23,7 +23,7 @@ resource "aws_iam_user_group_membership" "ci_admin" {
   user = aws_iam_user.ci_admin.name
 }
 
-resource "aws_iam_group_policy_attachment" "admin_user_allow_all_policy" {
+resource "aws_iam_group_policy_attachment" "ci_admin_user_allow_all_policy" {
   group      = aws_iam_group.aws_ci_admin_group.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }

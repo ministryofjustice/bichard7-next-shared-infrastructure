@@ -92,7 +92,6 @@ data "template_file" "allow_assume_ci_admin_access" {
 
   vars = {
     parent_account_id = var.root_account_id
-    excluded_arns     = jsonencode(var.denied_user_arns)
     user_role         = "ci-admin"
   }
 }
