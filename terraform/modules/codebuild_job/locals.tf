@@ -13,7 +13,8 @@ locals {
         "arn:aws:ssm:eu-west-2:${data.aws_caller_identity.current.account_id}:parameter/ci/*",
         "arn:aws:ssm:eu-west-2:${data.aws_caller_identity.current.account_id}:parameter/nuke/*",
         "arn:aws:kms:*:${data.aws_caller_identity.current.account_id}:key/*",
-        "arn:aws:kms:*:${data.aws_caller_identity.current.account_id}:alias/*"
+        "arn:aws:kms:*:${data.aws_caller_identity.current.account_id}:alias/*",
+        "arn:aws:ssm:eu-west-2:${data.aws_caller_identity.current.account_id}:parameter/ci-admin/*",
       ]
     )
   )
