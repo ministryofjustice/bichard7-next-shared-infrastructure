@@ -1,6 +1,12 @@
 #!/bin/bash
 
-ACCOUNTS=$(aws ssm get-parameter --name /cjse/bichard7/accounts/administrator-role --query "Parameter.Value" --output text)
+ACCOUNTS_SSM_KEY=/cjse/bichard7/accounts/ci-admin-role
+
+if [[ "$CI_USER" == "false" ]]; then
+  ACCOUNTS_SSM_KEY=/cjse/bichard7/accounts/administrator-role
+fi
+
+ACCOUNTS=$(aws ssm get-parameter --name $ACCOUNTS_SSM_KEY --query "Parameter.Value" --output text)
 SANDBOX_A_ADMIN_ROLE=$(echo $ACCOUNTS | jq -r ".sandbox_a")
 SANDBOX_B_ADMIN_ROLE=$(echo $ACCOUNTS | jq -r ".sandbox_b")
 SANDBOX_C_ADMIN_ROLE=$(echo $ACCOUNTS | jq -r ".sandbox_c")

@@ -5,3 +5,9 @@ resource "aws_iam_role" "assume_ci_admin_access" {
 
   tags = var.tags
 }
+
+resource "aws_iam_role_policy" "allow_ci_admin" {
+  name   = "CiAdminPolicy"
+  role   = aws_iam_role.assume_ci_admin_access.id
+  policy = file("${path.module}/policies/allow_ci_admin.json")
+}
