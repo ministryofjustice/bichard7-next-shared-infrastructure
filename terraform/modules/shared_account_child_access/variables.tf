@@ -8,6 +8,11 @@ variable "root_account_id" {
   description = "The ID of the parent account"
 }
 
+variable "account_id" {
+  type        = string
+  description = "The ID of the account"
+}
+
 variable "bucket_name" {
   type        = string
   description = "The name of the shared bucket"

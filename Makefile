@@ -22,7 +22,7 @@ destroy-shared-account-sandbox-bootstrap:
 
 .PHONY: shared-account-sandbox-infra
 shared-account-sandbox-infra:
-	./scripts/shared_account_terraform.py sandbox infra
+	ENVIRONMENT=sandbox ./scripts/deploy_infra.sh
 
 .PHONY: shared-account-sandbox-infra-ci
 shared-account-sandbox-infra-ci:
@@ -46,7 +46,7 @@ destroy-shared-account-pathtolive-bootstrap:
 
 .PHONY: shared-account-pathtolive-infra
 shared-account-pathtolive-infra:
-	./scripts/shared_account_terraform.py pathtolive infra
+	ENVIRONMENT=pathtolive ./scripts/deploy_infra.sh
 
 .PHONY: destroy-shared-account-pathtolive-infra
 destroy-shared-account-pathtolive-infra:

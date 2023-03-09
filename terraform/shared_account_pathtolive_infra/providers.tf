@@ -17,6 +17,7 @@ provider "aws" {
   region     = data.aws_region.current_region.name
   access_key = var.integration_next_access_key
   secret_key = var.integration_next_secret_key
+  token      = var.integration_next_session_token
   alias      = "integration_next"
 }
 
@@ -25,6 +26,7 @@ provider "aws" {
   region     = data.aws_region.current_region.name
   access_key = var.integration_baseline_access_key
   secret_key = var.integration_baseline_secret_key
+  token      = var.integration_baseline_session_token
   alias      = "integration_baseline"
 }
 

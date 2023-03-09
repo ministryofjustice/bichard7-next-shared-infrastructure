@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowCIAdmin",
+      "Effect": "Allow",
+      "Action": ["iam:*", "s3:*", "kms:*", "cloudtrail:*", "route53:*"],
+      "Resource": "*"
+    }
+  ]
+}
