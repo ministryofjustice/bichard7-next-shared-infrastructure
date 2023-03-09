@@ -4,7 +4,10 @@
     {
       "Sid": "AllowCIAdmin",
       "Effect": "Allow",
-      "Action": ["iam:*"],
+      "Action": [
+        "iam:*",
+        "s3:*"
+      ],
       "Resource": "*"
     }
   ]

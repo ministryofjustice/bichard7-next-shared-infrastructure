@@ -18,4 +18,4 @@ phases:
   build:
     commands:
       - set -e
-      - ./scripts/deploy_infra.sh
+      - CI_USER=true ./scripts/deploy_infra.sh

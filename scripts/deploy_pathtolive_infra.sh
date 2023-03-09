@@ -1,9 +1,9 @@
 #!/bin/bash
 
-ACCOUNTS_SSM_KEY=/cjse/bichard7/accounts/ci-admin-role
+ACCOUNTS_SSM_KEY=/cjse/bichard7/accounts/administrator-role
 
-if [[ "$CI_USER" == "false" ]]; then
-  ACCOUNTS_SSM_KEY=/cjse/bichard7/accounts/administrator-role
+if [[ "$CI_USER" == "true" ]]; then
+  ACCOUNTS_SSM_KEY=/cjse/bichard7/accounts/ci-admin-role
 fi
 
 ACCOUNTS=$(aws ssm get-parameter --name $ACCOUNTS_SSM_KEY --query "Parameter.Value" --output text)
@@ -32,4 +32,4 @@ export TF_VAR_production_access_key=$(echo "${PRODUCTION}" | jq -r ".Credentials
 export TF_VAR_production_secret_key=$(echo "${PRODUCTION}" | jq -r ".Credentials.SecretAccessKey")
 export TF_VAR_production_session_token=$(echo "${PRODUCTION}" | jq -r ".Credentials.SessionToken")
 
-make shared-account-pathtolive-infra
+./scripts/shared_account_terraform.py pathtolive infra
