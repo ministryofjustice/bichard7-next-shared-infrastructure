@@ -1,6 +1,7 @@
 module "sandbox_c_child_access" {
   source              = "../modules/shared_account_child_access"
   root_account_id     = data.aws_caller_identity.current.account_id
+  account_id          = data.aws_caller_identity.sandbox_c.account_id
   bucket_name         = local.remote_bucket_name
   logging_bucket_name = module.aws_logs.aws_logs_bucket
   create_nuke_user    = true

@@ -1,6 +1,7 @@
 module "preprod_child_access" {
   source          = "../modules/shared_account_child_access"
   root_account_id = data.aws_caller_identity.current.account_id
+  account_id      = data.aws_caller_identity.preprod.account_id
   tags            = module.label.tags
   bucket_name     = local.remote_bucket_name
 

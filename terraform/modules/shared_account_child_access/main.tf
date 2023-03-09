@@ -35,7 +35,7 @@ resource "aws_s3_bucket_public_access_block" "account_logging_bucket" {
 module "aws_logs" {
   source            = "trussworks/logs/aws"
   version           = "~> 10.3.0 "
-  s3_bucket_name    = "account-logging-${data.aws_caller_identity.current.account_id}-logs"
+  s3_bucket_name    = "account-logging-${var.account_id}-logs"
   force_destroy     = false
   enable_versioning = true
 
@@ -43,7 +43,7 @@ module "aws_logs" {
 }
 
 resource "aws_s3_bucket" "account_logging_bucket" {
-  bucket        = "account-logging-${data.aws_caller_identity.current.account_id}"
+  bucket        = "account-logging-${var.account_id}"
   acl           = "log-delivery-write"
   force_destroy = false
 

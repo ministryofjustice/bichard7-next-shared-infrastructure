@@ -1,5 +1,3 @@
-data "aws_caller_identity" "current" {}
-
 data "aws_region" "current_region" {}
 
 data "template_file" "ci_to_parent_policy_template" {
@@ -15,7 +13,7 @@ data "template_file" "ci_policy_document_part1" {
   template = file("${path.module}/policies/child_ci_policy_part1.json.tpl")
   vars = {
     parent_account_id = var.root_account_id
-    account_id        = data.aws_caller_identity.current.account_id
+    account_id        = var.account_id
     bucket_name       = var.bucket_name
     region            = data.aws_region.current_region.name
   }
@@ -25,7 +23,7 @@ data "template_file" "ci_policy_document_part2" {
   template = file("${path.module}/policies/child_ci_policy_part2.json.tpl")
   vars = {
     parent_account_id = var.root_account_id
-    account_id        = data.aws_caller_identity.current.account_id
+    account_id        = var.account_id
     bucket_name       = var.bucket_name
     region            = data.aws_region.current_region.name
   }
@@ -34,7 +32,7 @@ data "template_file" "ci_policy_document_part2" {
 data "template_file" "deny_ci_permissions_policy" {
   template = file("${path.module}/policies/deny_attach_policy_to_ci.json.tpl")
   vars = {
-    account_id = data.aws_caller_identity.current.account_id
+    account_id = var.account_id
   }
 }
 

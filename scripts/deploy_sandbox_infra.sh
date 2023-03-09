@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 ACCOUNTS_SSM_KEY=/cjse/bichard7/accounts/administrator-role
 
 if [[ "$CI_USER" == "true" ]]; then

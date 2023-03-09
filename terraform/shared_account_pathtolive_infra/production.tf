@@ -1,6 +1,7 @@
 module "production_child_access" {
   source              = "../modules/shared_account_child_access"
   root_account_id     = data.aws_caller_identity.current.account_id
+  account_id          = data.aws_caller_identity.production.account_id
   tags                = module.label.tags
   bucket_name         = local.remote_bucket_name
   denied_user_arns    = split(",", data.aws_ssm_parameter.non_sc_users.value)
