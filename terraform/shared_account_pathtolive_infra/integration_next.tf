@@ -9,6 +9,10 @@ module "integration_next_child_access" {
   providers = {
     aws = aws.integration_next
   }
+
+  depends_on = [
+    module.shared_account_user_access
+  ]
 }
 
 
@@ -22,12 +26,17 @@ module "shared_account_access_integration_next" {
   readonly_access_arn        = module.integration_next_child_access.readonly_access_role.arn
   admin_access_arn           = module.integration_next_child_access.administrator_access_role.arn
   ci_access_arn              = module.integration_next_child_access.ci_access_role.arn
+  ci_admin_access_arn        = module.integration_next_child_access.ci_admin_access_role.arn
 
   providers = {
     aws = aws.shared
   }
 
   tags = module.label.tags
+
+  depends_on = [
+    module.shared_account_user_access
+  ]
 }
 
 module "shared_account_access_integration_next_lambda_cloudtrail" {

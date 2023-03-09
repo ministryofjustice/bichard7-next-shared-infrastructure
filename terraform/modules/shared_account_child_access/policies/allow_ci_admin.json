@@ -6,7 +6,10 @@
       "Effect": "Allow",
       "Action": [
         "iam:*",
-        "s3:*"
+        "s3:*",
+        "kms:*",
+        "cloudtrail:*",
+        "route53:*"
       ],
       "Resource": "*"
     }

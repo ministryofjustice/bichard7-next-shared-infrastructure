@@ -8,6 +8,11 @@ variable "integration_next_secret_key" {
   description = "the AWS_SECRET_ACCESS_KEY for integration_next"
 }
 
+variable "integration_next_session_token" {
+  type        = string
+  description = "the AWS_SESSION_TOKEN for integration_next"
+}
+
 variable "integration_baseline_access_key" {
   type        = string
   description = "the AWS_ACCESS_KEY_ID for integration_baseline"
@@ -16,6 +21,11 @@ variable "integration_baseline_access_key" {
 variable "integration_baseline_secret_key" {
   type        = string
   description = "the AWS_SECRET_ACCESS_KEY for integration_baseline"
+}
+
+variable "integration_baseline_session_token" {
+  type        = string
+  description = "the AWS_SESSION_TOKEN for integration_baseline"
 }
 
 variable "preprod_access_key" {
