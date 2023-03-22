@@ -107,6 +107,22 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
+      name     = "api-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["api-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/api-worker.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
       name     = "nginx-auth-proxy-semaphore"
       category = "Source"
       owner    = "AWS"
