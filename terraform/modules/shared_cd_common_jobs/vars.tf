@@ -47,6 +47,12 @@ variable "user_service_cd_env_vars" {
   default     = []
 }
 
+variable "api_cd_env_vars" {
+  description = "A list of maps of env var strings"
+  type        = list(map(string))
+  default     = []
+}
+
 variable "core_cd_env_vars" {
   description = "A list of maps of env var strings"
   type        = list(map(string))

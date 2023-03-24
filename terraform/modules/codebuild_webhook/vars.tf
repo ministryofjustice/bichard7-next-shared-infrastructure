@@ -20,3 +20,9 @@ variable "filter_event_pattern" {
   default     = "PUSH"
   type        = string
 }
+
+variable "file_path" {
+  description = "The pattern we're using to filter filepath in repo"
+  default     = ""
+  type        = string
+}

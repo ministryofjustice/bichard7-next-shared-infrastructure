@@ -61,6 +61,7 @@ module "common_build_jobs" {
   vpc_config_block          = module.codebuild_base_resources.codebuild_vpc_config_block
   environment               = local.environment
   bichard_cd_env_vars       = local.bichard_cd_vars
+  api_cd_env_vars           = local.bichard_cd_vars
   core_cd_env_vars          = local.bichard_cd_vars
   audit_logging_cd_env_vars = local.bichard_cd_vars
   user_service_cd_env_vars  = local.bichard_cd_vars
