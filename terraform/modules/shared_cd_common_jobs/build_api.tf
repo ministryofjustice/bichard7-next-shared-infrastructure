@@ -26,6 +26,7 @@ module "build_bichard7_api_docker_image" {
 module "build_bichard7_api_docker_image_trigger" {
   source                 = "../codebuild_webhook"
   codebuild_project_name = module.build_bichard7_api_docker_image.pipeline_name
+  file_path              = "api/"
 }
 
 module "build_bichard7_api_docker_image_schedule" {
