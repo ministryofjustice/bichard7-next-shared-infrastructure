@@ -576,12 +576,43 @@ resource "aws_codepipeline" "path_to_live" {
     name = "run-preprod-tests"
 
     action {
+      category = "Build"
+      name     = "verify-preprod-ecs-services"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+      run_order = 1
+
+      configuration = {
+        ProjectName   = module.verify_ecs_tasks.pipeline_name
+        PrimarySource = "infrastructure"
+
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "preprod"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure"
+      ]
+    }
+
+    action {
       category  = "Build"
       name      = "apply-dev-sgs-to-preprod"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 1
+      run_order = 2
       configuration = {
         ProjectName = module.apply_dev_sg_to_preprod.pipeline_name
       }
@@ -859,12 +890,45 @@ resource "aws_codepipeline" "path_to_live" {
 
   stage {
     name = "run-production-smoketests"
+
+    action {
+      category = "Build"
+      name     = "verify-production-ecs-services"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+      run_order = 1
+
+      configuration = {
+        ProjectName   = module.verify_ecs_tasks.pipeline_name
+        PrimarySource = "infrastructure"
+
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "production"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure"
+      ]
+    }
+
     action {
       category = "Build"
       name     = "run-production-smoketests"
       owner    = "AWS"
       provider = "CodeBuild"
       version  = "1"
+      run_order = 2
 
       configuration = {
         ProjectName   = module.run_prod_smoketests.pipeline_name

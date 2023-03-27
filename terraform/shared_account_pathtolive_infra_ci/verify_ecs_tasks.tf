@@ -8,6 +8,7 @@ module "verify_ecs_tasks" {
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   buildspec_file         = "buildspecs/verify-ecs-tasks-buildspec.yml"
+  event_type_ids         = []
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn
@@ -17,9 +18,9 @@ module "verify_ecs_tasks" {
     {
       compute_type                = "BUILD_GENERAL1_SMALL"
       type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
+      privileged_mode             = false
+      image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      image_pull_credentials_type = "CODEBUILD"
     }
   ]
 
