@@ -68,6 +68,16 @@ output "amazon_linux_2_docker_image" {
   value       = "${aws_ecr_repository.amazon_linux_2.repository_url}@${data.docker_registry_image.amazon_linux_2.sha256_digest}"
 }
 
+output "api_repository_arn" {
+  description = "The repository arn for our API image"
+  value       = aws_ecr_repository.api.arn
+}
+
+output "api_repository" {
+  description = "The outputs of the API ecr repository"
+  value       = aws_ecr_repository.api
+}
+
 output "liquibase_docker_image" {
   description = "The image hash for liquibase"
   value       = "${aws_ecr_repository.liquibase.repository_url}@${data.docker_registry_image.liquibase.sha256_digest}"
