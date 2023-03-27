@@ -576,11 +576,11 @@ resource "aws_codepipeline" "path_to_live" {
     name = "run-preprod-tests"
 
     action {
-      category = "Build"
-      name     = "verify-preprod-ecs-services"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "verify-preprod-ecs-services"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
       run_order = 1
 
       configuration = {
@@ -892,11 +892,11 @@ resource "aws_codepipeline" "path_to_live" {
     name = "run-production-smoketests"
 
     action {
-      category = "Build"
-      name     = "verify-production-ecs-services"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "verify-production-ecs-services"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
       run_order = 1
 
       configuration = {
@@ -923,11 +923,11 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category = "Build"
-      name     = "run-production-smoketests"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "run-production-smoketests"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
       run_order = 2
 
       configuration = {
