@@ -363,11 +363,42 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "apply-dev-sgs-to-e2e-test"
+      name      = "verify-e2e-test-ecs-services"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
       run_order = 1
+
+      configuration = {
+        ProjectName   = module.verify_ecs_tasks.pipeline_name
+        PrimarySource = "infrastructure"
+
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "e2e-test"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure"
+      ]
+    }
+
+    action {
+      category  = "Build"
+      name      = "apply-dev-sgs-to-e2e-test"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
       configuration = {
         ProjectName = module.apply_dev_sg_to_e2e_test.pipeline_name
       }
