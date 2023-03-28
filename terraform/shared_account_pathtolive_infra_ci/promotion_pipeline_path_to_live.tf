@@ -412,7 +412,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 2
+      run_order = 3
       configuration = {
         ProjectName = module.run_e2e_tests.pipeline_name
         EnvironmentVariables = jsonencode(
@@ -434,7 +434,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 3
+      run_order = 4
       configuration = {
         ProjectName = module.seed_e2e_data.pipeline_name
       }
@@ -448,7 +448,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 4
+      run_order = 5
       configuration = {
         ProjectName = module.remove_dev_sg_from_e2e_test.pipeline_name
       }
@@ -657,7 +657,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 2
+      run_order = 3
 
       configuration = {
         ProjectName = module.run_preprod_tests.pipeline_name
@@ -672,7 +672,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 3
+      run_order = 4
 
       configuration = {
         ProjectName = module.remove_dev_sg_from_preprod.pipeline_name
