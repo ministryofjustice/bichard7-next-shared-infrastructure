@@ -310,6 +310,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_core_worker_deploy_tag"
               value = "#{HASHES.CORE_WORKER_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_api_deploy_tag"
+              value = "#{HASHES.API_IMAGE_HASH}"
             }
           ]
         )
@@ -555,6 +559,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_core_worker_deploy_tag"
               value = "#{HASHES.CORE_WORKER_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_api_deploy_tag"
+              value = "#{HASHES.API_IMAGE_HASH}"
             }
           ]
         )
@@ -870,6 +878,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_core_worker_deploy_tag"
               value = "#{HASHES.CORE_WORKER_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_api_deploy_tag"
+              value = "#{HASHES.API_IMAGE_HASH}"
             }
           ]
         )
