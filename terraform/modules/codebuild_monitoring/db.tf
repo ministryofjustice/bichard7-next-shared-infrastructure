@@ -96,7 +96,7 @@ resource "aws_rds_cluster" "grafana_db" {
   enable_global_write_forwarding = false
 
   engine         = "aurora-postgresql"
-  engine_version = "13.4"
+  engine_version = "13.8"
 
   availability_zones = data.aws_availability_zones.current.names
   vpc_security_group_ids = [
