@@ -16,8 +16,8 @@ brew install --user awscli
 
 ```bash
 brew install tfenv
-tfenv install 1.1.3
-tfenv use 1.1.3
+tfenv install 1.4.4
+tfenv use 1.4.4
 ```
 
 ### Install required tooling for terraform checks

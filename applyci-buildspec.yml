@@ -14,7 +14,7 @@ phases:
       - |
         cd ../
         yum install -y unzip
-        readonly TERRAFORM_VERSION="1.1.3"
+        readonly TERRAFORM_VERSION="1.4.4"
         readonly TF_URL="https://releases.hashicorp.com/terraform"
         readonly TF_ZIP="terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
         wget ${TF_URL}/${TERRAFORM_VERSION}/${TF_ZIP}
