@@ -31,7 +31,9 @@ brew install tfsec terraform-docs tflint yamllint jq pre-commit
 ```shell
 pre-commit install
 ```
+
 ## Other documentation
+
 - [Deploying Shared Parent Infrastructure](./docs/SharedParentInfra.md)
 - [User Management](./docs/UserManagement.md)
 - [Shared Account CI/CD](./docs/SharedCICD.md)
