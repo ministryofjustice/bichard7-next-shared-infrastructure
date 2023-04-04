@@ -16,8 +16,8 @@ brew install --user awscli
 
 ```bash
 brew install tfenv
-tfenv install 1.1.3
-tfenv use 1.1.3
+tfenv install 1.4.4
+tfenv use 1.4.4
 ```
 
 ### Install required tooling for terraform checks
@@ -31,7 +31,9 @@ brew install tfsec terraform-docs tflint yamllint jq pre-commit
 ```shell
 pre-commit install
 ```
+
 ## Other documentation
+
 - [Deploying Shared Parent Infrastructure](./docs/SharedParentInfra.md)
 - [User Management](./docs/UserManagement.md)
 - [Shared Account CI/CD](./docs/SharedCICD.md)
