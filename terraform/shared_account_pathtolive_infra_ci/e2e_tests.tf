@@ -149,6 +149,15 @@ module "seed_e2e_data" {
     data.aws_ecr_repository.codebuild_base.arn
   ]
 
+  build_environments = [
+    {
+      compute_type    = "BUILD_GENERAL1_MEDIUM"
+      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      type            = "LINUX_CONTAINER"
+      privileged_mode = true
+    }
+  ]
+
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
