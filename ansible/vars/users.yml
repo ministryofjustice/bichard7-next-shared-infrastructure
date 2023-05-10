@@ -26,17 +26,15 @@
       type: admin
     - name: joe_folkard
       type: admin
-    - name: hannah_goraya
-      type: readonly
     - name: donny_hyon
       type: admin
-    - name: comfort_osobu
-      type: readonly
     - name: ian_king
       type: admin
     - name: agnieszka_zbikowska
       type: admin
-    - name: jess_neely
+    - name: richard_cane
+      type: admin
+    - name: hannah_goraya
       type: readonly
 
 - users_removed:
@@ -54,3 +52,5 @@
     - name: tom_vaughan
     - name: simon_oldham
     - name: jazz_sarkaria
+    - name: jess_neely
+    - name: comfort_osobu
