@@ -32,8 +32,6 @@
       type: admin
     - name: richard_cane
       type: admin
-    - name: richard_cane
-      type: admin
     - name: hannah_goraya
       type: readonly
     - name: miles_egbuchiem
