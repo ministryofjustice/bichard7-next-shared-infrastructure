@@ -30,8 +30,6 @@
       type: admin
     - name: ian_king
       type: admin
-    - name: agnieszka_zbikowska
-      type: admin
     - name: richard_cane
       type: admin
     - name: hannah_goraya
@@ -56,3 +54,4 @@
     - name: jazz_sarkaria
     - name: jess_neely
     - name: comfort_osobu
+    - name: agnieszka_zbikowska
