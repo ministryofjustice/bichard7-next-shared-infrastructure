@@ -1,5 +1,5 @@
 data "docker_registry_image" "puppeteer" {
-  name = "buildkite/puppeteer"
+  name = "ghcr.io/puppeteer/puppeteer"
 }
 # Get our image hashes
 data "external" "puppeteer_hash" {
