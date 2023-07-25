@@ -155,10 +155,6 @@ module "deploy_production_terraform" {
       value = 1500
     },
     {
-      name  = "TF_VAR_grafana_db_instance_class"
-      value = "db.r5.large"
-    },
-    {
       name  = "TF_VAR_broker_instance_type"
       value = "mq.m5.large"
     },
