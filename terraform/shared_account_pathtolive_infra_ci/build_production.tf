@@ -171,6 +171,18 @@ module "deploy_production_terraform" {
       value = 9 # Three per AZ
     },
     {
+      name  = "TF_VAR_desired_web_application_instance_count"
+      value = 9 # Three per AZ
+    },
+    {
+      name  = "TF_VAR_desired_backend_application_instance_count"
+      value = 6 # Three per AZ
+    },
+    {
+      name  = "TF_VAR_desired_pnc_api_instance_count"
+      value = 3 # Three per AZ
+    },
+    {
       name  = "TF_VAR_desired_portal_instance_count"
       value = 3 # One per AZ
     },
