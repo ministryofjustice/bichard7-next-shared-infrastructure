@@ -1,5 +1,5 @@
 # tfsec:ignore:aws-ecr-repository-customer-key
-resource "aws_ecr_repository" "nginx_nodejs_supervisord" {
+resource "aws_ecr_repository" "nginx_nodejs_2023_supervisord" {
   name                 = "nginx-nodejs-2023-supervisord"
   image_tag_mutability = "IMMUTABLE"
 
@@ -10,12 +10,12 @@ resource "aws_ecr_repository" "nginx_nodejs_supervisord" {
   tags = var.tags
 }
 
-resource "aws_ecr_repository_policy" "allow_codebuild_nginx_nodejs_supervisord" {
+resource "aws_ecr_repository_policy" "allow_codebuild_nginx_nodejs_2023_supervisord" {
   policy     = file("${path.module}/templates/codebuild_image_policy.json")
   repository = aws_ecr_repository.nginx_nodejs_supervisord.name
 }
 
-resource "aws_ecr_lifecycle_policy" "nginx_node_js_supervisord" {
+resource "aws_ecr_lifecycle_policy" "nginx_nodejs_2023_supervisord" {
   policy     = file("${path.module}/policies/application_image_ecr_lifecycle_policy.json")
   repository = aws_ecr_repository.nginx_nodejs_supervisord.name
 }
