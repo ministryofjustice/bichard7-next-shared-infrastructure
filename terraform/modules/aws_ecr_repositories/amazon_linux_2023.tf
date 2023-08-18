@@ -24,7 +24,7 @@ resource "aws_ecr_repository" "amazon_linux_2023" {
   tags = var.tags
 }
 
-resource "aws_ecr_repository_policy" "allow_codebuild_amazon_linux" {
+resource "aws_ecr_repository_policy" "allow_codebuild_amazon_linux_2023" {
   policy     = file("${path.module}/templates/codebuild_image_policy.json")
   repository = aws_ecr_repository.amazon_linux_2023.name
 }
@@ -76,26 +76,4 @@ resource "aws_ecr_repository_policy" "allow_codebuild_amazon_linux_2023_base" {
 resource "aws_ecr_lifecycle_policy" "amazon_linux_2023_base" {
   policy     = file("${path.module}/policies/builder_image_ecr_lifecycle_policy.json")
   repository = aws_ecr_repository.amazon_linux_2023_base.name
-}
-
-# tfsec:ignore:aws-ecr-repository-customer-key
-resource "aws_ecr_repository" "codebuild_base" {
-  name                 = "codebuild-base"
-  image_tag_mutability = "IMMUTABLE"
-
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-
-  tags = var.tags
-}
-
-resource "aws_ecr_lifecycle_policy" "codebuild_base" {
-  policy     = file("${path.module}/policies/builder_image_ecr_lifecycle_policy.json")
-  repository = aws_ecr_repository.codebuild_base.name
-}
-
-resource "aws_ecr_repository_policy" "allow_codebuild_codebuild_base" {
-  policy     = file("${path.module}/templates/codebuild_image_policy.json")
-  repository = aws_ecr_repository.codebuild_base.name
 }
