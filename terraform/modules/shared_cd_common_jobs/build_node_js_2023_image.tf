@@ -15,7 +15,7 @@ module "build_nodejs_2023_docker_image" {
   tags = var.tags
 }
 
-module "build_nodejs_docker_image_schedule" {
+module "build_nodejs_2023_docker_image_schedule" {
   source          = "../codebuild_schedule"
   codebuild_arn   = module.build_nodejs_2023_docker_image.pipeline_arn
   name            = module.build_nodejs_2023_docker_image.pipeline_name
