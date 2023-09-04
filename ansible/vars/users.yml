@@ -18,15 +18,11 @@
       type: admin
     - name: emad_karamad
       type: admin
-    - name: jamie_davies
-      type: admin
     - name: alice_lee
       type: admin
     - name: csaba_gyorfi
       type: admin
     - name: joe_folkard
-      type: admin
-    - name: donny_hyon
       type: admin
     - name: ian_king
       type: admin
@@ -34,9 +30,7 @@
       type: admin
     - name: richard_race
       type: admin
-    - name: hannah_goraya
-      type: readonly
-
+ 
 - users_removed:
     - name: tolu_johnson
     - name: christopher_ryan
@@ -55,3 +49,6 @@
     - name: jess_neely
     - name: comfort_osobu
     - name: agnieszka_zbikowska
+    - name: hannah_goraya
+    - name: jamie_davies
+    - name: donny_hyon
