@@ -494,6 +494,15 @@ module "run_production_migrations" {
       git_submodules_config = {
         fetch_submodules = true
       }
+    },
+    {
+      type              = "GITHUB"
+      location          = "https://github.com/ministryofjustice/bichard7-next-core.git"
+      git_clone_depth   = 1
+      source_identifier = "bichard7_next_core"
+      git_submodules_config = {
+        fetch_submodules = true
+      }
     }
   ]
 
