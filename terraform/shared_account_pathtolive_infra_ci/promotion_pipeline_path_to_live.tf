@@ -339,7 +339,8 @@ resource "aws_codepipeline" "path_to_live" {
 
       input_artifacts = [
         "infrastructure",
-        "application"
+        "application",
+        "core"
       ]
     }
 
@@ -588,7 +589,8 @@ resource "aws_codepipeline" "path_to_live" {
 
       input_artifacts = [
         "infrastructure",
-        "application"
+        "application",
+        "core"
       ]
     }
 
@@ -908,7 +910,8 @@ resource "aws_codepipeline" "path_to_live" {
 
       input_artifacts = [
         "infrastructure",
-        "application"
+        "application",
+        "core"
       ]
     }
 
