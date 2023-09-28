@@ -355,7 +355,7 @@ module "apply_dev_sg_to_prod" {
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "elevate-prod-access-to-vpn-users"
+  name                   = "apply-dev-sgs-to-prod"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
@@ -409,7 +409,7 @@ module "remove_dev_sg_from_prod" {
 
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "remove-elevated-prod-access-from-vpn-users"
+  name                   = "remove-dev-sgs-from-prod"
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
