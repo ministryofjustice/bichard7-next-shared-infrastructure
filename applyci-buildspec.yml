@@ -28,9 +28,9 @@ phases:
       - |
         echo "Waiting 120 seconds for IAM permissions to apply"
         sleep 120
-        cd terraform/shared_account_${ENVIRONMENT}_infra_ci
+        cd terraform/shared_account_${ENVIRONMENT}_infra
         TF_VAR_is_cd=true terraform init
-        TF_VAR_is_cd=true terraform apply -auto-approve
+        TF_VAR_is_cd=true terraform plan
   post_build:
     commands:
       - echo "Removing CI user credentials elevation"
