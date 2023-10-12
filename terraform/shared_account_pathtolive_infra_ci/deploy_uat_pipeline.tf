@@ -60,7 +60,7 @@ resource "aws_codepipeline" "uat" {
   stage {
     name = "Deploy UAT"
 
-  action {
+    action {
       category  = "Build"
       name      = "deploy-uat-environment"
       owner     = "AWS"
@@ -125,6 +125,6 @@ resource "aws_codepipeline" "uat" {
         "infrastructure",
         "application"
       ]
-  }
+    }
   }
 }
