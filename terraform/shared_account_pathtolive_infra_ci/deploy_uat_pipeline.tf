@@ -1,5 +1,5 @@
 resource "aws_codepipeline" "uat" {
-  name     = "cjse-bichard7-path-to-live-deploy-pipeline"
+  name     = "cjse-bichard7-uat-deploy-pipeline"
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {
@@ -8,7 +8,7 @@ resource "aws_codepipeline" "uat" {
   }
 
   stage {
-    name = "Update Tags"
+    name = "update_tags"
 
     action {
       category        = "Build"
@@ -58,7 +58,7 @@ resource "aws_codepipeline" "uat" {
   }
 
   stage {
-    name = "Deploy UAT"
+    name = "deploy_uat"
 
     action {
       category  = "Build"
