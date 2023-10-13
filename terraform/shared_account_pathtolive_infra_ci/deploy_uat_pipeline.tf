@@ -69,7 +69,7 @@ resource "aws_codepipeline" "uat" {
       run_order = 2
 
       configuration = {
-        ProjectName   = module.deploy_production_terraform.pipeline_name
+        ProjectName   = module.deploy_uat_terraform.pipeline_name
         PrimarySource = "infrastructure"
         EnvironmentVariables = jsonencode(
           [
