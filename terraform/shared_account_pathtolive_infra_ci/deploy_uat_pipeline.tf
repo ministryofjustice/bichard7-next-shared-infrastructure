@@ -16,7 +16,6 @@ resource "aws_codepipeline" "uat" {
       owner           = "AWS"
       provider        = "CodeBuild"
       version         = "1"
-      run_order       = 1
       input_artifacts = ["infrastructure"]
 
       configuration = {
@@ -66,7 +65,6 @@ resource "aws_codepipeline" "uat" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 2
 
       configuration = {
         ProjectName   = module.deploy_uat_terraform.pipeline_name
@@ -124,6 +122,47 @@ resource "aws_codepipeline" "uat" {
       input_artifacts = [
         "infrastructure",
         "application"
+      ]
+    }
+  }
+
+  stage {
+    name = "run_uat_migrations"
+
+    action {
+      category  = "Build"
+      name      = "run-uat-migrations"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+
+      configuration = {
+        ProjectName   = module.run_uat_migrations.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "application",
+        "core"
+      ]
+    }
+
+    action {
+      category = "Build"
+      name     = "deploy-conductor-definitions"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+
+      configuration = {
+        ProjectName   = module.deploy_uat_conductor_definitions.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "core"
       ]
     }
   }
