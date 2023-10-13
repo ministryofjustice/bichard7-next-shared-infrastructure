@@ -1,5 +1,5 @@
 resource "aws_codepipeline" "uat" {
-  name     = "cjse-bichard7-path-to-live-deploy-pipeline"
+  name     = "cjse-bichard7-uat-deploy-pipeline"
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {
@@ -8,7 +8,7 @@ resource "aws_codepipeline" "uat" {
   }
 
   stage {
-    name = "Update Tags"
+    name = "update_tags"
 
     action {
       category        = "Build"
@@ -16,7 +16,6 @@ resource "aws_codepipeline" "uat" {
       owner           = "AWS"
       provider        = "CodeBuild"
       version         = "1"
-      run_order       = 1
       input_artifacts = ["infrastructure"]
 
       configuration = {
@@ -58,18 +57,17 @@ resource "aws_codepipeline" "uat" {
   }
 
   stage {
-    name = "Deploy UAT"
+    name = "deploy_uat"
 
     action {
-      category  = "Build"
-      name      = "deploy-uat-environment"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 2
+      category = "Build"
+      name     = "deploy-uat-environment"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
       configuration = {
-        ProjectName   = module.deploy_production_terraform.pipeline_name
+        ProjectName   = module.deploy_uat_terraform.pipeline_name
         PrimarySource = "infrastructure"
         EnvironmentVariables = jsonencode(
           [
@@ -124,6 +122,47 @@ resource "aws_codepipeline" "uat" {
       input_artifacts = [
         "infrastructure",
         "application"
+      ]
+    }
+  }
+
+  stage {
+    name = "run_uat_migrations"
+
+    action {
+      category = "Build"
+      name     = "run-uat-migrations"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+
+      configuration = {
+        ProjectName   = module.run_uat_migrations.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "application",
+        "core"
+      ]
+    }
+
+    action {
+      category = "Build"
+      name     = "deploy-conductor-definitions"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+
+      configuration = {
+        ProjectName   = module.deploy_uat_conductor_definitions.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "core"
       ]
     }
   }
