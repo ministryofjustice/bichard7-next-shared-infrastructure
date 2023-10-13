@@ -239,8 +239,24 @@ resource "aws_codepipeline" "uat" {
       }
     }
   }
+
   stage {
-    name = "update_tags"
+    name = "deploy_uat"
+
+    action {
+      category        = "Build"
+      name            = "fetch-and-update-e2e-test-deploy-tags"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      run_order       = 1
+      version         = "1"
+      namespace       = "HASHES"
+      input_artifacts = ["infrastructure"]
+
+      configuration = {
+        ProjectName = module.update_environment_ssm_params.pipeline_name
+      }
+    }
 
     action {
       category        = "Build"
@@ -249,6 +265,7 @@ resource "aws_codepipeline" "uat" {
       provider        = "CodeBuild"
       version         = "1"
       input_artifacts = ["infrastructure"]
+      run_order       = 2
 
       configuration = {
         ProjectName = module.update_environment_ssm_params.pipeline_name
@@ -286,17 +303,14 @@ resource "aws_codepipeline" "uat" {
         )
       }
     }
-  }
-
-  stage {
-    name = "deploy_uat"
 
     action {
-      category = "Build"
-      name     = "deploy-uat-environment"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "deploy-uat-environment"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 3
 
       configuration = {
         ProjectName   = module.deploy_uat_terraform.pipeline_name
