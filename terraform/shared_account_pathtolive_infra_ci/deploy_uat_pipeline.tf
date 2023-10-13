@@ -8,6 +8,238 @@ resource "aws_codepipeline" "uat" {
   }
 
   stage {
+    name = "bichard-infra-source"
+
+    action {
+      name     = "application-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["application-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/application.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
+      name     = "ui-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["ui-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/ui.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
+      name     = "user-service-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["user-service-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/user-service.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
+      name     = "audit-logging-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["audit-logging-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/audit-logging.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
+      name     = "conductor-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["conductor-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/conductor.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
+      name     = "core-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["core-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/core-worker.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
+      name     = "api-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["api-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/api.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
+      name     = "nginx-auth-proxy-semaphore"
+      category = "Source"
+      owner    = "AWS"
+      provider = "S3"
+      version  = "1"
+
+      output_artifacts = ["nginx-auth-proxy-semaphore"]
+
+      configuration = {
+        S3Bucket             = module.codebuild_base_resources.codepipeline_bucket
+        S3ObjectKey          = "semaphores/nginx-auth-proxy.json"
+        PollForSourceChanges = true
+      }
+    }
+
+    action {
+      name             = "infrastructure-source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["infrastructure"]
+
+      configuration = {
+        ConnectionArn        = aws_codestarconnections_connection.github.arn
+        FullRepositoryId     = "ministryofjustice/bichard7-next-infrastructure"
+        BranchName           = "main"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = true
+      }
+    }
+
+    action {
+      name             = "application-source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["application"]
+
+      configuration = {
+        ConnectionArn        = aws_codestarconnections_connection.github.arn
+        FullRepositoryId     = "ministryofjustice/bichard7-next"
+        BranchName           = "main"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = true
+      }
+    }
+
+    action {
+      name             = "core-source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["core"]
+
+      configuration = {
+        ConnectionArn        = aws_codestarconnections_connection.github.arn
+        FullRepositoryId     = "ministryofjustice/bichard7-next-core"
+        BranchName           = "main"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = true
+      }
+    }
+
+    action {
+      name             = "tests-source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["tests"]
+
+      configuration = {
+        ConnectionArn        = aws_codestarconnections_connection.github.arn
+        FullRepositoryId     = "ministryofjustice/bichard7-next-tests"
+        BranchName           = "main"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = false
+      }
+    }
+
+    action {
+      name             = "ui-source"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["ui"]
+
+      configuration = {
+        ConnectionArn        = aws_codestarconnections_connection.github.arn
+        FullRepositoryId     = "ministryofjustice/bichard7-next-ui"
+        BranchName           = "main"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = false
+      }
+    }
+  }
+
+  stage {
+    name = "manual-approval-for-deploy-uat"
+    action {
+      name     = "manual-approval-for-deploy-to-uat"
+      category = "Approval"
+      owner    = "AWS"
+      provider = "Manual"
+      version  = "1"
+
+      configuration = {
+        NotificationArn = module.codebuild_base_resources.notifications_arn
+        CustomData      = "Release to UAT requires manual approval"
+      }
+    }
+  }
+  stage {
     name = "update_tags"
 
     action {
