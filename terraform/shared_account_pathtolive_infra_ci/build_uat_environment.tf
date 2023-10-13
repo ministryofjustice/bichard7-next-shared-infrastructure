@@ -231,7 +231,7 @@ module "deploy_uat_conductor_definitions" {
 
   build_description      = "Codebuild job for updating JSON definitions for workflows, tasks and event listeners in Conductor"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "deploy-production-conductor-definitions"
+  name                   = "deploy-uat-conductor-definitions"
   buildspec_file         = "buildspecs/deploy-conductor-definitions.yml"
 
   repository_name      = "bichard7-next-infrastructure"
