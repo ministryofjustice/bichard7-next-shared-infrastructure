@@ -60,11 +60,11 @@ resource "aws_codepipeline" "uat" {
     name = "deploy_uat"
 
     action {
-      category  = "Build"
-      name      = "deploy-uat-environment"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
+      category = "Build"
+      name     = "deploy-uat-environment"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
       configuration = {
         ProjectName   = module.deploy_uat_terraform.pipeline_name
@@ -130,11 +130,11 @@ resource "aws_codepipeline" "uat" {
     name = "run_uat_migrations"
 
     action {
-      category  = "Build"
-      name      = "run-uat-migrations"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
+      category = "Build"
+      name     = "run-uat-migrations"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
 
       configuration = {
         ProjectName   = module.run_uat_migrations.pipeline_name
