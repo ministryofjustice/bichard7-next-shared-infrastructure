@@ -313,7 +313,6 @@ resource "aws_codepipeline" "uat" {
       run_order = 3
 
       configuration = {
-        ConnectionArn = aws_codestarconnections_connection.github.arn
         ProjectName   = module.deploy_uat_terraform.pipeline_name
         PrimarySource = "infrastructure"
         EnvironmentVariables = jsonencode(
