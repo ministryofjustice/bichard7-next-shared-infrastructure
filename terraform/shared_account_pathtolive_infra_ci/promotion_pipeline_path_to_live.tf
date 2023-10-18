@@ -828,7 +828,7 @@ resource "aws_codepipeline" "path_to_live" {
       }
     }
 
-        action {
+    action {
       category  = "Build"
       name      = "deploy-uat-environment"
       owner     = "AWS"
@@ -991,6 +991,44 @@ resource "aws_codepipeline" "path_to_live" {
 
       configuration = {
         ProjectName   = module.deploy_production_conductor_definitions.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "core"
+      ]
+    }
+
+    action {
+      category  = "Build"
+      name      = "run-uat-migrations"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
+
+      configuration = {
+        ProjectName   = module.run_uat_migrations.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "application",
+        "core"
+      ]
+    }
+
+    action {
+      category = "Build"
+      name     = "deploy-conductor-definitions"
+      owner    = "AWS"
+      provider = "CodeBuild"
+      version  = "1"
+
+      configuration = {
+        ProjectName   = module.deploy_uat_conductor_definitions.pipeline_name
         PrimarySource = "infrastructure"
       }
 
