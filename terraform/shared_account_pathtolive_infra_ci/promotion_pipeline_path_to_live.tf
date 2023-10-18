@@ -828,6 +828,73 @@ resource "aws_codepipeline" "path_to_live" {
       }
     }
 
+        action {
+      category  = "Build"
+      name      = "deploy-uat-environment"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
+
+      configuration = {
+        ProjectName   = module.deploy_uat_terraform.pipeline_name
+        PrimarySource = "infrastructure"
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "TF_VAR_override_deploy_tags"
+              value = "true"
+            },
+            {
+              name  = "TF_VAR_bichard_deploy_tag"
+              value = "#{HASHES.WAS_APPLICATION_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_audit_logging_fn_hash"
+              value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
+            },
+            {
+              name  = "TF_VAR_core_fn_hash"
+              value = "#{HASHES.CORE_COMMIT_HASH}"
+            },
+            {
+              name  = "TF_VAR_user_service_deploy_tag"
+              value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_nginx_auth_proxy_deploy_tag"
+              value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_ui_deploy_tag"
+              value = "#{HASHES.UI_IMAGE_HASH}"
+            },
+            {
+              name  = "INFRA_MODULES_COMMIT_HASH"
+              value = "#{HASHES.INFRA_MODULES_COMMIT_HASH}"
+            },
+            {
+              name  = "TF_VAR_conductor_deploy_tag"
+              value = "#{HASHES.CONDUCTOR_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_core_worker_deploy_tag"
+              value = "#{HASHES.CORE_WORKER_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_api_deploy_tag"
+              value = "#{HASHES.API_IMAGE_HASH}"
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "application"
+      ]
+    }
+
     action {
       category  = "Build"
       name      = "deploy-production-environment"
