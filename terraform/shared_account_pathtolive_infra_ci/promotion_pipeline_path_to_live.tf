@@ -1022,7 +1022,7 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category = "Build"
-      name     = "deploy-conductor-definitions"
+      name     = "deploy-uat-conductor-definitions"
       owner    = "AWS"
       provider = "CodeBuild"
       version  = "1"
