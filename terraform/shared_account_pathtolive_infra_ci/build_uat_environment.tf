@@ -288,3 +288,111 @@ module "deploy_uat_conductor_definitions" {
   ]
   tags = module.label.tags
 }
+
+module "apply_dev_sg_to_uat" {
+  source = "../modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "apply-dev-sgs-to-uat"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  buildspec_file       = "buildspecs/vpc-sg-access.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  deploy_account_name = "integration_baseline"
+  deployment_name     = "load-test"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = local.pipeline_build_environments
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "uat"
+    },
+    {
+      name  = "USER_TYPE"
+      value = "ci"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "integration_baseline"
+    },
+    {
+      name  = "AUTO_APPROVE"
+      value = true
+    },
+    {
+      name  = "SG_COMMAND"
+      value = "dev-sg-rules"
+    }
+  ]
+
+  tags = module.label.tags
+}
+
+module "remove_dev_sg_from_uat" {
+  source = "../modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "remove-dev-sgs-from-uat"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  buildspec_file       = "buildspecs/vpc-sg-access.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  deploy_account_name = "integration_baseline"
+  deployment_name     = "load-test"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = local.pipeline_build_environments
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "uat"
+    },
+    {
+      name  = "USER_TYPE"
+      value = "ci"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "integration_baseline"
+    },
+    {
+      name  = "AUTO_APPROVE"
+      value = true
+    },
+    {
+      name  = "SG_COMMAND"
+      value = "destroy-dev-sg-rules"
+    }
+  ]
+
+  tags = module.label.tags
+}
