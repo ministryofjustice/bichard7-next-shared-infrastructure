@@ -191,3 +191,33 @@ resource "aws_iam_role_policy" "verify_ecs_tasks" {
   policy = data.template_file.allow_codebuild_codestar_connection.rendered
   role   = module.verify_ecs_tasks.pipeline_service_role_name
 }
+
+resource "aws_iam_role_policy" "deploy_uat_terraform" {
+  name   = "allow-codestar-connection"
+  policy = data.template_file.allow_codebuild_codestar_connection.rendered
+  role   = module.deploy_uat_terraform.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "run_uat_migrations" {
+  name   = "allow-codestar-connection"
+  policy = data.template_file.allow_codebuild_codestar_connection.rendered
+  role   = module.run_uat_migrations.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "deploy_uat_conductor_definitions" {
+  name   = "allow-codestar-connection"
+  policy = data.template_file.allow_codebuild_codestar_connection.rendered
+  role   = module.deploy_uat_conductor_definitions.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "apply_dev_sg_to_uat" {
+  name   = "allow-codestar-connection"
+  policy = data.template_file.allow_codebuild_codestar_connection.rendered
+  role   = module.apply_dev_sg_to_uat.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "remove_dev_sg_from_uat" {
+  name   = "allow-codestar-connection"
+  policy = data.template_file.allow_codebuild_codestar_connection.rendered
+  role   = module.remove_dev_sg_from_uat.pipeline_service_role_name
+}
