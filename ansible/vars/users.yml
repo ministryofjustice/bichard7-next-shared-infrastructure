@@ -30,6 +30,8 @@
       type: admin
     - name: richard_race
       type: admin
+    - name: ammaar_limbada
+      type: admin
 
 - users_removed:
     - name: tolu_johnson
