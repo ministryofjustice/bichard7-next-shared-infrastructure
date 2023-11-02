@@ -409,14 +409,32 @@ module "seed_uat_data" {
   repository_name = "bichard7-next-ui"
   buildspec_file  = "seed-data-buildspec.yml"
 
-  environment_variables = concat(
-    [
-      {
-        name  = "WORKSPACE"
-        value = "uat"
-      }
-    ],
-  local.bichard_cd_vars)
+  environment_variables = [
+    {
+      name  = "WORKSPACE"
+      value = "uat"
+    },
+    {
+      name  = "DEPLOY_NAME"
+      value = "uat"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
+    },
+    {
+      name  = "ACCOUNT_NAME"
+      value = "integration-baseline"
+    },
+    {
+      name  = "IS_CD"
+      value = "true"
+    },
+    {
+      name  = "ARTIFACT_BUCKET"
+      value = module.codebuild_base_resources.codepipeline_bucket
+    }
+  ]
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn
