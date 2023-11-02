@@ -400,3 +400,58 @@ module "remove_dev_sg_from_uat" {
 
   tags = module.label.tags
 }
+
+module "seed_uat_data" {
+  source            = "../modules/codebuild_job"
+  name              = "seed-uat-data"
+  build_description = "Seed the database with generated case data"
+
+  repository_name = "bichard7-next-ui"
+  buildspec_file  = "seed-data-buildspec.yml"
+
+  environment_variables = [
+    {
+      name  = "WORKSPACE"
+      value = "uat"
+    },
+    {
+      name  = "DEPLOY_NAME"
+      value = "uat"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
+    },
+    {
+      name  = "ACCOUNT_NAME"
+      value = "integration-baseline"
+    },
+    {
+      name  = "IS_CD"
+      value = "true"
+    },
+    {
+      name  = "ARTIFACT_BUCKET"
+      value = module.codebuild_base_resources.codepipeline_bucket
+    }
+  ]
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  build_environments = [
+    {
+      compute_type    = "BUILD_GENERAL1_MEDIUM"
+      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      type            = "LINUX_CONTAINER"
+      privileged_mode = true
+    }
+  ]
+
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  sns_notification_arn   = module.codebuild_base_resources.notifications_arn
+  sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
+
+  tags = module.label.tags
+}
