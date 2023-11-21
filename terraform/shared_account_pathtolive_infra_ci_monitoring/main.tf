@@ -23,21 +23,3 @@ module "label" {
     "region"           = data.aws_region.current_region.id
   }
 }
-
-module "codebuild_monitoring" {
-  source = "../modules/codebuild_monitoring"
-
-  fargate_cpu            = 2048
-  fargate_memory         = 4096
-  logging_bucket_name    = data.terraform_remote_state.shared_infra_ci.outputs.codepipeline_bucket
-  name                   = module.label.name
-  public_zone_id         = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_zone_id
-  service_subnets        = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_public_subnet_ids
-  ssl_certificate_arn    = data.terraform_remote_state.shared_infra_ci.outputs.ssl_certificate_arn
-  vpc_id                 = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_vpc_id
-  grafana_image          = "${data.aws_ecr_repository.grafana_codebuild.repository_url}@${data.external.latest_grafana_codebuild_image.result.tags}"
-  private_subnets        = data.terraform_remote_state.shared_infra_ci.outputs.codebuild_subnet_ids
-  grafana_repository_arn = data.aws_ecr_repository.grafana_codebuild.arn
-
-  tags = module.label.tags
-}
