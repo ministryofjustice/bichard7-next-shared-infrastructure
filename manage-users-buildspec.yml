@@ -6,25 +6,8 @@ phases:
   install:
     runtime-versions:
       python: 3.9
-  pre_build:
-    commands:
-      - echo "Elevating CI user credentials"
-      - |
-        aws iam attach-group-policy \
-          --group-name "CIAccess" \
-          --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess"
   build:
     commands:
       - set -e
-      - |
-        echo "Waiting 30 seconds for IAM permissions to apply"
-        sleep 30
       - ./scripts/manage_users.sh
-  post_build:
-    commands:
-      - echo "Removing CI user credentials elevation"
-      - |
-        aws iam detach-group-policy \
-          --group-name "CIAccess" \
-          --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess"
 ...
