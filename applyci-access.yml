@@ -19,4 +19,3 @@ phases:
     commands:
       - set -e
       - CI_USER=true ./scripts/deploy_infra.sh
-...

@@ -1,5 +1,4 @@
 ---
-
 version: 0.2
 
 phases:
@@ -10,4 +9,3 @@ phases:
     commands:
       - set -e
       - ./scripts/manage_users.sh
-...

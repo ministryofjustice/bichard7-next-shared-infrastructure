@@ -1,5 +1,4 @@
 ---
-
 version: 0.2
 
 phases:
@@ -10,4 +9,3 @@ phases:
         cd terraform/shared_account_pathtolive_infra_ci_monitoring
         TF_VAR_is_cd=true terraform init
         TF_VAR_is_cd=true terraform apply -auto-approve
-...
