@@ -24,19 +24,6 @@ data "terraform_remote_state" "shared_infra_ci" {
   }
 }
 
-
-data "aws_ecr_repository" "grafana_codebuild" {
-  name = "grafana-codebuild"
-}
-
-data "external" "latest_grafana_codebuild_image" {
-  program = [
-    "aws", "ecr", "describe-images",
-    "--repository-name", data.aws_ecr_repository.grafana_codebuild.name,
-    "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
-  ]
-}
-
 data "archive_file" "query_num_ecr_images" {
   output_path = "/tmp/query_long_running_fns.zip"
   type        = "zip"

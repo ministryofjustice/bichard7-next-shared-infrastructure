@@ -1,3 +1,3 @@
 # Shared Account Pathtolive Infra CI Monitoring
 
-Creates a Grafana ECS cluster that pulls metrics from Cloudwatch
+Creates cloudwatch metric alarms for monitoring resources in Pathtolive account.

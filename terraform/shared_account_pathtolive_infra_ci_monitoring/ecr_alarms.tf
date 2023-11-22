@@ -122,7 +122,7 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_invoke_query_ecr_repo" {
 
 resource "aws_cloudwatch_metric_alarm" "query_ecr_repo_images" {
   alarm_name        = "Query number of images in repo under threshold for ${terraform.workspace}"
-  alarm_description = "There no images in an ecr repo in pathtolive, check the 'query-ecr-images' lambda logs for more details"
+  alarm_description = "There are no images in an ecr repo in pathtolive, check the 'query-ecr-images' lambda logs for more details"
 
   evaluation_periods  = 5
   datapoints_to_alarm = 1
