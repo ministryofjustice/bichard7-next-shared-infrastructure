@@ -3,10 +3,10 @@ locals {
   public_dns_name    = lower("cd.${data.terraform_remote_state.shared_infra.outputs.delegated_hosted_zone.name}")
   environment        = "pathtolive"
 
-  integration_baseline_arn = var.is_cd ? data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn : data.terraform_remote_state.shared_infra.outputs.integration_baseline_admin_arn
-  integration_next_arn     = var.is_cd ? data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn : data.terraform_remote_state.shared_infra.outputs.integration_next_admin_arn
-  preprod_arn              = var.is_cd ? data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn : data.terraform_remote_state.shared_infra.outputs.preprod_admin_arn
-  production_arn           = var.is_cd ? data.terraform_remote_state.shared_infra.outputs.production_ci_arn : data.terraform_remote_state.shared_infra.outputs.production_admin_arn
+  integration_baseline_arn = data.terraform_remote_state.shared_infra.outputs.integration_baseline_admin_arn
+  integration_next_arn     = data.terraform_remote_state.shared_infra.outputs.integration_next_admin_arn
+  preprod_arn              = data.terraform_remote_state.shared_infra.outputs.preprod_admin_arn
+  production_arn           = data.terraform_remote_state.shared_infra.outputs.production_admin_arn
 
   bichard_cd_vars = concat(
     [
