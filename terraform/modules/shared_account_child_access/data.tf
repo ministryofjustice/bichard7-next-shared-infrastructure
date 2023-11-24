@@ -37,12 +37,13 @@ data "template_file" "deny_ci_permissions_policy" {
 }
 
 data "template_file" "allow_assume_ci_access_template" {
-  template = file("${path.module}/policies/${local.no_mfa_access_template}")
+  template = file("${path.module}/policies/${local.no_mfa_multi_user_roles_access_template}")
 
   vars = {
     parent_account_id = var.root_account_id
     excluded_arns     = jsonencode(var.denied_user_arns)
     user_role         = "ci/cd"
+    admin_user_role   = "ci-admin"
   }
 }
 
