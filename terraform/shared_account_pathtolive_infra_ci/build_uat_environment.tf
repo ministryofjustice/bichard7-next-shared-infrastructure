@@ -318,7 +318,11 @@ module "run_uat_migrations" {
     {
       name  = "LIQUIBASE_IMAGE"
       value = local.latest_liquibase_image
-    }
+    },
+    {
+      name  = "TF_VAR_override_deploy_tags"
+      value = "true"
+    },
   ]
   tags = module.label.tags
 }
