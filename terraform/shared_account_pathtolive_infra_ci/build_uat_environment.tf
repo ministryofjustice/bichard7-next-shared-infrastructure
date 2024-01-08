@@ -118,7 +118,7 @@ module "deploy_uat_terraform" {
       name  = "TF_VAR_db_instance_class"
       value = "db.r5.large"
     },
-      {
+    {
       name  = "USE_SMTP"
       value = "true"
     },
