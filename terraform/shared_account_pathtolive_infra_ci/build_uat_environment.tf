@@ -5,15 +5,15 @@ module "deploy_uat_terraform" {
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "deploy-uat"
   repository_name        = "bichard7-next-infrastructure"
+  buildspec_file         = "buildspecs/buildspec.yml"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
-  buildspec_file         = "buildspecs/buildspec.yml"
-
-  build_timeout = 180
+  event_type_ids         = []
 
   build_environments = local.pipeline_build_environments
 
+  build_timeout = 180
   codebuild_secondary_sources = [
     {
       type              = "GITHUB"
@@ -25,10 +25,8 @@ module "deploy_uat_terraform" {
       }
     }
   ]
-
   deploy_account_name = "integration_baseline"
   deployment_name     = "uat"
-  event_type_ids      = []
 
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
@@ -85,6 +83,10 @@ module "deploy_uat_terraform" {
       type  = "PARAMETER_STORE"
     },
     {
+      name  = "TF_VAR_override_deploy_tags"
+      value = "true"
+    },
+    {
       name  = "ASSUME_ROLE_ARN"
       value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
     },
@@ -109,16 +111,16 @@ module "deploy_uat_terraform" {
       value = 1500
     },
     {
-      name  = "TF_VAR_grafana_db_instance_class"
-      value = "db.r5.large"
-    },
-    {
       name  = "TF_VAR_broker_instance_type"
       value = "mq.m5.large"
     },
     {
       name  = "TF_VAR_db_instance_class"
       value = "db.r5.large"
+    },
+      {
+      name  = "USE_SMTP"
+      value = "true"
     },
     {
       name  = "TF_VAR_desired_application_instance_count"
@@ -139,10 +141,6 @@ module "deploy_uat_terraform" {
     {
       name  = "ARTIFACT_BUCKET"
       value = module.codebuild_base_resources.codepipeline_bucket
-    },
-    {
-      name  = "USE_SMTP"
-      value = "true"
     }
   ]
 
