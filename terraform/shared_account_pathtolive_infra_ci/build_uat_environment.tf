@@ -9,7 +9,6 @@ module "deploy_uat_terraform" {
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
-  event_type_ids         = []
 
   build_environments = local.pipeline_build_environments
 
@@ -27,6 +26,7 @@ module "deploy_uat_terraform" {
   ]
   deploy_account_name = "integration_baseline"
   deployment_name     = "uat"
+  event_type_ids      = []
 
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
