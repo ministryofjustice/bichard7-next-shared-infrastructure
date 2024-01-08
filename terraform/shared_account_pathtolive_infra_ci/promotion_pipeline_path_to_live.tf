@@ -802,7 +802,7 @@ resource "aws_codepipeline" "path_to_live" {
       }
     }
 
-        action {
+    action {
       category        = "Build"
       name            = "fetch-and-update-uat-deploy-tags"
       owner           = "AWS"
