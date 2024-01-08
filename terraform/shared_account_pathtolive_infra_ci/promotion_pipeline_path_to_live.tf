@@ -804,6 +804,52 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category        = "Build"
+      name            = "fetch-and-update-uat-deploy-tags"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      version         = "1"
+      run_order       = 1
+      input_artifacts = ["infrastructure"]
+
+      configuration = {
+        ProjectName = module.update_environment_ssm_params.pipeline_name
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "uat"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
+            },
+            {
+              name  = "WAS_APPLICATION_IMAGE_HASH"
+              value = "#{HASHES.WAS_APPLICATION_IMAGE_HASH}"
+            },
+            {
+              name  = "AUDIT_LOGGING_COMMIT_HASH"
+              value = "#{HASHES.AUDIT_LOGGING_COMMIT_HASH}"
+            },
+            {
+              name  = "USER_SERVICE_IMAGE_HASH"
+              value = "#{HASHES.USER_SERVICE_IMAGE_HASH}"
+            },
+            {
+              name  = "NGINX_AUTH_PROXY_IMAGE_HASH"
+              value = "#{HASHES.NGINX_AUTH_PROXY_IMAGE_HASH}"
+            },
+            {
+              name  = "UI_IMAGE_HASH"
+              value = "#{HASHES.UI_IMAGE_HASH}"
+            }
+          ]
+        )
+      }
+    }
+
+    action {
+      category        = "Build"
       name            = "post-deploying-to-prod-notification"
       owner           = "AWS"
       provider        = "CodeBuild"
