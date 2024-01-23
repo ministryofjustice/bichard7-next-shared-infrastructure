@@ -32,6 +32,8 @@
       type: admin
     - name: ammaar_limbada
       type: admin
+    - name: seneca_saunders
+      type: admin
 
 - users_removed:
     - name: tolu_johnson
