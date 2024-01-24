@@ -143,11 +143,6 @@ output "grafana_repository_arn" {
   value       = aws_ecr_repository.grafana.arn
 }
 
-output "logstash_repository_arn" {
-  description = "The arn of our logstash repsitory"
-  value       = aws_ecr_repository.logstash_7_10_1_staged.arn
-}
-
 output "amazon_linux_2_base_arn" {
   description = "The repository arn for amazon-linux2-base image"
   value       = aws_ecr_repository.amazon_linux_2_base.arn
