@@ -172,38 +172,3 @@ module "build_grafana_ssl_docker_schedule" {
   cron_expression = "cron(0 5 ? * 1 *)"
   tags            = var.tags
 }
-
-module "build_logstash_docker" {
-  source = "../codebuild_job"
-
-  name              = "build-logstash-docker"
-  build_description = "Codebuild for Building Customised Logstash Images"
-  repository_name   = "bichard7-next-infrastructure-docker-images"
-  buildspec_file    = "./Logstash/buildspec.yml"
-  vpc_config        = var.vpc_config_block
-
-  environment_variables = [
-    {
-      name  = "DOCKER_IMAGE_HASH"
-      value = ""
-    },
-    {
-      name  = "ARTIFACT_BUCKET"
-      value = var.codebuild_s3_bucket
-    }
-  ]
-
-  codepipeline_s3_bucket = var.codebuild_s3_bucket
-  sns_notification_arn   = var.sns_notifications_arn
-  sns_kms_key_arn        = var.notifications_kms_key_arn
-
-  tags = var.tags
-}
-
-module "build_logstash_docker_schedule" {
-  source          = "../codebuild_schedule"
-  codebuild_arn   = module.build_logstash_docker.pipeline_arn
-  name            = module.build_logstash_docker.pipeline_name
-  cron_expression = "cron(0 5 ? * 1 *)"
-  tags            = var.tags
-}
