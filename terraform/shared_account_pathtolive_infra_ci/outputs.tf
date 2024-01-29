@@ -52,26 +52,6 @@ output "codebuild_security_group_id" {
   value       = module.codebuild_base_resources.codebuild_security_group_id
 }
 
-output "prometheus_repository_url" {
-  description = "The repository url for our prometheus image"
-  value       = module.codebuild_docker_resources.prometheus_repository_url
-}
-
-output "prometheus_repository_arn" {
-  description = "The repository arn for our prometheus image"
-  value       = module.codebuild_docker_resources.prometheus_repository_arn
-}
-
-output "prometheus_cloudwatch_exporter_repository_url" {
-  description = "The repository url for our prometheus cloudwatch exporter image"
-  value       = module.codebuild_docker_resources.prometheus_cloudwatch_exporter_repository_url
-}
-
-output "prometheus_cloudwatch_exporter_repository_arn" {
-  description = "The repository arn for our prometheus cloudwatch exporter image"
-  value       = module.codebuild_docker_resources.prometheus_cloudwatch_exporter_repository_arn
-}
-
 output "bichard_liberty_ecr" {
   description = "The Bichard Liberty ecr repository details"
   value       = module.codebuild_docker_resources.bichard_liberty_ecr

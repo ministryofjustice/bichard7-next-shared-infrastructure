@@ -28,16 +28,6 @@ output "scoutsuite_docker_image" {
   value       = "${aws_ecr_repository.scoutsuite.repository_url}@${data.docker_registry_image.scoutsuite.sha256_digest}"
 }
 
-output "openjdk_jre_repository_url" {
-  description = "The repository url for our openjdk jre image"
-  value       = aws_ecr_repository.openjdk_jre.repository_url
-}
-
-output "openjdk_jre_repository_arn" {
-  description = "The repository arn for our openjdk jre image"
-  value       = aws_ecr_repository.openjdk_jre.arn
-}
-
 output "zap_owasp_scanner_repository_url" {
   description = "The repository url for our zap owasp scanner image"
   value       = aws_ecr_repository.zap_owasp_scanner.repository_url
@@ -138,11 +128,6 @@ output "audit_logging_portal" {
   value       = aws_ecr_repository.audit_logging_portal
 }
 
-output "grafana_repository_arn" {
-  description = "The arn of our grafana repository"
-  value       = aws_ecr_repository.grafana.arn
-}
-
 output "amazon_linux_2_base_arn" {
   description = "The repository arn for amazon-linux2-base image"
   value       = aws_ecr_repository.amazon_linux_2_base.arn
@@ -158,11 +143,6 @@ output "nginx_nodejs_supervisord_arn" {
   value       = aws_ecr_repository.nginx_nodejs_supervisord.arn
 }
 
-output "prometheus_blackbox_exporter_arn" {
-  description = "The repository arn for our blackbox exporter image"
-  value       = aws_ecr_repository.prometheus_blackbox_exporter.arn
-}
-
 output "nginx_supervisord_arn" {
   description = "The repository ARN for our nginx-supervisord image"
   value       = aws_ecr_repository.nginx_supervisord.arn
@@ -176,26 +156,6 @@ output "nginx_auth_proxy_arn" {
 output "nginx_auth_proxy" {
   description = "The outputs for our nginx-auth-proxy image repository"
   value       = aws_ecr_repository.nginx_auth_proxy
-}
-
-output "prometheus_repository_url" {
-  description = "The repository url for our prometheus image"
-  value       = aws_ecr_repository.prometheus.repository_url
-}
-
-output "prometheus_repository_arn" {
-  description = "The repository arn for our prometheus image"
-  value       = aws_ecr_repository.prometheus.arn
-}
-
-output "prometheus_cloudwatch_exporter_repository_url" {
-  description = "The repository url for our prometheus cloudwatch exporter image"
-  value       = aws_ecr_repository.prometheus_cloudwatch_exporter.repository_url
-}
-
-output "prometheus_cloudwatch_exporter_repository_arn" {
-  description = "The repository arn for our prometheus cloudwatch exporter image"
-  value       = aws_ecr_repository.prometheus_cloudwatch_exporter.arn
 }
 
 output "bichard_liberty_ecr" {
