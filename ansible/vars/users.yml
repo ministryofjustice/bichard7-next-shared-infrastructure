@@ -20,8 +20,6 @@
       type: admin
     - name: alice_lee
       type: admin
-    - name: csaba_gyorfi
-      type: admin
     - name: joe_folkard
       type: admin
     - name: ian_king
@@ -56,3 +54,4 @@
     - name: hannah_goraya
     - name: jamie_davies
     - name: donny_hyon
+    - name: csaba_gyorfi
