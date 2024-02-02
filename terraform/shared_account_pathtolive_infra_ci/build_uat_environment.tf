@@ -141,6 +141,10 @@ module "deploy_uat_terraform" {
     {
       name  = "ARTIFACT_BUCKET"
       value = module.codebuild_base_resources.codepipeline_bucket
+    },
+    {
+      name  = "TF_VAR_use_smtp_service"
+      value = "true"
     }
   ]
 
