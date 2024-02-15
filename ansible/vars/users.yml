@@ -36,5 +36,7 @@
       type: admin
     - name: tausif_patel
       type: admin
+    - name: kate_sugden
+      type: admin
 
 - users_removed:
