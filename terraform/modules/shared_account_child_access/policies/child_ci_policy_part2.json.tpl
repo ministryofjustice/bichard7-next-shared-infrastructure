@@ -96,6 +96,7 @@
         "events:TagResource",
         "cloudtrail:*",
         "states:*StateMachine",
+        "states:ListStateMachineVersions",
         "states:*TagsForResource",
         "states:TagResource"
       ],
