@@ -163,6 +163,7 @@
         "ec2:DescribeInstanceStatus",
         "ec2:DescribeRegions",
         "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSecurityGroupRules",
         "ec2:DescribeSnapshots",
         "ec2:DescribeSubnets",
         "ec2:DescribeTags",
