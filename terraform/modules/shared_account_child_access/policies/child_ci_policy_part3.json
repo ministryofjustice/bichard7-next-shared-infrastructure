@@ -86,7 +86,8 @@
         "cloudformation:DescribeStackResource",
         "cloudformation:DescribeStacks",
         "cloudformation:ExecuteChangeSet",
-        "ec2:DescribeSecurityGroups"
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSecurityGroupRules"
       ],
       "Effect": "Allow",
       "Resource": "*"
