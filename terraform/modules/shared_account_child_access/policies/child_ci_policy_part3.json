@@ -33,6 +33,7 @@
         "application-autoscaling:DescribeScalingPolicies",
         "application-autoscaling:PutScalingPolicy",
         "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:ListTagsForResource",
         "datapipeline:ActivatePipeline",
         "datapipeline:CreatePipeline",
         "datapipeline:DeletePipeline",
