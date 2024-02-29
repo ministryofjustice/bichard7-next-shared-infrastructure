@@ -1,8 +1,10 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
-      version = "= 3.75.2"
+      source = "hashicorp/aws"
+      configuration_aliases = [
+        aws.parent,
+      ]
     }
     template = {
       source  = "hashicorp/template"
