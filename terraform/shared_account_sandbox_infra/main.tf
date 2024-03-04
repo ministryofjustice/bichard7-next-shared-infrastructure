@@ -28,7 +28,7 @@ module "aws_logs" {
   source            = "trussworks/logs/aws"
   version           = "16.0.2"
   s3_bucket_name    = "${module.label.name}-aws-logs"
-  enable_versioning = true
+  versioning_status = "Enabled"
 
   tags = module.label.tags
 }

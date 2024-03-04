@@ -37,7 +37,7 @@ module "aws_logs" {
   version           = "16.2.0"
   s3_bucket_name    = "account-logging-${var.account_id}-logs"
   force_destroy     = false
-  enable_versioning = true
+  versioning_status = "Enabled"
 
   tags = var.tags
 }
