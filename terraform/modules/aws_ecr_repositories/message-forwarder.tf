@@ -11,7 +11,7 @@ resource "aws_ecr_repository" "message_forwarder" {
 }
 
 resource "aws_ecr_repository_policy" "allow_codebuild_message_forwarder" {
-  policy     = data.template_file.shared_docker_image_policy.rendered
+  policy     = local.shared_docker_image_policy
   repository = aws_ecr_repository.message_forwarder.name
 }
 

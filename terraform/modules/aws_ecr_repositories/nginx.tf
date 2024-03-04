@@ -78,7 +78,7 @@ resource "aws_ecr_lifecycle_policy" "nginx_node_js_supervisord" {
 }
 
 resource "aws_ecr_repository_policy" "allow_codebuild_nginx_supervisord" {
-  policy     = data.template_file.shared_docker_image_policy.rendered
+  policy     = local.shared_docker_image_policy
   repository = aws_ecr_repository.nginx_supervisord.name
 }
 

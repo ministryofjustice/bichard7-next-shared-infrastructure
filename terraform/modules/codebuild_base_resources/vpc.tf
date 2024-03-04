@@ -41,7 +41,7 @@ resource "aws_s3_bucket_public_access_block" "codebuild_flow_logs_bucket" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.0.0"
+  version = "5.5.2"
 
   name = "${var.name}-codebuild-vpc"
   cidr = local.cidr_block

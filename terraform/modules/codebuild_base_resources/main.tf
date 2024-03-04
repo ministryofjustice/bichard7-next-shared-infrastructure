@@ -81,7 +81,13 @@ locals {
 resource "aws_s3_bucket_policy" "allow_access_to_codebuild_bucket" {
   bucket = aws_s3_bucket.codebuild_artifact_bucket.bucket
 
-  policy = data.template_file.codebuild_bucket_policy.rendered
+  policy = templatefile("${path.module}/policies/codebuild_bucket_policy.json.tpl", {
+    bucket_arn                     = aws_s3_bucket.codebuild_artifact_bucket.arn
+    account_id                     = data.aws_caller_identity.current.account_id
+    allowed_principals             = jsonencode(local.allowed_principals)
+    allowed_principals_with_lambda = jsonencode(local.allowed_principals_with_lambda)
+    ci_user_arn                    = data.aws_iam_user.ci_user.arn
+  })
 }
 
 resource "aws_kms_key" "codebuild_lock_table" {
@@ -145,5 +151,7 @@ resource "aws_iam_user_policy" "allow_lock_table_access" {
   name = "AllowCIConcurrency"
   user = data.aws_iam_user.ci_user.user_name
 
-  policy = data.template_file.allow_dynamodb_lock_table_access.rendered
+  policy = templatefile("${path.module}/policies/allow_dynamodb_lock_table_access.json.tpl", {
+    lock_table_arn = aws_dynamodb_table.codebuild_lock_table.arn
+  })
 }

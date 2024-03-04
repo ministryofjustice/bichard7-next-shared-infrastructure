@@ -11,7 +11,7 @@ resource "aws_s3_account_public_access_block" "protect" {
 
 module "label" {
   source  = "cloudposse/label/null"
-  version = "0.24.1"
+  version = "0.25.0"
 
   # namespace, environment, stage, name, attributes
   namespace   = "${lower(module.tag_vars.business_unit)}-${replace(module.tag_vars.application, "-", "")}"
@@ -39,11 +39,15 @@ module "account_resources_terraform_remote_state" {
   logging_bucket_name = module.aws_logs.aws_logs_bucket
 
   tags = module.label.tags
+
+  providers = {
+    aws.parent = aws
+  }
 }
 
 module "aws_logs" {
   source            = "trussworks/logs/aws"
-  version           = "~> 10.3.0 "
+  version           = "16.2.0"
   s3_bucket_name    = "${module.label.id}-logging"
   force_destroy     = false
   enable_versioning = true

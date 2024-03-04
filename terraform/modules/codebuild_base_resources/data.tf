@@ -34,24 +34,6 @@ data "aws_ssm_parameter" "slack_webhook" {
   with_decryption = true
 }
 
-data "template_file" "webhook_source" {
-  template = file("${path.module}/source/webhook.py.tpl")
-
-  vars = {
-    webhook_url  = data.aws_ssm_parameter.slack_webhook.value
-    channel_name = var.notifications_channel_name
-  }
-}
-
-data "template_file" "scanning_webhook_source" {
-  template = file("${path.module}/source/scanning_webhook.py.tpl")
-
-  vars = {
-    webhook_url  = data.aws_ssm_parameter.slack_webhook.value
-    channel_name = var.notifications_channel_name
-  }
-}
-
 data "template_file" "child_accounts_cmk_access_template" {
   template = file("${path.module}/policies/child_accounts_cmk_access.json.tpl")
 
@@ -64,34 +46,6 @@ data "template_file" "child_accounts_cmk_access_template" {
 #tfsec:ignore:aws-iam-no-user-attached-policies
 data "aws_iam_user" "ci_user" {
   user_name = "cjse.ci"
-}
-
-data "template_file" "allow_ci_slack_ssm" {
-  template = file("${path.module}/policies/allow_ci_ssm.json.tpl")
-
-  vars = {
-    slack_webhook_arn = aws_ssm_parameter.slack_webhook.arn
-  }
-}
-
-data "template_file" "codebuild_bucket_policy" {
-  template = file("${path.module}/policies/codebuild_bucket_policy.json.tpl")
-
-  vars = {
-    bucket_arn                     = aws_s3_bucket.codebuild_artifact_bucket.arn
-    account_id                     = data.aws_caller_identity.current.account_id
-    allowed_principals             = jsonencode(local.allowed_principals)
-    allowed_principals_with_lambda = jsonencode(local.allowed_principals_with_lambda)
-    ci_user_arn                    = data.aws_iam_user.ci_user.arn
-  }
-}
-
-data "template_file" "allow_dynamodb_lock_table_access" {
-  template = file("${path.module}/policies/allow_dynamodb_lock_table_access.json.tpl")
-
-  vars = {
-    lock_table_arn = aws_dynamodb_table.codebuild_lock_table.arn
-  }
 }
 
 data "template_file" "allow_access_to_scanning_results_bucket" {
@@ -119,7 +73,10 @@ data "archive_file" "codebuild_notification" {
   type        = "zip"
 
   source {
-    content  = data.template_file.webhook_source.rendered
+    content = templatefile("${path.module}/source/webhook.py.tpl", {
+      webhook_url  = data.aws_ssm_parameter.slack_webhook.value
+      channel_name = var.notifications_channel_name
+    })
     filename = "webhook.py"
   }
 }
@@ -129,7 +86,10 @@ data "archive_file" "scanning_notification" {
   type        = "zip"
 
   source {
-    content  = data.template_file.scanning_webhook_source.rendered
+    content = templatefile("${path.module}/source/scanning_webhook.py.tpl", {
+      webhook_url  = data.aws_ssm_parameter.slack_webhook.value
+      channel_name = var.notifications_channel_name
+    })
     filename = "webhook.py"
   }
 }

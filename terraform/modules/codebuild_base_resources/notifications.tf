@@ -15,7 +15,9 @@ resource "aws_ssm_parameter" "slack_webhook" {
 
 resource "aws_iam_policy" "allow_ci_ssm_access" {
   name   = "${var.name}-allow-ci-slack-ssm"
-  policy = data.template_file.allow_ci_slack_ssm.rendered
+  policy = templatefile("${path.module}/policies/allow_ci_ssm.json.tpl", {
+    slack_webhook_arn = aws_ssm_parameter.slack_webhook.arn
+  })
 
   tags = var.tags
 }
