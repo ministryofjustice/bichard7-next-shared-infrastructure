@@ -18,8 +18,6 @@
       type: admin
     - name: emad_karamad
       type: admin
-    - name: alice_lee
-      type: admin
     - name: joe_folkard
       type: admin
     - name: ian_king
@@ -40,3 +38,4 @@
       type: admin
 
 - users_removed:
+    - name: alice_lee
