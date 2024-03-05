@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "codebuild_allow_ecr" {
-  name   = "${var.name}-ecr"
+  name = "${var.name}-ecr"
   policy = templatefile("${path.module}/policies/allow_ecr.json.tpl", {
     allowed_resources = jsonencode(local.allowed_resources)
   })
@@ -21,7 +21,7 @@ resource "aws_iam_role" "service_role" {
 }
 
 resource "aws_iam_role_policy" "codebuild_role_extra_policies" {
-  role   = aws_iam_role.service_role.name
+  role = aws_iam_role.service_role.name
   policy = templatefile("${path.module}/policies/codebuild_policy.json.tpl", {
     codebuild_bucket = "arn:aws:s3:::${var.codepipeline_s3_bucket}"
     codebuild_logs = jsonencode([

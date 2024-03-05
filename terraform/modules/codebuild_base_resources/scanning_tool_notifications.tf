@@ -21,7 +21,7 @@ resource "aws_sns_topic" "scanning_notifications" {
 }
 
 resource "aws_sns_topic_policy" "scanning_notifications" {
-  arn    = aws_sns_topic.scanning_notifications.arn
+  arn = aws_sns_topic.scanning_notifications.arn
   policy = templatefile("${path.module}/policies/allow_sns_policy.json.tpl", {
     sns_topic_arn = aws_sns_topic.scanning_notifications.arn
     account_id    = data.aws_caller_identity.current.account_id

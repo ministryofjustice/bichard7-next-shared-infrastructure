@@ -1,12 +1,11 @@
 resource "aws_iam_policy" "allow_assume_ci_admin_access_role" {
-  name   = "Assume-CI-Admin-Access-on-${var.child_account_id}"
+  name = "Assume-CI-Admin-Access-on-${var.child_account_id}"
   policy = templatefile(
     "${path.module}/policies/allow_assume_ci_admin_access.json.tpl",
     {
       ci_admin_access_arn = var.ci_admin_access_arn
     }
   )
-}
 
   tags = var.tags
 }

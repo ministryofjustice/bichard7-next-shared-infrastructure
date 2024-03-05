@@ -19,7 +19,7 @@ resource "aws_iam_role_policy" "trigger_codebuild_build_policy" {
   policy = templatefile("${path.module}/policies/start_pipeline.json.tpl", {
     codebuild_arn = var.codebuild_arn
   })
-  role   = aws_iam_role.trigger_codebuild_build_role.id
+  role = aws_iam_role.trigger_codebuild_build_role.id
 }
 
 resource "aws_cloudwatch_event_target" "trigger_codebuild_build_target" {

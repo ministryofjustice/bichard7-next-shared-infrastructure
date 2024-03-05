@@ -1,7 +1,7 @@
 resource "aws_iam_role" "assume_ci_access" {
   name                 = "Bichard7-CI-Access"
   max_session_duration = 10800
-  assume_role_policy   = templatefile("${path.module}/policies/${local.no_mfa_multi_user_roles_access_template}",  {
+  assume_role_policy = templatefile("${path.module}/policies/${local.no_mfa_multi_user_roles_access_template}", {
     parent_account_id = var.root_account_id
     excluded_arns     = jsonencode(var.denied_user_arns)
     user_role         = "ci/cd"
@@ -12,7 +12,7 @@ resource "aws_iam_role" "assume_ci_access" {
 }
 
 resource "aws_iam_policy" "ci_to_parent_policy" {
-  name   = "CIAccessToParent"
+  name = "CIAccessToParent"
   policy = file("${path.module}/policies/child_to_parent_policy.json.tpl", {
     parent_account_id = var.root_account_id
     bucket_name       = var.bucket_name
@@ -23,7 +23,7 @@ resource "aws_iam_policy" "ci_to_parent_policy" {
 }
 
 resource "aws_iam_policy" "ci_permissions_policy_part1" {
-  name   = "CIPolicyPart1"
+  name = "CIPolicyPart1"
   policy = templatefile("${path.module}/policies/child_ci_policy_part1.json.tpl", {
     parent_account_id = var.root_account_id
     account_id        = var.account_id
@@ -35,7 +35,7 @@ resource "aws_iam_policy" "ci_permissions_policy_part1" {
 }
 
 resource "aws_iam_policy" "ci_permissions_policy_part2" {
-  name   = "CIPolicyPart2"
+  name = "CIPolicyPart2"
   policy = templatefile("${path.module}/policies/child_ci_policy_part2.json.tpl", {
     parent_account_id = var.root_account_id
     account_id        = var.account_id
@@ -47,7 +47,7 @@ resource "aws_iam_policy" "ci_permissions_policy_part2" {
 }
 
 resource "aws_iam_policy" "deny_ci_permissions_policy" {
-  name   = "DenyCIActions"
+  name = "DenyCIActions"
   policy = templatefile("${path.module}/policies/deny_attach_policy_to_ci.json.tpl", {
     account_id = var.account_id
   })

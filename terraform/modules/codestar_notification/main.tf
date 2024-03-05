@@ -14,7 +14,7 @@ resource "aws_codestarnotifications_notification_rule" "codebuild_notification_r
 
 resource "aws_iam_policy" "allow_codebuild_sns_kms" {
   name_prefix = "AllowCodebuildSNSAccess-${var.name}"
-  policy      = templatefile("${path.module}/policies/kms.json.tpl", {
+  policy = templatefile("${path.module}/policies/kms.json.tpl", {
     sns_key_arn = var.sns_kms_key_arn
   })
 

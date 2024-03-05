@@ -1,7 +1,7 @@
 resource "aws_iam_role" "assume_administrator_access" {
   name                 = "Bichard7-Administrator-Access"
   max_session_duration = 10800
-  assume_role_policy   = templatefile("${path.module}/policies/${local.access_template}", {
+  assume_role_policy = templatefile("${path.module}/policies/${local.access_template}", {
     parent_account_id = var.root_account_id
     excluded_arns     = jsonencode(var.denied_user_arns)
     user_role         = "operations"
@@ -18,7 +18,7 @@ resource "aws_iam_role_policy_attachment" "administrator_access_policy_attachmen
 resource "aws_iam_role" "assume_readonly_access" {
   name                 = "Bichard7-ReadOnly-Access"
   max_session_duration = 10800
-  assume_role_policy   = templatefile(
+  assume_role_policy = templatefile(
     "${path.module}/policies/${local.access_template}",
     {
       parent_account_id = var.root_account_id

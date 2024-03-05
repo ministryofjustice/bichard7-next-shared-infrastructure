@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "allow_assume_administrator_access_role" {
-  name   = "Assume-Administrator-Access-on-${var.child_account_id}"
+  name = "Assume-Administrator-Access-on-${var.child_account_id}"
   policy = templatefile(
     "${path.module}/policies/allow_assume_admin_access.json.tpl",
     {
@@ -15,14 +15,13 @@ resource "aws_iam_group_policy_attachment" "administrator_access_policy_attachme
 }
 
 resource "aws_iam_policy" "allow_assume_readonly_access_role" {
-  name   = "Assume-ReadOnly-Access-on-${var.child_account_id}"
+  name = "Assume-ReadOnly-Access-on-${var.child_account_id}"
   policy = templatefile(
     "${path.module}/policies/allow_assume_readonly_access.json.tpl",
     {
       readonly_access_arn = var.readonly_access_arn
     }
   )
-}
 
   tags = var.tags
 }
@@ -33,7 +32,7 @@ resource "aws_iam_group_policy_attachment" "readonly_access_policy_attachment" {
 }
 
 resource "aws_iam_policy" "allow_assume_ci_access_role" {
-  name   = "Assume-CI-Access-on-${var.child_account_id}"
+  name = "Assume-CI-Access-on-${var.child_account_id}"
   policy = templatefile(
     "${path.module}/policies/allow_assume_ci_access.json.tpl",
     {

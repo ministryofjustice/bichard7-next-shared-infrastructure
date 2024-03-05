@@ -48,8 +48,8 @@ resource "aws_ssm_parameter" "scanning_portal_password" {
 
 # tfsec:ignore:aws-iam-no-policy-wildcards
 resource "aws_iam_user_policy" "scanning_user_policy" {
-  name   = "AllowScanningBucketAccess"
-  user   = aws_iam_user.scanning_bucket_user.name
+  name = "AllowScanningBucketAccess"
+  user = aws_iam_user.scanning_bucket_user.name
   policy = templatefile("${path.module}/policies/scanning_user_policy.json.tpl", {
     scanning_bucket_name = var.scanning_bucket_name
   })
