@@ -85,7 +85,7 @@ module "scanning_portal_ecs_service" {
   ]
 
   log_group_name           = aws_cloudwatch_log_group.ecs_log_group.name
-  rendered_task_definition = base64encode(scanning_reults_portal_fargate_policy)
+  rendered_task_definition = base64encode(local.scanning_reults_portal_fargate_policy)
   security_group_name      = aws_security_group.scanning_portal_container.name
   service_subnets          = var.service_subnets
   container_count          = var.desired_instance_count

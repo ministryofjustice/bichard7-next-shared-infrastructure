@@ -43,7 +43,7 @@ module "account_resources_terraform_remote_state" {
 
 module "aws_logs" {
   source            = "trussworks/logs/aws"
-  version           = "16.0.2"
+  version           = "16.2.0"
   s3_bucket_name    = "${module.label.id}-logging"
   force_destroy     = false
   versioning_status = "Enabled"
