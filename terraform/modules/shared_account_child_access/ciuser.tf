@@ -13,7 +13,7 @@ resource "aws_iam_role" "assume_ci_access" {
 
 resource "aws_iam_policy" "ci_to_parent_policy" {
   name = "CIAccessToParent"
-  policy = file("${path.module}/policies/child_to_parent_policy.json.tpl", {
+  policy = templatefile("${path.module}/policies/child_to_parent_policy.json.tpl", {
     parent_account_id = var.root_account_id
     bucket_name       = var.bucket_name
     logging_bucket    = var.logging_bucket_name

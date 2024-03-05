@@ -2,7 +2,7 @@ resource "aws_kms_key" "lambda_trail_encryption" {
   deletion_window_in_days = 7
   enable_key_rotation     = true
 
-  policy = template("${path.module}/policies/lambda_cloudtrail.json.tpl", {
+  policy = templatefile("${path.module}/policies/lambda_cloudtrail.json.tpl", {
     account_id = data.aws_caller_identity.current.account_id
   })
 
