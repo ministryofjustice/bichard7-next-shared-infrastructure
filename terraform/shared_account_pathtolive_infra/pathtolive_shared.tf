@@ -8,7 +8,7 @@ module "shared_account_user_access" {
   ]
 
   providers = {
-    aws = aws.shared
+    aws        = aws.shared
     aws.parent = aws.parent
   }
 }
