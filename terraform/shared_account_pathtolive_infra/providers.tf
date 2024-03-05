@@ -8,6 +8,10 @@ provider "template" {
 }
 
 provider "aws" {
+  alias = "parent"
+}
+
+provider "aws" {
   region = var.region
   alias  = "shared"
 }
