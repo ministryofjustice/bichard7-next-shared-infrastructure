@@ -31,7 +31,7 @@ resource "aws_kms_key" "build_notifications_key" {
   description             = "${var.name}-codebuild-notifications-encryption-key"
   enable_key_rotation     = true
   deletion_window_in_days = 10
-  policy                  = data.template_file.allow_codestar_kms.rendered
+  policy                  = local.allow_codestar_kms_policy
 
   tags = var.tags
 }
@@ -51,7 +51,10 @@ resource "aws_sns_topic" "build_notifications" {
 
 resource "aws_sns_topic_policy" "default" {
   arn    = aws_sns_topic.build_notifications.arn
-  policy = data.template_file.allow_sns_publish_policy.rendered
+  policy = templatefile("${path.module}/policies/allow_sns_policy.json.tpl", {
+    sns_topic_arn = aws_sns_topic.build_notifications.arn
+    account_id    = data.aws_caller_identity.current.account_id
+  })
 }
 
 resource "aws_iam_role" "codebuild_notification" {

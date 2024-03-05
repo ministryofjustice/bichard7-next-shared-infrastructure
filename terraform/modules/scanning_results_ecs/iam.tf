@@ -50,7 +50,9 @@ resource "aws_ssm_parameter" "scanning_portal_password" {
 resource "aws_iam_user_policy" "scanning_user_policy" {
   name   = "AllowScanningBucketAccess"
   user   = aws_iam_user.scanning_bucket_user.name
-  policy = data.template_file.scanning_user_policy.rendered
+  policy = templatefile("${path.module}/policies/scanning_user_policy.json.tpl", {
+    scanning_bucket_name = var.scanning_bucket_name
+  })
 }
 
 resource "aws_kms_key" "cloudwatch_encryption" {
@@ -59,7 +61,11 @@ resource "aws_kms_key" "cloudwatch_encryption" {
   enable_key_rotation     = true
   deletion_window_in_days = 7
 
-  policy = data.template_file.cloudwatch_encryption.rendered
+  policy = templatefile("${path.module}/policies/cloudwatch_encryption.json.tpl", {
+    account_id               = data.aws_caller_identity.current.account_id
+    region                   = data.aws_region.current.name
+    scanning_bucket_user_arn = aws_iam_user.scanning_bucket_user.arn
+  })
 
   tags = var.tags
 }

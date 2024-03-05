@@ -1,7 +1,7 @@
 resource "aws_iam_policy" "allow_assume_aws_nuke_access_role" {
   count  = (var.aws_nuke_access_arn != null) ? 1 : 0
   name   = "Assume-AWS-Nuke-Access-on-${var.child_account_id}"
-  policy = data.template_file.allow_assume_aws_nuke_access[count.index].rendered
+  policy = local.allow_assume_aws_nuke_access_policy
 
   tags = var.tags
 }

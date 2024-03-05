@@ -27,7 +27,9 @@ resource "aws_s3_bucket" "codebuild_flow_logs_bucket" {
 
 resource "aws_s3_bucket_policy" "codebuild_flow_logs_bucket" {
   bucket = aws_s3_bucket.codebuild_flow_logs_bucket.bucket
-  policy = data.template_file.codebuild_flow_logs_bucket.rendered
+  policy = templatefile("${path.module}/policies/codebuild_flow_logs_bucket.json.tpl", {
+    codebuild_flow_logs_bucket_arn = aws_s3_bucket.codebuild_flow_logs_bucket.arn
+  })
 }
 
 resource "aws_s3_bucket_public_access_block" "codebuild_flow_logs_bucket" {

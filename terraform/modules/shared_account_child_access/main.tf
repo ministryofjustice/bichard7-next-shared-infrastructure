@@ -1,7 +1,11 @@
 resource "aws_iam_role" "assume_administrator_access" {
   name                 = "Bichard7-Administrator-Access"
   max_session_duration = 10800
-  assume_role_policy   = data.template_file.allow_assume_administrator_access_template.rendered
+  assume_role_policy   = templatefile("${path.module}/policies/${local.access_template}", {
+    parent_account_id = var.root_account_id
+    excluded_arns     = jsonencode(var.denied_user_arns)
+    user_role         = "operations"
+  })
 
   tags = var.tags
 }
@@ -14,8 +18,14 @@ resource "aws_iam_role_policy_attachment" "administrator_access_policy_attachmen
 resource "aws_iam_role" "assume_readonly_access" {
   name                 = "Bichard7-ReadOnly-Access"
   max_session_duration = 10800
-  assume_role_policy   = data.template_file.allow_assume_readonly_access_template.rendered
-
+  assume_role_policy   = templatefile(
+    "${path.module}/policies/${local.access_template}",
+    {
+      parent_account_id = var.root_account_id
+      excluded_arns     = jsonencode(var.denied_user_arns)
+      user_role         = "readonly"
+    }
+  )
   tags = var.tags
 }
 
@@ -68,7 +78,9 @@ resource "aws_s3_bucket" "account_logging_bucket" {
 
 resource "aws_s3_bucket_policy" "account_logging_bucket" {
   bucket = aws_s3_bucket.account_logging_bucket.bucket
-  policy = data.template_file.deny_non_tls_s3_comms_on_logging_bucket.rendered
+  policy = templatefile("${path.module}/policies/non_tls_comms_on_bucket_policy.json.tpl", {
+    bucket_arn = aws_s3_bucket.account_logging_bucket.arn
+  })
 }
 
 resource "aws_iam_role" "portal_host_lambda_role" {

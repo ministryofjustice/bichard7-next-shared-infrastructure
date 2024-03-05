@@ -2,7 +2,9 @@ resource "aws_kms_key" "lambda_trail_encryption" {
   deletion_window_in_days = 7
   enable_key_rotation     = true
 
-  policy = data.template_file.lambda_cloudtrail_policy.rendered
+  policy = template("${path.module}/policies/lambda_cloudtrail.json.tpl", {
+    account_id = data.aws_caller_identity.current.account_id
+  })
 
   tags = var.tags
 }
@@ -41,7 +43,10 @@ resource "aws_s3_bucket" "lambda_logs_bucket" {
   bucket        = "${var.name}-lambdas-cloudtrail"
   force_destroy = true
 
-  policy = data.template_file.lambda_logging_bucket.rendered
+  policy = templatefile("${path.module}/policies/lambda_logging_bucket.json.tpl", {
+    account_id = data.aws_caller_identity.current.account_id
+    name       = var.name
+  })
 
   versioning {
     enabled = true

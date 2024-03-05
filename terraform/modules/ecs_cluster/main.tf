@@ -14,7 +14,9 @@ resource "aws_iam_role_policy" "allow_admin_role_cmk_access" {
   count = var.create_cluster ? 1 : 0
 
   name   = "${local.service_name}-allow-admin-cmk-access"
-  policy = data.template_file.allow_admin_cmk_access[count.index].rendered
+  policy = templatefile("${path.module}/policies/allow_admin_cmk_access.json.tpl", {
+    logs_encryption_key_arn = aws_kms_key.cluster_logs_encryption_key.arn
+  })
   role   = data.aws_iam_role.admin_role.name
 }
 
@@ -119,13 +121,17 @@ resource "aws_iam_role" "ecs_service_role" {
 resource "aws_iam_role_policy" "allow_ecr" {
   name   = "${local.service_name}-ecr"
   role   = aws_iam_role.ecs_service_role.id
-  policy = data.template_file.allow_ecr_repository.rendered
+  policy = templatefile("${path.module}/policies/allow_ecr.json.tpl", {
+    ecr_repos = jsonencode(var.ecr_repository_arns)
+  })
 }
 
 resource "aws_iam_role_policy" "allow_kms" {
   name   = "${local.service_name}-kms"
   role   = aws_iam_role.ecs_service_role.id
-  policy = data.template_file.allow_kms_usage.rendered
+  policy = templatefile("${path.module}/policies/allow_kms.json.tpl", {
+    account_id = data.aws_caller_identity.current.account_id
+  })
 }
 
 resource "aws_iam_role_policy" "allow_ssm" {
@@ -133,14 +139,22 @@ resource "aws_iam_role_policy" "allow_ssm" {
 
   name   = "${local.service_name}-ssm"
   role   = aws_iam_role.ecs_service_role.id
-  policy = data.template_file.allow_ssm_parameters.rendered
+  policy = templatefile("${path.module}/policies/allow_ssm.json.tpl", {
+    allowed_resources = jsonencode(var.ssm_resources)
+  })
 }
 
 resource "aws_iam_role_policy" "allow_ssm_messages" {
   count = var.enable_execute_command == true ? 1 : 0
 
   name   = "${local.service_name}-ssm-messages"
-  policy = data.template_file.allow_ssm_messages[0].rendered
+  policy = templatefile("${path.module}/policies/allow_ssm_messages.json.tpl", {
+    region              = data.aws_region.current.name
+    account             = data.aws_caller_identity.current.account_id
+    log_group_name      = var.log_group_name
+    logging_bucket_name = var.logging_bucket_name
+    key_arn             = aws_kms_key.cluster_logs_encryption_key.arn
+  })
   role   = aws_iam_role.ecs_service_role.id
 }
 
@@ -148,7 +162,13 @@ resource "aws_iam_role_policy" "allow_ssm_messages_external_kms" {
   count = (var.enable_execute_command == true && var.remote_cluster_kms_key_arn != null) ? 1 : 0
 
   name   = "${local.service_name}-external-ssm-messages"
-  policy = data.template_file.allow_ssm_messages_external_kms[0].rendered
+  policy = templatefile("${path.module}/policies/allow_ssm_messages.json.tpl", {
+    region              = data.aws_region.current.name
+    account             = data.aws_caller_identity.current.account_id
+    log_group_name      = var.log_group_name
+    logging_bucket_name = var.logging_bucket_name
+    key_arn             = var.remote_cluster_kms_key_arn
+  })
   role   = aws_iam_role.ecs_service_role.id
 }
 

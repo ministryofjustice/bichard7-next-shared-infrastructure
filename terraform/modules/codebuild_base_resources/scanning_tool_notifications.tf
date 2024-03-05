@@ -1,7 +1,7 @@
 resource "aws_kms_key" "scanning_notifications_key" {
   description             = "${var.name}-scanning-notifications-encryption-key"
   enable_key_rotation     = true
-  policy                  = data.template_file.allow_codestar_kms.rendered
+  policy                  = local.allow_codestar_kms_policy
   deletion_window_in_days = 10
 
   tags = var.tags
@@ -22,7 +22,10 @@ resource "aws_sns_topic" "scanning_notifications" {
 
 resource "aws_sns_topic_policy" "scanning_notifications" {
   arn    = aws_sns_topic.scanning_notifications.arn
-  policy = data.template_file.allow_scanning_sns_publish_policy.rendered
+  policy = templatefile("${path.module}/policies/allow_sns_policy.json.tpl", {
+    sns_topic_arn = aws_sns_topic.scanning_notifications.arn
+    account_id    = data.aws_caller_identity.current.account_id
+  })
 }
 
 resource "aws_iam_role" "scanning_notification" {
