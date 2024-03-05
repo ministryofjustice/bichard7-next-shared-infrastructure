@@ -54,27 +54,42 @@ module "aws_logs" {
 
 resource "aws_s3_bucket" "account_logging_bucket" {
   bucket        = "account-logging-${var.account_id}"
-  acl           = "log-delivery-write"
   force_destroy = false
-
-  versioning {
-    enabled = true
-  }
-
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
-
-  logging {
-    target_bucket = module.aws_logs.aws_logs_bucket
-  }
 
   tags = var.tags
 }
+
+resource "aws_s3_bucket_logging" "account_logging_bucket_logging" {
+  bucket        = aws_s3_bucket.account_logging_bucket.id
+  target_bucket = module.aws_logs.aws_logs_bucket
+  target_prefix = ""
+}
+
+
+resource "aws_s3_bucket_acl" "account_logging_bucket_acl" {
+  bucket = aws_s3_bucket.account_logging_bucket.id
+  acl    = "log-delivery-write"
+}
+
+resource "aws_s3_bucket_versioning" "account_logging_bucket_versioning" {
+  bucket = aws_s3_bucket.account_logging_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# trivy:ignore:aws-s3-encryption-customer-key
+resource "aws_s3_bucket_server_side_encryption_configuration" "account_logging_bucket_encryption" {
+  bucket = aws_s3_bucket.account_logging_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+
 
 resource "aws_s3_bucket_policy" "account_logging_bucket" {
   bucket = aws_s3_bucket.account_logging_bucket.bucket

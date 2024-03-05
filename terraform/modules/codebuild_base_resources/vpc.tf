@@ -1,28 +1,36 @@
 #tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket" "codebuild_flow_logs_bucket" {
   bucket = "${var.name}-codebuild-flow-logs"
+  tags   = var.tags
+}
+
+resource "aws_s3_bucket_acl" "codebuild_flow_logs_bucket_acl" {
+  bucket = aws_s3_bucket.codebuild_flow_logs_bucket.id
   acl    = "private"
+}
 
-  force_destroy = true
+resource "aws_s3_bucket_logging" "codebuild_flow_logs_bucket_logging" {
+  bucket        = aws_s3_bucket.codebuild_flow_logs_bucket.id
+  target_bucket = var.aws_logs_bucket
+  target_prefix = "codebuild-flow-logs/"
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "codebuild_flow_logs_bucket_versioning" {
+  bucket = aws_s3_bucket.codebuild_flow_logs_bucket.id
+  versioning_configuration {
+    status = "Enabled"
   }
+}
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
+# trivy:ignore:aws-s3-encryption-customer-key
+resource "aws_s3_bucket_server_side_encryption_configuration" "codebuild_flow_logs_bucket_encryption" {
+  bucket = aws_s3_bucket.codebuild_flow_logs_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
   }
-
-  logging {
-    target_bucket = var.aws_logs_bucket
-    target_prefix = "codebuild-flow-logs/"
-  }
-
-  tags = var.tags
 }
 
 resource "aws_s3_bucket_policy" "codebuild_flow_logs_bucket" {

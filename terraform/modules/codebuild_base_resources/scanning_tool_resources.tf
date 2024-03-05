@@ -1,28 +1,36 @@
 #tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket" "scanning_results_bucket" {
   bucket = "${var.name}-scanning-results"
-  acl    = "private"
-
-  force_destroy = true
-
-  versioning {
-    enabled = true
-  }
-
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
-
-  logging {
-    target_bucket = var.aws_logs_bucket
-    target_prefix = "scanning-results/"
-  }
 
   tags = var.tags
+}
+
+resource "aws_s3_bucket_acl" "scanning_results_bucket_acl" {
+  bucket = aws_s3_bucket.scanning_results_bucket.id
+  acl    = "private"
+}
+resource "aws_s3_bucket_logging" "scanning_results_bucket_logging" {
+  bucket        = aws_s3_bucket.scanning_results_bucket.id
+  target_bucket = var.aws_logs_bucket
+  target_prefix = "scanning-results/"
+}
+
+resource "aws_s3_bucket_versioning" "scanning_results_bucket_versioning" {
+  bucket = aws_s3_bucket.scanning_results_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# trivy:ignore:aws-s3-encryption-customer-key
+resource "aws_s3_bucket_server_side_encryption_configuration" "scanning_results_bucket_encryption" {
+  bucket = aws_s3_bucket.scanning_results_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "scanning_results_bucket" {

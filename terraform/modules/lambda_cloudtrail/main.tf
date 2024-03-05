@@ -40,27 +40,37 @@ resource "aws_cloudtrail" "lambda_trail" {
 
 # tfsec:ignore:aws-s3-enable-bucket-logging tfsec:ignore:aws-s3-encryption-customer-key tfsec:ignore:aws-cloudtrail-require-bucket-access-logging
 resource "aws_s3_bucket" "lambda_logs_bucket" {
-  bucket        = "${var.name}-lambdas-cloudtrail"
-  force_destroy = true
+  bucket = "${var.name}-lambdas-cloudtrail"
 
+
+
+  tags = var.tags
+}
+
+resource "aws_s3_bucket_policy" "lambda_logs_bucket_policy" {
+  bucket = aws_s3_bucket.lambda_logs_bucket.id
   policy = templatefile("${path.module}/policies/lambda_logging_bucket.json.tpl", {
     account_id = data.aws_caller_identity.current.account_id
     name       = var.name
   })
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "lambda_logs_bucket_versioning" {
+  bucket = aws_s3_bucket.lambda_logs_bucket.id
+  versioning_configuration {
+    status = "Enabled"
   }
+}
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
+# trivy:ignore:aws-s3-encryption-customer-key
+resource "aws_s3_bucket_server_side_encryption_configuration" "lambda_logs_bucket_encryption" {
+  bucket = aws_s3_bucket.lambda_logs_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
   }
-
-  tags = var.tags
 }
 
 resource "aws_s3_bucket_public_access_block" "lambda_logs_bucket" {
