@@ -39,10 +39,6 @@ module "account_resources_terraform_remote_state" {
   logging_bucket_name = module.aws_logs.aws_logs_bucket
 
   tags = module.label.tags
-
-  providers = {
-    aws.parent = aws
-  }
 }
 
 module "aws_logs" {
