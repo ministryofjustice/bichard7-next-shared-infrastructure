@@ -29,7 +29,8 @@ class TerraformRunner(object):
     _state_files = {
         "infra": "tfstatefile",
         "infra_ci": "ci/tfstatefile",
-        "users": "users/tfstatefile"
+        "users": "users/tfstatefile",
+        "bootstrap": "bootstrap/terraform.tfstate"
     }
 
     _lock_table_region = "eu-west-2"

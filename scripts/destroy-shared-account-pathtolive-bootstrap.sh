@@ -1,6 +1,9 @@
 #!/bin/bash
-set -ex
 
-cd terraform/shared_account_pathtolive_bootstrap
+if [ -n "$WORKSPACE" ]
+then
+  echo "WORKSPACE should not be set"
+  exit 1
+fi
 
-terraform destroy
+./scripts/shared_account_terraform.py pathtolive bootstrap destroy
