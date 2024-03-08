@@ -14,10 +14,5 @@ resource "aws_codebuild_webhook" "trigger_build" {
       type    = "HEAD_REF"
       pattern = var.git_ref
     }
-
-    filter {
-      type    = "FILE_PATH"
-      pattern = var.file_path
-    }
   }
 }
