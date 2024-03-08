@@ -1,7 +1,7 @@
 # Requires the user running this to be an admin on the repository
 resource "aws_codebuild_webhook" "trigger_build" {
   project_name = var.codebuild_project_name
-  build_type = "BUILD"
+  build_type   = "BUILD"
 
   filter_group {
     # See https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codebuild_webhook#filter_group
