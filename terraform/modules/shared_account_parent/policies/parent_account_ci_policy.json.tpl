@@ -3,17 +3,12 @@
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": ["s3:*"],
+      "Action": ["s3:*", "lambda:*", "secretsmanager:*"],
       "Resource": "*"
     },
     {
       "Effect": "Allow",
       "Action": ["codestar-notifications:DescribeNotificationRule"],
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["lambda:GetFunction"],
       "Resource": "*"
     },
     {
