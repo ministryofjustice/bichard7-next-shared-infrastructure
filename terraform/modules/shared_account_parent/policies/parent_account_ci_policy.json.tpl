@@ -3,17 +3,18 @@
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": "s3:ListBucket",
-      "Resource": ${buckets}
+      "Action": ["s3:*"],
+      "Resource": "*"
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:DeleteObject"
-      ],
-      "Resource": ${bucket_contents}
+      "Action": ["codestar-notifications:DescribeNotificationRule"],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["lambda:GetFunction"],
+      "Resource": "*"
     },
     {
       "Effect": "Allow",
