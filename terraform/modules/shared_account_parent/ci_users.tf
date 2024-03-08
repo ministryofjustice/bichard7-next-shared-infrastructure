@@ -59,7 +59,7 @@ resource "aws_iam_user_policy" "allow_ci_codebuild_all" {
 resource "aws_iam_user_policy" "allow_aws_logs_bucket" {
   name   = "AWSLogsBucketAccess"
   policy = file("${path.module}/policies/allow_aws_logs_bucket.json")
-  user = aws_iam_user.ci_user.name
+  user   = aws_iam_user.ci_user.name
 }
 
 resource "aws_iam_group_policy_attachment" "allow_ci_ssm_read_only" {
