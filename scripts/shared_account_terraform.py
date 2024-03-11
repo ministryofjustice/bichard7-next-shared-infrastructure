@@ -29,19 +29,22 @@ class TerraformRunner(object):
     _state_files = {
         "infra": "tfstatefile",
         "infra_ci": "ci/tfstatefile",
-        "users": "users/tfstatefile"
+        "users": "users/tfstatefile",
+        "bootstrap": "bootstrap/terraform.tfstate"
     }
 
     _lock_table_region = "eu-west-2"
     _args = None
 
     def _set_state_file(self):
-        self._statefile = self._state_files.get(self._args.module, "tfstatefile")
+        self._statefile = self._state_files.get(
+            self._args.module, "tfstatefile")
 
     def _parse_arguments(self):
         parser = argparse.ArgumentParser()
         parser.add_argument('environment', type=str, help="The environment ")
-        parser.add_argument('module', type=str, help="The terraform module we want to run")
+        parser.add_argument('module', type=str,
+                            help="The terraform module we want to run")
         parser.add_argument('action', type=str, default='apply', help="The terraform action we want to perform",
                             nargs="?")
         self._args = parser.parse_args()
@@ -56,7 +59,8 @@ class TerraformRunner(object):
     def _init_args(self):
         return [
             '-backend-config "bucket={}"'.format(self._get_bucket()),
-            '-backend-config "dynamodb_table={}-lock"'.format(self._get_bucket()),
+            '-backend-config "dynamodb_table={}-lock"'.format(
+                self._get_bucket()),
             '-backend-config "key={}"'.format(self._statefile),
             '-backend-config "region={}"'.format(self._lock_table_region)
         ]
@@ -65,7 +69,8 @@ class TerraformRunner(object):
         command = self._generate_command(action=action, extra_args=extra_args)
         running_env = os.environ.copy()
         try:
-            subprocess.run(args=command, env=running_env, shell=True, check=True)
+            subprocess.run(args=command, env=running_env,
+                           shell=True, check=True)
         except subprocess.CalledProcessError as e:
             print(e.output)
             exit(1)

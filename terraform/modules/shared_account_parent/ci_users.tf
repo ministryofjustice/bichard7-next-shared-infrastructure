@@ -47,8 +47,13 @@ resource "aws_iam_group_policy" "ci_user_allow_scoutsuite" {
 }
 
 resource "aws_iam_user_policy" "allow_ci_codebuild_all" {
-  policy = data.template_file.allow_codebuild_ci.rendered
-  user   = aws_iam_user.ci_user.name
+  policy = templatefile(
+    "${path.module}/policies/allow_codebuild.json.tpl",
+    {
+      root_account_id = data.aws_caller_identity.current.account_id
+    }
+  )
+  user = aws_iam_user.ci_user.name
 }
 
 resource "aws_iam_group_policy_attachment" "allow_ci_ssm_read_only" {

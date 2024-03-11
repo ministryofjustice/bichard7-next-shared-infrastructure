@@ -11,7 +11,7 @@ resource "aws_ecr_repository" "e2etests" {
 }
 
 resource "aws_ecr_repository_policy" "allow_codebuild_e2etests" {
-  policy     = data.template_file.shared_docker_image_policy.rendered
+  policy     = local.shared_docker_image_policy
   repository = aws_ecr_repository.e2etests.name
 }
 

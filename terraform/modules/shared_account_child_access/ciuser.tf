@@ -1,35 +1,56 @@
 resource "aws_iam_role" "assume_ci_access" {
   name                 = "Bichard7-CI-Access"
   max_session_duration = 10800
-  assume_role_policy   = data.template_file.allow_assume_ci_access_template.rendered
+  assume_role_policy = templatefile("${path.module}/policies/${local.no_mfa_multi_user_roles_access_template}", {
+    parent_account_id = var.root_account_id
+    excluded_arns     = jsonencode(var.denied_user_arns)
+    user_role         = "ci/cd"
+    admin_user_role   = "ci-admin"
+  })
 
   tags = var.tags
 }
 
 resource "aws_iam_policy" "ci_to_parent_policy" {
-  name   = "CIAccessToParent"
-  policy = data.template_file.ci_to_parent_policy_template.rendered
+  name = "CIAccessToParent"
+  policy = templatefile("${path.module}/policies/child_to_parent_policy.json.tpl", {
+    parent_account_id = var.root_account_id
+    bucket_name       = var.bucket_name
+    logging_bucket    = var.logging_bucket_name
+  })
 
   tags = var.tags
 }
 
 resource "aws_iam_policy" "ci_permissions_policy_part1" {
-  name   = "CIPolicyPart1"
-  policy = data.template_file.ci_policy_document_part1.rendered
+  name = "CIPolicyPart1"
+  policy = templatefile("${path.module}/policies/child_ci_policy_part1.json.tpl", {
+    parent_account_id = var.root_account_id
+    account_id        = var.account_id
+    bucket_name       = var.bucket_name
+    region            = data.aws_region.current_region.name
+  })
 
   tags = var.tags
 }
 
 resource "aws_iam_policy" "ci_permissions_policy_part2" {
-  name   = "CIPolicyPart2"
-  policy = data.template_file.ci_policy_document_part2.rendered
+  name = "CIPolicyPart2"
+  policy = templatefile("${path.module}/policies/child_ci_policy_part2.json.tpl", {
+    parent_account_id = var.root_account_id
+    account_id        = var.account_id
+    bucket_name       = var.bucket_name
+    region            = data.aws_region.current_region.name
+  })
 
   tags = var.tags
 }
 
 resource "aws_iam_policy" "deny_ci_permissions_policy" {
-  name   = "DenyCIActions"
-  policy = data.template_file.deny_ci_permissions_policy.rendered
+  name = "DenyCIActions"
+  policy = templatefile("${path.module}/policies/deny_attach_policy_to_ci.json.tpl", {
+    account_id = var.account_id
+  })
 
   tags = var.tags
 }

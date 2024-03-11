@@ -19,7 +19,6 @@ resource "aws_ssm_parameter" "rsa_private_key" {
 }
 
 resource "tls_cert_request" "ssl_signing_certificate" {
-  key_algorithm   = tls_private_key.rsa_private_key.algorithm
   private_key_pem = tls_private_key.rsa_private_key.private_key_pem
 
   subject {
@@ -53,7 +52,6 @@ resource "tls_self_signed_cert" "self_signed_certificate" {
     "server_auth"
   ]
 
-  key_algorithm   = tls_private_key.rsa_private_key.algorithm
   private_key_pem = tls_private_key.rsa_private_key.private_key_pem
 
   validity_period_hours = 8760

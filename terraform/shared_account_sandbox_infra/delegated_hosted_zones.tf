@@ -41,16 +41,10 @@ resource "aws_iam_role" "allow_pathtolive_assume" {
   tags = module.label.tags
 }
 
-data "template_file" "allow_route53" {
-  template = file("${path.module}/policies/route53_allow_delegated.json.tpl")
 
-  vars = {
-    zone_id = aws_route53_zone.bichard7_delegated_zone.zone_id
-  }
-}
 
 resource "aws_iam_policy" "allow_route53" {
-  policy = data.template_file.allow_route53.rendered
+  policy = local.allow_route53_policy
   name   = "AllowPathToLiveRoute53"
 
   tags = module.label.tags

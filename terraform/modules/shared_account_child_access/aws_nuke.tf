@@ -2,7 +2,11 @@ resource "aws_iam_role" "assume_aws_nuke_access" {
   count                = (var.create_nuke_user == true) ? 1 : 0
   name                 = "Bichard7-Aws-Nuke-Access"
   max_session_duration = 10800
-  assume_role_policy   = data.template_file.allow_assume_aws_nuke_access[count.index].rendered
+  assume_role_policy = templatefile("${path.module}/policies/${local.no_mfa_access_template}", {
+    parent_account_id = var.root_account_id
+    excluded_arns     = jsonencode(var.denied_user_arns)
+    user_role         = "aws-nuke"
+  })
 
   tags = var.tags
 }

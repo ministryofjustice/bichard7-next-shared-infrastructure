@@ -96,4 +96,14 @@ locals {
   ]
 
   latest_liquibase_image = "${data.aws_ecr_repository.liquibase.repository_url}@${data.external.latest_liquibase.result.tags}"
+
+  allow_codebuild_codestar_connection_policy = templatefile("${path.module}/policies/allow_codebuild_codestar_connection.json", {
+    codestar_arn = aws_codestarconnections_connection.github.id
+  })
+  kms_permissions_policy = templatefile(
+    "${path.module}/policies/codebuild_kms_permissions.json",
+    {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  )
 }

@@ -4,7 +4,7 @@ module "tag_vars" {
 
 module "label" {
   source  = "cloudposse/label/null"
-  version = "0.24.1"
+  version = "0.25.0"
 
   # namespace, environment, stage, name, attributes
   namespace   = "${lower(module.tag_vars.business_unit)}-${replace(module.tag_vars.application, "-", "")}"
@@ -26,9 +26,9 @@ module "label" {
 
 module "aws_logs" {
   source            = "trussworks/logs/aws"
-  version           = "~> 10.3.0 "
+  version           = "16.2.0"
   s3_bucket_name    = "${module.label.name}-aws-logs"
-  enable_versioning = true
+  versioning_status = "Enabled"
 
   tags = module.label.tags
 }

@@ -1,24 +1,23 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
-      version = "= 3.75.2"
+      source = "hashicorp/aws"
     }
     docker = {
       source  = "kreuzwerker/docker"
-      version = "= 3.0.1"
+      version = "3.0.2"
     }
     external = {
       source  = "hashicorp/external"
-      version = "= 2.1.0"
+      version = "2.3.3"
     }
     null = {
       source  = "hashicorp/null"
-      version = "= 3.2.1"
+      version = "3.2.2"
     }
     local = {
       source  = "hashicorp/local"
-      version = "= 2.3.0"
+      version = "2.4.1"
     }
   }
   required_version = ">= 0.13"

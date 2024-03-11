@@ -4,9 +4,6 @@ provider "tls" {
 provider "null" {
 }
 
-provider "template" {
-}
-
 provider "aws" {
   region = var.region
   alias  = "sandbox_shared"

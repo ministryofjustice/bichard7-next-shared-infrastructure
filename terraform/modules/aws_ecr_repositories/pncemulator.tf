@@ -11,7 +11,7 @@ resource "aws_ecr_repository" "pncemulator" {
 }
 
 resource "aws_ecr_repository_policy" "allow_codebuild_pncemulator" {
-  policy     = data.template_file.shared_docker_image_policy.rendered
+  policy     = local.shared_docker_image_policy
   repository = aws_ecr_repository.pncemulator.name
 }
 

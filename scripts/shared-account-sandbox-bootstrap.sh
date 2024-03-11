@@ -6,12 +6,4 @@ then
   exit 1
 fi
 
-cd shared_account_sandbox_bootstrap
-terraform init
-
-if [ "$AUTO_APPROVE" = "true" ]
-then
-  terraform apply -auto-approve
-else
-  terraform apply
-fi
+./scripts/shared_account_terraform.py sandbox bootstrap

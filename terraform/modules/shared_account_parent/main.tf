@@ -42,8 +42,12 @@ resource "aws_iam_group_policy_attachment" "readonly_user_policy" {
 }
 
 resource "aws_iam_policy" "ci_policy" {
-  name   = "CIAccessPolicy"
-  policy = data.template_file.parent_account_ci_policy.rendered
+  name = "CIAccessPolicy"
+  policy = templatefile("${path.module}/policies/parent_account_ci_policy.json.tpl", {
+    root_account_id = data.aws_caller_identity.current.account_id
+    buckets         = jsonencode(var.buckets)
+    bucket_contents = jsonencode(formatlist("%s/*", var.buckets))
+  })
 
   tags = var.tags
 }
@@ -57,8 +61,12 @@ resource "aws_iam_group_policy_attachment" "ci_group_policy" {
 resource "aws_iam_role" "assume_administrator_access_on_parent" {
   name                 = "Bichard7-Administrator-Access"
   max_session_duration = 10800
-  assume_role_policy   = data.template_file.allow_assume_administrator_access_template.rendered
-
+  assume_role_policy = templatefile(
+    "${path.module}/policies/allow_assume_parent_admin_access.json.tpl",
+    {
+      parent_account_id = data.aws_caller_identity.current.account_id
+    }
+  )
   tags = var.tags
 }
 

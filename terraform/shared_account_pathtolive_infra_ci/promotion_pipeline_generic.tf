@@ -2,7 +2,7 @@ resource "aws_kms_key" "codepipeline_deploy_key" {
   deletion_window_in_days = 14
   enable_key_rotation     = true
 
-  policy = data.template_file.kms_permissions.rendered
+  policy = local.kms_permissions_policy
   tags   = module.label.tags
 }
 

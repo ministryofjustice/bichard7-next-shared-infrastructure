@@ -1,33 +1,43 @@
 #tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket" "codebuild_flow_logs_bucket" {
   bucket = "${var.name}-codebuild-flow-logs"
+  tags   = var.tags
+}
+
+resource "aws_s3_bucket_acl" "codebuild_flow_logs_bucket_acl" {
+  bucket = aws_s3_bucket.codebuild_flow_logs_bucket.id
   acl    = "private"
+}
 
-  force_destroy = true
+resource "aws_s3_bucket_logging" "codebuild_flow_logs_bucket_logging" {
+  bucket        = aws_s3_bucket.codebuild_flow_logs_bucket.id
+  target_bucket = var.aws_logs_bucket
+  target_prefix = "codebuild-flow-logs/"
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "codebuild_flow_logs_bucket_versioning" {
+  bucket = aws_s3_bucket.codebuild_flow_logs_bucket.id
+  versioning_configuration {
+    status = "Enabled"
   }
+}
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
+# trivy:ignore:aws-s3-encryption-customer-key
+resource "aws_s3_bucket_server_side_encryption_configuration" "codebuild_flow_logs_bucket_encryption" {
+  bucket = aws_s3_bucket.codebuild_flow_logs_bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
   }
-
-  logging {
-    target_bucket = var.aws_logs_bucket
-    target_prefix = "codebuild-flow-logs/"
-  }
-
-  tags = var.tags
 }
 
 resource "aws_s3_bucket_policy" "codebuild_flow_logs_bucket" {
   bucket = aws_s3_bucket.codebuild_flow_logs_bucket.bucket
-  policy = data.template_file.codebuild_flow_logs_bucket.rendered
+  policy = templatefile("${path.module}/policies/codebuild_flow_logs_bucket.json.tpl", {
+    codebuild_flow_logs_bucket_arn = aws_s3_bucket.codebuild_flow_logs_bucket.arn
+  })
 }
 
 resource "aws_s3_bucket_public_access_block" "codebuild_flow_logs_bucket" {
@@ -41,7 +51,7 @@ resource "aws_s3_bucket_public_access_block" "codebuild_flow_logs_bucket" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.0.0"
+  version = "5.5.2"
 
   name = "${var.name}-codebuild-vpc"
   cidr = local.cidr_block
@@ -50,12 +60,13 @@ module "vpc" {
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_vpn_gateway   = false
-  create_igw           = true
-  enable_dns_hostnames = true
-  enable_dns_support   = true
+  enable_nat_gateway      = true
+  single_nat_gateway      = true
+  enable_vpn_gateway      = false
+  create_igw              = true
+  enable_dns_hostnames    = true
+  enable_dns_support      = true
+  map_public_ip_on_launch = true
 
   enable_flow_log           = true
   flow_log_destination_type = "s3"
