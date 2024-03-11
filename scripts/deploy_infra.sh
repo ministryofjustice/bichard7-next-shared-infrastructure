@@ -61,4 +61,4 @@ else
   exit 1
 fi
 
-./scripts/shared_account_terraform.py $ENVIRONMENT infra
+./scripts/shared_account_terraform.py $ENVIRONMENT infra "plan"
