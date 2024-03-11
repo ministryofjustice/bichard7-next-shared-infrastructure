@@ -238,13 +238,7 @@
         "ecs:UpdateCluster"
       ],
       "Resource": [
-        "arn:aws:ecs:*:${account_id}:cluster/*",
-        "arn:aws:ecs:*:${account_id}:task/*",
-        "arn:aws:ecs:*:${account_id}:service/*",
-        "arn:aws:ecs:*:${account_id}:task-definition/*:*",
-        "arn:aws:ecs:*:${account_id}:capacity-provider/*",
-        "arn:aws:ecs:*:${account_id}:container-instance/*",
-        "arn:aws:ecs:*:${account_id}:task-set/*/*/*"
+        "arn:aws:ecs:*:${account_id}:*"
       ]
     },
     {
