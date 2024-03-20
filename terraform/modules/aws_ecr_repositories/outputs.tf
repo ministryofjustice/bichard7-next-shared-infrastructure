@@ -93,11 +93,6 @@ output "puppeteer_repository_arn" {
   value       = aws_ecr_repository.puppeteer.arn
 }
 
-output "nginx_scan_portal_repository_arn" {
-  description = "The repository arn for our nginx scan portal image"
-  value       = aws_ecr_repository.nginx_scan_portal.arn
-}
-
 output "user_service_repository_arn" {
   description = "The repository arn for our user service image"
   value       = aws_ecr_repository.user_service.arn

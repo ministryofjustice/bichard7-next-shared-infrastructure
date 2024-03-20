@@ -42,10 +42,6 @@ output "codebuild_public_cidr_blocks" {
   description = "A list of private cidr blocks"
   value       = module.codebuild_base_resources.codebuild_public_cidrs
 }
-output "scanning_portal_fqdn" {
-  description = "The external fqdn of our scanning portal"
-  value       = module.ecs_scanning_portal.scanning_fqdn
-}
 
 output "codebuild_security_group_id" {
   description = "The VPC security group id used by codebuild"

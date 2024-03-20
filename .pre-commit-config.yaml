@@ -16,7 +16,6 @@ repos:
       - id: terraform_fmt
       - id: terraform_tflint
         args:
-          - "--args=--ignore-module=./terraform/modules/scanning_results_ecs"
           - "--args=--ignore-module=./terraform/modules/codebuild_monitoring"
           - "--args=--module"
           - "--args=--force"
