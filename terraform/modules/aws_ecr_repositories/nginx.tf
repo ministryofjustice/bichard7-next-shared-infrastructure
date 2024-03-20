@@ -1,16 +1,4 @@
 # tfsec:ignore:aws-ecr-repository-customer-key
-resource "aws_ecr_repository" "nginx_scan_portal" {
-  name                 = "nginx-scan-portal"
-  image_tag_mutability = "IMMUTABLE"
-
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-
-  tags = var.tags
-}
-
-# tfsec:ignore:aws-ecr-repository-customer-key
 resource "aws_ecr_repository" "nginx_nodejs_supervisord" {
   name                 = "nginx-nodejs-supervisord"
   image_tag_mutability = "IMMUTABLE"
@@ -45,16 +33,6 @@ resource "aws_ecr_repository" "nginx_supervisord" {
   }
 
   tags = var.tags
-}
-
-resource "aws_ecr_repository_policy" "allow_codebuild_nginx_scan_portal" {
-  policy     = file("${path.module}/templates/codebuild_image_policy.json")
-  repository = aws_ecr_repository.nginx_scan_portal.name
-}
-
-resource "aws_ecr_lifecycle_policy" "nginx_scan_portal" {
-  policy     = file("${path.module}/policies/helper_image_ecr_lifecycle_policy.json")
-  repository = aws_ecr_repository.nginx_scan_portal.name
 }
 
 resource "aws_ecr_repository_policy" "allow_codebuild_nginx_java_supervisord" {
