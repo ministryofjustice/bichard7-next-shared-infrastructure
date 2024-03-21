@@ -2,9 +2,9 @@ module "build_nodejs_20_2023_docker_image" {
   source = "../codebuild_job"
 
   name                  = "build-nodejs-20-2023-docker"
-  build_description     = "Codebuild for Building Nginx and Supervisord On NodeJS 20 Base With amazonlinux:2023"
+  build_description     = "Codebuild for Building NodeJS 20 Base With amazonlinux:2023"
   repository_name       = "bichard7-next-infrastructure-docker-images"
-  buildspec_file        = "./Nginx_NodeJS_20_2023_Supervisord/buildspec.yml"
+  buildspec_file        = "./NodeJS_20_2023/buildspec.yml"
   environment_variables = var.common_cd_vars
 
   codepipeline_s3_bucket = var.codebuild_s3_bucket
