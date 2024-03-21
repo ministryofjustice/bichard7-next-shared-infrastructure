@@ -128,21 +128,6 @@ output "amazon_linux_2_base_arn" {
   value       = aws_ecr_repository.amazon_linux_2_base.arn
 }
 
-output "nginx_java_supervisord_arn" {
-  description = "The repository arn for our nginx jre11 supervisord image"
-  value       = aws_ecr_repository.nginx_java_supervisord.arn
-}
-
-output "nginx_nodejs_supervisord_arn" {
-  description = "The repository arn for our nginx nodejs16 supervisord image"
-  value       = aws_ecr_repository.nginx_nodejs_supervisord.arn
-}
-
-output "nginx_supervisord_arn" {
-  description = "The repository ARN for our nginx-supervisord image"
-  value       = aws_ecr_repository.nginx_supervisord.arn
-}
-
 output "nginx_auth_proxy_arn" {
   description = "The repository ARN for our nginx-auth-proxy image"
   value       = aws_ecr_repository.nginx_auth_proxy.arn
