@@ -78,11 +78,6 @@ output "liquibase_repository_arn" {
   value       = aws_ecr_repository.liquibase.arn
 }
 
-output "nodejs_repository_arn" {
-  description = "The repository arn for our nodejs image"
-  value       = aws_ecr_repository.nodejs.arn
-}
-
 output "puppeteer_docker_image" {
   description = "The image hash for puppeteer"
   value       = "${aws_ecr_repository.puppeteer.repository_url}@${data.docker_registry_image.puppeteer.sha256_digest}"
@@ -121,11 +116,6 @@ output "audit_logging_portal_arn" {
 output "audit_logging_portal" {
   description = "The outputs of the audit logging portal ecr repository"
   value       = aws_ecr_repository.audit_logging_portal
-}
-
-output "amazon_linux_2_base_arn" {
-  description = "The repository arn for amazon-linux2-base image"
-  value       = aws_ecr_repository.amazon_linux_2_base.arn
 }
 
 output "nginx_auth_proxy_arn" {

@@ -23,3 +23,8 @@ module "build_codebuild_base_docker_image_schedule" {
   cron_expression = "cron(0 4 ? * SUN *)"
   tags            = var.tags
 }
+
+module "build_codebuild_base_docker_image_trigger" {
+  source                 = "../codebuild_webhook"
+  codebuild_project_name = module.build_codebuild_base_docker_image.pipeline_name
+}
