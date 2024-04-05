@@ -26,8 +26,6 @@
       type: admin
     - name: richard_race
       type: admin
-    - name: ammaar_limbada
-      type: admin
     - name: seneca_saunders
       type: admin
     - name: bushra_abdullahi
@@ -38,4 +36,4 @@
       type: admin
 
 - users_removed:
-    - name: alice_lee
+    - name: ammaar_limbada
