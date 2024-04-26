@@ -1,5 +1,5 @@
 data "docker_registry_image" "zap_owasp_scanner" {
-  name = "owasp/zap2docker-weekly"
+  name = "softwaresecurityproject/zap-stable"
 }
 # Get our image hashes
 data "external" "zap_owasp_scanner_hash" {
