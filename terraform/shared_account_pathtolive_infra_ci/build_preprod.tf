@@ -337,6 +337,10 @@ module "run_preprod_tests" {
     {
       name  = "PNC_TEST_TOOL"
       value = "https://10.129.3.73/"
+    },
+    {
+      name  = "AWS_URL"
+      value = ""
     }
   ]
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
