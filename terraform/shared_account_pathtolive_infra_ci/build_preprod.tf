@@ -707,10 +707,10 @@ module "enable_pnc_test_tool" {
   build_description      = "Enable PNC test tool in pre production"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "enable-pnc-test-tool"
-  repository_name        = "bichard7-next-infrastructure"
-  buildspec_file         = "buildspecs/pnc-test-tool-buildspec.yml"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  buildspec_file       = "buildspecs/pnc-test-tool-buildspec.yml"
+  repository_name      = "bichard7-next-infrastructure"
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
 
@@ -721,10 +721,6 @@ module "enable_pnc_test_tool" {
   ]
 
   environment_variables = [
-    {
-      name  = "ASSUME_ROLE_ARN"
-      value = each.value.role_arn
-    },
     {
       name  = "DEPLOY_ENV"
       value = "pathtolive"
@@ -750,20 +746,8 @@ module "enable_pnc_test_tool" {
       value = data.aws_caller_identity.current.account_id
     },
     {
-      name  = "USE_PEERING"
-      value = "true"
-    },
-    {
-      name  = "TF_VAR_is_e2e"
-      value = each.value.is_e2e
-    },
-    {
-      name  = "TF_VAR_is_qsolution"
-      value = each.value.is_qsolution
-    },
-    {
-      name  = "TF_VAR_is_production"
-      value = each.value.is_production
+      name  = "TF_VAR_pnc_test_tool_enabled"
+      value = true
     },
   ]
 
@@ -775,11 +759,11 @@ module "disable_pnc_test_tool" {
   build_description      = "Disable PNC test tool in pre production"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "disable-pnc-test-tool"
-  repository_name        = "bichard7-next-infrastructure"
-  buildspec_file         = "buildspecs/pnc-test-tool-buildspec.yml"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
 
 
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  buildspec_file       = "buildspecs/pnc-test-tool-buildspec.yml"
+  repository_name      = "bichard7-next-infrastructure"
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
 
@@ -790,10 +774,6 @@ module "disable_pnc_test_tool" {
   ]
 
   environment_variables = [
-    {
-      name  = "ASSUME_ROLE_ARN"
-      value = each.value.role_arn
-    },
     {
       name  = "DEPLOY_ENV"
       value = "pathtolive"
@@ -819,20 +799,8 @@ module "disable_pnc_test_tool" {
       value = data.aws_caller_identity.current.account_id
     },
     {
-      name  = "USE_PEERING"
-      value = "true"
-    },
-    {
-      name  = "TF_VAR_is_e2e"
-      value = each.value.is_e2e
-    },
-    {
-      name  = "TF_VAR_is_qsolution"
-      value = each.value.is_qsolution
-    },
-    {
-      name  = "TF_VAR_is_production"
-      value = each.value.is_production
+      name  = "TF_VAR_pnc_test_tool_enabled"
+      value = false
     },
   ]
 
