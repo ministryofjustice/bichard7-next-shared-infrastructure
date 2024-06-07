@@ -340,7 +340,7 @@ module "run_preprod_tests" {
     },
     {
       name  = "AWS_URL"
-      value = ""
+      value = "none"
     }
   ]
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
