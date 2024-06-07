@@ -708,7 +708,7 @@ module "enable_pnc_test_tool" {
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "enable-pnc-test-tool"
   repository_name        = "bichard7-next-infrastructure"
-  buildspec_file         = "buildspecs/enable-pnc-test-tool-buildspec.yml"
+  buildspec_file         = "buildspecs/pnc-test-tool-buildspec.yml"
 
   vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
