@@ -749,6 +749,10 @@ module "enable_pnc_test_tool" {
       name  = "TF_VAR_pnc_test_tool_enabled"
       value = true
     },
+    {
+      name  = "TF_VAR_host9_testing_tool_service_name"
+      value = "com.amazonaws.vpce.eu-west-2.vpce-svc-0c8c75e097f908968"
+    },
   ]
 
   tags = module.label.tags
@@ -801,6 +805,10 @@ module "disable_pnc_test_tool" {
     {
       name  = "TF_VAR_pnc_test_tool_enabled"
       value = true
+    },
+    {
+      name  = "TF_VAR_host9_testing_tool_service_name"
+      value = "com.amazonaws.vpce.eu-west-2.vpce-svc-0c8c75e097f908968"
     },
   ]
 
