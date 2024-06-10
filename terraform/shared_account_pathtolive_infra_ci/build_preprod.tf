@@ -727,7 +727,7 @@ module "enable_pnc_test_tool" {
     },
     {
       name  = "WORKSPACE"
-      value = each.value.workspace
+      value = "preprod"
     },
     {
       name  = "USER_TYPE"
@@ -735,7 +735,7 @@ module "enable_pnc_test_tool" {
     },
     {
       name  = "AWS_ACCOUNT_NAME"
-      value = each.value.deploy_account_name
+      value = "q_solution"
     },
     {
       name  = "AUTO_APPROVE"
@@ -780,7 +780,7 @@ module "disable_pnc_test_tool" {
     },
     {
       name  = "WORKSPACE"
-      value = each.value.workspace
+      value = "preprod"
     },
     {
       name  = "USER_TYPE"
@@ -788,7 +788,7 @@ module "disable_pnc_test_tool" {
     },
     {
       name  = "AWS_ACCOUNT_NAME"
-      value = each.value.deploy_account_name
+      value = "q_solution"
     },
     {
       name  = "AUTO_APPROVE"
@@ -800,7 +800,7 @@ module "disable_pnc_test_tool" {
     },
     {
       name  = "TF_VAR_pnc_test_tool_enabled"
-      value = false
+      value = true
     },
   ]
 
