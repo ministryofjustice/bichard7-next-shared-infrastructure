@@ -701,3 +701,109 @@ module "disable_maintenance_page_preprod" {
 
   tags = module.label.tags
 }
+
+module "enable_pnc_test_tool" {
+  source                 = "../modules/codebuild_job"
+  build_description      = "Enable PNC test tool in pre production"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "enable-pnc-test-tool"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  buildspec_file       = "buildspecs/pnc-test-tool-buildspec.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+
+  build_environments = local.pipeline_build_environments
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = each.value.workspace
+    },
+    {
+      name  = "USER_TYPE"
+      value = "ci"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = each.value.deploy_account_name
+    },
+    {
+      name  = "AUTO_APPROVE"
+      value = true
+    },
+    {
+      name  = "PARENT_ACCOUNT_ID"
+      value = data.aws_caller_identity.current.account_id
+    },
+    {
+      name  = "TF_VAR_pnc_test_tool_enabled"
+      value = true
+    },
+  ]
+
+  tags = module.label.tags
+}
+
+module "disable_pnc_test_tool" {
+  source                 = "../modules/codebuild_job"
+  build_description      = "Disable PNC test tool in pre production"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "disable-pnc-test-tool"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+
+
+  buildspec_file       = "buildspecs/pnc-test-tool-buildspec.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+
+  build_environments = local.pipeline_build_environments
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
+  environment_variables = [
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = each.value.workspace
+    },
+    {
+      name  = "USER_TYPE"
+      value = "ci"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = each.value.deploy_account_name
+    },
+    {
+      name  = "AUTO_APPROVE"
+      value = true
+    },
+    {
+      name  = "PARENT_ACCOUNT_ID"
+      value = data.aws_caller_identity.current.account_id
+    },
+    {
+      name  = "TF_VAR_pnc_test_tool_enabled"
+      value = false
+    },
+  ]
+
+  tags = module.label.tags
+}
+
