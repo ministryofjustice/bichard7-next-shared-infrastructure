@@ -36,6 +36,8 @@
       type: admin
     - name: wenting_wang
       type: admin
+    - name: csaba_gyorfi
+      type: admin
 
 - users_removed:
     - name: ammaar_limbada
