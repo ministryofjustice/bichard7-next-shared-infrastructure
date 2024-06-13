@@ -225,7 +225,7 @@ resource "aws_codepipeline" "path_to_live" {
   }
 
   stage {
-    name = "update-e2e-test-environment"
+    name = "deploy-and-test-e2e-test-environment"
     action {
       category        = "Build"
       name            = "fetch-and-update-e2e-test-deploy-tags"
@@ -255,16 +255,14 @@ resource "aws_codepipeline" "path_to_live" {
         ProjectName = module.run_e2e_tests_restart_pnc_container.pipeline_name
       }
     }
-  }
 
-  stage {
-    name = "deploy-e2e-test-environment"
     action {
-      category = "Build"
-      name     = "deploy-e2e-test-environment"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "deploy-e2e-test-environment"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
 
       configuration = {
         ProjectName   = module.deploy_e2e_test_terraform.pipeline_name
@@ -326,11 +324,12 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category = "Build"
-      name     = "run-e2e-test-migrations"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "run-e2e-test-migrations"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
 
       configuration = {
         ProjectName   = module.run_e2e_test_migrations.pipeline_name
@@ -345,11 +344,12 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category = "Build"
-      name     = "deploy-conductor-definitions"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "deploy-conductor-definitions"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
 
       configuration = {
         ProjectName   = module.deploy_e2e_test_conductor_definitions.pipeline_name
@@ -361,10 +361,6 @@ resource "aws_codepipeline" "path_to_live" {
         "core"
       ]
     }
-  }
-
-  stage {
-    name = "run-e2e-tests"
 
     action {
       category  = "Build"
@@ -372,7 +368,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 1
+      run_order = 3
 
       configuration = {
         ProjectName   = module.verify_ecs_tasks.pipeline_name
@@ -403,7 +399,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 2
+      run_order = 4
       configuration = {
         ProjectName = module.apply_dev_sg_to_e2e_test.pipeline_name
       }
@@ -417,7 +413,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 3
+      run_order = 5
       configuration = {
         ProjectName = module.run_e2e_tests.pipeline_name
         EnvironmentVariables = jsonencode(
@@ -435,25 +431,11 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "seed-e2e-data"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 4
-      configuration = {
-        ProjectName = module.seed_e2e_data.pipeline_name
-      }
-
-      input_artifacts = ["ui"]
-    }
-
-    action {
-      category  = "Build"
       name      = "remove-dev-sgs-from-e2e-test"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 5
+      run_order = 6
       configuration = {
         ProjectName = module.remove_dev_sg_from_e2e_test.pipeline_name
       }
@@ -465,11 +447,12 @@ resource "aws_codepipeline" "path_to_live" {
   stage {
     name = "fetch-and-update-preprod-environment"
     action {
-      category = "Build"
-      name     = "fetch-and-update-preprod-deploy-tags"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "fetch-and-update-preprod-deploy-tags"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 1
 
       input_artifacts = ["infrastructure"]
 
@@ -505,16 +488,14 @@ resource "aws_codepipeline" "path_to_live" {
         )
       }
     }
-  }
 
-  stage {
-    name = "deploy-preprod-environment"
     action {
-      category = "Build"
-      name     = "deploy-preprod-environment"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "deploy-preprod-environment"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
 
       configuration = {
         ProjectName   = module.deploy_preprod_terraform.pipeline_name
@@ -576,11 +557,12 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category = "Build"
-      name     = "run-preprod-migrations"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "run-preprod-migrations"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
 
       configuration = {
         ProjectName   = module.run_preprod_migrations.pipeline_name
@@ -595,11 +577,12 @@ resource "aws_codepipeline" "path_to_live" {
     }
 
     action {
-      category = "Build"
-      name     = "deploy-conductor-definitions"
-      owner    = "AWS"
-      provider = "CodeBuild"
-      version  = "1"
+      category  = "Build"
+      name      = "deploy-conductor-definitions"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
 
       configuration = {
         ProjectName   = module.deploy_preprod_conductor_definitions.pipeline_name
@@ -611,10 +594,6 @@ resource "aws_codepipeline" "path_to_live" {
         "core"
       ]
     }
-  }
-
-  stage {
-    name = "run-preprod-tests"
 
     action {
       category  = "Build"
@@ -622,7 +601,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 1
+      run_order = 3
 
       configuration = {
         ProjectName   = module.verify_ecs_tasks.pipeline_name
@@ -653,7 +632,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 2
+      run_order = 4
       configuration = {
         ProjectName = module.apply_dev_sg_to_preprod.pipeline_name
       }
@@ -667,7 +646,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 3
+      run_order = 5
 
       configuration = {
         ProjectName = module.run_preprod_tests.pipeline_name
@@ -682,7 +661,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 4
+      run_order = 6
 
       configuration = {
         ProjectName = module.remove_dev_sg_from_preprod.pipeline_name
