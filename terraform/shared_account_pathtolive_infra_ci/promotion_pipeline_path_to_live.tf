@@ -445,7 +445,7 @@ resource "aws_codepipeline" "path_to_live" {
   }
 
   stage {
-    name = "fetch-and-update-preprod-environment"
+    name = "deploy-and-test-preprod-environment"
     action {
       category  = "Build"
       name      = "fetch-and-update-preprod-deploy-tags"
