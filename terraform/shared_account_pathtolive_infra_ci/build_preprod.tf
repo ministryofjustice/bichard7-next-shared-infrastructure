@@ -753,6 +753,32 @@ module "enable_pnc_test_tool" {
       name  = "TF_VAR_host9_testing_tool_service_name"
       value = "com.amazonaws.vpce.eu-west-2.vpce-svc-0c8c75e097f908968"
     },
+     {
+      name  = "CA_CERT"
+      value = "/ci/certs/qsolution/ca.crt"
+      type  = "PARAMETER_STORE"
+    },
+    {
+      name  = "SERVER_CERT"
+      value = "/ci/certs/qsolution/server.crt"
+      type  = "PARAMETER_STORE"
+    },
+    {
+      name  = "SERVER_KEY"
+      value = "/ci/certs/qsolution/server.key"
+      type  = "PARAMETER_STORE"
+    },
+    {
+      name  = "CLIENT_CERT"
+      value = "/ci/certs/qsolution/client1.domain.tld.crt"
+      type  = "PARAMETER_STORE"
+    },  
+    {
+      name  = "CLIENT_KEY"
+      value = "/ci/certs/qsolution/client1.domain.tld.key"
+      type  = "PARAMETER_STORE"
+    },
+
   ]
 
   tags = module.label.tags
@@ -809,6 +835,31 @@ module "disable_pnc_test_tool" {
     {
       name  = "TF_VAR_host9_testing_tool_service_name"
       value = "com.amazonaws.vpce.eu-west-2.vpce-svc-0c8c75e097f908968"
+    },
+     {
+      name  = "CA_CERT"
+      value = "/ci/certs/qsolution/ca.crt"
+      type  = "PARAMETER_STORE"
+    },
+    {
+      name  = "SERVER_CERT"
+      value = "/ci/certs/qsolution/server.crt"
+      type  = "PARAMETER_STORE"
+    },
+    {
+      name  = "SERVER_KEY"
+      value = "/ci/certs/qsolution/server.key"
+      type  = "PARAMETER_STORE"
+    },
+    {
+      name  = "CLIENT_CERT"
+      value = "/ci/certs/qsolution/client1.domain.tld.crt"
+      type  = "PARAMETER_STORE"
+    },
+    {
+      name  = "CLIENT_KEY"
+      value = "/ci/certs/qsolution/client1.domain.tld.key"
+      type  = "PARAMETER_STORE"
     },
   ]
 
