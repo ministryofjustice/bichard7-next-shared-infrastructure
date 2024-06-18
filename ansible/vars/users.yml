@@ -32,12 +32,10 @@
       type: admin
     - name: tausif_patel
       type: admin
-    - name: kate_sugden
-      type: admin
     - name: wenting_wang
       type: admin
     - name: csaba_gyorfi
       type: admin
 
 - users_removed:
-    - name: ammaar_limbada
+    - name: kate_sugden
