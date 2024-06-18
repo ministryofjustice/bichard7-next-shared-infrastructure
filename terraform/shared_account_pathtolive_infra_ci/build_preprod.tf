@@ -804,7 +804,7 @@ module "disable_pnc_test_tool" {
     },
     {
       name  = "TF_VAR_pnc_test_tool_enabled"
-      value = true
+      value = false
     },
     {
       name  = "TF_VAR_host9_testing_tool_service_name"
