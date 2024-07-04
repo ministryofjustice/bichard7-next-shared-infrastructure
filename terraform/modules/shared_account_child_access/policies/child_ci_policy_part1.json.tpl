@@ -257,6 +257,7 @@
         "ecs:DiscoverPollEndpoint",
         "ecs:ListTaskDefinitionFamilies",
         "ecs:CreateCluster",
+        "ecs:TagResource",
         "ecs:RegisterTaskDefinition",
         "ecs:ListTaskDefinitions",
         "ecs:DescribeTaskDefinition",
