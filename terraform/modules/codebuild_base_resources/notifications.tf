@@ -75,7 +75,7 @@ resource "aws_lambda_function" "codebuild_notification" {
 
   role        = aws_iam_role.codebuild_notification.arn
   memory_size = "128"
-  runtime     = "python3.8"
+  runtime     = "python3.12"
   timeout     = "5"
 
   tracing_config {
