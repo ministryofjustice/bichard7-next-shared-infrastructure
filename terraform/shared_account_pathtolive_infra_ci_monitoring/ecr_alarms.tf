@@ -94,7 +94,7 @@ resource "aws_lambda_function" "query_images_fn" {
 
   role        = aws_iam_role.ecr_repo_images.arn
   memory_size = "128"
-  runtime     = "python3.8"
+  runtime     = "python3.12"
   timeout     = "10"
 
   tags = module.label.tags
