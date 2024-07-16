@@ -62,7 +62,7 @@ module "trivy_scan" {
 module "trivy_scan_trigger" {
   source          = "../codebuild_schedule"
   codebuild_arn   = module.trivy_scan.pipeline_arn
-  cron_expression = "cron(0 10 ? * MON *)"
+  cron_expression = "cron(0 10 ? * * *)"
   name            = module.trivy_scan.pipeline_name
 
   tags = var.tags
