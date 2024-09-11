@@ -115,6 +115,10 @@ module "deploy_e2e_test_terraform" {
       name  = "TF_VAR_is_e2e"
       value = true
     },
+    {
+      name  = "TF_VAR_use_smtp_service"
+      value = "true"
+    }
   ]
   is_cd = true
 
