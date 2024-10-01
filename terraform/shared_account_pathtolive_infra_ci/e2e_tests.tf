@@ -2,11 +2,11 @@ module "run_e2e_tests" {
   source            = "../modules/codebuild_job"
   name              = "integration-test-e2e-test"
   build_description = "Codebuild Pipeline Running integration tests against e2e-test"
-  repository_name   = "bichard7-next-tests"
+  repository_name   = "bichard7-next-core"
 
   report_build_status = true
 
-  buildspec_file = "e2eTestBuildspec.yml"
+  buildspec_file = "packages/e2e-test/e2eTestBuildspec.yml"
   event_type_ids = []
 
   allowed_resource_arns = [

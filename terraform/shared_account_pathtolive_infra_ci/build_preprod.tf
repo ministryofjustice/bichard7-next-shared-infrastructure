@@ -292,11 +292,11 @@ module "run_preprod_tests" {
   source            = "../modules/codebuild_job"
   name              = "integration-test-preprod"
   build_description = "Codebuild Pipeline Running integration tests against preprod"
-  repository_name   = "bichard7-next-tests"
+  repository_name   = "bichard7-next-core"
 
   report_build_status = true
 
-  buildspec_file = "e2eTestBuildspec.yml"
+  buildspec_file = "packages/e2e-test/e2eTestBuildspec.yml"
   event_type_ids = []
 
   allowed_resource_arns = [
@@ -814,4 +814,3 @@ module "disable_pnc_test_tool" {
 
   tags = module.label.tags
 }
-
