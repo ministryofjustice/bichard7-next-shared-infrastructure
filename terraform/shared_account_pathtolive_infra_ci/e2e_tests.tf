@@ -55,43 +55,6 @@ module "run_e2e_tests" {
   ]
 }
 
-resource "aws_codebuild_webhook" "e2e_tests_pr_webhook" {
-  project_name = module.run_e2e_tests.pipeline_name
-
-  # Run the tests when a PR is created or updated and is not the master branch
-  filter_group {
-    filter {
-      type    = "EVENT"
-      pattern = "PULL_REQUEST_CREATED"
-    }
-
-    filter {
-      type    = "EVENT"
-      pattern = "PULL_REQUEST_UPDATED"
-    }
-
-    filter {
-      type                    = "HEAD_REF"
-      pattern                 = "refs/heads/main"
-      exclude_matched_pattern = true
-    }
-  }
-
-  # Run the tests when the master branch is updated from a merge or a naughty force push
-  filter_group {
-    filter {
-      type    = "EVENT"
-      pattern = "PUSH"
-    }
-
-    filter {
-      type    = "HEAD_REF"
-      pattern = "refs/heads/main"
-    }
-  }
-
-}
-
 module "run_e2e_tests_restart_pnc_container" {
   source            = "../modules/codebuild_job"
   name              = "restart-e2e-test-pnc-emulator-container"
