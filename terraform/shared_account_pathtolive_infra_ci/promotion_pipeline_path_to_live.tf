@@ -199,7 +199,7 @@ resource "aws_codepipeline" "path_to_live" {
 
       configuration = {
         ConnectionArn        = aws_codestarconnections_connection.github.arn
-        FullRepositoryId     = "ministryofjustice/bichard7-next-tests"
+        FullRepositoryId     = "ministryofjustice/bichard7-next-core"
         BranchName           = "main"
         OutputArtifactFormat = "CODEBUILD_CLONE_REF"
         DetectChanges        = false
