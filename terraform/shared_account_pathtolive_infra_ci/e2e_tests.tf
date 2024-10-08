@@ -55,16 +55,6 @@ module "run_e2e_tests" {
   ]
 }
 
-module "run_e2e_tests_schedule" {
-  count           = 0 // We are disabling this for now as it interferes with the pipeline testing, we'll probably remove it
-  source          = "../modules/codebuild_schedule"
-  codebuild_arn   = module.run_e2e_tests.pipeline_arn
-  name            = module.run_e2e_tests.pipeline_name
-  cron_expression = "cron(30 8-18 ? * MON-FRI *)"
-
-  tags = module.label.tags
-}
-
 resource "aws_codebuild_webhook" "e2e_tests_pr_webhook" {
   project_name = module.run_e2e_tests.pipeline_name
 
