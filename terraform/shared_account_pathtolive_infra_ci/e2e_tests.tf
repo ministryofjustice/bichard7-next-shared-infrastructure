@@ -81,43 +81,5 @@ module "run_e2e_tests_restart_pnc_container" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
 
-
-  tags = module.label.tags
-}
-
-module "seed_e2e_data" {
-  source            = "../modules/codebuild_job"
-  name              = "seed-e2e-data"
-  build_description = "Seed the database with generated case data"
-
-  repository_name = "bichard7-next-ui"
-  buildspec_file  = "seed-data-buildspec.yml"
-
-  environment_variables = concat(
-    [
-      {
-        name  = "WORKSPACE"
-        value = "e2e-test"
-      }
-    ],
-  local.bichard_cd_vars)
-
-  allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
-  ]
-
-  build_environments = [
-    {
-      compute_type    = "BUILD_GENERAL1_MEDIUM"
-      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
-      type            = "LINUX_CONTAINER"
-      privileged_mode = true
-    }
-  ]
-
-  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
-
   tags = module.label.tags
 }
