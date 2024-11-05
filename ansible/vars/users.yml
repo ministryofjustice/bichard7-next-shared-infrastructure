@@ -34,8 +34,6 @@
       type: admin
     - name: wenting_wang
       type: admin
-    - name: harriet_hall
-      type: admin
 
 - users_removed:
-    - name: csaba_gyorfi
+    - name: harriet_hall
