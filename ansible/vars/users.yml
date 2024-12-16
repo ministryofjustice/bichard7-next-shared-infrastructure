@@ -28,12 +28,10 @@
       type: admin
     - name: seneca_saunders
       type: admin
-    - name: bushra_abdullahi
-      type: admin
     - name: tausif_patel
       type: admin
     - name: wenting_wang
       type: admin
 
 - users_removed:
-    - name: harriet_hall
+    - name: bushra_abdullahi
