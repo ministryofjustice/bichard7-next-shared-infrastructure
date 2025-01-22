@@ -495,7 +495,7 @@ module "remove_dev_sg_from_uat" {
 }
 
 module "seed_uat_environment" {
-  source = "../codebuild_job"
+  source = "../modules/codebuild_job"
 
   repository_name = "bichard7-next-core"
   buildspec_file  = "packages/uat-data/buildspec.yml"
@@ -506,6 +506,7 @@ module "seed_uat_environment" {
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  tags = module.label.tags
 }
 
 module "apply_codebuild_layer_schedule" {
