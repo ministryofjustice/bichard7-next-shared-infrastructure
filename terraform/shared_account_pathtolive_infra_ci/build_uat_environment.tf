@@ -502,7 +502,7 @@ module "seed_uat_environment" {
 
   build_description      = "Insert test data into UAT environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "deploy-uat"
+  name                   = "seed-uat"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
