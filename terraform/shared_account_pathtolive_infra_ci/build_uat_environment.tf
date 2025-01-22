@@ -495,10 +495,10 @@ module "remove_dev_sg_from_uat" {
 }
 
 module "seed_uat_environment" {
-  source                         = "../codebuild_job"
+  source = "../codebuild_job"
 
-  repository_name                = "bichard7-next-core"
-  buildspec_file                 = "packages/uat-data/buildspec.yml"
+  repository_name = "bichard7-next-core"
+  buildspec_file  = "packages/uat-data/buildspec.yml"
 
   build_description      = "Insert test data into UAT environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
