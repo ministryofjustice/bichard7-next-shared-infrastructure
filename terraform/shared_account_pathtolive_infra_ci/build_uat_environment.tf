@@ -493,3 +493,25 @@ module "remove_dev_sg_from_uat" {
 
   tags = module.label.tags
 }
+
+module "seed_uat_environment" {
+  source                         = "../codebuild_job"
+
+  repository_name                = "bichard7-next-core"
+  buildspec_file                 = "packages/uat-data/buildspec.yml"
+
+  build_description      = "Insert test data into UAT environment"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "deploy-uat"
+  sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn   = module.codebuild_base_resources.notifications_arn
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+}
+
+module "apply_codebuild_layer_schedule" {
+  source          = "../codebuild_schedule"
+  codebuild_arn   = module.apply_codebuild_layer.pipeline_arn
+  name            = module.apply_codebuild_layer.pipeline_name
+  cron_expression = "cron(0 0 * * ? *)"
+  tags            = var.tags
+}
