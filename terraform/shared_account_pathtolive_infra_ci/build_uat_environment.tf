@@ -507,6 +507,13 @@ module "seed_uat_environment" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
   tags                   = module.label.tags
+
+    environment_variables = [
+    {
+      name  = "S3_INCOMING_MESSAGE_BUCKET"
+      value = "bichard-7-uat-incoming-messages"
+    }
+  ]
 }
 
 module "apply_codebuild_layer_schedule" {
