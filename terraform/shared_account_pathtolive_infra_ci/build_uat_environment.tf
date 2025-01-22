@@ -509,9 +509,9 @@ module "seed_uat_environment" {
 }
 
 module "apply_codebuild_layer_schedule" {
-  source          = "../codebuild_schedule"
+  source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.apply_codebuild_layer.pipeline_arn
   name            = module.apply_codebuild_layer.pipeline_name
   cron_expression = "cron(0 0 * * ? *)"
-  tags            = var.tags
+  tags            = module.tag_vars
 }
