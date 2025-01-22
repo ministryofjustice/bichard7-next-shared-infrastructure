@@ -506,13 +506,13 @@ module "seed_uat_environment" {
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
-  tags = module.label.tags
+  tags                   = module.label.tags
 }
 
 module "apply_codebuild_layer_schedule" {
   source          = "../modules/codebuild_schedule"
-  codebuild_arn   = module.apply_codebuild_layer.pipeline_arn
-  name            = module.apply_codebuild_layer.pipeline_name
+  codebuild_arn   = module.seed_uat_environment.pipeline_arn
+  name            = module.seed_uat_environment.pipeline_name
   cron_expression = "cron(0 0 * * ? *)"
   tags            = module.tag_vars
 }
