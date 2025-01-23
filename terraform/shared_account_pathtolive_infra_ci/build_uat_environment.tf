@@ -514,11 +514,19 @@ module "seed_uat_environment" {
       value = "bichard-7-uat-incoming-messages"
     },
     {
-      name  = "PNC_HOST"
-      value = "cjse-uat-bichard-7-pnc-emulator-75e8686f94f102b8.elb.eu-west-2.amazonaws.co"
+      name  = "WORKSPACE"
+      value = "uat"
     },
     {
-      name  = "PNC_PORT"
+      name  = "USE_PEERING"
+      value = "true"
+    },
+    {
+      name = "PNC_HOST"
+      value = "cjse-uat-bichard-7-pnc-emulator-75e8686f94f102b8.elb.eu-west-2.amazonaws.com"
+    },
+    {
+      name = "PNC_PORT"
       value = "3000"
     }
   ]
