@@ -524,6 +524,14 @@ module "seed_uat_environment" {
     {
       name = "PNC_PORT"
       value = "3000"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "integration_baseline"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
     }
   ]
 }
