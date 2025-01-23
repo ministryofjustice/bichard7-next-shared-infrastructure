@@ -534,18 +534,6 @@ module "seed_uat_environment" {
       value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
     }
   ]
-
-  codebuild_secondary_sources = [
-    {
-      type              = "GITHUB"
-      location          = "https://github.com/ministryofjustice/bichard7-next-infrastructure.git"
-      git_clone_depth   = 1
-      source_identifier = "bichard7_next_infrastructure"
-      git_submodules_config = {
-        fetch_submodules = true
-      }
-    }
-  ]
 }
 
 module "apply_codebuild_layer_schedule" {
