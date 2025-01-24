@@ -508,6 +508,10 @@ module "seed_uat_environment" {
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
   tags                   = module.label.tags
 
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn
+  ]
+
   build_environments = local.pipeline_build_environments
 
   environment_variables = [
