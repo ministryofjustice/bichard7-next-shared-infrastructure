@@ -508,7 +508,18 @@ module "seed_uat_environment" {
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
   tags                   = module.label.tags
 
-    environment_variables = [
+  build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_MEDIUM"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
+  environment_variables = [
     {
       name  = "S3_INCOMING_MESSAGE_BUCKET"
       value = "bichard-7-uat-incoming-messages"
@@ -518,11 +529,11 @@ module "seed_uat_environment" {
       value = "uat"
     },
     {
-      name = "PNC_HOST"
+      name  = "PNC_HOST"
       value = "cjse-uat-bichard-7-pnc-emulator-75e8686f94f102b8.elb.eu-west-2.amazonaws.com"
     },
     {
-      name = "PNC_PORT"
+      name  = "PNC_PORT"
       value = "3000"
     },
     {
