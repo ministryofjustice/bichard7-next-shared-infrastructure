@@ -497,61 +497,51 @@ module "remove_dev_sg_from_uat" {
 module "seed_uat_environment" {
   source = "../modules/codebuild_job"
 
-  repository_name = "bichard7-next-core"
-  buildspec_file  = "packages/uat-data/buildspec.yml"
-
   build_description      = "Insert test data into UAT environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "seed-uat"
-  sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
-  sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
-  tags                   = module.label.tags
+  buildspec_file         = "packages/uat-data/buildspec.yml"
 
-  allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
-  ]
-
-  build_environments = local.pipeline_build_environments
+  repository_name      = "bichard7-next-core"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
 
   environment_variables = [
     {
-      name  = "S3_INCOMING_MESSAGE_BUCKET"
-      value = "bichard-7-uat-incoming-messages"
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
     },
     {
       name  = "WORKSPACE"
       value = "uat"
     },
     {
-      name  = "PNC_HOST"
-      value = "cjse-uat-bichard-7-pnc-emulator-75e8686f94f102b8.elb.eu-west-2.amazonaws.com"
-    },
-    {
-      name  = "PNC_PORT"
-      value = "3000"
+      name  = "USER_TYPE"
+      value = "ci"
     },
     {
       name  = "AWS_ACCOUNT_NAME"
       value = "integration_baseline"
     },
     {
+      name  = "AUTO_APPROVE"
+      value = true
+    },
+    {
       name  = "ASSUME_ROLE_ARN"
       value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
-    }
-  ]
-
-  codebuild_secondary_sources = [
+    },
     {
-      type              = "GITHUB"
-      location          = "https://github.com/ministryofjustice/bichard7-next-infrastructure.git"
-      git_clone_depth   = 1
-      source_identifier = "bichard7_next_infrastructure"
-      git_submodules_config = {
-        fetch_submodules = true
-      }
+      name  = "PARENT_ACCOUNT_ID"
+      value = data.aws_caller_identity.current.account_id
+    },
+    {
+      name  = "LIQUIBASE_IMAGE"
+      value = local.latest_liquibase_image
     }
   ]
+  tags = module.label.tags
 }
 
 module "apply_codebuild_layer_schedule" {
