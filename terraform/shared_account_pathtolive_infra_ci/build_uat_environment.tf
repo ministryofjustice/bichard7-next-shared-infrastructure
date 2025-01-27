@@ -509,6 +509,26 @@ module "seed_uat_environment" {
 
   environment_variables = [
     {
+      name  = "PNC_HOST"
+      value = "pnc.uat.ptl.bichard7.modernisation-platform.service.justice.gov.uk"
+    },
+    {
+      name  = "PNC_PORT"
+      value = "3000"
+    },
+    {
+      name  = "S3_INCOMING_MESSAGE_BUCKET"
+      value = "bichard-7-uat-incoming-messages"
+    },
+    {
+      name  = "DEPLOY_NAME"
+      value = "uat"
+    },
+    {
+      name  = "REPEAT_SCENARIOS"
+      value = "10"
+    },
+    {
       name  = "DEPLOY_ENV"
       value = "pathtolive"
     },
@@ -525,20 +545,8 @@ module "seed_uat_environment" {
       value = "integration_baseline"
     },
     {
-      name  = "AUTO_APPROVE"
-      value = true
-    },
-    {
       name  = "ASSUME_ROLE_ARN"
       value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
-    },
-    {
-      name  = "PARENT_ACCOUNT_ID"
-      value = data.aws_caller_identity.current.account_id
-    },
-    {
-      name  = "LIQUIBASE_IMAGE"
-      value = local.latest_liquibase_image
     }
   ]
   tags = module.label.tags
