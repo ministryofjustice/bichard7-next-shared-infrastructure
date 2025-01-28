@@ -493,3 +493,69 @@ module "remove_dev_sg_from_uat" {
 
   tags = module.label.tags
 }
+
+module "seed_uat_environment" {
+  source = "../modules/codebuild_job"
+
+  build_description      = "Insert test data into UAT environment"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "seed-uat"
+  buildspec_file         = "packages/uat-data/buildspec.yml"
+
+  repository_name      = "bichard7-next-core"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+
+  environment_variables = [
+    {
+      name  = "PNC_HOST"
+      value = "pnc.uat.ptl.bichard7.modernisation-platform.service.justice.gov.uk"
+    },
+    {
+      name  = "PNC_PORT"
+      value = "3000"
+    },
+    {
+      name  = "S3_INCOMING_MESSAGE_BUCKET"
+      value = "bichard-7-uat-incoming-messages"
+    },
+    {
+      name  = "DEPLOY_NAME"
+      value = "uat"
+    },
+    {
+      name  = "REPEAT_SCENARIOS"
+      value = "10"
+    },
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "uat"
+    },
+    {
+      name  = "USER_TYPE"
+      value = "ci"
+    },
+    {
+      name  = "AWS_ACCOUNT_NAME"
+      value = "integration_baseline"
+    },
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
+    }
+  ]
+  tags = module.label.tags
+}
+
+module "apply_codebuild_layer_schedule" {
+  source          = "../modules/codebuild_schedule"
+  codebuild_arn   = module.seed_uat_environment.pipeline_arn
+  name            = module.seed_uat_environment.pipeline_name
+  cron_expression = "cron(0 0,8,16 * * ? *)"
+  tags            = module.tag_vars
+}
