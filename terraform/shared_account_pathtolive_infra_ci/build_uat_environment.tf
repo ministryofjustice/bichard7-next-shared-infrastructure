@@ -556,6 +556,6 @@ module "apply_codebuild_layer_schedule" {
   source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.seed_uat_environment.pipeline_arn
   name            = module.seed_uat_environment.pipeline_name
-  cron_expression = "cron(0 0 * * ? *)"
+  cron_expression = "cron(0 0,8,16 * * ? *)"
   tags            = module.tag_vars
 }
