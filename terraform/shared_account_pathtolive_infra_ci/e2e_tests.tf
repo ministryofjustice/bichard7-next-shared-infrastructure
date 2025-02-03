@@ -3,6 +3,7 @@ module "run_e2e_tests" {
   name              = "integration-test-e2e-test"
   build_description = "Codebuild Pipeline Running integration tests against e2e-test"
   repository_name   = "bichard7-next-core"
+  vpc_config        = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
 
   report_build_status = true
 

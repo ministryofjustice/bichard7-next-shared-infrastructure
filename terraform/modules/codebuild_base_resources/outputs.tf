@@ -71,6 +71,11 @@ output "codebuild_security_group_id" {
   value       = aws_security_group.codebuild_vpc_sg.id
 }
 
+output "codebuild_security_group_ids" {
+  description = "Mapping of environment names to their security group IDs"
+  value       = { for env, sg in aws_security_group.environment_codebuild_vpc_sgs : env => sg.id }
+}
+
 output "codebuild_vpc_config_block" {
   description = "A preformed config block to pass to codebuild"
   value = [
@@ -83,6 +88,11 @@ output "codebuild_vpc_config_block" {
       ]
     }
   ]
+}
+
+output "codebuild_vpc_config_blocks" {
+  description = "A preformed config block to pass to codebuild"
+  value       = local.codebuild_vpc_config_blocks
 }
 
 output "codebuild_cidr_block" {

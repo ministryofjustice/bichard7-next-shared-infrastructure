@@ -8,7 +8,7 @@ module "deploy_uat_terraform" {
   buildspec_file         = "buildspecs/buildspec.yml"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   build_environments = local.pipeline_build_environments
 
@@ -161,7 +161,7 @@ module "destroy_uat_test_terraform" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   build_timeout = 180
 
@@ -254,7 +254,7 @@ module "run_uat_migrations" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   build_timeout = 180
 
@@ -334,7 +334,7 @@ module "deploy_uat_conductor_definitions" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   build_timeout = 180
 
@@ -392,7 +392,7 @@ module "apply_dev_sg_to_uat" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "apply-dev-sgs-to-uat"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -446,7 +446,7 @@ module "remove_dev_sg_from_uat" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "remove-dev-sgs-from-uat"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -505,7 +505,7 @@ module "seed_uat_environment" {
   repository_name      = "bichard7-next-core"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   environment_variables = [
     {
