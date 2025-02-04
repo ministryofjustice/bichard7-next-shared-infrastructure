@@ -8,7 +8,7 @@ module "deploy_preprod_terraform" {
   buildspec_file         = "buildspecs/buildspec.yml"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   build_environments = local.pipeline_build_environments
 
@@ -172,7 +172,7 @@ module "destroy_preprod_terraform" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "destroy-qsolution-preprod"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   buildspec_file       = "buildspecs/destroy-buildspec.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -365,7 +365,7 @@ module "run_preprod_migrations" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   build_timeout = 180
 
@@ -445,7 +445,7 @@ module "deploy_preprod_conductor_definitions" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   build_timeout = 180
 
@@ -503,7 +503,7 @@ module "apply_dev_sg_to_preprod" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "apply-dev-sgs-to-preprod"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -557,7 +557,7 @@ module "remove_dev_sg_from_preprod" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "remove-dev-sgs-from-preprod"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -620,7 +620,7 @@ module "enable_maintenance_page_preprod" {
   build_description      = "Codebuild Pipeline for enabling maintenance page in preprod"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "enable-maintenance-page-preprod"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   buildspec_file       = "buildspecs/maintenance-buildspec.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -664,7 +664,7 @@ module "disable_maintenance_page_preprod" {
   build_description      = "Codebuild Pipeline for disabling maintenance page in preprod"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "disable-maintenance-page-preprod"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   buildspec_file       = "buildspecs/maintenance-buildspec.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -707,7 +707,7 @@ module "enable_pnc_test_tool" {
   build_description      = "Enable PNC test tool in pre production"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "enable-pnc-test-tool"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   buildspec_file       = "buildspecs/pnc-test-tool-buildspec.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -763,7 +763,7 @@ module "disable_pnc_test_tool" {
   build_description      = "Disable PNC test tool in pre production"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "disable-pnc-test-tool"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
 
   buildspec_file       = "buildspecs/pnc-test-tool-buildspec.yml"

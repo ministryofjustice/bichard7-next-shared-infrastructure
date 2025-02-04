@@ -8,7 +8,7 @@ module "deploy_e2e_test_terraform" {
   buildspec_file         = "buildspecs/buildspec.yml"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
 
   build_timeout = 180
 
@@ -132,7 +132,7 @@ module "destroy_e2e_test_terraform" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
 
   build_timeout = 180
 
@@ -226,7 +226,7 @@ module "run_e2e_test_migrations" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
 
   build_timeout = 180
 
@@ -306,7 +306,7 @@ module "deploy_e2e_test_conductor_definitions" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
 
   build_timeout = 180
 
@@ -364,7 +364,7 @@ module "apply_dev_sg_to_e2e_test" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "apply-dev-sgs-to-e2e-test"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -418,7 +418,7 @@ module "remove_dev_sg_from_e2e_test" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "remove-dev-sgs-from-e2e-test"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"

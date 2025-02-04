@@ -41,6 +41,12 @@ variable "vpc_cidr_block" {
   default     = null
 }
 
+variable "codebuild_sg_environment_names" {
+  description = "List of environment names for CodeBuild security groups"
+  type        = set(string)
+  default     = []
+}
+
 variable "is_sandbox_account" {
   description = "Is this a sandbox account?"
   type        = bool

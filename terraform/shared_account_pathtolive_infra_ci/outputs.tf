@@ -48,6 +48,11 @@ output "codebuild_security_group_id" {
   value       = module.codebuild_base_resources.codebuild_security_group_id
 }
 
+output "codebuild_security_group_ids" {
+  description = "The VPC security group ids used by codebuild"
+  value       = module.codebuild_base_resources.codebuild_security_group_ids
+}
+
 output "bichard_liberty_ecr" {
   description = "The Bichard Liberty ecr repository details"
   value       = module.codebuild_docker_resources.bichard_liberty_ecr

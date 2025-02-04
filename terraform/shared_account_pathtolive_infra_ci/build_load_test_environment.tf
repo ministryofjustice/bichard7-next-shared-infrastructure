@@ -7,7 +7,7 @@ module "deploy_load_test_terraform" {
   repository_name        = "bichard7-next-infrastructure"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
   buildspec_file         = "buildspecs/buildspec.yml"
 
   build_timeout = 180
@@ -151,7 +151,7 @@ module "destroy_load_test_terraform" {
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "destroy-integration-baseline-load-test"
   buildspec_file         = "buildspecs/destroy-buildspec.yml"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
@@ -255,7 +255,7 @@ module "run_load_test_migrations" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   build_timeout = 180
 
@@ -330,7 +330,7 @@ module "apply_dev_sg_to_load_test" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "apply-dev-sgs-to-load-test"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -384,7 +384,7 @@ module "remove_dev_sg_from_load_test" {
   build_description      = "Codebuild Pipeline for rebuilding terraform infrastructure"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "remove-dev-sgs-from-load-test"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_block
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
