@@ -115,6 +115,22 @@ module "deploy_e2e_test_terraform" {
       name  = "TF_VAR_is_e2e"
       value = true
     },
+    {
+      name  = "TF_VAR_vpc_peering_access_mq"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_db"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_conductor"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_pnc_emulator"
+      value = "true"
+    }
   ]
   is_cd = true
 

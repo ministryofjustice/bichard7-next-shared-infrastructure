@@ -160,6 +160,22 @@ module "deploy_preprod_terraform" {
     {
       name  = "ARTIFACT_BUCKET"
       value = module.codebuild_base_resources.codepipeline_bucket
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_mq"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_db"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_conductor"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_pnc_emulator"
+      value = "false"
     }
   ]
 

@@ -144,6 +144,22 @@ module "deploy_uat_terraform" {
     {
       name  = "TF_VAR_use_smtp_service"
       value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_mq"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_db"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_conductor"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_vpc_peering_access_pnc_emulator"
+      value = "true"
     }
   ]
 
