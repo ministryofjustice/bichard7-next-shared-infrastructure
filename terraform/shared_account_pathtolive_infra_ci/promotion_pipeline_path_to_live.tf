@@ -1189,6 +1189,7 @@ module "run_prod_smoketests" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   buildspec_file         = "buildspecs/prod-smoketest-buildspec.yml"
   event_type_ids         = []
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["production"]
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn
