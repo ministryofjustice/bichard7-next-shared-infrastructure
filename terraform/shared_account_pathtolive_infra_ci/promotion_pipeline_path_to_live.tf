@@ -395,25 +395,11 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "apply-dev-sgs-to-e2e-test"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 4
-      configuration = {
-        ProjectName = module.apply_dev_sg_to_e2e_test.pipeline_name
-      }
-
-      input_artifacts = ["infrastructure"]
-    }
-
-    action {
-      category  = "Build"
       name      = "run-e2e-tests"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 5
+      run_order = 4
       configuration = {
         ProjectName = module.run_e2e_tests.pipeline_name
         EnvironmentVariables = jsonencode(
@@ -427,20 +413,6 @@ resource "aws_codepipeline" "path_to_live" {
       }
 
       input_artifacts = ["tests"]
-    }
-
-    action {
-      category  = "Build"
-      name      = "remove-dev-sgs-from-e2e-test"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 6
-      configuration = {
-        ProjectName = module.remove_dev_sg_from_e2e_test.pipeline_name
-      }
-
-      input_artifacts = ["infrastructure"]
     }
   }
 
@@ -628,46 +600,17 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "apply-dev-sgs-to-preprod"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 4
-      configuration = {
-        ProjectName = module.apply_dev_sg_to_preprod.pipeline_name
-      }
-
-      input_artifacts = ["infrastructure"]
-    }
-
-    action {
-      category  = "Build"
       name      = "run-preprod-tests"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 5
+      run_order = 4
 
       configuration = {
         ProjectName = module.run_preprod_tests.pipeline_name
       }
 
       input_artifacts = ["tests"]
-    }
-
-    action {
-      category  = "Build"
-      name      = "remove-dev-sgs-from-preprod"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 6
-
-      configuration = {
-        ProjectName = module.remove_dev_sg_from_preprod.pipeline_name
-      }
-
-      input_artifacts = ["infrastructure"]
     }
   }
 
@@ -1246,6 +1189,7 @@ module "run_prod_smoketests" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   buildspec_file         = "buildspecs/prod-smoketest-buildspec.yml"
   event_type_ids         = []
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["production"]
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn
