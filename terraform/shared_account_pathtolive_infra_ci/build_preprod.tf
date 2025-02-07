@@ -293,6 +293,7 @@ module "run_preprod_tests" {
   name              = "integration-test-preprod"
   build_description = "Codebuild Pipeline Running integration tests against preprod"
   repository_name   = "bichard7-next-core"
+  vpc_config        = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
   report_build_status = true
 
