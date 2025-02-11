@@ -50,6 +50,14 @@ module "aws_logs" {
   versioning_status = "Enabled"
 
   tags = var.tags
+
+}
+
+resource "aws_s3_bucket_policy" "aws_logs_policy" {
+  bucket = module.aws_logs.aws_logs_bucket
+  policy = templatefile("${path.module}/policies/aws_logs_bucket_policy.json.tpl", {
+    aws_logs_bucket_arn = module.aws_logs.bucket_arn
+  })
 }
 
 resource "aws_s3_bucket" "account_logging_bucket" {

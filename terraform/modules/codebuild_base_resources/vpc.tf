@@ -37,6 +37,7 @@ resource "aws_s3_bucket_policy" "codebuild_flow_logs_bucket" {
   bucket = aws_s3_bucket.codebuild_flow_logs_bucket.bucket
   policy = templatefile("${path.module}/policies/codebuild_flow_logs_bucket.json.tpl", {
     codebuild_flow_logs_bucket_arn = aws_s3_bucket.codebuild_flow_logs_bucket.arn
+    account_id                     = data.aws_caller_identity.current.account_id
   })
 }
 
