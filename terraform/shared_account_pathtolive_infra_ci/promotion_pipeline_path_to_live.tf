@@ -791,6 +791,10 @@ resource "aws_codepipeline" "path_to_live" {
               name  = "ASSUME_ROLE_ARN"
               value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
             },
+            {
+              name  = "CODEPIPELINE_PIPELINE_EXECUTION_ID"
+              value = "#{codepipeline.PipelineExecutionId}"
+            }
           ]
         )
       }
