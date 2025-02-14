@@ -28,7 +28,6 @@
       "Resource": "${codebuild_flow_logs_bucket_arn}/AWSLogs/${account_id}/*",
       "Condition": {
         "StringEquals": {
-          "aws:SourceAccount": "${account_id}",
           "s3:x-amz-acl": "bucket-owner-full-control"
         }
       }
@@ -40,13 +39,7 @@
         "Service": "delivery.logs.amazonaws.com"
       },
       "Action": "s3:ListBucket",
-      "Resource": "${codebuild_flow_logs_bucket_arn}",
-      "Condition": {
-        "StringEquals": {
-          "aws:SourceAccount": "${account_id}",
-          "s3:x-amz-acl": "bucket-owner-full-control"
-        }
-      }
+      "Resource": "${codebuild_flow_logs_bucket_arn}"
     }
   ]
 }
