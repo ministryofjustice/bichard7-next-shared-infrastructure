@@ -78,6 +78,18 @@ data "external" "latest_codebuild_base" {
   ]
 }
 
+data "external" "latest_codebuild_2023_base" {
+  program = [
+    "aws", "ecr", "describe-images",
+    "--repository-name", module.codebuild_docker_resources.codebuild_2023_base.name,
+    "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
+  ]
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
 data "aws_secretsmanager_secret_version" "github_token" {
   secret_id = aws_secretsmanager_secret.github_token.id
 }

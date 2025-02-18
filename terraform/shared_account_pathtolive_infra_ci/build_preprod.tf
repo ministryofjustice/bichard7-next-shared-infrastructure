@@ -32,7 +32,8 @@ module "deploy_preprod_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     data.aws_ecr_repository.bichard.arn,
-    data.aws_ecr_repository.codebuild_base.arn
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   environment_variables = [
@@ -190,7 +191,8 @@ module "destroy_preprod_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     data.aws_ecr_repository.bichard.arn,
-    data.aws_ecr_repository.codebuild_base.arn
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   environment_variables = [
@@ -301,7 +303,8 @@ module "run_preprod_tests" {
   event_type_ids = []
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   build_environments = local.pipeline_build_environments
@@ -517,7 +520,8 @@ module "apply_dev_sg_to_preprod" {
   deployment_name     = "preprod"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   build_environments = local.pipeline_build_environments
@@ -571,7 +575,8 @@ module "remove_dev_sg_from_preprod" {
   deployment_name     = "preprod"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   build_environments = local.pipeline_build_environments
@@ -718,7 +723,8 @@ module "enable_pnc_test_tool" {
   build_environments = local.pipeline_build_environments
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   environment_variables = [
@@ -775,7 +781,8 @@ module "disable_pnc_test_tool" {
   build_environments = local.pipeline_build_environments
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   environment_variables = [

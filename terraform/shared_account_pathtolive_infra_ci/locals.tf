@@ -56,6 +56,17 @@ locals {
     }
   ]
 
+  codebuild_2023_pipeline_build_environments = [
+    {
+      compute_type                = "BUILD_GENERAL1_MEDIUM"
+      type                        = "LINUX_CONTAINER"
+      privileged_mode             = true
+      image                       = "${data.aws_ecr_repository.codebuild_2023_base.repository_url}@${data.external.latest_codebuild_2023_base.result.tags}"
+      image_pull_credentials_type = "SERVICE_ROLE"
+
+    }
+  ]
+
   vpn_rotation_vars = [
     {
       id                  = data.aws_caller_identity.integration_next.account_id
