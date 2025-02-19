@@ -14,7 +14,8 @@ module "build_ci_monitoring" {
   environment_variables  = local.common_cd_vars
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   build_environments = local.pipeline_build_environments

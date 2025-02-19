@@ -147,3 +147,8 @@ output "codebuild_base" {
   description = "The ecr repository for our codebuild image"
   value       = aws_ecr_repository.codebuild_base
 }
+
+output "codebuild_2023_base" {
+  description = "The ecr repository for our codebuild 2023 image"
+  value       = aws_ecr_repository.codebuild_2023_base
+}
