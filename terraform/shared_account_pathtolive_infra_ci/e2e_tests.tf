@@ -15,14 +15,7 @@ module "run_e2e_tests" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = [
-    {
-      compute_type    = "BUILD_GENERAL1_MEDIUM"
-      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
-      type            = "LINUX_CONTAINER"
-      privileged_mode = true
-    }
-  ]
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   environment_variables = [
     {

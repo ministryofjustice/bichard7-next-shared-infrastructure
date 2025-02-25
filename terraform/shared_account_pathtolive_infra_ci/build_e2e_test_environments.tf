@@ -12,7 +12,7 @@ module "deploy_e2e_test_terraform" {
 
   build_timeout = 180
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   codebuild_secondary_sources = [
     {
@@ -140,7 +140,7 @@ module "destroy_e2e_test_terraform" {
   deploy_account_name = "integration_next"
   deployment_name     = "e2e-test"
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
@@ -375,7 +375,7 @@ module "apply_dev_sg_to_e2e_test" {
 
   build_timeout = 180
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   deploy_account_name = "integration_next"
   deployment_name     = "e2e-test"
@@ -430,7 +430,7 @@ module "remove_dev_sg_from_e2e_test" {
 
   build_timeout = 180
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   deploy_account_name = "integration_next"
   deployment_name     = "e2e-test"

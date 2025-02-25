@@ -66,10 +66,30 @@ data "aws_ecr_repository" "codebuild_base" {
   ]
 }
 
+data "aws_ecr_repository" "codebuild_2023_base" {
+  name = "codebuild-2023-base"
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
 data "external" "latest_codebuild_base" {
   program = [
     "aws", "ecr", "describe-images",
     "--repository-name", data.aws_ecr_repository.codebuild_base.name,
+    "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
+  ]
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
+data "external" "latest_codebuild_2023_base" {
+  program = [
+    "aws", "ecr", "describe-images",
+    "--repository-name", data.aws_ecr_repository.codebuild_2023_base.name,
     "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
   ]
 
