@@ -425,7 +425,7 @@ resource "aws_codepipeline" "path_to_live" {
       provider        = "CodeBuild"
       run_order       = 1
       version         = "1"
-      namespace       = "HASHES"
+      namespace       = "LEDS_HASHES"
       input_artifacts = ["infrastructure"]
 
       configuration = {
