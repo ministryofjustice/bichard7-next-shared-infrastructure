@@ -442,7 +442,7 @@ resource "aws_codepipeline" "path_to_live" {
       run_order = 2
 
       configuration = {
-        ProjectName   = module.deploy_e2e_test_terraform.pipeline_name
+        ProjectName   = module.deploy_leds_test_environment_terraform.pipeline_name
         PrimarySource = "infrastructure"
         EnvironmentVariables = jsonencode(
           [
@@ -502,6 +502,26 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
+      name      = "run-e2e-test-migrations"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
+
+      configuration = {
+        ProjectName   = module.run_leds_test_migrations.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "application",
+        "core"
+      ]
+    }
+
+    action {
+      category  = "Build"
       name      = "deploy-conductor-definitions"
       owner     = "AWS"
       provider  = "CodeBuild"
@@ -509,7 +529,7 @@ resource "aws_codepipeline" "path_to_live" {
       run_order = 2
 
       configuration = {
-        ProjectName   = module.deploy_e2e_test_conductor_definitions.pipeline_name
+        ProjectName   = module.deploy_leds_conductor_definitions.pipeline_name
         PrimarySource = "infrastructure"
       }
 
@@ -535,7 +555,7 @@ resource "aws_codepipeline" "path_to_live" {
           [
             {
               name  = "ENVIRONMENT"
-              value = "e2e-test"
+              value = "leds"
             },
             {
               name  = "ASSUME_ROLE_ARN"
