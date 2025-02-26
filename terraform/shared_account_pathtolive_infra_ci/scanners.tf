@@ -9,7 +9,7 @@ module "scoutsuite_scan_shared" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = module.codebuild_docker_resources.scoutsuite_docker_image
+      image           = local.latest_scoutsuite_image
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
@@ -67,7 +67,7 @@ module "scoutsuite_scan_integration_next" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = module.codebuild_docker_resources.scoutsuite_docker_image
+      image           = local.latest_scoutsuite_image
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
@@ -125,7 +125,7 @@ module "scoutsuite_scan_integration_baseline" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = module.codebuild_docker_resources.scoutsuite_docker_image
+      image           = local.latest_scoutsuite_image
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
@@ -197,7 +197,7 @@ module "owasp_scan_e2e_test" {
   environment_variables = [
     {
       name  = "OWASP_DOCKER_IMAGE"
-      value = module.codebuild_docker_resources.zap_owasp_scanner_docker_image
+      value = local.latest_zap_owasp_scanner_image
     },
     {
       name  = "ACCOUNT_ID"
@@ -261,7 +261,7 @@ module "owasp_scan_e2e_test_user_service" {
   environment_variables = [
     {
       name  = "OWASP_DOCKER_IMAGE"
-      value = module.codebuild_docker_resources.zap_owasp_scanner_docker_image
+      value = local.latest_zap_owasp_scanner_image
     },
     {
       name  = "ACCOUNT_ID"
@@ -329,7 +329,7 @@ module "owasp_scan_e2e_test_audit_logging" {
   environment_variables = [
     {
       name  = "OWASP_DOCKER_IMAGE"
-      value = module.codebuild_docker_resources.zap_owasp_scanner_docker_image
+      value = local.latest_zap_owasp_scanner_image
     },
     {
       name  = "ACCOUNT_ID"

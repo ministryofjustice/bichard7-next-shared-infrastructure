@@ -66,14 +66,6 @@ data "aws_ecr_repository" "codebuild_base" {
   ]
 }
 
-data "aws_ecr_repository" "codebuild_2023_base" {
-  name = "codebuild-2023-base"
-
-  depends_on = [
-    module.codebuild_base_resources
-  ]
-}
-
 data "external" "latest_codebuild_base" {
   program = [
     "aws", "ecr", "describe-images",
@@ -86,10 +78,58 @@ data "external" "latest_codebuild_base" {
   ]
 }
 
+data "aws_ecr_repository" "codebuild_2023_base" {
+  name = "codebuild-2023-base"
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
 data "external" "latest_codebuild_2023_base" {
   program = [
     "aws", "ecr", "describe-images",
     "--repository-name", data.aws_ecr_repository.codebuild_2023_base.name,
+    "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
+  ]
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
+data "aws_ecr_repository" "scoutsuite" {
+  name = "scoutsuite"
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
+data "external" "latest_scoutsuite" {
+  program = [
+    "aws", "ecr", "describe-images",
+    "--repository-name", data.aws_ecr_repository.scoutsuite.name,
+    "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
+  ]
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
+data "aws_ecr_repository" "zap_owasp_scanner" {
+  name = "zap-owasp-scanner"
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
+data "external" "latest_zap_owasp_scanner" {
+  program = [
+    "aws", "ecr", "describe-images",
+    "--repository-name", data.aws_ecr_repository.zap_owasp_scanner.name,
     "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
   ]
 

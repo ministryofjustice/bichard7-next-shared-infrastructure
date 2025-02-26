@@ -35,4 +35,6 @@ locals {
       value = module.codebuild_base_resources.codepipeline_bucket
     }
   ]
+
+  latest_scoutsuite_image = "${data.aws_ecr_repository.scoutsuite.repository_url}@${data.external.latest_scoutsuite.result.tags}"
 }

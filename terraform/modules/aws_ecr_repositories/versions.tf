@@ -3,18 +3,6 @@ terraform {
     aws = {
       source = "hashicorp/aws"
     }
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "3.0.2"
-    }
-    external = {
-      source  = "hashicorp/external"
-      version = "2.3.3"
-    }
-    null = {
-      source  = "hashicorp/null"
-      version = "3.2.2"
-    }
     local = {
       source  = "hashicorp/local"
       version = "2.4.1"

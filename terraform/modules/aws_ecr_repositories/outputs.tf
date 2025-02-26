@@ -8,11 +8,6 @@ output "gradle_jdk11_repository_arn" {
   value       = aws_ecr_repository.gradle_jdk11.arn
 }
 
-output "gradle_jdk11_docker_image" {
-  description = "The image hash for our ecs deployment"
-  value       = "${aws_ecr_repository.gradle_jdk11.repository_url}@${data.docker_registry_image.gradle_jdk11.sha256_digest}"
-}
-
 output "scoutsuite_repository_url" {
   description = "The repository url for our scoutsuite image"
   value       = aws_ecr_repository.scoutsuite.repository_url
@@ -21,11 +16,6 @@ output "scoutsuite_repository_url" {
 output "scoutsuite_repository_arn" {
   description = "The repository arn for our scoutsuite image"
   value       = aws_ecr_repository.scoutsuite.arn
-}
-
-output "scoutsuite_docker_image" {
-  description = "The image hash for our ecs deployment"
-  value       = "${aws_ecr_repository.scoutsuite.repository_url}@${data.docker_registry_image.scoutsuite.sha256_digest}"
 }
 
 output "zap_owasp_scanner_repository_url" {
@@ -38,11 +28,6 @@ output "zap_owasp_scanner_repository_arn" {
   value       = aws_ecr_repository.zap_owasp_scanner.arn
 }
 
-output "zap_owasp_scanner_docker_image" {
-  description = "The image hash for our ecs deployment"
-  value       = "${aws_ecr_repository.zap_owasp_scanner.repository_url}@${data.docker_registry_image.zap_owasp_scanner.sha256_digest}"
-}
-
 output "amazon_linux_2_repository_url" {
   description = "The repository url for our amazonlinux 2 image"
   value       = aws_ecr_repository.amazon_linux_2.repository_url
@@ -51,11 +36,6 @@ output "amazon_linux_2_repository_url" {
 output "amazon_linux_2_repository_arn" {
   description = "The repository arn for our amazonlinux 2 image"
   value       = aws_ecr_repository.amazon_linux_2.arn
-}
-
-output "amazon_linux_2_docker_image" {
-  description = "The image hash for our ecs deployment"
-  value       = "${aws_ecr_repository.amazon_linux_2.repository_url}@${data.docker_registry_image.amazon_linux_2.sha256_digest}"
 }
 
 output "api_repository_arn" {
@@ -68,19 +48,9 @@ output "api_repository" {
   value       = aws_ecr_repository.api
 }
 
-output "liquibase_docker_image" {
-  description = "The image hash for liquibase"
-  value       = "${aws_ecr_repository.liquibase.repository_url}@${data.docker_registry_image.liquibase.sha256_digest}"
-}
-
 output "liquibase_repository_arn" {
   description = "The repository arn for our liquibase image"
   value       = aws_ecr_repository.liquibase.arn
-}
-
-output "puppeteer_docker_image" {
-  description = "The image hash for puppeteer"
-  value       = "${aws_ecr_repository.puppeteer.repository_url}@${data.docker_registry_image.puppeteer.sha256_digest}"
 }
 
 output "puppeteer_repository_arn" {

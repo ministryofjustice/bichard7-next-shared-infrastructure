@@ -12,7 +12,7 @@ module "scoutsuite_scan_shared" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = module.codebuild_docker_resources.scoutsuite_docker_image
+      image           = local.latest_scoutsuite_image
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
@@ -73,7 +73,7 @@ module "scoutsuite_scan_sandbox_a" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = module.codebuild_docker_resources.scoutsuite_docker_image
+      image           = local.latest_scoutsuite_image
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
@@ -136,7 +136,7 @@ module "scoutsuite_scan_sandbox_b" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = module.codebuild_docker_resources.scoutsuite_docker_image
+      image           = local.latest_scoutsuite_image
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
@@ -199,7 +199,7 @@ module "scoutsuite_scan_sandbox_c" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = module.codebuild_docker_resources.scoutsuite_docker_image
+      image           = local.latest_scoutsuite_image
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }

@@ -106,7 +106,9 @@ locals {
     }
   ]
 
-  latest_liquibase_image = "${data.aws_ecr_repository.liquibase.repository_url}@${data.external.latest_liquibase.result.tags}"
+  latest_liquibase_image         = "${data.aws_ecr_repository.liquibase.repository_url}@${data.external.latest_liquibase.result.tags}"
+  latest_scoutsuite_image        = "${data.aws_ecr_repository.scoutsuite.repository_url}@${data.external.latest_scoutsuite.result.tags}"
+  latest_zap_owasp_scanner_image = "${data.aws_ecr_repository.zap_owasp_scanner.repository_url}@${data.external.latest_zap_owasp_scanner.result.tags}"
 
   allow_codebuild_codestar_connection_policy = templatefile("${path.module}/policies/allow_codebuild_codestar_connection.json", {
     codestar_arn = aws_codestarconnections_connection.github.id
