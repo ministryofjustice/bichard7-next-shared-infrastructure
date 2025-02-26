@@ -59,6 +59,26 @@ data "external" "latest_codebuild_base" {
   ]
 }
 
+data "aws_ecr_repository" "scoutsuite" {
+  name = "scoutsuite"
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
+data "external" "latest_scoutsuite" {
+  program = [
+    "aws", "ecr", "describe-images",
+    "--repository-name", data.aws_ecr_repository.scoutsuite.name,
+    "--query", "{\"tags\": to_string(sort_by(imageDetails,& imagePushedAt)[-1].imageDigest)}",
+  ]
+
+  depends_on = [
+    module.codebuild_base_resources
+  ]
+}
+
 data "aws_secretsmanager_secret_version" "github_token" {
   secret_id = aws_secretsmanager_secret.github_token.id
 }
