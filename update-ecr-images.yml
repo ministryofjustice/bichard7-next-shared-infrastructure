@@ -1,0 +1,8 @@
+---
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - set -e
+      - bash ./scripts/update_ecr_images.sh
