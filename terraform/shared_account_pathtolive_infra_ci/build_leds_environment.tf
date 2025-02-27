@@ -7,7 +7,7 @@ module "deploy_leds_test_environment_terraform" {
   repository_name        = "bichard7-next-infrastructure"
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds-intergration"]
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds"]
   buildspec_file         = "buildspecs/buildspec.yml"
 
   build_timeout = 180
@@ -140,7 +140,7 @@ module "destroy_leds_test_environment_terraform" {
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "destory-leds-test-environment-terraform"
   buildspec_file         = "buildspecs/destroy-buildspec.yml"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds-intergration"]
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds"]
 
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
@@ -245,7 +245,7 @@ module "run_leds_test_migrations" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds-intergration"]
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds"]
 
   build_timeout = 180
 
@@ -325,7 +325,7 @@ module "deploy_leds_conductor_definitions" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds-intergration"]
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds"]
 
   build_timeout = 180
 
@@ -383,7 +383,7 @@ module "apply_dev_sg_to_leds_test" {
   build_description      = "Apply dev security groups to leds test environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "apply-dev-sgs-to-leds-test"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds-intergration"]
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
@@ -438,7 +438,7 @@ module "remove_dev_sg_from_leds_test" {
   build_description      = "Remove dev security groups to leds test environment"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
   name                   = "remove-dev-sgs-from-leds-test"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds-intergration"]
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds"]
 
   buildspec_file       = "buildspecs/vpc-sg-access.yml"
   repository_name      = "bichard7-next-infrastructure"
