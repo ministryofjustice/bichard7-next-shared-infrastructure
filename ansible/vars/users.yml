@@ -20,8 +20,6 @@
       type: admin
     - name: joe_folkard
       type: admin
-    - name: ian_king
-      type: admin
     - name: richard_cane
       type: admin
     - name: richard_race
@@ -34,4 +32,4 @@
       type: admin
 
 - users_removed:
-    - name: bushra_abdullahi
+    - name: ian_king
