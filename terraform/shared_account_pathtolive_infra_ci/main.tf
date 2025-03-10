@@ -32,7 +32,7 @@ module "codebuild_base_resources" {
   slack_webhook   = var.slack_webhook
 
   allow_accounts                 = local.shared_resource_accounts
-  codebuild_sg_environment_names = ["production", "pre-prod", "e2e-test", "uat"]
+  codebuild_sg_environment_names = ["production", "pre-prod", "e2e-test", "uat", "leds"]
 
   tags = module.label.tags
 }
