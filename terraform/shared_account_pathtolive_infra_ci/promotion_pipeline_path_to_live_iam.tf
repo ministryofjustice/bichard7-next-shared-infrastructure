@@ -198,3 +198,33 @@ resource "aws_iam_role_policy" "remove_dev_sg_from_uat" {
   policy = local.allow_codebuild_codestar_connection_policy
   role   = module.remove_dev_sg_from_uat.pipeline_service_role_name
 }
+
+resource "aws_iam_role_policy" "deploy_leds_terraform" {
+  name   = "allow-codestar-connection"
+  policy = local.allow_codebuild_codestar_connection_policy
+  role   = module.deploy_leds_test_environment_terraform.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "run_leds_test_migrations" {
+  name   = "allow-codestar-connection"
+  policy = local.allow_codebuild_codestar_connection_policy
+  role   = module.run_leds_test_migrations.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "deploy_leds_conductor_definitions" {
+  name   = "allow-codestar-connection"
+  policy = local.allow_codebuild_codestar_connection_policy
+  role   = module.deploy_leds_conductor_definitions.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "apply_dev_sg_to_leds" {
+  name   = "allow-codestar-connection"
+  policy = local.allow_codebuild_codestar_connection_policy
+  role   = module.apply_dev_sg_to_uat.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "remove_dev_sg_from_leds" {
+  name   = "allow-codestar-connection"
+  policy = local.allow_codebuild_codestar_connection_policy
+  role   = module.remove_dev_sg_from_uat.pipeline_service_role_name
+}
