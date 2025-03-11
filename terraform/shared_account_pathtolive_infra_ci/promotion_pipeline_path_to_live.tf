@@ -501,7 +501,7 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "run-e2e-test-migrations"
+      name      = "run-leds-test-migrations"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
@@ -521,7 +521,7 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "deploy-conductor-definitions"
+      name      = "deploy-leds-conductor-definitions"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
