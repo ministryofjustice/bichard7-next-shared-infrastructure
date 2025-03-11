@@ -434,7 +434,7 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "deploy-leds-test-environment-terraform"
+      name      = "deploy-leds-test-environment"
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
