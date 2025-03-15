@@ -213,6 +213,16 @@ module "deploy_production_terraform" {
     {
       name  = "ARTIFACT_BUCKET"
       value = module.codebuild_base_resources.codepipeline_bucket
+    },
+    {
+      name  = "TF_VAR_dynamodb_backup_s3_bucket_name"
+      value = aws_ssm_parameter.dynamodb_backup_bucket.name
+      type  = "PARAMETER_STORE"
+    },
+    {
+      name  = "TF_VAR_dynamodb_backup_assume_role_arn"
+      value = aws_ssm_parameter.dynamodb_backup_assume_role_arn.name
+      type  = "PARAMETER_STORE"
     }
   ]
 
