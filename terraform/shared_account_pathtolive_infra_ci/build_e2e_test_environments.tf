@@ -116,6 +116,10 @@ module "deploy_e2e_test_terraform" {
       name  = "TF_VAR_is_e2e"
       value = true
     },
+    {
+      name  = "TF_VAR_aurora_db_version"
+      value = "15.10"
+    },
   ]
   is_cd = true
 
