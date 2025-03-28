@@ -558,7 +558,7 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "ASSUME_ROLE_ARN"
-              value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+              value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
             }
           ]
         )
@@ -1189,6 +1189,37 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "ASSUME_ROLE_ARN"
               value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure"
+      ]
+    }
+
+    action {
+      category  = "Build"
+      name      = "verify-uat-ecs-services"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 1
+
+      configuration = {
+        ProjectName   = module.verify_ecs_tasks.pipeline_name
+        PrimarySource = "infrastructure"
+
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "uat"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
             }
           ]
         )
