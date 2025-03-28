@@ -145,7 +145,11 @@ module "deploy_uat_terraform" {
     {
       name  = "TF_VAR_use_smtp_service"
       value = "true"
-    }
+    },
+    {
+      name  = "TF_VAR_aurora_db_version"
+      value = "15.10"
+    },
   ]
 
   tags = module.label.tags

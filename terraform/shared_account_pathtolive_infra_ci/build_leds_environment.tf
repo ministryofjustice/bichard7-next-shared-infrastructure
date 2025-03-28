@@ -127,7 +127,11 @@ module "deploy_leds_test_environment_terraform" {
     {
       name  = "ARTIFACT_BUCKET"
       value = module.codebuild_base_resources.codepipeline_bucket
-    }
+    },
+    {
+      name  = "TF_VAR_aurora_db_version"
+      value = "15.10"
+    },
   ]
 
   tags = module.label.tags
