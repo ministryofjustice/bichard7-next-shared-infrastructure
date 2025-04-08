@@ -130,9 +130,35 @@ resource "aws_security_group_rule" "codebuild_ingress_from_github_ssl" {
   ]
 }
 
-resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs" {
-  for_each = aws_security_group.environment_codebuild_vpc_sgs
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_e2e_test" {
+  vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
+  security_group_id = aws_security_group.environment_codebuild_vpc_sgs["e2e-test"].id
+}
 
-  vpc_endpoint_id   = resource.aws_vpc_endpoint.codepipeline_vpc_endpoint.id
-  security_group_id = each.value.id
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_uat" {
+  vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
+  security_group_id = aws_security_group.environment_codebuild_vpc_sgs["uat"].id
+
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_e2e_test]
+}
+
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_leds" {
+  vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
+  security_group_id = aws_security_group.environment_codebuild_vpc_sgs["leds"].id
+
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_uat]
+}
+
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_pre_prod" {
+  vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
+  security_group_id = aws_security_group.environment_codebuild_vpc_sgs["pre-prod"].id
+
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_leds]
+}
+
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_production" {
+  vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
+  security_group_id = aws_security_group.environment_codebuild_vpc_sgs["production"].id
+
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_pre_prod]
 }
