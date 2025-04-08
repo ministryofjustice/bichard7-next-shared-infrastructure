@@ -139,26 +139,26 @@ resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebu
   vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
   security_group_id = aws_security_group.environment_codebuild_vpc_sgs["uat"].id
 
-  depends_on = [ aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_e2e_test ]
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_e2e_test]
 }
 
 resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_leds" {
   vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
   security_group_id = aws_security_group.environment_codebuild_vpc_sgs["leds"].id
 
-  depends_on = [ aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_uat ]
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_uat]
 }
 
 resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_pre_prod" {
   vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
   security_group_id = aws_security_group.environment_codebuild_vpc_sgs["pre-prod"].id
 
-  depends_on = [ aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_leds ]
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_leds]
 }
 
 resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_production" {
   vpc_endpoint_id   = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
   security_group_id = aws_security_group.environment_codebuild_vpc_sgs["production"].id
 
-  depends_on = [ aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_pre_prod ]
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_pre_prod]
 }
