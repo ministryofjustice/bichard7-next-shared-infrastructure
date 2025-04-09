@@ -421,7 +421,7 @@ resource "aws_codepipeline" "path_to_live" {
       owner     = "AWS"
       provider  = "CodeBuild"
       version   = "1"
-      run_order = 5
+      run_order = 4
 
       configuration = {
         ProjectName   = module.deploy_help_docs.pipeline_name
