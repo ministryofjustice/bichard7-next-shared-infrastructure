@@ -414,6 +414,41 @@ resource "aws_codepipeline" "path_to_live" {
 
       input_artifacts = ["tests"]
     }
+
+    action {
+      category  = "Build"
+      name      = "deploy-e2e-test-help-docs"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 5
+
+      configuration = {
+        ProjectName   = module.deploy_help_docs.pipeline_name
+        PrimarySource = "infrastructure"
+
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "e2e-test"
+            },
+            {
+              name  = "WORKSPACE"
+              value = "e2e-test"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure"
+      ]
+    }
   }
 
   stage {
