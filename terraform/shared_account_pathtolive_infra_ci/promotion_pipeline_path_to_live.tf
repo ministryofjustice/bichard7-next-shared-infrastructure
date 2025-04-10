@@ -801,6 +801,42 @@ resource "aws_codepipeline" "path_to_live" {
 
       input_artifacts = ["tests"]
     }
+
+    action {
+      category  = "Build"
+      name      = "deploy-preprod-help-docs"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 4
+
+      configuration = {
+        ProjectName   = module.deploy_help_docs.pipeline_name
+        PrimarySource = "infrastructure"
+
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "preprod"
+            },
+            {
+              name  = "WORKSPACE"
+              value = "preprod"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "core"
+      ]
+    }
   }
 
   stage {
