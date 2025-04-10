@@ -1282,6 +1282,78 @@ resource "aws_codepipeline" "path_to_live" {
         "infrastructure"
       ]
     }
+
+    action {
+      category  = "Build"
+      name      = "deploy-uat-help-docs"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
+
+      configuration = {
+        ProjectName   = module.deploy_help_docs.pipeline_name
+        PrimarySource = "infrastructure"
+
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "uat"
+            },
+            {
+              name  = "WORKSPACE"
+              value = "uat"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "core"
+      ]
+    }
+
+    action {
+      category  = "Build"
+      name      = "deploy-production-help-docs"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 2
+
+      configuration = {
+        ProjectName   = module.deploy_help_docs.pipeline_name
+        PrimarySource = "infrastructure"
+
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "ENVIRONMENT"
+              value = "production"
+            },
+            {
+              name  = "WORKSPACE"
+              value = "production"
+            },
+            {
+              name  = "ASSUME_ROLE_ARN"
+              value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+            }
+          ]
+        )
+      }
+
+      input_artifacts = [
+        "infrastructure",
+        "core"
+      ]
+    }
   }
 }
 module "notify_pipeline" {
