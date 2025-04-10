@@ -50,6 +50,6 @@ resource "aws_route53_record" "parent_zone_validation_records" {
   zone_id         = data.terraform_remote_state.shared_infra.outputs.delegated_hosted_zone.zone_id
 }
 
-resource "aws_acm_certificate_validation" "base_infra_certificate_validation" {
-  certificate_arn = aws_acm_certificate.bichard7_pathtolive_delegated_zone.arn
-}
+# resource "aws_acm_certificate_validation" "base_infra_certificate_validation" {
+#   certificate_arn = aws_acm_certificate.bichard7_pathtolive_delegated_zone.arn
+# }

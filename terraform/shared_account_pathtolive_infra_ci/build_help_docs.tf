@@ -9,7 +9,7 @@ module "deploy_help_docs" {
   repository_name      = "bichard7-next-infrastructure"
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
+  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_block
 
   build_environments = local.codebuild_2023_pipeline_build_environments
 
