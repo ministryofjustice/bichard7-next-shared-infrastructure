@@ -67,6 +67,12 @@ resource "aws_iam_role_policy" "allow_code_pipeline_connection_for_deploy_conduc
   role   = module.deploy_production_conductor_definitions.pipeline_service_role_name
 }
 
+resource "aws_iam_role_policy" "allow_code_pipeline_connection_for_deploy_help_docs" {
+  name   = "Allow-Codestar-Connection"
+  policy = local.allow_codebuild_codestar_connection_policy
+  role   = module.deploy_help_docs.pipeline_service_role_name
+}
+
 resource "aws_iam_role_policy" "allow_code_pipeline_connection_for_deploy_pre_prod" {
   name   = "Allow-Codestar-Connection"
   policy = local.allow_codebuild_codestar_connection_policy
