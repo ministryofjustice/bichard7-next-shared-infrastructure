@@ -395,28 +395,6 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "run-e2e-tests"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 4
-      configuration = {
-        ProjectName = module.run_e2e_tests.pipeline_name
-        EnvironmentVariables = jsonencode(
-          [
-            {
-              name  = "CODEPIPELINE_EXECUTION_ID"
-              value = "#{codepipeline.PipelineExecutionId}"
-            }
-          ]
-        )
-      }
-
-      input_artifacts = ["tests"]
-    }
-
-    action {
-      category  = "Build"
       name      = "deploy-e2e-test-help-docs"
       owner     = "AWS"
       provider  = "CodeBuild"
@@ -449,6 +427,28 @@ resource "aws_codepipeline" "path_to_live" {
         "infrastructure",
         "core"
       ]
+    }
+
+    action {
+      category  = "Build"
+      name      = "run-e2e-tests"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 5
+      configuration = {
+        ProjectName = module.run_e2e_tests.pipeline_name
+        EnvironmentVariables = jsonencode(
+          [
+            {
+              name  = "CODEPIPELINE_EXECUTION_ID"
+              value = "#{codepipeline.PipelineExecutionId}"
+            }
+          ]
+        )
+      }
+
+      input_artifacts = ["tests"]
     }
   }
 
