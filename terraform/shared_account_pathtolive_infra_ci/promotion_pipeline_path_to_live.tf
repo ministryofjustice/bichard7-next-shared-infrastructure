@@ -446,7 +446,8 @@ resource "aws_codepipeline" "path_to_live" {
       }
 
       input_artifacts = [
-        "infrastructure"
+        "infrastructure",
+        "core"
       ]
     }
   }
