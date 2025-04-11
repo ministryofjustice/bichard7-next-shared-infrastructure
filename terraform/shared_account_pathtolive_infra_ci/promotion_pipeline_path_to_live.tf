@@ -1267,24 +1267,6 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "run-production-smoketests"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 2
-
-      configuration = {
-        ProjectName   = module.run_prod_smoketests.pipeline_name
-        PrimarySource = "infrastructure"
-      }
-
-      input_artifacts = [
-        "infrastructure"
-      ]
-    }
-
-    action {
-      category  = "Build"
       name      = "deploy-uat-help-docs"
       owner     = "AWS"
       provider  = "CodeBuild"
@@ -1352,6 +1334,24 @@ resource "aws_codepipeline" "path_to_live" {
       input_artifacts = [
         "infrastructure",
         "core"
+      ]
+    }
+
+    action {
+      category  = "Build"
+      name      = "run-production-smoketests"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 3
+
+      configuration = {
+        ProjectName   = module.run_prod_smoketests.pipeline_name
+        PrimarySource = "infrastructure"
+      }
+
+      input_artifacts = [
+        "infrastructure"
       ]
     }
   }
