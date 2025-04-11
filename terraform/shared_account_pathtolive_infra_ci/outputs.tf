@@ -58,16 +58,6 @@ output "bichard_liberty_ecr" {
   value       = module.codebuild_docker_resources.bichard_liberty_ecr
 }
 
-output "codebuild_zone_id" {
-  description = "The public zone id for our codebuild VPC route53 zone"
-  value       = aws_route53_zone.codebuild_public_zone.id
-}
-
-output "ssl_certificate_arn" {
-  description = "The arn for our ACM ssl certificate"
-  value       = aws_acm_certificate.bichard7_pathtolive_delegated_zone.arn
-}
-
 output "codepipeline_bucket" {
   description = "The name of the codebuild/pipeline bucket"
   value       = module.codebuild_base_resources.codepipeline_bucket
