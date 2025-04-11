@@ -789,21 +789,6 @@ resource "aws_codepipeline" "path_to_live" {
 
     action {
       category  = "Build"
-      name      = "run-preprod-tests"
-      owner     = "AWS"
-      provider  = "CodeBuild"
-      version   = "1"
-      run_order = 4
-
-      configuration = {
-        ProjectName = module.run_preprod_tests.pipeline_name
-      }
-
-      input_artifacts = ["tests"]
-    }
-
-    action {
-      category  = "Build"
       name      = "deploy-preprod-help-docs"
       owner     = "AWS"
       provider  = "CodeBuild"
@@ -836,6 +821,21 @@ resource "aws_codepipeline" "path_to_live" {
         "infrastructure",
         "core"
       ]
+    }
+
+    action {
+      category  = "Build"
+      name      = "run-preprod-tests"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 5
+
+      configuration = {
+        ProjectName = module.run_preprod_tests.pipeline_name
+      }
+
+      input_artifacts = ["tests"]
     }
   }
 
