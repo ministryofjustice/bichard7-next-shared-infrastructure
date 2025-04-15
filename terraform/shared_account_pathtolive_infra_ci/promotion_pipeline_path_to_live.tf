@@ -1289,7 +1289,7 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "ASSUME_ROLE_ARN"
-              value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+              value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
             }
           ]
         )
@@ -1325,7 +1325,7 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "ASSUME_ROLE_ARN"
-              value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+              value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
             }
           ]
         )
