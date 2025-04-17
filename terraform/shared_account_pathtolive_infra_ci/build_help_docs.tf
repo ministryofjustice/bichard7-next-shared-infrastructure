@@ -3,7 +3,7 @@ module "deploy_help_docs" {
 
   build_description      = "Codebuild job for updating Help docs"
   codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "deploy_help_docs"
+  name                   = "deploy-help-docs"
   buildspec_file         = "buildspecs/deploy-help-docs.yml"
 
   repository_name      = "bichard7-next-infrastructure"
