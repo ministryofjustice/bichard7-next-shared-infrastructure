@@ -26,12 +26,10 @@
       type: admin
     - name: richard_race
       type: admin
-    - name: seneca_saunders
-      type: admin
     - name: tausif_patel
       type: admin
     - name: wenting_wang
       type: admin
 
 - users_removed:
-    - name: bushra_abdullahi
+    - name: seneca_saunders
