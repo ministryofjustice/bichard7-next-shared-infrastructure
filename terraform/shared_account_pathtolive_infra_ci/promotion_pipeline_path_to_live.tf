@@ -188,40 +188,6 @@ resource "aws_codepipeline" "path_to_live" {
         DetectChanges        = true
       }
     }
-
-    action {
-      name             = "tests-source"
-      category         = "Source"
-      owner            = "AWS"
-      provider         = "CodeStarSourceConnection"
-      version          = "1"
-      output_artifacts = ["tests"]
-
-      configuration = {
-        ConnectionArn        = aws_codestarconnections_connection.github.arn
-        FullRepositoryId     = "ministryofjustice/bichard7-next-core"
-        BranchName           = "main"
-        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
-        DetectChanges        = false
-      }
-    }
-
-    action {
-      name             = "ui-source"
-      category         = "Source"
-      owner            = "AWS"
-      provider         = "CodeStarSourceConnection"
-      version          = "1"
-      output_artifacts = ["ui"]
-
-      configuration = {
-        ConnectionArn        = aws_codestarconnections_connection.github.arn
-        FullRepositoryId     = "ministryofjustice/bichard7-next-core"
-        BranchName           = "main"
-        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
-        DetectChanges        = false
-      }
-    }
   }
 
   stage {
