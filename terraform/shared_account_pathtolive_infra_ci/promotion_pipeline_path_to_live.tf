@@ -838,7 +838,7 @@ resource "aws_codepipeline" "path_to_live" {
         ProjectName = module.run_preprod_tests.pipeline_name
       }
 
-      input_artifacts = ["tests"]
+      input_artifacts = ["core"]
     }
   }
 
