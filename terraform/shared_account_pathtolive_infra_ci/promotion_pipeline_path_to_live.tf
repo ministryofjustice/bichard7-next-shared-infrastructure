@@ -414,7 +414,7 @@ resource "aws_codepipeline" "path_to_live" {
         )
       }
 
-      input_artifacts = ["tests"]
+      input_artifacts = ["core"]
     }
   }
 
