@@ -13,6 +13,15 @@ module "build_conductor_image" {
   sns_kms_key_arn        = var.notifications_kms_key_arn
   vpc_config             = var.vpc_config_block
 
+  build_environments = [
+    {
+      compute_type    = "BUILD_GENERAL1_MEDIUM"
+      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      type            = "LINUX_CONTAINER"
+      privileged_mode = true
+    }
+  ]
+
   tags = var.tags
 }
 
