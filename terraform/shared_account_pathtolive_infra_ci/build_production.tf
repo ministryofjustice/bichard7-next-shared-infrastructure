@@ -160,7 +160,7 @@ module "deploy_production_terraform" {
     },
     {
       name  = "TF_VAR_db_instance_class"
-      value = "db.r5.large"
+      value = "db.r6i.2xlarge"
     },
     {
       name  = "USE_SMTP"
