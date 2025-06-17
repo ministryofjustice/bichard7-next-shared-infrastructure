@@ -30,6 +30,8 @@
       type: admin
     - name: wenting_wang
       type: admin
+    - name: irene_grande
+      type: admin
 
 - users_removed:
     - name: seneca_saunders
