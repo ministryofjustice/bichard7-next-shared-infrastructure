@@ -482,3 +482,51 @@ module "remove_dev_sg_from_e2e_test_schedule" {
 
   tags = module.label.tags
 }
+
+module "optimise_e2e_test_db" {
+  source = "../modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for optimising e2e test database"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "optimise-e2e-test-db"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
+
+  buildspec_file       = "buildspecs/optimise-db.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  build_environments = local.codebuild_2023_pipeline_build_environments
+
+  deploy_account_name = "integration_next"
+  deployment_name     = "e2e-test"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
+  ]
+
+  environment_variables = [
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
+    },
+    {
+      name  = "WORKSPACE"
+      value = "e2e-test"
+    },
+  ]
+
+  tags = module.label.tags
+}
+
+module "optimise_e2e_test_db_schedule" {
+  source          = "../modules/codebuild_schedule"
+  codebuild_arn   = module.optimise_e2e_test_db.pipeline_arn
+  name            = module.optimise_e2e_test_db.pipeline_name
+  cron_expression = "cron(0 03 * * ? *)"
+
+  tags = module.label.tags
+}
