@@ -51,7 +51,6 @@ locals {
       privileged_mode             = true
       image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
       image_pull_credentials_type = "SERVICE_ROLE"
-
     }
   ]
 
@@ -62,11 +61,34 @@ locals {
       privileged_mode             = true
       image                       = "${data.aws_ecr_repository.codebuild_2023_base.repository_url}@${data.external.latest_codebuild_2023_base.result.tags}"
       image_pull_credentials_type = "SERVICE_ROLE"
-
     }
   ]
 
   vpn_rotation_vars = [
+    {
+      id                  = "leds"
+      target              = "leds"
+      role_arn            = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
+      workspace           = "leds"
+      account_name        = "integration_baseline"
+      deploy_name         = "leds"
+      deploy_account_name = "integration_baseline"
+      is_e2e              = false
+      is_qsolution        = false
+      is_production       = false
+    },
+    {
+      id                  = "uat"
+      target              = "uat"
+      role_arn            = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
+      workspace           = "uat"
+      account_name        = "integration_baseline"
+      deploy_name         = "uat"
+      deploy_account_name = "integration_baseline"
+      is_e2e              = false
+      is_qsolution        = false
+      is_production       = false
+    },
     {
       id                  = data.aws_caller_identity.integration_next.account_id
       target              = "integration-next"

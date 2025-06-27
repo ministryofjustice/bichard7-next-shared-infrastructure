@@ -50,10 +50,6 @@ module "rotate_vpn_keys" {
       value = data.aws_caller_identity.current.account_id
     },
     {
-      name  = "USE_PEERING"
-      value = "true"
-    },
-    {
       name  = "TF_VAR_is_e2e"
       value = each.value.is_e2e
     },
