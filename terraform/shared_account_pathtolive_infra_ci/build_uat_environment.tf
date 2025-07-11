@@ -567,3 +567,51 @@ module "apply_codebuild_layer_schedule" {
   cron_expression = "cron(0 0,8,16 * * ? *)"
   tags            = module.tag_vars
 }
+
+module "optimise_uat_db" {
+  source = "../modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for optimising uat database"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "optimise-uat-db"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
+
+  buildspec_file       = "buildspecs/optimise-db.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  build_environments = local.codebuild_2023_pipeline_build_environments
+
+  deploy_account_name = "integration_baseline"
+  deployment_name     = "uat"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
+  ]
+
+  environment_variables = [
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
+    },
+    {
+      name  = "WORKSPACE"
+      value = "uat"
+    },
+  ]
+
+  tags = module.label.tags
+}
+
+module "optimise_uat_db_schedule" {
+  source          = "../modules/codebuild_schedule"
+  codebuild_arn   = module.optimise_uat_db.pipeline_arn
+  name            = module.optimise_uat_db.pipeline_name
+  cron_expression = "cron(0 03 * * ? *)"
+
+  tags = module.label.tags
+}
