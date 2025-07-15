@@ -826,3 +826,42 @@ module "disable_pnc_test_tool" {
 
   tags = module.label.tags
 }
+
+module "optimise_preprod_db" {
+  source = "../modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for optimising preprod database"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "optimise-preprod-db"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
+
+  buildspec_file       = "buildspecs/optimise-db.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  build_environments = local.pipeline_build_environments
+
+  deploy_account_name = "q_solution"
+  deployment_name     = "preprod"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
+  ]
+
+  environment_variables = [
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn
+    },
+    {
+      name  = "WORKSPACE"
+      value = "preprod"
+    },
+  ]
+
+  tags = module.label.tags
+}
