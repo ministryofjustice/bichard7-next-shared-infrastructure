@@ -703,3 +703,42 @@ module "disable_maintenance_page_prod" {
 
   tags = module.label.tags
 }
+
+module "optimise_prod_db" {
+  source = "../modules/codebuild_job"
+
+  build_description      = "Codebuild Pipeline for optimising prod database"
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  name                   = "optimise-prod-db"
+  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["production"]
+
+  buildspec_file       = "buildspecs/optimise-db.yml"
+  repository_name      = "bichard7-next-infrastructure"
+  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
+  sns_notification_arn = module.codebuild_base_resources.notifications_arn
+
+  build_timeout = 180
+
+  build_environments = local.pipeline_build_environments
+
+  deploy_account_name = "production"
+  deployment_name     = "production"
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
+  ]
+
+  environment_variables = [
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+    },
+    {
+      name  = "WORKSPACE"
+      value = "production"
+    },
+  ]
+
+  tags = module.label.tags
+}
