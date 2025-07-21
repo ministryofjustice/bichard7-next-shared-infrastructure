@@ -842,7 +842,7 @@ module "optimise_preprod_db" {
 
   build_timeout = 180
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   deploy_account_name = "q_solution"
   deployment_name     = "preprod"
