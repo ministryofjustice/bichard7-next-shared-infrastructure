@@ -32,6 +32,10 @@
       type: admin
     - name: irene_grande
       type: admin
+    - name: tom_watkins
+      type: admin
+    - name: emma_lanigan
+      type: admin
 
 - users_removed:
     - name: seneca_saunders
