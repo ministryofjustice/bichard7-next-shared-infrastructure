@@ -29,7 +29,7 @@ function update_ecr_image {
     fi
 
     local image_tag="${ecr_repo_url}:${short_hash}"
-    
+
     docker tag $docker_image $image_tag
     aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ecr_repo_url};
     echo "Pushing ${image_tag}"
@@ -42,5 +42,5 @@ update_ecr_image liquibase/liquibase liquibase
 update_ecr_image gradle:6.7-jdk11 gradle-jdk11
 update_ecr_image open-liberty:kernel-slim-java11-openj9 open-liberty
 update_ecr_image rossja/ncc-scoutsuite:aws-latest scoutsuite
-update_ecr_image softwaresecurityproject/zap-stable zap-owasp-scanner
+update_ecr_image zaproxy/zap-stable zap-owasp-scanner
 update_ecr_image ghcr.io/puppeteer/puppeteer puppeteer
