@@ -742,3 +742,12 @@ module "optimise_prod_db" {
 
   tags = module.label.tags
 }
+
+module "optimise_prod_db_schedule" {
+  source          = "../modules/codebuild_schedule"
+  codebuild_arn   = module.optimise_e2e_test_db.pipeline_arn
+  name            = module.optimise_e2e_test_db.pipeline_name
+  cron_expression = "cron(0 03 * * ? *)"
+
+  tags = module.label.tags
+}
