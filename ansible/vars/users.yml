@@ -28,8 +28,6 @@
       type: admin
     - name: tausif_patel
       type: admin
-    - name: wenting_wang
-      type: admin
     - name: irene_grande
       type: admin
     - name: tom_watkins
@@ -38,4 +36,4 @@
       type: admin
 
 - users_removed:
-    - name: seneca_saunders
+    - name: wenting_wang
