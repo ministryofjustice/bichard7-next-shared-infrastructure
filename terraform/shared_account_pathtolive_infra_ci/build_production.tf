@@ -747,7 +747,7 @@ module "optimise_prod_db_schedule" {
   source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.optimise_prod_db.pipeline_arn
   name            = module.optimise_prod_db.pipeline_name
-  cron_expression = "cron(0 03 * * ? *)"
+  cron_expression = "cron(0 03 * * 2)"
 
   tags = module.label.tags
 }
