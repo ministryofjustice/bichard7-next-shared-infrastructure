@@ -18,7 +18,7 @@ module "build_ci_monitoring" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   tags = module.label.tags
 

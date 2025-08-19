@@ -10,7 +10,7 @@ module "deploy_preprod_terraform" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["pre-prod"]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   build_timeout = 180
   codebuild_secondary_sources = [
@@ -189,7 +189,7 @@ module "destroy_preprod_terraform" {
   deploy_account_name = "q_solution"
   deployment_name     = "preprod"
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
@@ -528,7 +528,7 @@ module "apply_dev_sg_to_preprod" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   environment_variables = [
     {
@@ -583,7 +583,7 @@ module "remove_dev_sg_from_preprod" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   environment_variables = [
     {
@@ -724,7 +724,7 @@ module "enable_pnc_test_tool" {
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn,
@@ -782,7 +782,7 @@ module "disable_pnc_test_tool" {
   sns_notification_arn = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn,

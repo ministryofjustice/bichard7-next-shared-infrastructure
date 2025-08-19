@@ -1478,7 +1478,7 @@ module "code_to_be_deployed" {
       compute_type                = "BUILD_GENERAL1_SMALL"
       type                        = "LINUX_CONTAINER"
       privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
+      image                       = "${data.aws_ecr_repository.codebuild_2023_base.repository_url}@${data.external.latest_codebuild_2023_base.result.tags}"
       image_pull_credentials_type = "SERVICE_ROLE"
     }
   ]
@@ -1506,7 +1506,7 @@ module "notify_deploying_to_prod" {
       compute_type                = "BUILD_GENERAL1_SMALL"
       type                        = "LINUX_CONTAINER"
       privileged_mode             = false
-      image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      image                       = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
       image_pull_credentials_type = "CODEBUILD"
     }
   ]
@@ -1532,7 +1532,7 @@ module "run_prod_smoketests" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   environment_variables = [
     {

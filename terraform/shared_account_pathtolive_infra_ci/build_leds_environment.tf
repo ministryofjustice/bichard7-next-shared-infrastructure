@@ -12,7 +12,7 @@ module "deploy_leds_test_environment_terraform" {
 
   build_timeout = 180
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   codebuild_secondary_sources = [
     {
@@ -159,7 +159,7 @@ module "destroy_leds_test_environment_terraform" {
   deploy_account_name = "integration_baseline"
   deployment_name     = "leds"
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
@@ -408,7 +408,7 @@ module "apply_dev_sg_to_leds_test" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   environment_variables = [
     {
@@ -463,7 +463,7 @@ module "remove_dev_sg_from_leds_test" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   environment_variables = [
     {
