@@ -9,7 +9,7 @@ module "rotate_vpn_keys" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   deploy_account_name = each.value.deploy_account_name
   deployment_name     = each.value.deploy_name

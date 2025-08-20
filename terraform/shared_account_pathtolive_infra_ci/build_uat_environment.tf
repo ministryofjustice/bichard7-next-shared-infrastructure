@@ -10,7 +10,7 @@ module "deploy_uat_terraform" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["uat"]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   build_timeout = 180
   codebuild_secondary_sources = [
@@ -173,7 +173,7 @@ module "destroy_uat_test_terraform" {
   deploy_account_name = "integration_baseline"
   deployment_name     = "uat"
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   allowed_resource_arns = [
     module.codebuild_docker_resources.liquibase_repository_arn,
@@ -415,7 +415,7 @@ module "apply_dev_sg_to_uat" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   environment_variables = [
     {
@@ -470,7 +470,7 @@ module "remove_dev_sg_from_uat" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = local.pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   environment_variables = [
     {

@@ -25,7 +25,7 @@ module "build_audit_logging" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_MEDIUM"
-      image           = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+      image           = local.amazon_linux_2023
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }

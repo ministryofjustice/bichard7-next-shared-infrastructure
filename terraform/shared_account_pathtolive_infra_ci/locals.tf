@@ -44,6 +44,8 @@ locals {
     data.aws_caller_identity.production.account_id
   ])
 
+  amazon_linux_2023 = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
+
   pipeline_build_environments = [
     {
       compute_type                = "BUILD_GENERAL1_MEDIUM"
@@ -141,3 +143,4 @@ locals {
     }
   )
 }
+
