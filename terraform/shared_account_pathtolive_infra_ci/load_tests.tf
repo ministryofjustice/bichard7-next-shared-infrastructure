@@ -19,7 +19,7 @@ module "run_load_tests" {
       compute_type    = "BUILD_GENERAL1_LARGE"
       type            = "LINUX_CONTAINER"
       privileged_mode = true
-      image           = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
+      image           = local.amazon_linux_2023
     }
   ]
 

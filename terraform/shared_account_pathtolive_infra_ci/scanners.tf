@@ -182,7 +182,7 @@ module "owasp_scan_e2e_test" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
+      image           = local.amazon_linux_2023
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
@@ -246,7 +246,7 @@ module "owasp_scan_e2e_test_user_service" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
+      image           = local.amazon_linux_2023
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
@@ -314,7 +314,7 @@ module "owasp_scan_e2e_test_audit_logging" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_SMALL"
-      image           = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
+      image           = local.amazon_linux_2023
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }

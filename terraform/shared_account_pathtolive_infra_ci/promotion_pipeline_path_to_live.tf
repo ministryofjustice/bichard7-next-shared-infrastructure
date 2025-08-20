@@ -1506,7 +1506,7 @@ module "notify_deploying_to_prod" {
       compute_type                = "BUILD_GENERAL1_SMALL"
       type                        = "LINUX_CONTAINER"
       privileged_mode             = false
-      image                       = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
+      image                       = local.amazon_linux_2023
       image_pull_credentials_type = "CODEBUILD"
     }
   ]
