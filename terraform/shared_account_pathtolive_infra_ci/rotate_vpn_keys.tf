@@ -61,6 +61,11 @@ module "rotate_vpn_keys" {
       name  = "TF_VAR_is_production"
       value = each.value.is_production
     },
+    {
+      name  = "TF_VAR_niam_api_url"
+      value = "https://login.microsoftonline.com/25d6f0c9-a61a-4999-9b67-4babac41824f/oauth2/v2.0/token"
+    }
+
   ]
 
   tags = module.label.tags
