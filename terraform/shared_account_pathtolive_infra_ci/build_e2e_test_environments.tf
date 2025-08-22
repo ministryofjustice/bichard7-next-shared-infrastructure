@@ -60,31 +60,6 @@ module "deploy_e2e_test_terraform" {
       value = true
     },
     {
-      name  = "CA_CERT"
-      value = "/ci/certs/e2e-test/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/e2e-test/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/e2e-test/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/e2e-test/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/e2e-test/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
       name  = "TF_VAR_override_deploy_tags"
       value = "true"
     },
@@ -124,101 +99,6 @@ module "deploy_e2e_test_terraform" {
   is_cd = true
 
   tags = module.label.tags
-}
-
-module "destroy_e2e_test_terraform" {
-  source = "../modules/codebuild_job"
-
-  build_description      = "Codebuild Pipeline for destroying e2e test terraform infrastructure"
-  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "destroy-integration-next-e2e-test"
-  buildspec_file         = "buildspecs/destroy-buildspec.yml"
-
-  repository_name      = "bichard7-next-infrastructure"
-  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
-  sns_notification_arn = module.codebuild_base_resources.notifications_arn
-  vpc_config           = module.codebuild_base_resources.codebuild_vpc_config_blocks["e2e-test"]
-
-  build_timeout = 180
-
-  deploy_account_name = "integration_next"
-  deployment_name     = "e2e-test"
-
-  build_environments = local.codebuild_2023_pipeline_build_environments
-
-  allowed_resource_arns = [
-    module.codebuild_docker_resources.liquibase_repository_arn,
-    module.codebuild_docker_resources.amazon_linux_2_repository_arn,
-    data.aws_ecr_repository.bichard.arn,
-    data.aws_ecr_repository.codebuild_base.arn,
-    module.codebuild_docker_resources.codebuild_2023_base.arn
-  ]
-
-  environment_variables = [
-    {
-      name  = "DEPLOY_ENV"
-      value = "pathtolive"
-    },
-    {
-      name  = "WORKSPACE"
-      value = "e2e-test"
-    },
-    {
-      name  = "USER_TYPE"
-      value = "ci"
-    },
-    {
-      name  = "AWS_ACCOUNT_NAME"
-      value = "integration_next"
-    },
-    {
-      name  = "AUTO_APPROVE"
-      value = true
-    },
-    {
-      name  = "CA_CERT"
-      value = "/ci/certs/e2e-test/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/e2e-test/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/e2e-test/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/e2e-test/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/e2e-test/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "ASSUME_ROLE_ARN"
-      value = data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn
-    },
-    {
-      name  = "PARENT_ACCOUNT_ID"
-      value = data.aws_caller_identity.current.account_id
-    },
-    {
-      name  = "USE_PEERING"
-      value = "true"
-    },
-    {
-      name  = "TF_VAR_is_e2e"
-      value = true
-    },
-  ]
-  is_cd = true
-  tags  = module.label.tags
 }
 
 module "run_e2e_test_migrations" {

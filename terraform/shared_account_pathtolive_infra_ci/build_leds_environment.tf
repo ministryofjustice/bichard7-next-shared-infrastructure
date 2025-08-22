@@ -60,31 +60,6 @@ module "deploy_leds_test_environment_terraform" {
       value = true
     },
     {
-      name  = "CA_CERT"
-      value = "/ci/certs/load-test/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/load-test/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/load-test/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/load-test/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/load-test/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
       name  = "ASSUME_ROLE_ARN"
       value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
     },
@@ -137,107 +112,6 @@ module "deploy_leds_test_environment_terraform" {
       value = "https://login.microsoftonline.com/25d6f0c9-a61a-4999-9b67-4babac41824f/oauth2/v2.0/token"
     }
   ]
-
-  tags = module.label.tags
-}
-
-module "destroy_leds_test_environment_terraform" {
-  source = "../modules/codebuild_job"
-
-  build_description      = "Codebuild Pipeline for destroying leds test environment terraform infrastructure"
-  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
-  name                   = "destory-leds-test-environment-terraform"
-  buildspec_file         = "buildspecs/destroy-buildspec.yml"
-  vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds"]
-
-  repository_name      = "bichard7-next-infrastructure"
-  sns_kms_key_arn      = module.codebuild_base_resources.notifications_kms_key_arn
-  sns_notification_arn = module.codebuild_base_resources.notifications_arn
-
-  build_timeout = 180
-
-  deploy_account_name = "integration_baseline"
-  deployment_name     = "leds"
-
-  build_environments = local.codebuild_2023_pipeline_build_environments
-
-  allowed_resource_arns = [
-    module.codebuild_docker_resources.liquibase_repository_arn,
-    module.codebuild_docker_resources.amazon_linux_2_repository_arn,
-    data.aws_ecr_repository.bichard.arn,
-    data.aws_ecr_repository.codebuild_base.arn,
-    module.codebuild_docker_resources.codebuild_2023_base.arn
-  ]
-
-  environment_variables = [
-    {
-      name  = "DEPLOY_ENV"
-      value = "pathtolive"
-    },
-    {
-      name  = "WORKSPACE"
-      value = "leds"
-    },
-    {
-      name  = "USER_TYPE"
-      value = "ci"
-    },
-    {
-      name  = "AWS_ACCOUNT_NAME"
-      value = "integration_baseline"
-    },
-    {
-      name  = "AUTO_APPROVE"
-      value = true
-    },
-    {
-      name  = "CA_CERT"
-      value = "/ci/certs/load-test/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/load-test/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/load-test/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/load-test/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/load-test/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "ASSUME_ROLE_ARN"
-      value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
-    },
-    {
-      name  = "PARENT_ACCOUNT_ID"
-      value = data.aws_caller_identity.current.account_id
-    },
-    {
-      name  = "USE_PEERING"
-      value = "true"
-    }
-  ]
-
-  tags = module.label.tags
-}
-
-module "run_destroy_leds_test_env_schedule" {
-  count           = 0
-  source          = "../modules/codebuild_schedule"
-  codebuild_arn   = module.destroy_load_test_terraform.pipeline_arn
-  name            = module.destroy_load_test_terraform.pipeline_name
-  cron_expression = "cron(0 18 * * ? *)"
 
   tags = module.label.tags
 }
