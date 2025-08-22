@@ -60,31 +60,6 @@ module "deploy_e2e_test_terraform" {
       value = true
     },
     {
-      name  = "CA_CERT"
-      value = "/ci/certs/e2e-test/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/e2e-test/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/e2e-test/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/e2e-test/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/e2e-test/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
       name  = "TF_VAR_override_deploy_tags"
       value = "true"
     },

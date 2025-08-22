@@ -58,31 +58,6 @@ module "deploy_preprod_terraform" {
       value = true
     },
     {
-      name  = "CA_CERT"
-      value = "/ci/certs/qsolution/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/qsolution/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/qsolution/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/qsolution/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/qsolution/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
       name  = "TF_VAR_override_deploy_tags"
       value = "true"
     },

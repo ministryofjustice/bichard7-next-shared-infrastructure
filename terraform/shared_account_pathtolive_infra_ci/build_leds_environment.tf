@@ -60,31 +60,6 @@ module "deploy_leds_test_environment_terraform" {
       value = true
     },
     {
-      name  = "CA_CERT"
-      value = "/ci/certs/load-test/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/load-test/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/load-test/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/load-test/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/load-test/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
       name  = "ASSUME_ROLE_ARN"
       value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
     },

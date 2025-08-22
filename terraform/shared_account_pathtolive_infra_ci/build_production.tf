@@ -58,31 +58,6 @@ module "deploy_production_terraform" {
       value = true
     },
     {
-      name  = "CA_CERT"
-      value = "/ci/certs/production/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/production/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/production/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/production/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/production/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
       name  = "TF_VAR_override_deploy_tags"
       value = "true"
     },

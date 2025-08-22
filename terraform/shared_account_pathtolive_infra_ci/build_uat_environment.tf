@@ -58,31 +58,6 @@ module "deploy_uat_terraform" {
       value = true
     },
     {
-      name  = "CA_CERT"
-      value = "/ci/certs/uat/ca.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_CERT"
-      value = "/ci/certs/uat/server.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "SERVER_KEY"
-      value = "/ci/certs/uat/server.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_CERT"
-      value = "/ci/certs/uat/client1.domain.tld.crt"
-      type  = "PARAMETER_STORE"
-    },
-    {
-      name  = "CLIENT_KEY"
-      value = "/ci/certs/uat/client1.domain.tld.key"
-      type  = "PARAMETER_STORE"
-    },
-    {
       name  = "TF_VAR_override_deploy_tags"
       value = "true"
     },
