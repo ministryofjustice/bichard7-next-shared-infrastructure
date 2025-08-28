@@ -16,7 +16,7 @@ module "build_conductor_image" {
   build_environments = [
     {
       compute_type    = "BUILD_GENERAL1_MEDIUM"
-      image           = local.amazon_linux_2023
+      image           = "aws/codebuild/amazonlinux-x86_64-standard:4.0"
       type            = "LINUX_CONTAINER"
       privileged_mode = true
     }
