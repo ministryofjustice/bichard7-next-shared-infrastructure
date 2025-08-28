@@ -8,6 +8,16 @@ module "build_bichard7_beanconnect_docker_image" {
   repository_name        = "bichard7-next-beanconnect"
   vpc_config             = var.vpc_config_block
 
+
+  build_environments = [
+    {
+      compute_type    = "BUILD_GENERAL1_SMALL"
+      image           = "aws/codebuild/amazonlinux-x86_64-standard:4.0"
+      type            = "LINUX_CONTAINER"
+      privileged_mode = true
+    }
+  ]
+
   environment_variables = var.beanconnect_cd_env_vars
 
   tags = var.tags
