@@ -38,7 +38,7 @@ function update_ecr_image {
 
 update_ecr_image amazonlinux:2 amazon-linux2
 update_ecr_image amazonlinux:2023 amazon-linux-2023
-update_ecr_image liquibase/liquibase liquibase
+update_ecr_image liquibase/liquibase:4.33 liquibase
 update_ecr_image gradle:6.7-jdk11 gradle-jdk11
 update_ecr_image open-liberty:kernel-slim-java11-openj9 open-liberty
 update_ecr_image rossja/ncc-scoutsuite:aws-latest scoutsuite
