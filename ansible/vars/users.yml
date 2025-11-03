@@ -12,6 +12,12 @@
         - ReadonlyAccess
       aws_tags:
         "user-role": readonly
+    ithc:
+      groups:
+        - EnforceMFA
+        - ReadonlyAccess
+      aws_tags:
+        "user-role": ithc
 
 - users_enabled:
     - name: ben_pirt
@@ -36,6 +42,8 @@
       type: admin
     - name: lili_berenyi
       type: admin
+    - name: ithc_user
+      type: ithc
 
 - users_removed:
     - name: wenting_wang
