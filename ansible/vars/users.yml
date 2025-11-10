@@ -15,7 +15,7 @@
     ithc:
       groups:
         - EnforceMFA
-        - ReadonlyAccess
+        - ItchReadOnlyAccess
       aws_tags:
         "user-role": ithc
 
