@@ -1,5 +1,4 @@
 ---
-
 - hosts: localhost
   gather_facts: false
   become: false
@@ -25,6 +24,7 @@
       with_items: "{{ users_enabled | default([]) }}"
       loop_control:
         loop_var: user
+      when: not (user.type == 'ithc' and lookup('env', 'WORKSPACE') == 'pathtolive')
 
     - name: Persist Non SC users to ssm
       when: non_sc_arns is defined and (non_sc_arns|length>0)
@@ -40,4 +40,3 @@
       with_items: "{{ users_removed | default([]) }}"
       loop_control:
         loop_var: user
-...
