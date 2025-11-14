@@ -9,13 +9,13 @@
     readonly:
       groups:
         - EnforceMFA
-        - ReadonlyAccess
+        - ReadOnlyAccess
       aws_tags:
         "user-role": readonly
     ithc:
       groups:
         - EnforceMFA
-        - ItchReadOnlyAccess
+        - IthcReadOnlyAccess
       aws_tags:
         "user-role": ithc
 
@@ -42,7 +42,9 @@
       type: admin
     - name: lili_berenyi
       type: admin
-    - name: ithc_user
+    - name: jonathan_hartshorn
+      type: ithc
+    - name: chris_hatton
       type: ithc
 
 - users_removed:
