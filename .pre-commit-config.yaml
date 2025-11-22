@@ -40,7 +40,7 @@ repos:
         language: script
 
   - repo: https://github.com/ansible/ansible-lint.git
-    rev: v25.11.0
+    rev: v4.2.0
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
