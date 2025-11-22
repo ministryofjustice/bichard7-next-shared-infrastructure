@@ -124,3 +124,13 @@ output "codebuild_public_cidr_blocks" {
   description = "A list of public cidr blocks"
   value       = module.vpc.public_subnets_cidr_blocks
 }
+
+output "codepipeline_vpc_endpoint_id" {
+  description = "The ID of the CodePipeline VPC endpoint"
+  value       = aws_vpc_endpoint.codepipeline_vpc_endpoint.id
+}
+
+output "codebuild_vpc_sgs" {
+  description = "The CodeBuild VPC security groups"
+  value       = aws_security_group.environment_codebuild_vpc_sgs
+}

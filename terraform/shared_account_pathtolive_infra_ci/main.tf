@@ -37,6 +37,39 @@ module "codebuild_base_resources" {
   tags = module.label.tags
 }
 
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_e2e_test" {
+  vpc_endpoint_id   = module.codebuild_base_resources.codepipeline_vpc_endpoint_id
+  security_group_id = module.codebuild_base_resources.codebuild_vpc_sgs["e2e-test"].id
+}
+
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_uat" {
+  vpc_endpoint_id   = module.codebuild_base_resources.codepipeline_vpc_endpoint_id
+  security_group_id = module.codebuild_base_resources.codebuild_vpc_sgs["uat"].id
+
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_e2e_test]
+}
+
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_leds" {
+  vpc_endpoint_id   = module.codebuild_base_resources.codepipeline_vpc_endpoint_id
+  security_group_id = module.codebuild_base_resources.codebuild_vpc_sgs["leds"].id
+
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_uat]
+}
+
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_pre_prod" {
+  vpc_endpoint_id   = module.codebuild_base_resources.codepipeline_vpc_endpoint_id
+  security_group_id = module.codebuild_base_resources.codebuild_vpc_sgs["pre-prod"].id
+
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_leds]
+}
+
+resource "aws_vpc_endpoint_security_group_association" "codepipeline_vpce_codebuild_sgs_production" {
+  vpc_endpoint_id   = module.codebuild_base_resources.codepipeline_vpc_endpoint_id
+  security_group_id = module.codebuild_base_resources.codebuild_vpc_sgs["production"].id
+
+  depends_on = [aws_vpc_endpoint_security_group_association.codepipeline_vpce_codebuild_sgs_pre_prod]
+}
+
 module "codebuild_docker_resources" {
   source            = "../modules/aws_ecr_repositories"
   child_account_ids = local.shared_resource_accounts
