@@ -35,3 +35,9 @@ module "shared_account_access_sandbox_a" {
 
   tags = module.label.tags
 }
+
+module "aws_cost_alerts_sandbox_a" {
+  source         = "../modules/aws_cost_alert"
+  sns_topic_name = "sandbox-a-sns-topic"
+  account_prefix = "sandbox-a"
+}

@@ -1,7 +1,3 @@
-resource "aws_sns_topic" "sandbox_cost_topic" {
-  name = var.sns_topic_name
-}
-
 resource "aws_cloudwatch_metric_alarm" "sandbox_cost_alert" {
   alarm_name          = "${var.account_prefix}-cost-alert"
   alarm_description   = "Billing alarm when EstimatedCharges exceed threshold"

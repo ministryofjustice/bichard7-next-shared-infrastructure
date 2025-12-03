@@ -35,3 +35,10 @@ module "shared_account_access_sandbox_c" {
 
   tags = module.label.tags
 }
+
+module "aws_cost_alerts_sandbox_c" {
+  source         = "../modules/aws_cost_alert"
+  sns_topic_name = "sandbox-c-sns-topic"
+  account_prefix = "sandbox-c"
+}
+
