@@ -1,0 +1,18 @@
+---
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.14
+    commands:
+      - pip install boto3
+      - pip install requests
+
+  build:
+    commands:
+      - python3 scripts/deployment_reminder.py
+
+  post_build:
+    commands:
+      - echo "Finished running deployment reminder script"
