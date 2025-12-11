@@ -35,7 +35,7 @@ def send_alert_to_slack(deployment_age):
     try:
         headers = {"Content-Type": "application/json"}
         payload = {
-        "text": f"We have not deployed for {deployment_age} days"
+        "text": f":mild-panic-intensifies: We have not deployed in the last {deployment_age} days :mild-panic-intensifies:"
         }
         response = requests.post(SLACK_WEBHOOK, data=json.dumps(payload), headers=headers)
         print(f"Deployment reminder sent to slack. Status: {response.status_code}", )
