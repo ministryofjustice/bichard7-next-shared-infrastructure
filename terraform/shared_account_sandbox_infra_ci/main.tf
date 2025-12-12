@@ -27,6 +27,8 @@ module "label" {
 module "codebuild_base_resources" {
   source = "../modules/codebuild_base_resources"
 
+  codebuild_sg_environment_names = []
+
   aws_logs_bucket = data.terraform_remote_state.shared_infra.outputs.s3_logging_bucket_name
   name            = module.label.name
   slack_webhook   = var.slack_webhook

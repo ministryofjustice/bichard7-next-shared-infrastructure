@@ -42,10 +42,7 @@
       type: admin
     - name: lili_berenyi
       type: admin
-    - name: jonathan_hartshorn
-      type: ithc
-    - name: chris_hatton
-      type: ithc
 
 - users_removed:
-    - name: ithc_user
+    - name: jonathan_hartshorn
+    - name: chris_hatton
