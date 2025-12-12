@@ -1,9 +1,9 @@
 resource "aws_budgets_budget" "budget_sandbox_a" {
-  count = var.create_budget ? 1 : 0
+  count = length(var.budget_limit_amount) > 0 ? 1 : 0
 
   name         = "main-budget"
   budget_type  = "COST"
-  limit_amount = var.budget_limit
+  limit_amount = var.budget_limit_amount
   limit_unit   = "USD"
   time_unit    = "MONTHLY"
 

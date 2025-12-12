@@ -35,20 +35,14 @@ variable "create_nuke_user" {
   default     = false
 }
 
-variable "create_budget" {
-  description = "Do you want to set a budget (with a cost alert) for this account?"
-  type = bool
-  default = false
-}
-
-variable "budget_limit" {
-  description = "What is the budget limit for the account?"
-  type = string
-  default = "0"
+variable "budget_limit_amount" {
+  description = "The budget for this this account, leave blank to not create one"
+  type    = string
+  default = ""
 }
 
 variable "budget_notification_email_addresses" {
-  description = "The list of email addresses to notify when budget alerts are triggered"
+  description = "The email addresses to send budget alerts to"
   type = list(string)
   default = []
 }
