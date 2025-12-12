@@ -44,5 +44,5 @@ variable "budget_limit_amount" {
 variable "budget_notification_email_addresses" {
   description = "The email addresses to send budget alerts to"
   type = list(string)
-  default = []
+  default = ["moj-bichard7@madetech.com"]
 }
