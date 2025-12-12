@@ -1,4 +1,4 @@
-resource "aws_budgets_budget" "budget_sandbox_a" {
+resource "aws_budgets_budget" "main" {
   count = length(var.budget_limit_amount) > 0 ? 1 : 0
 
   name         = "main-budget"
