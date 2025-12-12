@@ -12,8 +12,8 @@ variable "is_cd" {
 
 variable "deployment_reminder_limit" {
   description = "Deplyment overdue limit in days"
-  type = string
-  default = "0"
+  type        = string
+  default     = "0"
 }
 
 # variable "codebuild_s3_bucket" {
