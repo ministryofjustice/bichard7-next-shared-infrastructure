@@ -34,3 +34,15 @@ variable "create_nuke_user" {
   type        = bool
   default     = false
 }
+
+variable "budget_limit_amount" {
+  description = "The budget for this this account, leave blank to not create one"
+  type        = string
+  default     = ""
+}
+
+variable "budget_notification_email_addresses" {
+  description = "The email addresses to send budget alerts to"
+  type        = list(string)
+  default     = ["moj-bichard7@madetech.com"]
+}

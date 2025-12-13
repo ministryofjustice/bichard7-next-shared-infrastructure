@@ -5,6 +5,7 @@ module "sandbox_b_child_access" {
   bucket_name         = local.remote_bucket_name
   logging_bucket_name = module.aws_logs.aws_logs_bucket
   create_nuke_user    = true
+  budget_limit_amount = "1000"
 
   tags = module.label.tags
 
