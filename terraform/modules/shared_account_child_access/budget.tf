@@ -22,4 +22,6 @@ resource "aws_budgets_budget" "main" {
     notification_type          = "ACTUAL"
     subscriber_email_addresses = var.budget_notification_email_addresses
   }
+
+  tags = var.tags
 }
