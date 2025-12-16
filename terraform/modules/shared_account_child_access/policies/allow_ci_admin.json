@@ -4,7 +4,7 @@
     {
       "Sid": "AllowCIAdmin",
       "Effect": "Allow",
-      "Action": ["iam:*", "s3:*", "kms:*", "cloudtrail:*", "route53:*"],
+      "Action": ["iam:*", "s3:*", "kms:*", "cloudtrail:*", "route53:*", "budgets:*"],
       "Resource": "*"
     }
   ]
