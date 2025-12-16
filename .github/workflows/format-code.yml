@@ -9,6 +9,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ministryofjustice/github-actions/code-formatter@v18.2.4
         with:
-          ignore-files: ".python-version"
+          ignore-files: ".python-version,*.py"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
