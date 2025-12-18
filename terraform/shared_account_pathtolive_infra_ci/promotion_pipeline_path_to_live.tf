@@ -497,11 +497,11 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_deploy_tgw_attachment"
-              value = "false"
+              value = "true"
             },
             {
               name  = "TF_VAR_deploy_leds_api_tgw_routes"
-              value = "false"
+              value = "true"
             }
           ]
         )
