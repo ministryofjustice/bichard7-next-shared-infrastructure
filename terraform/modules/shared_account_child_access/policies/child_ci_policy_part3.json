@@ -172,6 +172,16 @@
       "Action": ["s3:GetObject"],
       "Effect": "Allow",
       "Resource": ["arn:aws:s3:::awsserverlessrepo-changesets*", "arn:aws:s3:::secrets-manager-rotation-apps-*/*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ram:AcceptResourceShareInvitation",
+        "ram:GetResourceShareInvitations",
+        "ram:GetResourceShares",
+        "ram:ListResources"
+      ],
+      "Resource": "*"
     }
   ]
 }
