@@ -175,12 +175,7 @@
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "ram:AcceptResourceShareInvitation",
-        "ram:GetResourceShareInvitations",
-        "ram:GetResourceShares",
-        "ram:ListResources"
-      ],
+      "Action": ["ram:AcceptResourceShareInvitation", "ram:GetResourceShareInvitations", "ram:GetResourceShares", "ram:ListResources"],
       "Resource": "*"
     }
   ]
