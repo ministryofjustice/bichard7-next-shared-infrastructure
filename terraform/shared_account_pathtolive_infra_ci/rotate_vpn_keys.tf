@@ -64,8 +64,19 @@ module "rotate_vpn_keys" {
     {
       name  = "TF_VAR_niam_api_url"
       value = "https://login.microsoftonline.com/25d6f0c9-a61a-4999-9b67-4babac41824f/oauth2/v2.0/token"
+    },
+    {
+      name  = "TF_VAR_deploy_private_hosted_zone_association"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_deploy_tgw_attachment"
+      value = "true"
+    },
+    {
+      name  = "TF_VAR_deploy_leds_api_tgw_routes"
+      value = "true"
     }
-
   ]
 
   tags = module.label.tags
