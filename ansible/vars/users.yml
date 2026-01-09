@@ -42,6 +42,8 @@
       type: admin
     - name: lili_berenyi
       type: admin
+    - name: kate_reidy
+      type: admin
 
 - users_removed:
     - name: jonathan_hartshorn
