@@ -26,8 +26,6 @@
       type: admin
     - name: joe_folkard
       type: admin
-    - name: ian_king
-      type: admin
     - name: richard_cane
       type: admin
     - name: richard_race
@@ -38,13 +36,11 @@
       type: admin
     - name: tom_watkins
       type: admin
-    - name: emma_lanigan
-      type: admin
     - name: lili_berenyi
       type: admin
     - name: kate_reidy
       type: admin
 
 - users_removed:
-    - name: jonathan_hartshorn
-    - name: chris_hatton
+    - name: emma_lanigan
+    - name: ian_king
