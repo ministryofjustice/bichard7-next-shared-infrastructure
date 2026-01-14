@@ -3,7 +3,7 @@ module "deployment_reminder" {
   name              = "deployment-reminder"
   build_description = "Daily check to see if deployment is overdue"
   repository_name   = "bichard7-next-shared-infrastructure"
-  buildspec_file    = "deployment_reminder.yml"
+  buildspec_file    = "deployment-reminder.yml"
 
   event_type_ids = []
 
