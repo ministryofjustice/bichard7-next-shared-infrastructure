@@ -9,9 +9,3 @@ variable "is_cd" {
   type        = bool
   default     = false
 }
-
-variable "deployment_reminder_limit" {
-  description = "Deplyment overdue limit in days"
-  type        = string
-  default     = "0"
-}
