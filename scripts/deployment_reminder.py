@@ -1,14 +1,14 @@
 from datetime import datetime, timedelta
 import json
-import os
 import requests
 import boto3
 
 pipeline_name = "cjse-bichard7-path-to-live-deploy-pipeline"
-LIMIT_DAYS = int(os.getenv("LIMIT_DAYS", "5"))
 ssm = boto3.client('ssm')
 SLACK_WEBHOOK = ssm.get_parameter(
         Name="/slack/deployment_reminder")["Parameter"]["Value"]
+LIMIT_DAYS = int(ssm.get_parameter(
+        Name="/slack/deployment_reminder/limit_days")["Parameter"]["Value"])
 
 def get_pipeline_state(pipeline_name):
     code_pipeline = boto3.client('codepipeline', region_name="eu-west-2")
