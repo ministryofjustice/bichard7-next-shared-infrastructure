@@ -36,11 +36,8 @@
       type: admin
     - name: tom_watkins
       type: admin
-    - name: lili_berenyi
-      type: admin
     - name: kate_reidy
       type: admin
 
 - users_removed:
-    - name: emma_lanigan
-    - name: ian_king
+    - name: lili_berenyi
