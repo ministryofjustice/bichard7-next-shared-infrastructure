@@ -3,6 +3,11 @@ output "administrator_access_group" {
   value       = aws_iam_group.administrator_access_group
 }
 
+output "aws_support_access_group" {
+  description = "The name of the admin group"
+  value       = aws_iam_group.aws_support_access_group
+}
+
 output "ci_access_group" {
   description = "The name of the ci group"
   value       = aws_iam_group.ci_access_group

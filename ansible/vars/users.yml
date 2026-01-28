@@ -4,6 +4,7 @@
       groups:
         - EnforceMFA
         - AdminAccess
+        - AWSSupportAccess
       aws_tags:
         "user-role": operations
     readonly:
