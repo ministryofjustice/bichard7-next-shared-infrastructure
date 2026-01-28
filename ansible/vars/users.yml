@@ -38,6 +38,8 @@
       type: admin
     - name: kate_reidy
       type: admin
+    - name: wren_hawthorne
+      type: admin
 
 - users_removed:
     - name: lili_berenyi
