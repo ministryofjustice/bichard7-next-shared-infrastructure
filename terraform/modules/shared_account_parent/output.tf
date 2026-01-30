@@ -3,6 +3,11 @@ output "administrator_access_group" {
   value       = aws_iam_group.administrator_access_group
 }
 
+output "aws_support_access_group" {
+  description = "The name of the admin group"
+  value       = aws_iam_group.aws_support_access_group
+}
+
 output "ci_access_group" {
   description = "The name of the ci group"
   value       = aws_iam_group.ci_access_group
@@ -43,4 +48,9 @@ output "nuke_users_arns" {
 output "ci_policy_arn" {
   description = "The arn of our ci policy"
   value       = aws_iam_policy.ci_policy.arn
+}
+
+output "aws_support_policy_arn" {
+  description = "The arn of our aws support policy"
+  value       = aws_iam_policy.aws_support_access_policy.arn
 }

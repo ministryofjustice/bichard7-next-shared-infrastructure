@@ -26,6 +26,7 @@ module "shared_account_access_preprod" {
   readonly_access_group_name = module.shared_account_user_access.readonly_access_group.name
   admin_access_arn           = module.preprod_child_access.administrator_access_role.arn
   admin_access_group_name    = module.shared_account_user_access.administrator_access_group.name
+  aws_support_access_arn     = module.shared_account_user_access.aws_support_policy_arn
 
   providers = {
     aws = aws.shared
