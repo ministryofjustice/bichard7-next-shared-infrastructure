@@ -492,6 +492,10 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.API_IMAGE_HASH}"
             },
             {
+              name  = "TF_VAR_leds_proxy_skip_ssl_verification"
+              value = "true"
+            },
+            {
               name  = "TF_VAR_deploy_private_hosted_zone_association"
               value = "true"
             },
