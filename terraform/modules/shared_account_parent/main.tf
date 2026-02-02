@@ -4,6 +4,11 @@ resource "aws_iam_group" "administrator_access_group" {
 }
 
 # tfsec:ignore:aws-iam-enforce-mfa
+resource "aws_iam_group" "aws_support_access_group" {
+  name = "AWSSupportAccess"
+}
+
+# tfsec:ignore:aws-iam-enforce-mfa
 resource "aws_iam_group" "readonly_access_group" {
   name = "ReadOnlyAccess"
 }
@@ -26,6 +31,13 @@ resource "aws_iam_policy" "mfa_policy" {
   tags = var.tags
 }
 
+resource "aws_iam_policy" "aws_support_access_policy" {
+  name   = "AWSSupportAccessUsers"
+  policy = file("${path.module}/policies/allow_aws_support.json")
+
+  tags = var.tags
+}
+
 resource "aws_iam_group_policy_attachment" "force_mfa" {
   group      = aws_iam_group.mfa_group.name
   policy_arn = aws_iam_policy.mfa_policy.arn
@@ -34,6 +46,11 @@ resource "aws_iam_group_policy_attachment" "force_mfa" {
 resource "aws_iam_group_policy_attachment" "admin_user_allow_all_policy" {
   group      = aws_iam_group.administrator_access_group.name
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
+resource "aws_iam_group_policy_attachment" "aws_support_access_policy" {
+  group      = aws_iam_group.aws_support_access_group.name
+  policy_arn = aws_iam_policy.aws_support_access_policy.arn
 }
 
 resource "aws_iam_group_policy_attachment" "readonly_user_policy" {
