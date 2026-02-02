@@ -25,6 +25,7 @@ module "shared_account_access_sandbox_a" {
   ci_access_arn              = module.sandbox_a_child_access.ci_access_role.arn
   aws_nuke_access_arn        = (length(module.sandbox_a_child_access.aws_nuke_access_role) > 0) ? module.sandbox_a_child_access.aws_nuke_access_role[0].arn : null
   ci_admin_access_arn        = module.sandbox_a_child_access.ci_admin_access_role.arn
+  aws_support_access_arn     = module.shared_account_user_access.aws_support_policy_arn
 
   providers = {
     aws = aws.sandbox_shared
