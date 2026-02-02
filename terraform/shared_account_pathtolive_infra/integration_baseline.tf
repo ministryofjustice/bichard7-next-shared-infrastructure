@@ -27,6 +27,8 @@ module "shared_account_access_integration_baseline" {
   admin_access_arn           = module.integration_baseline_child_access.administrator_access_role.arn
   ci_access_arn              = module.integration_baseline_child_access.ci_access_role.arn
   ci_admin_access_arn        = module.integration_baseline_child_access.ci_admin_access_role.arn
+  aws_support_access_arn     = module.shared_account_user_access.aws_support_policy_arn
+
 
   providers = {
     aws = aws.shared

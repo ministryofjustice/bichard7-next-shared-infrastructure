@@ -23,6 +23,11 @@ variable "admin_access_arn" {
   type        = string
 }
 
+variable "aws_support_access_arn" {
+  description = "The child aws support assume role arn"
+  type        = string
+}
+
 variable "readonly_access_arn" {
   description = "The child readonly assume role arn"
   type        = string
