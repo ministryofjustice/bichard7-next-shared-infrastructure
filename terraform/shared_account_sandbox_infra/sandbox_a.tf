@@ -15,18 +15,20 @@ module "sandbox_a_child_access" {
 }
 
 module "shared_account_access_sandbox_a" {
-  source                        = "../modules/shared_account_parent_access"
-  child_account_id              = data.aws_caller_identity.sandbox_a.account_id
+  source           = "../modules/shared_account_parent_access"
+  child_account_id = data.aws_caller_identity.sandbox_a.account_id
+
   admin_access_group_name       = module.shared_account_user_access.administrator_access_group.name
-  readonly_access_group_name    = module.shared_account_user_access.readonly_access_group.name
-  ci_access_group_name          = module.shared_account_user_access.ci_access_group.name
-  readonly_access_arn           = module.sandbox_a_child_access.readonly_access_role.arn
-  admin_access_arn              = module.sandbox_a_child_access.administrator_access_role.arn
-  ci_access_arn                 = module.sandbox_a_child_access.ci_access_role.arn
-  aws_nuke_access_arn           = (length(module.sandbox_a_child_access.aws_nuke_access_role) > 0) ? module.sandbox_a_child_access.aws_nuke_access_role[0].arn : null
-  ci_admin_access_arn           = module.sandbox_a_child_access.ci_admin_access_role.arn
   aws_support_access_group_name = module.shared_account_user_access.aws_support_access_group.name
+  ci_access_group_name          = module.shared_account_user_access.ci_access_group.name
+  readonly_access_group_name    = module.shared_account_user_access.readonly_access_group.name
+
+  admin_access_arn       = module.sandbox_a_child_access.administrator_access_role.arn
+  aws_nuke_access_arn    = (length(module.sandbox_a_child_access.aws_nuke_access_role) > 0) ? module.sandbox_a_child_access.aws_nuke_access_role[0].arn : null
   aws_support_access_arn = module.sandbox_a_child_access.aws_support_access_role.arn
+  ci_access_arn          = module.sandbox_a_child_access.ci_access_role.arn
+  ci_admin_access_arn    = module.sandbox_a_child_access.ci_admin_access_role.arn
+  readonly_access_arn    = module.sandbox_a_child_access.readonly_access_role.arn
 
   providers = {
     aws = aws.sandbox_shared
