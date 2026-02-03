@@ -28,9 +28,9 @@ module "shared_account_access_integration_next" {
   admin_access_arn              = module.integration_next_child_access.administrator_access_role.arn
   ci_access_arn                 = module.integration_next_child_access.ci_access_role.arn
   ci_admin_access_arn           = module.integration_next_child_access.ci_admin_access_role.arn
-  aws_support_access_arn        = module.shared_account_user_access.aws_support_access_arn.arn
   aws_support_access_group_name = module.shared_account_user_access.aws_support_access_group.name
 
+  aws_support_access_arn = module.integration_next_child_access.aws_support_access_role.arn
 
   providers = {
     aws = aws.shared
