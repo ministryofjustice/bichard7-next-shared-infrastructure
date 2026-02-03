@@ -17,16 +17,17 @@ module "production_child_access" {
 }
 
 module "shared_account_access_production" {
-  source                     = "../modules/shared_account_parent_access"
-  child_account_id           = data.aws_caller_identity.production.account_id
-  ci_access_group_name       = module.shared_account_user_access.ci_access_group.name
-  ci_access_arn              = module.production_child_access.ci_access_role.arn
-  ci_admin_access_arn        = module.production_child_access.ci_admin_access_role.arn
-  readonly_access_arn        = module.production_child_access.readonly_access_role.arn
-  readonly_access_group_name = module.shared_account_user_access.readonly_access_group.name
-  admin_access_arn           = module.production_child_access.administrator_access_role.arn
-  admin_access_group_name    = module.shared_account_user_access.administrator_access_group.name
-  aws_support_access_arn     = module.shared_account_user_access.aws_support_policy_arn
+  source                        = "../modules/shared_account_parent_access"
+  child_account_id              = data.aws_caller_identity.production.account_id
+  ci_access_group_name          = module.shared_account_user_access.ci_access_group.name
+  ci_access_arn                 = module.production_child_access.ci_access_role.arn
+  ci_admin_access_arn           = module.production_child_access.ci_admin_access_role.arn
+  readonly_access_arn           = module.production_child_access.readonly_access_role.arn
+  readonly_access_group_name    = module.shared_account_user_access.readonly_access_group.name
+  admin_access_arn              = module.production_child_access.administrator_access_role.arn
+  admin_access_group_name       = module.shared_account_user_access.administrator_access_group.name
+  aws_support_access_arn        = module.shared_account_user_access.aws_support_access_arn.arn
+  aws_support_access_group_name = module.shared_account_user_access.aws_support_access_group.name
 
   providers = {
     aws = aws.shared
