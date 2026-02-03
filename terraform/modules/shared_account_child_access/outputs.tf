@@ -25,5 +25,5 @@ output "ci_admin_access_role" {
 
 output "aws_support_access_role" {
   description = "The aws support role outputs"
-  value       = aws_iam_role.assume_ci_admin_access
+  value       = aws_iam_role.assume_aws_support_access
 }
