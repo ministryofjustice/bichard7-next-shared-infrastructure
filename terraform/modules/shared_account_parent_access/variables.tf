@@ -28,6 +28,11 @@ variable "aws_support_access_arn" {
   type        = string
 }
 
+variable "aws_support_access_group_name" {
+  description = "The name of the CI group"
+  type        = string
+}
+
 variable "readonly_access_arn" {
   description = "The child readonly assume role arn"
   type        = string

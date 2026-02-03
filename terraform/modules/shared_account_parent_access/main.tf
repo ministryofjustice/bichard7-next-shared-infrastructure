@@ -31,6 +31,23 @@ resource "aws_iam_group_policy_attachment" "readonly_access_policy_attachment" {
   group      = var.readonly_access_group_name
 }
 
+resource "aws_iam_policy" "allow_assume_aws_support_role" {
+  name = "Assume-Aws-Support-Access-on-${var.child_account_id}"
+  policy = templatefile(
+    "${path.module}/policies/allow_assume_aws_support_access.json.tpl",
+    {
+      aws_support_access_arn = var.aws_support_access_arn
+    }
+  )
+
+  tags = var.tags
+}
+
+resource "aws_iam_group_policy_attachment" "aws_support_access_policy_attachment" {
+  policy_arn = aws_iam_policy.allow_assume_aws_support_role.arn
+  group      = var.aws_support_access_arn
+}
+
 resource "aws_iam_policy" "allow_assume_ci_access_role" {
   name = "Assume-CI-Access-on-${var.child_account_id}"
   policy = templatefile(
