@@ -49,8 +49,3 @@ output "ci_policy_arn" {
   description = "The arn of our ci policy"
   value       = aws_iam_policy.ci_policy.arn
 }
-
-output "aws_support_policy_arn" {
-  description = "The arn of our aws support policy"
-  value       = aws_iam_policy.aws_support_access_policy.arn
-}
