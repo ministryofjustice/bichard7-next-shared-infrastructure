@@ -34,6 +34,25 @@ resource "aws_iam_role_policy_attachment" "readonly_access_policy_attachment" {
   role       = aws_iam_role.assume_readonly_access.name
 }
 
+resource "aws_iam_role" "assume_aws_support_access" {
+  name                 = "Bichard7-Aws-Support-Access"
+  max_session_duration = 10800
+  assume_role_policy = templatefile(
+    "${path.module}/policies/${local.access_template}",
+    {
+      parent_account_id = var.root_account_id
+      excluded_arns     = jsonencode(var.denied_user_arns)
+      user_role         = "admin"
+    }
+  )
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "aws_support_access_policy_attachment" {
+  policy_arn = "arn:aws:iam::aws:policy/AWSSupportAccess"
+  role       = aws_iam_role.assume_aws_support_access.name
+}
+
 resource "aws_s3_bucket_public_access_block" "account_logging_bucket" {
   bucket                  = aws_s3_bucket.account_logging_bucket.bucket
   block_public_acls       = true
