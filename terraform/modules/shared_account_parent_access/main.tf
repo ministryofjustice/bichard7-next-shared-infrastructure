@@ -45,7 +45,7 @@ resource "aws_iam_policy" "allow_assume_aws_support_role" {
 
 resource "aws_iam_group_policy_attachment" "aws_support_access_policy_attachment" {
   policy_arn = aws_iam_policy.allow_assume_aws_support_role.arn
-  group      = var.aws_support_access_arn
+  group      = var.aws_support_access_group_name
 }
 
 resource "aws_iam_policy" "allow_assume_ci_access_role" {
