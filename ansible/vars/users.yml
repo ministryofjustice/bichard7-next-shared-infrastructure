@@ -4,13 +4,13 @@
       groups:
         - EnforceMFA
         - AdminAccess
+        - AWSSupportAccess
       aws_tags:
         "user-role": operations
     readonly:
       groups:
         - EnforceMFA
         - ReadOnlyAccess
-        - AWSSupportAccess
       aws_tags:
         "user-role": readonly
     ithc:
