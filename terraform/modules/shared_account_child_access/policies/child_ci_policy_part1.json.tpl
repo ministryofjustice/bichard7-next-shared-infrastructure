@@ -34,6 +34,7 @@
         "iam:ListEntitiesForPolicy",
         "iam:DeleteRole",
         "iam:UpdateRoleDescription",
+        "iam:AddUserToGroup",
         "iam:CreateGroup",
         "iam:GetGroupPolicy",
         "iam:UntagRole",
