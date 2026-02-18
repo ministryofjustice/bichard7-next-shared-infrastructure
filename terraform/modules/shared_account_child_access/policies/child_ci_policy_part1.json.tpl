@@ -50,6 +50,7 @@
         "iam:ListPolicyVersions",
         "iam:AttachGroupPolicy",
         "iam:UpdateRole",
+        "iam:DetachGroupPolicy",
         "iam:DeleteGroupPolicy",
         "iam:ListGroupsForUser",
         "iam:CreateUser",
