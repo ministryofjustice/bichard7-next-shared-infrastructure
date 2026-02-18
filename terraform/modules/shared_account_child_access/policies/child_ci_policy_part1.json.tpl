@@ -54,6 +54,7 @@
         "iam:DetachGroupPolicy",
         "iam:DeleteGroupPolicy",
         "iam:ListGroupsForUser",
+        "iam:RemoveUserFromGroup",
         "iam:CreateUser",
         "iam:DeleteUser",
         "iam:UpdateUser",
