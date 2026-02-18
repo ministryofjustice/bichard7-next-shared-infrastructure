@@ -37,6 +37,7 @@
         "iam:AddUserToGroup",
         "iam:CreateGroup",
         "iam:DeleteGroup",
+        "iam:UpdateGroup",
         "iam:GetGroupPolicy",
         "iam:UntagRole",
         "iam:TagRole",
