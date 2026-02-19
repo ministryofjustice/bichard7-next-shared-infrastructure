@@ -41,6 +41,8 @@
       type: admin
     - name: wren_hawthorne
       type: admin
+    - name: tim_howes
+      type: admin
 
 - users_removed:
     - name: lili_berenyi
