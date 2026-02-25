@@ -1,0 +1,128 @@
+resource "aws_kms_key" "sqs_key" {
+  description             = "CSOC queue encryption key"
+  deletion_window_in_days = 10
+  enable_key_rotation     = true
+
+  policy = <<-POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Allow SQS to encrypt messages",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "sqs.amazonaws.com",
+        "AWS": "${data.aws_caller_identity.current.arn}"
+      },
+      "Action": [
+        "kms:GenerateDataKey*",
+        "kms:Decrypt"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "Enable IAM User Permissions",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
+          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Bichard7-CI-Access"
+        ]
+      },
+      "Action": "kms:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "Allow S3 to work with key",
+      "Effect": "Allow",
+      "Principal": {
+          "Service": "s3.amazonaws.com"
+      },
+      "Action": [
+          "kms:GenerateDataKey",
+          "kms:Decrypt"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "Allow cloudwatch to work with key",
+      "Effect": "Allow",
+      "Principal": {
+          "Service": "events.amazonaws.com"
+      },
+      "Action": [
+          "kms:GenerateDataKey",
+          "kms:Decrypt"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+  POLICY
+
+  tags = var.tags
+}
+
+resource "aws_kms_alias" "csoc_queue_encryption_key" {
+  target_key_id = aws_kms_key.sqs_key.id
+  name          = "alias/csoc-sqs"
+}
+
+resource "aws_sqs_queue" "csoc_queue" {
+  count                     = 1
+  name                      = "csoc-queue"
+  message_retention_seconds = 14 * 86400
+  receive_wait_time_seconds = 2
+  kms_master_key_id         = aws_kms_key.sqs_key.key_id
+
+  tags = var.tags
+}
+
+data "aws_s3_bucket" "csoc_logs" {
+  bucket = "moj-bichard7-production-logs"
+}
+
+resource "aws_s3_bucket_notification" "sqs_notification" {
+  bucket      = data.aws_s3_bucket.csoc_logs.id
+  eventbridge = true
+}
+
+# CloudWatch EventBridge to listen to the PutObject S3 bucket event
+resource "aws_cloudwatch_event_rule" "trigger_from_csoc_logs_bucket" {
+  name = "trigger-from-csoc-logs-bucket"
+
+  event_pattern = jsonencode({
+    source        = ["aws.s3"]
+    "detail-type" = ["Object Created"]
+    detail = {
+      bucket = {
+        name = [data.aws_s3_bucket.csoc_logs.id]
+      }
+    }
+  })
+}
+
+data "aws_iam_policy_document" "send_to_csoc_sqs" {
+  statement {
+    effect    = "Allow"
+    actions   = ["sqs:SendMessage"]
+    resources = [aws_sqs_queue.csoc_queue.arn]
+
+    principals {
+      type        = "Service"
+      identifiers = ["events.amazonaws.com"]
+    }
+
+    condition {
+      test     = "ArnEquals"
+      variable = "aws:SourceArn"
+      values   = [aws_cloudwatch_event_rule.trigger_from_csoc_logs_bucket.arn]
+    }
+  }
+}
+
+
+resource "aws_sqs_queue_policy" "allow_cloudwatch" {
+  queue_url = aws_sqs_queue.csoc_queues.url
+  policy    = data.aws_iam_policy_document.send_to_csoc_sqs.json
+}
