@@ -69,7 +69,6 @@ resource "aws_kms_alias" "csoc_queue_encryption_key" {
 }
 
 resource "aws_sqs_queue" "csoc_queue" {
-  count                     = 1
   name                      = "csoc-queue"
   message_retention_seconds = 14 * 86400
   receive_wait_time_seconds = 2
@@ -99,6 +98,6 @@ resource "aws_cloudwatch_event_rule" "trigger_from_csoc_logs_bucket" {
 }
 
 resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
-  queue_url = aws_sqs_queue.csoc_queue[0].url
+  queue_url = aws_sqs_queue.csoc_queue.url
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs.json
 }

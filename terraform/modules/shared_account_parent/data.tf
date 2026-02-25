@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
   statement {
     effect    = "Allow"
     actions   = ["sqs:SendMessage"]
-    resources = [aws_sqs_queue.csoc_queue[0].arn]
+    resources = [aws_sqs_queue.csoc_queue.arn]
 
     principals {
       type        = "Service"
