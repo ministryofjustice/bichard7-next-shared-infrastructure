@@ -78,10 +78,6 @@ resource "aws_sqs_queue" "csoc_queue" {
   tags = var.tags
 }
 
-data "aws_s3_bucket" "csoc_logs" {
-  bucket = "moj-bichard7-production-logs"
-}
-
 resource "aws_s3_bucket_notification" "sqs_notification" {
   bucket      = data.aws_s3_bucket.csoc_logs.id
   eventbridge = true
@@ -101,26 +97,6 @@ resource "aws_cloudwatch_event_rule" "trigger_from_csoc_logs_bucket" {
     }
   })
 }
-
-data "aws_iam_policy_document" "send_to_csoc_sqs" {
-  statement {
-    effect    = "Allow"
-    actions   = ["sqs:SendMessage"]
-    resources = [aws_sqs_queue.csoc_queue.arn]
-
-    principals {
-      type        = "Service"
-      identifiers = ["events.amazonaws.com"]
-    }
-
-    condition {
-      test     = "ArnEquals"
-      variable = "aws:SourceArn"
-      values   = [aws_cloudwatch_event_rule.trigger_from_csoc_logs_bucket.arn]
-    }
-  }
-}
-
 
 resource "aws_sqs_queue_policy" "allow_cloudwatch" {
   queue_url = aws_sqs_queue.csoc_queues.url
