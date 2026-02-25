@@ -1,9 +1,5 @@
 data "aws_caller_identity" "current" {}
 
-
-
-
-
 data "aws_ssm_parameter" "ci_user" {
   name            = "/users/system/ci"
   with_decryption = true
