@@ -1,4 +1,4 @@
-resource "aws_kms_key" "sqs_key" {
+resource "aws_kms_key" "csoc_sqs_key" {
   description             = "CSOC queue encryption key"
   deletion_window_in_days = 10
   enable_key_rotation     = true
@@ -64,7 +64,7 @@ resource "aws_kms_key" "sqs_key" {
 }
 
 resource "aws_kms_alias" "csoc_queue_encryption_key" {
-  target_key_id = aws_kms_key.sqs_key.id
+  target_key_id = aws_kms_key.csoc_sqs_key.id
   name          = "alias/csoc-sqs"
 }
 
@@ -73,7 +73,7 @@ resource "aws_sqs_queue" "csoc_queue" {
   name                      = "csoc-queue"
   message_retention_seconds = 14 * 86400
   receive_wait_time_seconds = 2
-  kms_master_key_id         = aws_kms_key.sqs_key.key_id
+  kms_master_key_id         = aws_kms_key.csoc_sqs_key.key_id
 
   tags = var.tags
 }
@@ -98,7 +98,7 @@ resource "aws_cloudwatch_event_rule" "trigger_from_csoc_logs_bucket" {
   })
 }
 
-resource "aws_sqs_queue_policy" "allow_cloudwatch" {
+resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   queue_url = aws_sqs_queue.csoc_queues.url
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs.json
 }
