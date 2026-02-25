@@ -99,6 +99,6 @@ resource "aws_cloudwatch_event_rule" "trigger_from_csoc_logs_bucket" {
 }
 
 resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
-  queue_url = aws_sqs_queue.csoc_queues.url
+  queue_url = aws_sqs_queue.csoc_queue[0].url
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs.json
 }
