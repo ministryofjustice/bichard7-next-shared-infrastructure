@@ -78,23 +78,15 @@ resource "aws_sqs_queue" "csoc_queue" {
 }
 
 resource "aws_s3_bucket_notification" "sqs_notification" {
-  bucket      = data.aws_s3_bucket.csoc_logs.id
-  eventbridge = true
-}
+  bucket = data.aws_s3_bucket.csoc_logs.id
 
-# CloudWatch EventBridge to listen to the PutObject S3 bucket event
-resource "aws_cloudwatch_event_rule" "trigger_from_csoc_logs_bucket" {
-  name = "trigger-from-csoc-logs-bucket"
+  queue {
+    queue_arn     = aws_sqs_queue.csoc_queue.arn
+    events        = ["s3:ObjectCreated:*"]
+    filter_prefix = "AWSLogs/"
+    filter_suffix = ".gz"
+  }
 
-  event_pattern = jsonencode({
-    source        = ["aws.s3"]
-    "detail-type" = ["Object Created"]
-    detail = {
-      bucket = {
-        name = [data.aws_s3_bucket.csoc_logs.id]
-      }
-    }
-  })
 }
 
 resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {

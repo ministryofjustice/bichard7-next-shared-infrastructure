@@ -23,13 +23,13 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
 
     principals {
       type        = "Service"
-      identifiers = ["events.amazonaws.com"]
+      identifiers = ["s3.amazonaws.com"]
     }
 
     condition {
       test     = "ArnEquals"
       variable = "aws:SourceArn"
-      values   = [aws_cloudwatch_event_rule.trigger_from_csoc_logs_bucket.arn]
+      values   = [data.aws_s3_bucket.csoc_logs.arn]
     }
   }
 }
