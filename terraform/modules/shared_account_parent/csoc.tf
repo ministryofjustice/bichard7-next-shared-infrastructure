@@ -21,7 +21,7 @@ resource "aws_kms_key" "csoc_sqs_key" {
       },
       {
         Sid : "Enable IAM User Permissions",
-        Effect : Allow,
+        Effect : "Allow",
         Principal : {
           AWS : [
             "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
@@ -32,7 +32,7 @@ resource "aws_kms_key" "csoc_sqs_key" {
       },
       {
         Sid : "Allow S3 to work with key",
-        Effect : Allow,
+        Effect : "Allow",
         Principal : {
           Service : "s3.amazonaws.com"
         },
