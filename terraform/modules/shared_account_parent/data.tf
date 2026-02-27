@@ -34,3 +34,19 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
   }
 }
 
+data "aws_iam_policy_document" "csoc_trust_policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::258361008057:root"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "sts:ExternalId"
+      values   = ["test"]
+    }
+  }
+}
