@@ -3,62 +3,59 @@ resource "aws_kms_key" "csoc_sqs_key" {
   deletion_window_in_days = 10
   enable_key_rotation     = true
 
-  policy = <<-POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Allow SQS to encrypt messages",
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "sqs.amazonaws.com",
-        "AWS": "${data.aws_caller_identity.current.arn}"
+  policy = jsonencode({
+    Version : "2012-10-17",
+    Statement : [
+      {
+        Sid : "Allow SQS to encrypt messages",
+        Effect : "Allow",
+        Principal : {
+          Service : "sqs.amazonaws.com",
+          AWS : "${data.aws_caller_identity.current.arn}"
+        },
+        Action : [
+          "kms:GenerateDataKey*",
+          "kms:Decrypt"
+        ],
+        "Resource" : "*"
       },
-      "Action": [
-        "kms:GenerateDataKey*",
-        "kms:Decrypt"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "Enable IAM User Permissions",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": [
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/Bichard7-CI-Access"
-        ]
+      {
+        Sid : "Enable IAM User Permissions",
+        Effect : "Allow",
+        Principal : {
+          AWS : [
+            "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
+          ]
+        },
+        Action : "kms:*",
+        Resource : "*"
       },
-      "Action": "kms:*",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Allow S3 to work with key",
-      "Effect": "Allow",
-      "Principal": {
-          "Service": "s3.amazonaws.com"
-      },
-      "Action": [
+      {
+        Sid : "Allow S3 to work with key",
+        Effect : "Allow",
+        Principal : {
+          Service : "s3.amazonaws.com"
+        },
+        Action : [
           "kms:GenerateDataKey",
           "kms:Decrypt"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "Allow cloudwatch to work with key",
-      "Effect": "Allow",
-      "Principal": {
-          "Service": "events.amazonaws.com"
+        ],
+        Resource : "*"
       },
-      "Action": [
+      {
+        Sid : "Allow cloudwatch to work with key",
+        Effect : "Allow",
+        Principal : {
+          Service : "events.amazonaws.com"
+        },
+        Action : [
           "kms:GenerateDataKey",
           "kms:Decrypt"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-  POLICY
+        ],
+        Resource : "*"
+      }
+    ]
+  })
 
   tags = var.tags
 }
