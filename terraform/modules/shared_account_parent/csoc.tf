@@ -90,3 +90,29 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   queue_url = aws_sqs_queue.csoc_queue.url
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs.json
 }
+
+resource "aws_iam_role" "csoc_role" {
+  name               = "CSOC-SQSAssumeRole"
+  assume_role_policy = data.aws_iam_policy_document.csoc_trust_policy.json
+}
+
+resource "aws_iam_role_policy" "csoc_sqs_access" {
+  name = "SQSConsumerPermissions"
+  role = aws_iam_role.csoc_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:sqs:eu-west-2:497078235711:csoc-queue"
+      }
+    ]
+  })
+}
+
