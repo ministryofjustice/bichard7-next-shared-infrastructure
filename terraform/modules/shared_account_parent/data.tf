@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "csoc_trust_policy" {
     condition {
       test     = "StringEquals"
       variable = "sts:ExternalId"
-      values   = ["test"]
+      values   = ["ee6d06ab-eaf3-4a3d-ac74-0ddf75fec004"]
     }
   }
 }
