@@ -102,12 +102,12 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
 }
 
 resource "aws_iam_role" "csoc_role" {
-  name               = "CSOC-SQSAssumeRole"
+  name               = "CSOC-SQS-Assume-Role"
   assume_role_policy = data.aws_iam_policy_document.csoc_trust_policy.json
 }
 
 resource "aws_iam_role_policy" "csoc_sqs_access" {
-  name = "SQSConsumerPermissions"
+  name = "SQS-Consumer-Permissions"
   role = aws_iam_role.csoc_role.id
 
   policy = jsonencode({
