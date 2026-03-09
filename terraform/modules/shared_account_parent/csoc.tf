@@ -56,7 +56,7 @@ resource "aws_kms_key" "csoc_sqs_key" {
         Sid    = "Allow CSOC to decrypt messages",
         Effect = "Allow",
         Principal = {
-          AWS = "arn:aws:iam::006742885340:root"
+          AWS = "arn:aws:iam::497078235711:role/CSOC-SQS-Assume-Role"
         },
         Action = [
           "kms:Decrypt",
@@ -104,6 +104,12 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
 resource "aws_iam_role" "csoc_role" {
   name               = "CSOC-SQS-Assume-Role"
   assume_role_policy = data.aws_iam_policy_document.csoc_trust_policy.json
+}
+
+resource "aws_iam_role_policy" "csoc_sqs_policy_attachment" {
+  name   = "CSOCSQSPolicy"
+  role   = aws_iam_role.csoc_role.id
+  policy = data.aws_iam_policy_document.csoc_sqs_permissions.json
 }
 
 resource "aws_iam_role_policy" "csoc_sqs_access" {
