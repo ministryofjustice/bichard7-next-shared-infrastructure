@@ -56,7 +56,7 @@ resource "aws_kms_key" "csoc_sqs_key" {
         Sid    = "Allow CSOC to decrypt messages",
         Effect = "Allow",
         Principal = {
-          AWS = "arn:aws:iam::258361008057:root"
+          AWS = "arn:aws:iam::006742885340:root"
         },
         Action = [
           "kms:Decrypt",
