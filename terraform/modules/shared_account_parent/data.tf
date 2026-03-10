@@ -32,6 +32,18 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
       values   = [data.aws_s3_bucket.csoc_logs.arn]
     }
   }
+
+  statement {
+    sid    = "AllowCSOCSQSAccess"
+    effect = "Allow"
+    actions = [
+      "sqs:ReceiveMessage",
+      "sqs:DeleteMessage",
+      "sqs:GetQueueAttributes"
+    ]
+    resources = ["arn:aws:sqs:eu-west-2:497078235711:csoc-queue"]
+  }
+
 }
 
 data "aws_iam_policy_document" "csoc_trust_policy" {
