@@ -106,12 +106,6 @@ resource "aws_iam_role" "csoc_role" {
   assume_role_policy = data.aws_iam_policy_document.csoc_trust_policy.json
 }
 
-resource "aws_iam_role_policy" "csoc_sqs_policy_attachment" {
-  name   = "CSOCSQSPolicy"
-  role   = aws_iam_role.csoc_role.id
-  policy = data.aws_iam_policy_document.csoc_sqs_permissions.json
-}
-
 resource "aws_iam_role_policy" "csoc_sqs_access" {
   name = "SQS-Consumer-Permissions"
   role = aws_iam_role.csoc_role.id
