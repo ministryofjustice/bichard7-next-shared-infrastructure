@@ -36,6 +36,12 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
   statement {
     sid    = "AllowCSOCSQSAccess"
     effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::497078235711:role/CSOC-SQS-Assume-Role"]
+    }
+
     actions = [
       "sqs:ReceiveMessage",
       "sqs:DeleteMessage",
