@@ -8,7 +8,8 @@ module "build_reporting" {
   sns_kms_key_arn        = var.notifications_kms_key_arn
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.nodejs_20_2023.arn
+    data.aws_ecr_repository.nodejs_24_2023.arn
+
   ]
 
   environment_variables = concat(
@@ -24,7 +25,7 @@ module "build_reporting" {
   build_environments = [
     {
       compute_type                = "BUILD_GENERAL1_SMALL"
-      image                       = "${data.aws_ecr_repository.nodejs_20_2023.repository_url}@${data.external.latest_nodejs_20_2023_image.result.tags}"
+      image                       = "${data.aws_ecr_repository.nodejs_24_2023.repository_url}@${data.external.latest_nodejs_24_2023_image.result.tags}"
       type                        = "LINUX_CONTAINER"
       privileged_mode             = true
       image_pull_credentials_type = "SERVICE_ROLE"
