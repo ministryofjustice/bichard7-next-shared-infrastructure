@@ -1,3 +1,25 @@
+resource "aws_iam_user" "csoc" {
+  name = "csoc-xsiam"
+  path = "/csoc-xsiam/"
+}
+
+resource "aws_iam_user_policy" "csoc_user_assume_role" {
+  name = "AllowXSIAMToAssumeRole"
+  user = aws_iam_user.csoc.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = "sts:AssumeRole"
+        Resource = aws_iam_role.csoc_role.arn
+      }
+    ]
+  })
+}
+
+
 resource "aws_kms_key" "csoc_sqs_key" {
   description             = "CSOC queue encryption key"
   deletion_window_in_days = 10
@@ -56,7 +78,7 @@ resource "aws_kms_key" "csoc_sqs_key" {
         Sid    = "Allow CSOC to decrypt messages",
         Effect = "Allow",
         Principal = {
-          AWS = "arn:aws:iam::497078235711:role/CSOC-SQS-Assume-Role"
+          AWS = aws_iam_role.csoc_role.arn
         },
         Action = [
           "kms:Decrypt",
@@ -109,6 +131,7 @@ resource "aws_iam_role" "csoc_role" {
 resource "aws_iam_role_policy" "csoc_sqs_access" {
   name = "SQS-Consumer-Permissions"
   role = aws_iam_role.csoc_role.id
+
 
   policy = jsonencode({
     Version = "2012-10-17",
