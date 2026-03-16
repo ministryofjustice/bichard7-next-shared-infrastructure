@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "csoc_trust_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::006742885340:root"]
+      identifiers = [aws_iam_user.csoc.arn]
     }
 
     condition {
