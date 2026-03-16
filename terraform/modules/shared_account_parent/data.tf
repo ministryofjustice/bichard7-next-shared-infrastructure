@@ -51,20 +51,3 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
   }
 
 }
-
-data "aws_iam_policy_document" "csoc_trust_policy" {
-  statement {
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::006742885340:root"]
-    }
-
-    condition {
-      test     = "StringEquals"
-      variable = "sts:ExternalId"
-      values   = ["ee6d06ab-eaf3-4a3d-ac74-0ddf75fec004"]
-    }
-  }
-}
