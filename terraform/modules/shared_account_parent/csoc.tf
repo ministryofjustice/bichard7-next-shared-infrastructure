@@ -3,22 +3,26 @@ resource "aws_iam_user" "csoc" {
   path = "/csoc-xsiam/"
 }
 
-resource "aws_iam_user_policy" "csoc_user_assume_role" {
-  name = "AllowXSIAMToAssumeRole"
+resource "aws_iam_user_policy" "csoc_user" {
+  name = "AllowXSIAMToAccessSQSQueue"
   user = aws_iam_user.csoc.name
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = "sts:AssumeRole"
-        Resource = aws_iam_role.csoc_role.arn
+        Sid    = "AllowCSOCSQSAccess",
+        Effect = "Allow",
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes"
+        ],
+        Resource = aws_sqs_queue.csoc_queue.arn
       }
     ]
   })
 }
-
 
 resource "aws_kms_key" "csoc_sqs_key" {
   description             = "CSOC queue encryption key"
@@ -78,7 +82,7 @@ resource "aws_kms_key" "csoc_sqs_key" {
         Sid    = "Allow CSOC to decrypt messages",
         Effect = "Allow",
         Principal = {
-          AWS = aws_iam_role.csoc_role.arn
+          AWS = aws_iam_user.csoc.arn
         },
         Action = [
           "kms:Decrypt",
@@ -121,31 +125,4 @@ resource "aws_s3_bucket_notification" "sqs_notification" {
 resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   queue_url = aws_sqs_queue.csoc_queue.url
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs.json
-}
-
-resource "aws_iam_role" "csoc_role" {
-  name               = "CSOC-SQS-Assume-Role"
-  assume_role_policy = data.aws_iam_policy_document.csoc_trust_policy.json
-}
-
-resource "aws_iam_role_policy" "csoc_sqs_access" {
-  name = "SQS-Consumer-Permissions"
-  role = aws_iam_role.csoc_role.id
-
-
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Sid    = "AllowAccessToCsocMessageQueue",
-        Effect = "Allow",
-        Action = [
-          "sqs:ReceiveMessage",
-          "sqs:DeleteMessage",
-          "sqs:GetQueueAttributes"
-        ],
-        Resource = "arn:aws:sqs:eu-west-2:497078235711:csoc-queue"
-      }
-    ]
-  })
 }
