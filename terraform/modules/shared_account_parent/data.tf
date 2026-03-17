@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::497078235711:role/CSOC-SQS-Assume-Role"]
+      identifiers = [aws_iam_user.csoc.arn]
     }
 
     actions = [
@@ -49,5 +49,4 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
     ]
     resources = ["arn:aws:sqs:eu-west-2:497078235711:csoc-queue"]
   }
-
 }
