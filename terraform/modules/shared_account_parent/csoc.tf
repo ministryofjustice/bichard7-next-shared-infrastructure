@@ -16,7 +16,8 @@ resource "aws_iam_user_policy" "csoc_user" {
         Action = [
           "sqs:ReceiveMessage",
           "sqs:DeleteMessage",
-          "sqs:GetQueueAttributes"
+          "sqs:GetQueueAttributes",
+          "sqs:ChangeMessageVisibility"
         ],
         Resource = aws_sqs_queue.csoc_queue.arn
       }
