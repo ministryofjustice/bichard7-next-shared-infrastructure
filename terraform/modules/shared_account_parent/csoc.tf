@@ -108,7 +108,8 @@ resource "aws_kms_key" "csoc_sqs_key" {
         },
         Action = [
           "kms:Decrypt",
-          "kms:DescribeKey"
+          "kms:DescribeKey",
+          "kms:GenerateDataKey",
         ],
         Resource = "*"
       }
