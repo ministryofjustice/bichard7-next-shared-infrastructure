@@ -20,6 +20,27 @@ resource "aws_iam_user_policy" "csoc_user" {
           "sqs:ChangeMessageVisibility"
         ],
         Resource = aws_sqs_queue.csoc_queue.arn
+      },
+      {
+        Sid : "AllowXSIAMToReadLogs",
+        Effect : "Allow",
+        Action : [
+          "s3:GetObject",
+          "s3:ListBucket"
+        ],
+        Resource : [
+          "arn:aws:s3:::moj-bichard7-production-logs",
+          "arn:aws:s3:::moj-bichard7-production-logs/*"
+        ]
+      },
+      {
+        Sid : "AllowDecryptCloudtrailLogs",
+        Effect : "Allow",
+        Action : [
+          "kms:Decrypt",
+          "kms:DescribeKey"
+        ],
+        Resource : [aws_kms_key.csoc_sqs_key.arn]
       }
     ]
   })
