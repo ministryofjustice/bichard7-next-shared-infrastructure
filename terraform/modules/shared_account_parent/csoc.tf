@@ -41,6 +41,12 @@ resource "aws_iam_user_policy" "csoc_user" {
           "kms:DescribeKey"
         ],
         Resource : [aws_kms_key.csoc_sqs_key.arn]
+      },
+      {
+        Sid : "AllowAccessToChildKMSKey"
+        Effect : "Allow",
+        Action : "kms:Decrypt",
+        Resource : "arn:aws:kms:eu-west-2:415925668545:key/ba38cc77-49a8-46d0-9cbc-97b3a33f95fb"
       }
     ]
   })
