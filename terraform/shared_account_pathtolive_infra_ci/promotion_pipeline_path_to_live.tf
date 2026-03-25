@@ -492,6 +492,14 @@ resource "aws_codepipeline" "path_to_live" {
               value = "#{HASHES.API_IMAGE_HASH}"
             },
             {
+              name  = "TF_VAR_leds_integration_mode"
+              value = "real"
+            },
+            {
+              name  = "TF_VAR_use_leds"
+              value = "true"
+            },
+            {
               name  = "TF_VAR_leds_proxy_skip_ssl_verification"
               value = "true"
             },
