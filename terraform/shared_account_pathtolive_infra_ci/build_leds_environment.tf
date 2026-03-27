@@ -116,6 +116,74 @@ module "deploy_leds_test_environment_terraform" {
   tags = module.label.tags
 }
 
+module "run_leds_tests" {
+  source            = "../modules/codebuild_job"
+  name              = "integration-test-leds"
+  build_description = "Codebuild Pipeline Running integration tests against LEDS API"
+  repository_name   = "bichard7-next-core"
+  vpc_config        = module.codebuild_base_resources.codebuild_vpc_config_blocks["leds"]
+
+  report_build_status = true
+
+  buildspec_file = "packages/e2e-test/e2eTestBuildspec.yml"
+  event_type_ids = []
+
+  allowed_resource_arns = [
+    data.aws_ecr_repository.codebuild_base.arn,
+    module.codebuild_docker_resources.codebuild_2023_base.arn
+  ]
+
+  build_environments = local.codebuild_2023_pipeline_build_environments
+
+  environment_variables = [
+    {
+      name  = "ASSUME_ROLE_ARN"
+      value = data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn
+    },
+    {
+      name  = "DEPLOY_ENV"
+      value = "pathtolive"
+    },
+    {
+      name  = "WORKSPACE"
+      value = "leds"
+    },
+    {
+      name  = "STACK_TYPE"
+      value = "next"
+    },
+    {
+      name  = "TEST_COMMAND"
+      value = "test:leds:preprod"
+    },
+    {
+      name  = "AL_TEST_COMMAND"
+      value = "test:leds:preprodauditlogs"
+    },
+    {
+      name  = "REAL_POLICE_API"
+      value = "true"
+    },
+    {
+      name  = "USE_LEDS"
+      value = "true"
+    },
+    {
+      name  = "AWS_URL"
+      value = "none"
+    }
+  ]
+  codepipeline_s3_bucket = module.codebuild_base_resources.codepipeline_bucket
+  sns_notification_arn   = module.codebuild_base_resources.notifications_arn
+  sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
+
+  tags = module.label.tags
+
+  depends_on = [
+    module.codebuild_docker_resources
+  ]
+}
+
 module "run_leds_test_migrations" {
   source = "../modules/codebuild_job"
 
