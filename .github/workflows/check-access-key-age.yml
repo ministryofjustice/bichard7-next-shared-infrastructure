@@ -16,18 +16,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v6
 
-      - name: Report Status
-        if: always()
-        uses: ravsamhq/notify-slack-action@v1
-        with:
-          status: ${{ job.status }}
-          notification_title: 'GitHub action failed'
-          message_format: ':elmo-fire: *{workflow}* {status_message} in <{repo_url}|{repo}>'
-          notify_when: 'failure'
-          footer: 'Linked to Repo <{repo_url}|{repo}>'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -51,3 +39,15 @@ jobs:
           ACCESS_KEY_EXPIRY_AGE_DAYS: 90
         run: |
           python3 check_access_key_age.py
+
+      - name: Report Status
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notification_title: 'GitHub action failed'
+          message_format: ':elmo-fire: *{workflow}* {status_message} in <{repo_url}|{repo}>'
+          notify_when: 'failure'
+          footer: 'Linked to Repo <{repo_url}|{repo}>'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
