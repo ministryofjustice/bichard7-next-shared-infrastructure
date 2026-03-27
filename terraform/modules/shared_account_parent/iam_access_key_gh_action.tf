@@ -12,8 +12,8 @@ resource "aws_iam_policy" "iam_read_only_audit" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
-        Action   = [
+        Effect = "Allow"
+        Action = [
           "iam:ListUsers",
           "iam:ListAccessKeys",
           "iam:GetAccessKeyLastUsed"
