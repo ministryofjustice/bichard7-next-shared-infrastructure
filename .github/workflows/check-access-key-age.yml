@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  audit-keys:
+  audit-access-keys:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
