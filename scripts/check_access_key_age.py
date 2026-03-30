@@ -10,7 +10,7 @@ from slack_sdk.errors import SlackApiError
 ACCESS_KEY_WARN_AGE_DAYS = int(os.getenv("ACCESS_KEY_WARN_AGE_DAYS"))
 ACCESS_KEY_EXPIRY_AGE_DAYS = int(os.getenv("ACCESS_KEY_EXPIRY_AGE_DAYS"))
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-
+SLACK_CHANNEL_NAME = os.getenv("SLACK_CHANNEL_NAME")
 client = WebClient(token=SLACK_BOT_TOKEN)
 
 
@@ -180,7 +180,7 @@ def main():
     print("=" * 90)
     summary_blocks = build_channel_summary_payload(users_with_slack_ids)
     channel_success = send_channel_summary(
-        slack_client, channel="aws-iam-access-alerts", blocks=summary_blocks
+        slack_client, channel=SLACK_CHANNEL_NAME, blocks=summary_blocks
     )
 
     if channel_success:
