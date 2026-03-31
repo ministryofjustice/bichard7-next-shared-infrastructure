@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  audit-keys:
+  audit-access-keys:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -14,16 +14,16 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
-        #TODO: add action that alerts if fails
+        uses: actions/checkout@v6
+
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: eu-west-2
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -39,3 +39,15 @@ jobs:
           ACCESS_KEY_EXPIRY_AGE_DAYS: 90
         run: |
           python3 check_access_key_age.py
+
+      - name: Report Status
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notification_title: 'GitHub action failed'
+          message_format: ':elmo-fire: *{workflow}* {status_message} in <{repo_url}|{repo}>'
+          notify_when: 'failure'
+          footer: 'Linked to Repo <{repo_url}|{repo}>'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
