@@ -322,6 +322,10 @@ module "deploy_leds_conductor_definitions" {
     {
       name  = "USE_PEERING"
       value = "true"
+    },
+    {
+      name  = "INCOMING_MESSAGE_SQS_QUEUE"
+      value = "bichard-7-leds-incomingMessageQueue"
     }
   ]
   tags = module.label.tags
