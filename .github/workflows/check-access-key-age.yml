@@ -37,6 +37,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           ACCESS_KEY_WARN_AGE_DAYS: 70
           ACCESS_KEY_EXPIRY_AGE_DAYS: 90
+          SLACK_CHANNEL_NAME: "moj-cjse-bichard-alerts"
         run: |
           python3 check_access_key_age.py
 
