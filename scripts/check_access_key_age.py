@@ -14,7 +14,9 @@ SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 client = WebClient(token=SLACK_BOT_TOKEN)
 
 
-def check_access_key_age(max_age_days=ACCESS_KEY_EXPIRY_AGE_DAYS, threshold=ACCESS_KEY_WARN_AGE_DAYS):
+def check_access_key_age(
+    max_age_days=ACCESS_KEY_EXPIRY_AGE_DAYS, threshold=ACCESS_KEY_WARN_AGE_DAYS
+):
     iam = boto3.client("iam")
     paginator = iam.get_paginator("list_users")
     users_with_expiring_access_keys = {}
@@ -104,6 +106,13 @@ def build_channel_summary_payload(users_dict):
                 "text": f"Found *{len(users_dict)} users* with access keys requiring rotation:",
             },
         },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Run this command:\n`aws-vault rotate bichard7-shared` and follow the on-screen prompt",
+            },
+        },
         {"type": "divider"},
     ]
 
@@ -121,7 +130,11 @@ def build_channel_summary_payload(users_dict):
 
         user_mention = f"<@{slack_id}>" if slack_id else f"`{username}`"
 
-        warning = " :warning: *Action Required* Access key older than 90 days" if oldest_age > 90 else ""
+        warning = (
+            " :warning: *Action Required* Access key older than 90 days"
+            if oldest_age > 90
+            else ""
+        )
 
         blocks.append(
             {
