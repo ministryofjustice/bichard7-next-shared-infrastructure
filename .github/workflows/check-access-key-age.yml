@@ -14,18 +14,21 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 #v6
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: eu-west-2
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c #v6
         with:
           python-version: "3.11"
+
+      - name: ⛓️ SLSA Supply Chain Security
+        uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649 # v1.4.0
 
       - name: Install Dependencies
         run: pip install boto3 slack-sdk
@@ -41,14 +44,15 @@ jobs:
         run: |
           python3 check_access_key_age.py
 
-      - name: Report Status
-        if: always()
-        uses: ravsamhq/notify-slack-action@v1
-        with:
-          status: ${{ job.status }}
-          notification_title: 'GitHub action failed'
-          message_format: ':elmo-fire: *{workflow}* {status_message} in <{repo_url}|{repo}>'
-          notify_when: 'failure'
-          footer: 'Linked to Repo <{repo_url}|{repo}>'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+# Temporarily disabled - investigating alternatives
+#      - name: Report Status
+#        if: always()
+#        uses: ravsamhq/notify-slack-action@4ed28566c2bdcdaee6dca2b46b9666d01b4ed8a4 # v1
+#        with:
+#          status: ${{ job.status }}
+#          notification_title: 'GitHub action failed'
+#          message_format: ':elmo-fire: *{workflow}* {status_message} in <{repo_url}|{repo}>'
+#          notify_when: 'failure'
+#          footer: 'Linked to Repo <{repo_url}|{repo}>'
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
