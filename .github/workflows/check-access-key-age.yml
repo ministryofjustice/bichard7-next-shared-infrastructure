@@ -31,7 +31,7 @@ jobs:
         uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649 # v1.4.0
 
       - name: Install Dependencies
-        run: pip install boto3==1.42.83 botocore==1.42.83 slack-sdk==3.41.0
+        run: pip install -r requirements.txt
 
       - name: Run Audit Script
         shell: bash
