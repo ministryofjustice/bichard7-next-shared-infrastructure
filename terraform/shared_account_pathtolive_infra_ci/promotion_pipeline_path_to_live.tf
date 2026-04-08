@@ -733,6 +733,34 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_api_deploy_tag"
               value = "#{HASHES.API_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_leds_integration_mode"
+              value = "real"
+            },
+            {
+              name  = "TF_VAR_use_leds"
+              value = "false"
+            },
+            {
+              name  = "TF_VAR_leds_proxy_skip_ssl_verification"
+              value = "true"
+            },
+            {
+              name  = "TF_VAR_deploy_private_hosted_zone_association"
+              value = "false"
+            },
+            {
+              name  = "TF_VAR_deploy_tgw_attachment"
+              value = "false"
+            },
+            {
+              name  = "TF_VAR_deploy_leds_api_tgw_routes"
+              value = "false"
+            },
+            {
+              name = "TF_VAR_use_ssm_for_niam_api_gateway_target"
+              value = false
             }
           ]
         )
