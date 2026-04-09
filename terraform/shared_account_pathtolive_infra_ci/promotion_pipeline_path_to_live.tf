@@ -760,7 +760,7 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_use_ssm_for_niam_api_gateway_target"
-              value = false
+              value = "false"
             }
           ]
         )
