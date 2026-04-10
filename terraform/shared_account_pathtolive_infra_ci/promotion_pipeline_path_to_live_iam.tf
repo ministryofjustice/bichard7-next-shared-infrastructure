@@ -211,6 +211,12 @@ resource "aws_iam_role_policy" "deploy_leds_test_environment_terraform" {
   role   = module.deploy_leds_test_environment_terraform.pipeline_service_role_name
 }
 
+resource "aws_iam_role_policy" "run_leds_tests" {
+  name   = "allow-codestar-connection"
+  policy = local.allow_codebuild_codestar_connection_policy
+  role   = module.run_leds_tests.pipeline_service_role_name
+}
+
 resource "aws_iam_role_policy" "run_leds_test_migrations" {
   name   = "allow-codestar-connection"
   policy = local.allow_codebuild_codestar_connection_policy
