@@ -28,7 +28,7 @@ jobs:
           python-version: "3.11"
 
       - name: ⛓️ SLSA Supply Chain Security
-        uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649 # v1.4.0
+        uses: ministryofjustice/devsecops-actions/sca/slsa@8c77d3a65a46d1d4b5416eafae5b84371ecd797d # v1.5.0
 
       - name: Install Dependencies
         run: pip install -r requirements.txt
