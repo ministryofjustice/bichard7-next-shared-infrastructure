@@ -1,3 +1,5 @@
+name: Format code
+
 on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
