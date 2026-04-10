@@ -634,6 +634,21 @@ resource "aws_codepipeline" "path_to_live" {
         "core"
       ]
     }
+
+    action {
+      category  = "Build"
+      name      = "run-leds-tests"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 5
+
+      configuration = {
+        ProjectName = module.run_leds_tests.pipeline_name
+      }
+
+      input_artifacts = ["core"]
+    }
   }
 
   stage {
