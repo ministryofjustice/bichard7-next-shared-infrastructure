@@ -71,7 +71,8 @@
       "Action": [
         "athena:CreateWorkGroup",
         "glue:CreateDatabase"
-      ]
+      ],
+      "Resource": "*"
     },
     {
       "Sid": "CloudwatchAll",
