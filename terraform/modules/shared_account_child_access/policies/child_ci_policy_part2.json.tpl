@@ -78,11 +78,11 @@
         "glue:CreateDatabase",
         "glue:GetDatabase",
         "glue:UpdateDatabase",
-        "glue:DeleteDatabase"
+        "glue:DeleteDatabase",
         "glue:CreateTable",
         "glue:GetTable",
         "glue:UpdateTable",
-        "glue:DeleteTable"
+        "glue:DeleteTable",
         "glue:GetTags",
         "glue:TagResource"
       ],
