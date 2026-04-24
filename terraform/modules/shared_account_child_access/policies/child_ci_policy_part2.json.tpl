@@ -66,6 +66,14 @@
       "Resource": "*"
     },
     {
+      "Sid": "AthenaS3LogAnalysis",
+      "Effect": "Allow",
+      "Action": [
+        "athena:CreateWorkGroup",
+        "glue:CreateDatabase"
+      ]
+    },
+    {
       "Sid": "CloudwatchAll",
       "Effect": "Allow",
       "Action": [
