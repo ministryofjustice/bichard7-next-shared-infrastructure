@@ -70,8 +70,15 @@
       "Effect": "Allow",
       "Action": [
         "athena:CreateWorkGroup",
+        "athena:GetWorkGroup",
+        "athena:UpdateWorkGroup",
         "athena:TagResource",
         "glue:CreateDatabase",
+        "glue:GetDatabase",
+        "glue:UpdateDatabase",
+        "glue:CreateTable",
+        "glue:GetTable",
+        "glue:UpdateTable",
         "glue:TagResource"
       ],
       "Resource": "*"
