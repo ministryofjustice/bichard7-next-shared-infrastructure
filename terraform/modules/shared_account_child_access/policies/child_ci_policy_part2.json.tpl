@@ -72,6 +72,7 @@
         "athena:CreateWorkGroup",
         "athena:GetWorkGroup",
         "athena:UpdateWorkGroup",
+        "athena:ListTagsForResource",
         "athena:TagResource",
         "glue:CreateDatabase",
         "glue:GetDatabase",
@@ -79,6 +80,7 @@
         "glue:CreateTable",
         "glue:GetTable",
         "glue:UpdateTable",
+        "glue:GetTags",
         "glue:TagResource"
       ],
       "Resource": "*"
