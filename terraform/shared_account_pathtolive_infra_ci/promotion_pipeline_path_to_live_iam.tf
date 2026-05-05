@@ -108,8 +108,8 @@ data "aws_kms_alias" "production_connectivity_check_key" {
 }
 
 resource "aws_iam_role_policy" "retrieve_connectivity_api_key_for_production_smoketests" {
-  name   = "Retrieve-Connectivity-API-Key"
-  role   = module.run_prod_smoketests.pipeline_service_role_name
+  name = "Retrieve-Connectivity-API-Key"
+  role = module.run_prod_smoketests.pipeline_service_role_name
 
   policy = templatefile(
     "${path.module}/policies/retrieve_secret_value_policy.json",
