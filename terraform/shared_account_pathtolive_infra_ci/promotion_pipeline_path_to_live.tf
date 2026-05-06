@@ -767,7 +767,7 @@ resource "aws_codepipeline" "path_to_live" {
             },
             {
               name  = "TF_VAR_deploy_private_hosted_zone_association"
-              value = "false"
+              value = "true"
             },
             {
               name  = "TF_VAR_deploy_tgw_attachment"
