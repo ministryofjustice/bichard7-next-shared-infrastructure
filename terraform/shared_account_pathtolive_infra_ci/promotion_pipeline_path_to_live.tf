@@ -1625,6 +1625,11 @@ module "run_prod_smoketests" {
     {
       name  = "AWS_ACCOUNT_NAME"
       value = "production"
+    },
+    {
+      name  = "CONNECTIVITY_CHECK_KEY"
+      value = data.aws_secretsmanager_secret.production_connectivity_check_key.arn
+      type  = "SECRETS_MANAGER"
     }
   ]
   tags = module.label.tags

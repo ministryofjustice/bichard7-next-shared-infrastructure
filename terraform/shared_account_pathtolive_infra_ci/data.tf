@@ -141,3 +141,13 @@ data "external" "latest_zap_owasp_scanner" {
 data "aws_secretsmanager_secret_version" "github_token" {
   secret_id = aws_secretsmanager_secret.github_token.id
 }
+
+data "aws_secretsmanager_secret" "production_connectivity_check_key" {
+  provider = aws.production
+  name     = "bichard-7-production-connectivity-check-key"
+}
+
+data "aws_kms_alias" "production_connectivity_check_key" {
+  provider = aws.production
+  name     = "alias/production-connectivity-check-key"
+}
