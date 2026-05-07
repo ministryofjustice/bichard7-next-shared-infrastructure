@@ -105,7 +105,7 @@ resource "aws_iam_role_policy" "retrieve_connectivity_api_key_for_production_smo
     "${path.module}/policies/retrieve_secret_value_policy.json",
     {
       secret_arn = data.aws_secretsmanager_secret.production_connectivity_check_key.arn
-      key_arn    = data.aws_kms_alias.production_connectivity_check_key.arn
+      key_arn    = data.aws_kms_alias.production_connectivity_check_key.target_key_arn
     }
   )
 }
