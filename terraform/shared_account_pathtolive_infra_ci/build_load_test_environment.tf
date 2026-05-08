@@ -108,6 +108,10 @@ module "deploy_load_test_terraform" {
       value = 3 # One per AZ
     },
     {
+      name  = "TF_VAR_desired_api_instance_count"
+      value = 3 # One per AZ
+    },
+    {
       name  = "TF_VAR_desired_user_service_instance_count"
       value = 3 # One per AZ
     },
