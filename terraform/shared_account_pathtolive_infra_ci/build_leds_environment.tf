@@ -92,6 +92,10 @@ module "deploy_leds_test_environment_terraform" {
       value = 3 # One per AZ
     },
     {
+      name  = "TF_VAR_desired_ui_instance_count"
+      value = 3 # One per AZ
+    },
+    {
       name  = "TF_VAR_desired_user_service_instance_count"
       value = 3 # One per AZ
     },
@@ -106,10 +110,6 @@ module "deploy_leds_test_environment_terraform" {
     {
       name  = "TF_VAR_aurora_db_version"
       value = "15.12"
-    },
-    {
-      name  = "TF_VAR_niam_api_url"
-      value = "https://login.microsoftonline.com/25d6f0c9-a61a-4999-9b67-4babac41824f/oauth2/v2.0/token"
     }
   ]
 

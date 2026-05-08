@@ -97,6 +97,19 @@ resource "aws_iam_role_policy" "allow_code_pipeline_connection_for_production_sm
   role   = module.run_prod_smoketests.pipeline_service_role_name
 }
 
+resource "aws_iam_role_policy" "retrieve_connectivity_api_key_for_production_smoketests" {
+  name = "Retrieve-Connectivity-API-Key"
+  role = module.run_prod_smoketests.pipeline_service_role_name
+
+  policy = templatefile(
+    "${path.module}/policies/retrieve_secret_value_policy.json",
+    {
+      secret_arn = data.aws_secretsmanager_secret.production_connectivity_check_key.arn
+      key_arn    = data.aws_kms_alias.production_connectivity_check_key.target_key_arn
+    }
+  )
+}
+
 resource "aws_iam_role_policy" "allow_code_pipeline_connection_for_load_tests" {
   name   = "Allow-Codestar-Connection"
   policy = local.allow_codebuild_codestar_connection_policy
@@ -209,6 +222,12 @@ resource "aws_iam_role_policy" "deploy_leds_test_environment_terraform" {
   name   = "allow-codestar-connection"
   policy = local.allow_codebuild_codestar_connection_policy
   role   = module.deploy_leds_test_environment_terraform.pipeline_service_role_name
+}
+
+resource "aws_iam_role_policy" "run_leds_tests" {
+  name   = "allow-codestar-connection"
+  policy = local.allow_codebuild_codestar_connection_policy
+  role   = module.run_leds_tests.pipeline_service_role_name
 }
 
 resource "aws_iam_role_policy" "run_leds_test_migrations" {

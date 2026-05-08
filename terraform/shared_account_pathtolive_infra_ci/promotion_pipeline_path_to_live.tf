@@ -514,6 +514,10 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_deploy_leds_api_tgw_routes"
               value = "true"
+            },
+            {
+              name  = "TF_VAR_use_ssm_for_niam_api_gateway_target"
+              value = "true"
             }
           ]
         )
@@ -630,6 +634,21 @@ resource "aws_codepipeline" "path_to_live" {
         "core"
       ]
     }
+
+    action {
+      category  = "Build"
+      name      = "run-leds-tests"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 5
+
+      configuration = {
+        ProjectName = module.run_leds_tests.pipeline_name
+      }
+
+      input_artifacts = ["core"]
+    }
   }
 
   stage {
@@ -733,6 +752,34 @@ resource "aws_codepipeline" "path_to_live" {
             {
               name  = "TF_VAR_api_deploy_tag"
               value = "#{HASHES.API_IMAGE_HASH}"
+            },
+            {
+              name  = "TF_VAR_leds_integration_mode"
+              value = "real"
+            },
+            {
+              name  = "TF_VAR_use_leds"
+              value = "false"
+            },
+            {
+              name  = "TF_VAR_leds_proxy_skip_ssl_verification"
+              value = "true"
+            },
+            {
+              name  = "TF_VAR_deploy_private_hosted_zone_association"
+              value = "true"
+            },
+            {
+              name  = "TF_VAR_deploy_tgw_attachment"
+              value = "true"
+            },
+            {
+              name  = "TF_VAR_deploy_leds_api_tgw_routes"
+              value = "true"
+            },
+            {
+              name  = "TF_VAR_use_ssm_for_niam_api_gateway_target"
+              value = "false"
             }
           ]
         )
@@ -1578,6 +1625,11 @@ module "run_prod_smoketests" {
     {
       name  = "AWS_ACCOUNT_NAME"
       value = "production"
+    },
+    {
+      name  = "CONNECTIVITY_CHECK_KEY"
+      value = data.aws_secretsmanager_secret.production_connectivity_check_key.arn
+      type  = "SECRETS_MANAGER"
     }
   ]
   tags = module.label.tags

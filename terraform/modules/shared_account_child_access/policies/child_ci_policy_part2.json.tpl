@@ -66,6 +66,29 @@
       "Resource": "*"
     },
     {
+      "Sid": "AthenaS3LogAnalysis",
+      "Effect": "Allow",
+      "Action": [
+        "athena:CreateWorkGroup",
+        "athena:GetWorkGroup",
+        "athena:UpdateWorkGroup",
+        "athena:DeleteWorkGroup",
+        "athena:ListTagsForResource",
+        "athena:TagResource",
+        "glue:CreateDatabase",
+        "glue:GetDatabase",
+        "glue:UpdateDatabase",
+        "glue:DeleteDatabase",
+        "glue:CreateTable",
+        "glue:GetTable",
+        "glue:UpdateTable",
+        "glue:DeleteTable",
+        "glue:GetTags",
+        "glue:TagResource"
+      ],
+      "Resource": "*"
+    },
+    {
       "Sid": "CloudwatchAll",
       "Effect": "Allow",
       "Action": [
