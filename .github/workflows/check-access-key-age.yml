@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+        with:
+          fetch-depth: 2
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 #v6
@@ -28,10 +30,22 @@ jobs:
           python-version: "3.11"
 
       - name: ⛓️ SLSA Supply Chain Security
+        id: slsa
         uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649 # v1.4.0
+        continue-on-error: true
+
+      - name: Install Fallback Dependencies
+        if: steps.slsa.outcome == 'failure'
+        run: |
+          echo "SLSA check failed. Reverting to previous version..."
+          git checkout HEAD^1 -- requirements.txt
+          pip install -r requirements.txt
 
       - name: Install Dependencies
-        run: pip install -r requirements.txt
+        if: steps.slsa.outcome == 'success'
+        run: |
+          echo "SLSA check passed."
+          pip install -r requirements.txt
 
       - name: Run Audit Script
         shell: bash
@@ -44,15 +58,23 @@ jobs:
         run: |
           python3 check_access_key_age.py
 
-# Temporarily disabled - investigating alternatives
-#      - name: Report Status
-#        if: always()
-#        uses: ravsamhq/notify-slack-action@4ed28566c2bdcdaee6dca2b46b9666d01b4ed8a4 # v1
-#        with:
-#          status: ${{ job.status }}
-#          notification_title: 'GitHub action failed'
-#          message_format: ':elmo-fire: *{workflow}* {status_message} in <{repo_url}|{repo}>'
-#          notify_when: 'failure'
-#          footer: 'Linked to Repo <{repo_url}|{repo}>'
-#        env:
-#          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+      - name: Report Status
+        if: failure()
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d #v2.0.0
+        with:
+          webhook-type: incoming-webhook
+          payload: |
+            text: "GitHub action failed"
+            attachments:
+              - color: "#a30000" # Red
+                blocks:
+                  - type: "section"
+                    text:
+                      type: "mrkdwn"
+                      text: ":elmo-fire: *${{ github.workflow }}* failed in <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>"
+                  - type: "context"
+                    elements:
+                      - type: "mrkdwn"
+                        text: "Linked to Repo <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
