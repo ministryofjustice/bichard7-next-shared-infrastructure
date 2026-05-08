@@ -33,16 +33,7 @@ jobs:
         uses: ministryofjustice/devsecops-actions/sca/slsa@2ce4e5898dfb83378215b4ae15401d4e9dba0649 # v1.4.0
 
       - name: Install Dependencies
-        id: install_deps
-        continue-on-error: true
         run: |
-          pip install -r requirements.txt
-
-      - name: Install Fallback Dependencies
-        if: steps.install_deps.outcome == 'failure'
-        run: |
-          echo "Reverting to previous version..."
-          git checkout HEAD^1 -- requirements.txt
           pip install -r requirements.txt
 
       - name: Run Audit Script
