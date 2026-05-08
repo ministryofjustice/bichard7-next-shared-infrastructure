@@ -106,6 +106,10 @@ module "deploy_uat_terraform" {
       value = 3 # One per AZ
     },
     {
+      name  = "TF_VAR_desired_ui_instance_count"
+      value = 3 # One per AZ
+    },
+    {
       name  = "TF_VAR_desired_user_service_instance_count"
       value = 3 # One per AZ
     },
