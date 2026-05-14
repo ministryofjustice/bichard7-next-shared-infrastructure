@@ -100,6 +100,14 @@ module "deploy_leds_test_environment_terraform" {
       value = 3 # One per AZ
     },
     {
+      name  = "TF_VAR_desired_conductor_instance_count"
+      value = 3 # One per AZ
+    },
+    {
+      name  = "TF_VAR_desired_message_forwarder_instance_count"
+      value = 3 # One per AZ
+    },
+    {
       name  = "TF_VAR_desired_user_service_instance_count"
       value = 3 # One per AZ
     },
