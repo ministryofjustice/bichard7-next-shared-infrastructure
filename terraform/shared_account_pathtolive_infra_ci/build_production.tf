@@ -192,7 +192,7 @@ module "deploy_production_terraform" {
     },
     {
       name  = "TF_VAR_aurora_db_version"
-      value = "15.12"
+      value = "15.15"
     },
   ]
 
