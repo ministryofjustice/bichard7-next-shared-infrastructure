@@ -4,32 +4,9 @@ resource "aws_iam_user" "dependabot_user" {
   tags = var.tags
 }
 
-data "aws_iam_policy_document" "dependabot_ecr_policy" {
-  statement {
-    sid       = "GetAuthorizationToken"
-    effect    = "Allow"
-    actions   = ["ecr:GetAuthorizationToken"]
-    resources = ["*"]
-  }
-
-  statement {
-    sid    = "AllowECRRead"
-    effect = "Allow"
-    actions = [
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:BatchGetImage",
-      "ecr:DescribeImages",
-      "ecr:ListImages"
-    ]
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_user_policy" "dependabot_policy" {
-  name   = "DependabotECRReadAccess"
-  user   = aws_iam_user.dependabot_user.name
-  policy = data.aws_iam_policy_document.dependabot_ecr_policy.json
+resource "aws_iam_user_policy_attachment" "dependabot_public_policy_attachment" {
+  user       = aws_iam_user.dependabot_user.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly"
 }
 
 resource "aws_iam_access_key" "dependabot_access_key" {
