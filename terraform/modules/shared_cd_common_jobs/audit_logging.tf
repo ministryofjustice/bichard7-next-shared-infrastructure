@@ -9,7 +9,8 @@ module "build_audit_logging" {
   vpc_config             = var.vpc_config_block
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.nodejs_20_2023.arn
+    data.aws_ecr_repository.nodejs_20_2023.arn,
+    data.aws_ecr_repository.nodejs_24_2023.arn
   ]
 
   environment_variables = concat(
