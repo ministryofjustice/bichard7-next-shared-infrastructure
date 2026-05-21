@@ -57,7 +57,7 @@ module "plan_e2e_test_terraform" {
     },
     {
       name  = "AUTO_APPROVE"
-      value = true
+      value = false
     },
     {
       name  = "TF_VAR_override_deploy_tags"
