@@ -95,6 +95,10 @@ module "plan_e2e_test_terraform" {
       name  = "TF_VAR_aurora_db_version"
       value = "15.15"
     },
+    {
+      name  = "TF_VAR_bichard_deploy_tag"
+      value = "unassigned_as_plan" # Hardcode so the plan doesn't fail due to blank SSM params
+    }
   ]
   is_cd = true
 
