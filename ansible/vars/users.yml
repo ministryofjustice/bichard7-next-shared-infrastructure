@@ -43,6 +43,13 @@
       type: admin
     - name: tim_howes
       type: admin
+    - name: ryan_murray
+      type: admin
+    - name: denise_turkova
+      type: admin
+    - name: joe_unwin
+      type: admin
+    - name: caitlin_barnard
+      type: admin
 
 - users_removed:
-    - name: lili_berenyi
