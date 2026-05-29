@@ -636,24 +636,20 @@ resource "aws_codepipeline" "path_to_live" {
       ]
     }
 
-    # TODO: TEMPORARY BYPASS - REVERT once LEDS gateway routing is fixed.
-    # We are skipping failures in this stage to unblock production deployments
-    # because integration tests are failing most likely due to LEDS routing issues.
+    action {
+      category  = "Build"
+      name      = "run-leds-tests"
+      owner     = "AWS"
+      provider  = "CodeBuild"
+      version   = "1"
+      run_order = 5
 
-    # action {
-    #   category  = "Build"
-    #   name      = "run-leds-tests"
-    #   owner     = "AWS"
-    #   provider  = "CodeBuild"
-    #   version   = "1"
-    #   run_order = 5
+      configuration = {
+        ProjectName = module.run_leds_tests.pipeline_name
+      }
 
-    #   configuration = {
-    #     ProjectName = module.run_leds_tests.pipeline_name
-    #   }
-
-    #   input_artifacts = ["core"]
-    # }
+      input_artifacts = ["core"]
+    }
   }
 
   stage {
