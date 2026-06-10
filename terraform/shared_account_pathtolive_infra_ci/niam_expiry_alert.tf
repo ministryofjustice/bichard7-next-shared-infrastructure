@@ -1,7 +1,7 @@
 ## SSM PARAM
 resource "aws_ssm_parameter" "niam_slack_webhook" {
-  name = "/monitoring/slack/niam_webhook"
-  type = "SecureString"
+  name  = "/monitoring/slack/niam_webhook"
+  type  = "SecureString"
   value = "-"
 
   tags = module.label.tags
