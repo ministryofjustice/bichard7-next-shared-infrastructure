@@ -138,12 +138,12 @@ def main():
     if certificate_expiry_details:
         print("\n🚨 Alert condition met! Sending slack notification...")
         payload = build_payload(certificate_expiry_details)
-        send_slack_alert(param["Name"], payload)
+        send_slack_alert(payload)
     else:
         print("\n✅ Certificates are safe. No alert needed.")
 
 
-def send_slack_alert(param_name, payload):
+def send_slack_alert(payload):
     if not SLACK_WEBHOOK:
         print("⚠️ Slack URL missing from environment variables. Skipping webhook call.")
         return
