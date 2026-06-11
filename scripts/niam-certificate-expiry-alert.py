@@ -31,33 +31,34 @@ def assume_role(role_arn, session_name="NIAM_EXPIRY_ALERT"):
 
     return assumed_session
 
-def build_payload(days_left, expiry_date, environment):
+def build_certificate_expiry_details(environment, days_remaining, expiry_date):
+    day_suffix = "day" if days_remaining == 1 else "days"
+    status_emoji = ":red_circle " if days_remaining < 14 else ""
+    return {
+        "type": "section",
+        "fields": [
+            {
+                "type": "mrkdwn",
+                "text": f"*Environment*\n`{environment}`"
+            },
+            {
+                "type": "mrkdwn",
+                "text": f"*Expires in*\n{status_emoji}*{days_remaining} {day_suffix}* ({expiry_date})"
+            }
+        ]
+    }
+
+def build_payload(expiry_details):
     payload = {
         "blocks": [
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f":alerts: *NIAM certificate expires in {days_left} days*\nAction required — renew before the expiry date to avoid service disruption."
+                    "text": f":alerts: *Action required* — renew NIAM certificate before the expiry date to avoid service disruption."
                 }
             },
-            {
-                "type": "section",
-                "fields": [
-                    {
-                        "type": "mrkdwn",
-                        "text": "*Certificate*\nNIAM"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": f"*Expiry date*\n{expiry_date}"
-                    },
-                    {
-                        "type": "mrkdwn",
-                        "text": f"*Environment*\n`{environment}`"
-                    }
-                ]
-            },
+            *expiry_details,
             {
                 "type": "divider"
             },
@@ -87,16 +88,14 @@ def build_payload(days_left, expiry_date, environment):
 	    ]
     }
 
-
     return payload
-
 
 def get_environment_name(param_name):
     return param_name.split("/")[1].split("-")[1]
 
-
 def main():
     print("🔍 Scanning Parameter Store...")
+    certificate_expiry_details = []
 
     for role_arn in ROLE_ARNS:
         child_account_role_session = assume_role(role_arn)
@@ -122,31 +121,35 @@ def main():
         for param in get_response.get("Parameters", []):
             cert = x509.load_pem_x509_certificate(param["Value"].encode("utf-8"), default_backend())
             expiry_date = cert.not_valid_after_utc
-            expiry_date_formatted = expiry_date.strftime('%d %B %Y')
+            formatted_expiry_date = expiry_date.strftime('%d %B %Y')
             days_remaining = (expiry_date - now).days
             environment = get_environment_name(param["Name"])
 
             print(f"\n📋 Parameter: {param['Name']}")
-            print(f"📅 Expires on: {expiry_date_formatted}")
+            print(f"📅 Expires on: {formatted_expiry_date}")
             print(f"⏳ Days remaining: {days_remaining}")
             print(f"☁️ Environment: {environment}")
 
             if days_remaining <= WARNING_DAYS:
-                print("🚨 Alert condition met! Sending Slack Notification...")
-                send_slack_alert(param["Name"], days_remaining, expiry_date_formatted, environment)
-            else:
-                print("✅ Certificate is safe. No alert needed.")
+                expiry_details = build_certificate_expiry_details(environment, days_remaining, formatted_expiry_date)
+                certificate_expiry_details.append(expiry_details)
 
 
-def send_slack_alert(param_name, days_left, expiry_date, environment):
+    if certificate_expiry_details:
+        print("\n🚨 Alert condition met! Sending slack notification...")
+        payload = build_payload(certificate_expiry_details)
+        send_slack_alert(param["Name"], payload)
+    else:
+        print("\n✅ Certificates are safe. No alert needed.")
+
+
+def send_slack_alert(param_name, payload):
     if not SLACK_WEBHOOK:
         print("⚠️ Slack URL missing from environment variables. Skipping webhook call.")
         return
 
-    emoji = ":alerts:"
     try:
       headers = {"Content-Type": "application/json"}
-      payload = build_payload(days_left, expiry_date, environment)
       response = requests.post(SLACK_WEBHOOK, data = json.dumps(payload), headers = headers)
       print(f"NIAM Certificate expiry alert sent to slack. Status: {response.status_code}")
 
