@@ -41,16 +41,3 @@ module "shared_account_access_preprod" {
     module.shared_account_user_access
   ]
 }
-
-module "shared_account_preprod_lambda_cloudtrail" {
-  source = "../modules/lambda_cloudtrail"
-
-  name           = "q-solution"
-  logging_bucket = module.aws_logs.aws_logs_bucket
-
-  tags = module.label.tags
-
-  providers = {
-    aws = aws.preprod
-  }
-}
