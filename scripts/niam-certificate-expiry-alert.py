@@ -11,6 +11,25 @@ ssm = boto3.client("ssm")
 SLACK_WEBHOOK = ssm.get_parameter(
         Name="/monitoring/slack/niam_webhook")["Parameter"]["Value"]
 WARNING_DAYS = 30
+ROLE_ARNS=[]
+
+def assume_role(role_arn, session_name="NIAM_EXPIRY_ALERT"):
+    sts_client = boto3.client('sts')
+
+    response = sts_client.assume_role(
+        RoleArn=role_arn,
+        RoleSessionName=session_name,
+    )
+
+    credentials = response['Credentials']
+
+    assumed_session = boto3.Session(
+        aws_access_key_id=credentials['AccessKeyId'],
+        aws_secret_access_key=credentials['SecretAccessKey'],
+        aws_session_token=credentials['SessionToken']
+    )
+
+    return assumed_session
 
 def build_payload(days_left, expiry_date, environment):
     payload = {
@@ -79,39 +98,44 @@ def get_environment_name(param_name):
 def main():
     print("🔍 Scanning Parameter Store...")
 
-    describe_response = ssm.describe_parameters(
-        ParameterFilters=[
-            {"Key": "Name", "Option": "Contains", "Values": ["leds/niam/certificate.pem"]}
-        ]
-    )
+    for role_arn in ROLE_ARNS:
+        child_account_role_session = assume_role(role_arn)
+        child_account_ssm = child_account_role_session.client('ssm')
 
-    param_names = [p["Name"] for p in describe_response.get("Parameters", [])]
+        describe_response = child_account_ssm.describe_parameters(
+            ParameterFilters=[
+                {"Key": "Name", "Option": "Contains", "Values": ["leds/niam/certificate.pem"]}
+            ]
+        )
 
-    if not param_names:
-        print("No matching SSM parameters found. Double check your parameter name suffix!")
-        return
+        param_names = [p["Name"] for p in describe_response.get("Parameters", [])]
 
-    print(f"Found parameters: {', '.join(param_names)}")
+        if not param_names:
+            print("No matching SSM parameters found. Double check your parameter name suffix!")
+            return
 
-    get_response = ssm.get_parameters(Names=param_names, WithDecryption=True)
-    now = datetime.datetime.now(datetime.timezone.utc)
+        print(f"Found parameters: {', '.join(param_names)}")
 
-    for param in get_response.get("Parameters", []):
-        cert = x509.load_pem_x509_certificate(param["Value"].encode("utf-8"), default_backend())
-        expiry_date = cert.not_valid_after_utc
-        expiry_date_formatted = expiry_date.strftime('%d %B %Y')
-        days_remaining = (expiry_date - now).days
-        environment = get_environment_name(param["Name"])
+        get_response = child_account_ssm.get_parameters(Names=param_names, WithDecryption=True)
+        now = datetime.datetime.now(datetime.timezone.utc)
 
-        print(f"\n📋 Parameter: {param['Name']}")
-        print(f"📅 Expires on: {expiry_date_formatted}")
-        print(f"⏳ Days remaining: {days_remaining}")
+        for param in get_response.get("Parameters", []):
+            cert = x509.load_pem_x509_certificate(param["Value"].encode("utf-8"), default_backend())
+            expiry_date = cert.not_valid_after_utc
+            expiry_date_formatted = expiry_date.strftime('%d %B %Y')
+            days_remaining = (expiry_date - now).days
+            environment = get_environment_name(param["Name"])
 
-        if days_remaining <= WARNING_DAYS:
-            print("🚨 Alert condition met! Sending Slack Notification...")
-            send_slack_alert(param["Name"], days_remaining, expiry_date_formatted, environment)
-        else:
-            print("✅ Certificate is safe. No alert needed.")
+            print(f"\n📋 Parameter: {param['Name']}")
+            print(f"📅 Expires on: {expiry_date_formatted}")
+            print(f"⏳ Days remaining: {days_remaining}")
+            print(f"☁️ Environment: {environment}")
+
+            if days_remaining <= WARNING_DAYS:
+                print("🚨 Alert condition met! Sending Slack Notification...")
+                send_slack_alert(param["Name"], days_remaining, expiry_date_formatted, environment)
+            else:
+                print("✅ Certificate is safe. No alert needed.")
 
 
 def send_slack_alert(param_name, days_left, expiry_date, environment):
