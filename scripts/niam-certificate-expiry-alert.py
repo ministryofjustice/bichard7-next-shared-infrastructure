@@ -31,7 +31,7 @@ def assume_role(role_arn, session_name="NIAM_EXPIRY_ALERT"):
 
     return assumed_session
 
-def build_certificate_expiry_details(environment, days_remaining, expiry_date):
+def build_expiry_alert(environment, days_remaining, expiry_date):
     day_suffix = "day" if days_remaining == 1 else "days"
     status_emoji = ":red_circle " if days_remaining < 14 else ""
     return {
@@ -85,7 +85,7 @@ def build_payload(expiry_details):
                     }
                 ]
             }
-	    ]
+        ]
     }
 
     return payload
@@ -95,7 +95,7 @@ def get_environment_name(param_name):
 
 def main():
     print("🔍 Scanning Parameter Store...")
-    certificate_expiry_details = []
+    expiry_alerts = []
 
     for role_arn in ROLE_ARNS:
         child_account_role_session = assume_role(role_arn)
@@ -131,13 +131,13 @@ def main():
             print(f"☁️ Environment: {environment}")
 
             if days_remaining <= WARNING_DAYS:
-                expiry_details = build_certificate_expiry_details(environment, days_remaining, formatted_expiry_date)
-                certificate_expiry_details.append(expiry_details)
+                expiry_alert = build_expiry_alert(environment, days_remaining, formatted_expiry_date)
+                expiry_alerts.append(expiry_alert)
 
 
-    if certificate_expiry_details:
+    if expiry_alerts:
         print("\n🚨 Alert condition met! Sending slack notification...")
-        payload = build_payload(certificate_expiry_details)
+        payload = build_payload(expiry_alerts)
         send_slack_alert(payload)
     else:
         print("\n✅ Certificates are safe. No alert needed.")
