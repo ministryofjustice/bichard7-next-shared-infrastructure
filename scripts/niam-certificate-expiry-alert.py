@@ -31,8 +31,133 @@ def assume_role(role_arn, session_name="NIAM_EXPIRY_ALERT"):
 
     return assumed_session
 
+def get_day_suffix(days_remaining):
+    return "day" if days_remaining == 1 else "days"
+
+def build_expiry_summary(environment, days_remaining, expiry_date):
+    day_suffix = get_day_suffix(days_remaining)
+    return [
+                {
+                    "type": "rich_text",
+                    "elements": [
+                        {
+                            "type": "rich_text_section",
+                            "elements": [
+                                {
+                                    "type": "text",
+                                    "text": f"{environment}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "rich_text",
+                    "elements": [
+                        {
+                            "type": "rich_text_section",
+                            "elements": [
+                                {
+                                    "type": "text",
+                                    "text": f"{days_remaining} {day_suffix}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "rich_text",
+                    "elements": [
+                        {
+                            "type": "rich_text_section",
+                            "elements": [
+                                {
+                                    "type": "text",
+                                    "text": f"{expiry_date}"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+
+def build_expiry_summary_payload(summary):
+    return {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": ":calendar: *NIAM Certificate — Weekly Expiry Summary*\nHere's a snapshot of how many days remain on each environment's NIAM certificate as of today. Review and plan renewals accordingly."
+                }
+            },
+            {
+                "type": "divider"
+            },
+            {
+                "type": "table",
+                "rows": [
+                    [
+                        {
+                            "type": "rich_text",
+                            "elements": [
+                                {
+                                    "type": "rich_text_section",
+                                    "elements": [
+                                        {
+                                            "type": "text",
+                                            "text": "Environment"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "rich_text",
+                            "elements": [
+                                {
+                                    "type": "rich_text_section",
+                                    "elements": [
+                                        {
+                                            "type": "text",
+                                            "text": "Days Left"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "rich_text",
+                            "elements": [
+                                {
+                                    "type": "rich_text_section",
+                                    "elements": [
+                                        {
+                                            "type": "text",
+                                            "text": "Expires On"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    *summary
+                ]
+            },
+            {
+                "type": "context",
+                "elements": [
+                    {
+                        "type": "mrkdwn",
+                        "text": ":information_source: This summary is sent every Monday at 09:00"
+                    }
+                ]
+            }
+        ]
+    }
+
 def build_expiry_alert(environment, days_remaining, expiry_date):
-    day_suffix = "day" if days_remaining == 1 else "days"
+    day_suffix = get_day_suffix(days_remaining)
     status_emoji = ":red_circle " if days_remaining < 14 else ""
     return {
         "type": "section",
@@ -95,6 +220,7 @@ def get_environment_name(param_name):
 
 def main():
     print("🔍 Scanning Parameter Store...")
+    expiry_summaries = []
     expiry_alerts = []
 
     for role_arn in ROLE_ARNS:
@@ -130,10 +256,19 @@ def main():
             print(f"⏳ Days remaining: {days_remaining}")
             print(f"☁️ Environment: {environment}")
 
+            expiry_summary = build_expiry_summary(environment, days_remaining, formatted_expiry_date)
+            expiry_summaries.append(expiry_summary)
+
             if days_remaining <= WARNING_DAYS:
                 expiry_alert = build_expiry_alert(environment, days_remaining, formatted_expiry_date)
                 expiry_alerts.append(expiry_alert)
 
+    if now.weekday() == 0:
+        if not expiry_summaries:
+            print("No NIAM certificate expiry data found.")
+            return
+        payload = build_expiry_summary_payload(expiry_summaries)
+        send_slack_alert(payload)
 
     if expiry_alerts:
         print("\n🚨 Alert condition met! Sending slack notification...")
