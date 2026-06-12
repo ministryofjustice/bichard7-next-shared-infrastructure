@@ -211,7 +211,7 @@ def main():
 
         if not param_names:
             print("No matching SSM parameters found. Double check your parameter name suffix!")
-            return
+            continue
 
         print(f"Found parameters: {', '.join(param_names)}")
 
