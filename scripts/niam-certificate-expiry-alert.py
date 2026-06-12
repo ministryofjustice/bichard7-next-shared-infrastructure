@@ -31,55 +31,29 @@ def assume_role(role_arn, session_name="NIAM_EXPIRY_ALERT"):
 
     return assumed_session
 
-def get_day_suffix(days_remaining):
-    return "day" if days_remaining == 1 else "days"
+def build_summary_section(text):
+    return {
+        "type": "rich_text",
+        "elements": [
+            {
+                "type": "rich_text_section",
+                "elements": [
+                    {
+                        "type": "text",
+                        "text": f"{text}"
+                    }
+                ]
+            }
+        ]
+    }
 
-def build_expiry_summary(environment, days_remaining, expiry_date):
-    day_suffix = get_day_suffix(days_remaining)
-    return [
-                {
-                    "type": "rich_text",
-                    "elements": [
-                        {
-                            "type": "rich_text_section",
-                            "elements": [
-                                {
-                                    "type": "text",
-                                    "text": f"{environment}"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "rich_text",
-                    "elements": [
-                        {
-                            "type": "rich_text_section",
-                            "elements": [
-                                {
-                                    "type": "text",
-                                    "text": f"{days_remaining} {day_suffix}"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "rich_text",
-                    "elements": [
-                        {
-                            "type": "rich_text_section",
-                            "elements": [
-                                {
-                                    "type": "text",
-                                    "text": f"{expiry_date}"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
+def build_expiry_summary(summary_items):
+    summary = []
+
+    for summary_item in summary_items:
+        summary.append(build_summary_section(summary_item))
+
+    return summary
 
 def build_expiry_summary_payload(summary):
     return {
@@ -157,7 +131,7 @@ def build_expiry_summary_payload(summary):
     }
 
 def build_expiry_alert(environment, days_remaining, expiry_date):
-    day_suffix = get_day_suffix(days_remaining)
+    day_suffix = "day" if days_remaining == 1 else "days"
     status_emoji = ":red_circle " if days_remaining < 14 else ""
     return {
         "type": "section",
@@ -173,7 +147,7 @@ def build_expiry_alert(environment, days_remaining, expiry_date):
         ]
     }
 
-def build_payload(expiry_details):
+def build_expiry_payload(expiry_details):
     payload = {
         "blocks": [
             {
@@ -220,7 +194,7 @@ def get_environment_name(param_name):
 
 def main():
     print("🔍 Scanning Parameter Store...")
-    expiry_summaries = []
+    expiry_summary = []
     expiry_alerts = []
 
     for role_arn in ROLE_ARNS:
@@ -256,23 +230,23 @@ def main():
             print(f"⏳ Days remaining: {days_remaining}")
             print(f"☁️ Environment: {environment}")
 
-            expiry_summary = build_expiry_summary(environment, days_remaining, formatted_expiry_date)
-            expiry_summaries.append(expiry_summary)
+            expiry_summary_item = build_expiry_summary([environment, days_remaining, formatted_expiry_date])
+            expiry_summary.append(expiry_summary_item)
 
             if days_remaining <= WARNING_DAYS:
                 expiry_alert = build_expiry_alert(environment, days_remaining, formatted_expiry_date)
                 expiry_alerts.append(expiry_alert)
 
     if now.weekday() == 0:
-        if not expiry_summaries:
+        if not expiry_summary:
             print("No NIAM certificate expiry data found.")
             return
-        payload = build_expiry_summary_payload(expiry_summaries)
+        payload = build_expiry_summary_payload(expiry_summary)
         send_slack_alert(payload)
 
     if expiry_alerts:
         print("\n🚨 Alert condition met! Sending slack notification...")
-        payload = build_payload(expiry_alerts)
+        payload = build_expiry_payload(expiry_alerts)
         send_slack_alert(payload)
     else:
         print("\n✅ Certificates are safe. No alert needed.")
