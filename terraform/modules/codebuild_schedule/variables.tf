@@ -17,3 +17,13 @@ variable "cron_expression" {
   description = "Our cron expression for our job"
   type        = string
 }
+
+variable "environment_variable_overrides" {
+  description = "Optional list of environment variable overrides for the CodeBuild trigger."
+  type = list(object({
+    name  = string
+    value = string
+    type  = optional(string, "PLAINTEXT")
+  }))
+  default = []
+}

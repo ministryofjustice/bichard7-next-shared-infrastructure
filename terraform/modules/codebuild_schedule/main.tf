@@ -26,4 +26,8 @@ resource "aws_cloudwatch_event_target" "trigger_codebuild_build_target" {
   arn      = var.codebuild_arn
   rule     = aws_cloudwatch_event_rule.trigger_codebuild_build.name
   role_arn = aws_iam_role.trigger_codebuild_build_role.arn
+
+  input = length(var.environment_variable_overrides) > 0 ? jsonencode({
+    environmentVariablesOverride = var.environment_variable_overrides
+  }) : null
 }
