@@ -166,7 +166,7 @@ module "run_leds_tests" {
     },
     {
       name  = "TEST_COMMAND"
-      value = "test:leds:preprod"
+      value = "test:leds:real:must"
     },
     {
       name  = "AL_TEST_COMMAND"
@@ -449,6 +449,21 @@ module "remove_dev_sg_from_leds_test" {
       value = "destroy-dev-sg-rules"
     }
   ]
+
+  tags = module.label.tags
+}
+
+module "run_all_leds_e2e_tests_schedule" {
+  source          = "../modules/codebuild_schedule"
+  codebuild_arn   = module.run_leds_tests.pipeline_arn
+  name            = "run-all-leds-e2e-tests-in-leds-env"
+  cron_expression = "cron(0 1 * * ? *)" # daily at 1am
+
+  environment_variable_overrides = [
+    {
+      name  = "TEST_COMMAND"
+      value = "test:leds:real"
+  }]
 
   tags = module.label.tags
 }
