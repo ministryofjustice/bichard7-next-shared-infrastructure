@@ -1,5 +1,6 @@
 resource "aws_ssm_parameter" "niam_slack_webhook" {
   name  = "/monitoring/slack/niam_webhook"
+  description = "The Slack webhook URL for NIAM certificate monitoring alerts"
   type  = "SecureString"
   value = "-"
 
@@ -12,7 +13,7 @@ resource "aws_ssm_parameter" "niam_slack_webhook" {
   }
 }
 
-module "niam_certificate_expiry_checker" {
+module "check_niam_certificate_expiry" {
   source                 = "../modules/codebuild_job"
   name                   = "check-niam-certificate-expiry"
   build_description      = "Checks SSM parameters for niam certificate expiration and alerts Slack"
@@ -39,23 +40,23 @@ module "niam_certificate_expiry_checker" {
       value = aws_ssm_parameter.niam_slack_webhook.name
     },
     {
-      name = "TARGET_ROLE_ARNS"
-      value = [
+      name  = "TARGET_ROLE_ARNS"
+      value = join(",", [
         data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn,
         data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn,
         data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn,
         data.terraform_remote_state.shared_infra.outputs.production_ci_arn
-      ]
+      ])
     }
   ]
 
   tags = module.label.tags
 }
 
-module "run_niam_certificate_expiry_alert_schedule" {
+module "check_niam_certificate_expiry_schedule" {
   source          = "../modules/codebuild_schedule"
-  codebuild_arn   = module.niam_certificate_expiry_checker.pipeline_arn
-  name            = "run-all-leds-e2e-tests-in-leds-env"
+  codebuild_arn   = module.check_niam_certificate_expiry.pipeline_arn
+  name            = "check-niam-certificate-expiry-daily"
   cron_expression = "cron(0 9 * * ? *)" # daily at 9am UTC
 
   tags = module.label.tags
