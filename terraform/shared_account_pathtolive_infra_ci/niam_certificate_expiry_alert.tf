@@ -22,7 +22,7 @@ module "niam_certificate_expiry_checker" {
   sns_notification_arn   = module.codebuild_base_resources.notifications_arn
   sns_kms_key_arn        = module.codebuild_base_resources.notifications_kms_key_arn
 
-  build_environments     = local.codebuild_2023_pipeline_build_environments
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   allowed_resource_arns = [
     data.aws_ecr_repository.codebuild_base.arn,
@@ -39,12 +39,12 @@ module "niam_certificate_expiry_checker" {
       value = aws_ssm_parameter.niam_slack_webhook.name
     },
     {
-      name  = "TARGET_ROLE_ARNS"
+      name = "TARGET_ROLE_ARNS"
       value = [
-          data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn,
-          data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn,
-          data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn,
-          data.terraform_remote_state.shared_infra.outputs.production_ci_arn
+        data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn,
+        data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn,
+        data.terraform_remote_state.shared_infra.outputs.preprod_ci_arn,
+        data.terraform_remote_state.shared_infra.outputs.production_ci_arn
       ]
     }
   ]
