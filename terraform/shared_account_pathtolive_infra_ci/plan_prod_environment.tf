@@ -53,7 +53,7 @@ module "plan_prod_terraform" {
     },
     {
       name  = "AWS_ACCOUNT_NAME"
-      value = "qsolution-production"
+      value = "production"
     },
     {
       name  = "AUTO_APPROVE"
