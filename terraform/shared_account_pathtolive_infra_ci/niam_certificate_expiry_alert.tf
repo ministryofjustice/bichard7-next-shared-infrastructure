@@ -1,8 +1,8 @@
 resource "aws_ssm_parameter" "niam_slack_webhook" {
-  name  = "/monitoring/slack/niam_webhook"
+  name        = "/monitoring/slack/niam_webhook"
   description = "The Slack webhook URL for NIAM certificate monitoring alerts"
-  type  = "SecureString"
-  value = "-"
+  type        = "SecureString"
+  value       = "-"
 
   tags = module.label.tags
 
@@ -40,7 +40,7 @@ module "check_niam_certificate_expiry" {
       value = aws_ssm_parameter.niam_slack_webhook.name
     },
     {
-      name  = "TARGET_ROLE_ARNS"
+      name = "TARGET_ROLE_ARNS"
       value = join(",", [
         data.terraform_remote_state.shared_infra.outputs.integration_next_ci_arn,
         data.terraform_remote_state.shared_infra.outputs.integration_baseline_ci_arn,
