@@ -41,16 +41,3 @@ module "shared_account_access_production" {
     module.shared_account_user_access
   ]
 }
-
-module "shared_account_production_next_lambda_cloudtrail" {
-  source = "../modules/lambda_cloudtrail"
-
-  name           = "production"
-  logging_bucket = module.aws_logs.aws_logs_bucket
-
-  tags = module.label.tags
-
-  providers = {
-    aws = aws.production
-  }
-}
