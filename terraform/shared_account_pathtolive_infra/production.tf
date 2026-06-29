@@ -16,6 +16,14 @@ module "production_child_access" {
   ]
 }
 
+removed {
+  from = module.shared_account_production_next_lambda_cloudtrail.aws_s3_bucket.lambda_logs_bucket
+
+  lifecycle {
+    destroy = false
+  }
+}
+
 module "shared_account_access_production" {
   source           = "../modules/shared_account_parent_access"
   child_account_id = data.aws_caller_identity.production.account_id
