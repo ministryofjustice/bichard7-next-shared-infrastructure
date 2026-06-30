@@ -6,7 +6,7 @@ module "apply_access_layer" {
   sns_kms_key_arn                = var.notifications_kms_key_arn
   sns_notification_arn           = var.sns_notifications_arn
   repository_name                = "bichard7-next-shared-infrastructure"
-  buildspec_file                 = "applyci-access.yml"
+  buildspec_file                 = "shared-infra.yml"
   aws_access_key_id_ssm_path     = "/ci-admin/user/access_key_id"
   aws_secret_access_key_ssm_path = "/ci-admin/user/secret_access_key"
 
@@ -14,6 +14,10 @@ module "apply_access_layer" {
     {
       name  = "ENVIRONMENT"
       value = var.environment
+    },
+    {
+      name  = "TF_ACTION"
+      value = "apply"
     },
     {
       name  = "AUTO_APPROVE"
