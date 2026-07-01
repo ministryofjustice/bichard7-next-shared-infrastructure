@@ -22,4 +22,4 @@ phases:
   build:
     commands:
       - set -e
-      - export CI_USER=true ./scripts/set-terraform-access-keys.sh ./scripts/shared_account_terraform.py $ENVIRONMENT infra $TF_ACTION
+      - CI_USER=true ./scripts/set-terraform-access-keys.sh ./scripts/shared_account_terraform.py $ENVIRONMENT infra $TF_ACTION
