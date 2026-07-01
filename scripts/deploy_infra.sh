@@ -2,5 +2,4 @@
 
 set -e
 
-./scripts/set_infra_credentials.sh
-./scripts/shared_account_terraform.py $ENVIRONMENT infra
+./scripts/set-terraform-access-keys.sh ./scripts/shared_account_terraform.py $ENVIRONMENT infra

@@ -60,3 +60,5 @@ else
   echo "Unknown environment"
   exit 1
 fi
+
+exec "$@"
