@@ -7,7 +7,7 @@ workflows:
   test_and_deploy:
     jobs:
       - terraform_test:
-          version: 1.4.4
+          version: 1.8.4
 
 commands:
   install_dependencies:
@@ -16,12 +16,9 @@ commands:
       - run:
           name: Install dependencies
           command: |
-            apk add curl jq python3 make bash py3-pip openssl wget
+            apk add curl jq python3 make bash py3-pip openssl wget aws-cli
             wget https://github.com/tfsec/tfsec/releases/download/v0.39.29/tfsec-linux-amd64 -O /usr/bin/tfsec
             chmod +x /usr/bin/tfsec
-      - run:
-          name: install aws cli
-          command: pip3 install awscli
   terraform_fmt:
     description: Terraform formatting (terraform fmt)
     steps:
