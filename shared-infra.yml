@@ -1,6 +1,10 @@
 ---
 version: 0.2
 
+env:
+  variables:
+    TF_ACTION: "plan"
+
 phases:
   install:
     commands:
@@ -18,4 +22,6 @@ phases:
   build:
     commands:
       - set -e
-      - CI_USER=true ./scripts/deploy_infra.sh
+      - |
+        CI_USER=true ./scripts/set-terraform-access-keys.sh
+        ./scripts/shared_account_terraform.py $ENVIRONMENT infra $TF_ACTION
