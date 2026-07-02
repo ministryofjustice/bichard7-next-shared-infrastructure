@@ -92,6 +92,10 @@ module "plan_prod_terraform" {
       value = true
     },
     {
+      name  = "TF_VAR_pnc_ip"
+      value = "172.31.4.204"
+    },
+    {
       name  = "TF_VAR_aurora_db_version"
       value = "15.15"
     },
