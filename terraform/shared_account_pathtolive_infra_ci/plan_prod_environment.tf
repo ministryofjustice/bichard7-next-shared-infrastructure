@@ -102,7 +102,11 @@ module "plan_prod_terraform" {
     {
       name  = "TF_VAR_bichard_deploy_tag"
       value = "unassigned_as_plan" # Hardcode so the plan doesn't fail due to blank SSM params
-    }
+    },
+    {
+      name  = "TF_VAR_use_smtp_service"
+      value = "true"
+    },
   ]
   is_cd = true
 
