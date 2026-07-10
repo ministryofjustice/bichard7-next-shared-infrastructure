@@ -24,3 +24,9 @@ provider "aws" {
   token      = var.sandbox_b_session_token
   alias      = "sandbox_b"
 }
+
+provider "aws" {
+  region     = data.aws_region.current_region.name
+  alias      = "sandbox_c"
+}
+
