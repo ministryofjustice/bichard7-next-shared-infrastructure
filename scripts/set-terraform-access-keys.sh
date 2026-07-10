@@ -24,6 +24,10 @@ if [[ "$ENVIRONMENT" == "sandbox" ]]; then
   export TF_VAR_sandbox_b_secret_key=$(echo "${SANDBOX_B}" | jq -r ".Credentials.SecretAccessKey")
   export TF_VAR_sandbox_b_session_token=$(echo "${SANDBOX_B}" | jq -r ".Credentials.SessionToken")
 
+  export TF_VAR_sandbox_c_access_key=empty
+  export TF_VAR_sandbox_c_secret_key=empty
+  export TF_VAR_sandbox_c_session_token=empty
+
 elif [[ "$ENVIRONMENT" == "pathtolive" ]]; then
   INTEGRATION_NEXT_ADMIN_ROLE=$(echo $ACCOUNTS | jq -r ".integration_next")
   INTEGRATION_BASELINE_ADMIN_ROLE=$(echo $ACCOUNTS | jq -r ".integration_baseline")
