@@ -53,7 +53,7 @@ To deploy to the shared environments we need a few more environment variables.
 As an example, to deploy as a ci user to sandbox_a, you will need to run something like the following:-
 
 ```shell
-WORKSPACE=development AWS_ACCOUNT_NAME=sandbox_c USER_TYPE=ci aws-vault exec bichard7-sandbox-ci -- make shared-base-infra
+WORKSPACE=development AWS_ACCOUNT_NAME=sandbox_b USER_TYPE=ci aws-vault exec bichard7-sandbox-ci -- make shared-base-infra
 ```
 
 This then in turn calls [a python](scripts/shared_account_terraform.py) script which will handle the create and destroy commands for each of the portions of infrastructure.
