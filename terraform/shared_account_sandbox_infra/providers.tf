@@ -26,7 +26,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  region     = data.aws_region.current_region.name
-  alias      = "sandbox_c"
+  region = data.aws_region.current_region.name
+  alias  = "sandbox_c"
 }
 
