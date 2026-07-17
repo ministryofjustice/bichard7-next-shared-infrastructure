@@ -57,7 +57,7 @@ removed {
 }
 
 removed {
-  from = module.module.sandbox_c_child_access.aws_budgets_budget.main
+  from = module.sandbox_c_child_access.aws_budgets_budget.main
 
   lifecycle = {
     destroy = false
