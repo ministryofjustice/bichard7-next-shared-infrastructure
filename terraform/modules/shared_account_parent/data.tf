@@ -18,6 +18,8 @@ data "aws_s3_bucket" "csoc_logs" {
 }
 
 data "aws_iam_policy_document" "send_to_csoc_sqs" {
+  count = (var.is_path_to_live == true) ? 1 : 0
+
   statement {
     effect    = "Allow"
     actions   = ["sqs:SendMessage"]
