@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
   statement {
     effect    = "Allow"
     actions   = ["sqs:SendMessage"]
-    resources = [aws_sqs_queue.csoc_queue.arn]
+    resources = [aws_sqs_queue.csoc_queue[0].arn]
 
     principals {
       type        = "Service"
@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_iam_user.csoc.arn]
+      identifiers = [aws_iam_user.csoc[0].arn]
     }
 
     actions = [
