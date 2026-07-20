@@ -12,6 +12,8 @@ data "aws_ssm_parameter" "aws_nuke_user" {
 }
 
 data "aws_s3_bucket" "csoc_logs" {
+  count = var.is_path_to_live ? 1 : 0
+
   bucket = "moj-bichard7-production-logs"
 }
 
@@ -29,7 +31,7 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
     condition {
       test     = "ArnEquals"
       variable = "aws:SourceArn"
-      values   = [data.aws_s3_bucket.csoc_logs.arn]
+      values   = [data.aws_s3_bucket.csoc_logs[0].arn]
     }
   }
 

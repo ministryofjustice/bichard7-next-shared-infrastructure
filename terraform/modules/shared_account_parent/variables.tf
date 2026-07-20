@@ -14,3 +14,9 @@ variable "create_nuke_user" {
   type        = bool
   default     = false
 }
+
+variable "is_path_to_live" {
+  default     = false
+  type        = bool
+  description = "use this to deploy to our parent path to live account"
+}
