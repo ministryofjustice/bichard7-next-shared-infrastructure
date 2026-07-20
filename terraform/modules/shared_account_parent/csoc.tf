@@ -167,5 +167,5 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   count = var.is_path_to_live ? 1 : 0
 
   queue_url = aws_sqs_queue.csoc_queue[0].url
-  policy    = data.aws_iam_policy_document.send_to_csoc_sqs.json
+  policy    = data.aws_iam_policy_document.send_to_csoc_sqs[0].json
 }
