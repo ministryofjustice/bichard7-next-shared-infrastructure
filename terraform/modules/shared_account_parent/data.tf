@@ -12,14 +12,18 @@ data "aws_ssm_parameter" "aws_nuke_user" {
 }
 
 data "aws_s3_bucket" "csoc_logs" {
+  count = var.is_path_to_live ? 1 : 0
+
   bucket = "moj-bichard7-production-logs"
 }
 
 data "aws_iam_policy_document" "send_to_csoc_sqs" {
+  count = (var.is_path_to_live == true) ? 1 : 0
+
   statement {
     effect    = "Allow"
     actions   = ["sqs:SendMessage"]
-    resources = [aws_sqs_queue.csoc_queue.arn]
+    resources = [aws_sqs_queue.csoc_queue[0].arn]
 
     principals {
       type        = "Service"
@@ -29,7 +33,7 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
     condition {
       test     = "ArnEquals"
       variable = "aws:SourceArn"
-      values   = [data.aws_s3_bucket.csoc_logs.arn]
+      values   = [data.aws_s3_bucket.csoc_logs[0].arn]
     }
   }
 
@@ -39,7 +43,7 @@ data "aws_iam_policy_document" "send_to_csoc_sqs" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_iam_user.csoc.arn]
+      identifiers = [aws_iam_user.csoc[0].arn]
     }
 
     actions = [

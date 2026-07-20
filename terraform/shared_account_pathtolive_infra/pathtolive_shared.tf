@@ -7,6 +7,8 @@ module "shared_account_user_access" {
     "arn:aws:s3:::${module.aws_logs.aws_logs_bucket}"
   ]
 
+  is_path_to_live = true
+
   providers = {
     aws = aws.shared
   }

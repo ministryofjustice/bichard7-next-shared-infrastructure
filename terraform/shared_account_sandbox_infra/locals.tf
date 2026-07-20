@@ -3,8 +3,7 @@ locals {
 
   account_ids = [
     data.aws_caller_identity.sandbox_a.account_id,
-    data.aws_caller_identity.sandbox_b.account_id,
-    data.aws_caller_identity.sandbox_c.account_id
+    data.aws_caller_identity.sandbox_b.account_id
   ]
   allow_route53_policy = templatefile("${path.module}/policies/route53_allow_delegated.json.tpl",
     {

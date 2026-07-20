@@ -48,21 +48,6 @@ output "sandbox_b_readonly_arn" {
   value       = module.sandbox_b_child_access.readonly_access_role.arn
 }
 
-output "sandbox_c_admin_arn" {
-  description = "The sandbox_c Admin Assume Role ARN"
-  value       = module.sandbox_c_child_access.administrator_access_role.arn
-}
-
-output "sandbox_c_ci_arn" {
-  description = "The sandbox_c CI Assume Role ARN"
-  value       = module.sandbox_c_child_access.ci_access_role.arn
-}
-
-output "sandbox_c_readonly_arn" {
-  description = "The sandbox_c ReadOnly Assume Role ARN"
-  value       = module.sandbox_c_child_access.readonly_access_role.arn
-}
-
 output "ci_users" {
   description = "A list of our CI users"
   value       = module.shared_account_user_access.ci_users

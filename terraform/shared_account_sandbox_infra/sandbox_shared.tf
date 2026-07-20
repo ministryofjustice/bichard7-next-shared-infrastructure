@@ -8,5 +8,7 @@ module "shared_account_user_access" {
 
   create_nuke_user = true
 
+  is_path_to_live = false
+
   tags = module.label.tags
 }
