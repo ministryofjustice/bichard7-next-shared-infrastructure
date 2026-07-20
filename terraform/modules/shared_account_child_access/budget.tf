@@ -1,5 +1,5 @@
 resource "aws_budgets_budget" "main" {
-  # count = length(var.budget_limit_amount) > 0 ? 1 : 0
+  count = length(var.budget_limit_amount) > 0 ? 1 : 0
 
   name         = "main-budget"
   budget_type  = "COST"
