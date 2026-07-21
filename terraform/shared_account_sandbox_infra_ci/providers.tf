@@ -14,10 +14,3 @@ provider "aws" {
   }
   alias = "sandbox_b"
 }
-
-provider "aws" {
-  assume_role {
-    role_arn = local.sandbox_c_arn
-  }
-  alias = "sandbox_c"
-}

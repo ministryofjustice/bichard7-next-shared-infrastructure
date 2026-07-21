@@ -22,10 +22,6 @@ data "aws_caller_identity" "sandbox_b" {
   provider = aws.sandbox_b
 }
 
-data "aws_caller_identity" "sandbox_c" {
-  provider = aws.sandbox_c
-}
-
 data "aws_ecr_repository" "was" {
   name = "bichard7-liberty"
 }
