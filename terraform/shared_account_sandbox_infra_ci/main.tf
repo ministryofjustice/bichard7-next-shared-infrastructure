@@ -35,8 +35,7 @@ module "codebuild_base_resources" {
   allow_accounts = [
     data.aws_caller_identity.current.account_id,
     data.aws_caller_identity.sandbox_a.account_id,
-    data.aws_caller_identity.sandbox_b.account_id,
-    data.aws_caller_identity.sandbox_c.account_id
+    data.aws_caller_identity.sandbox_b.account_id
   ]
 
   is_sandbox_account = true
@@ -48,8 +47,7 @@ module "codebuild_docker_resources" {
   source = "../modules/aws_ecr_repositories"
   child_account_ids = [
     data.aws_caller_identity.sandbox_a.account_id,
-    data.aws_caller_identity.sandbox_b.account_id,
-    data.aws_caller_identity.sandbox_c.account_id
+    data.aws_caller_identity.sandbox_b.account_id
   ]
 
   tags = module.label.tags
