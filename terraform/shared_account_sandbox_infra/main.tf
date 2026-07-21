@@ -39,19 +39,3 @@ resource "aws_s3_bucket_policy" "aws_logs_policy" {
     aws_logs_bucket_arn = module.aws_logs.bucket_arn
   })
 }
-
-removed {
-  from = module.sandbox_c_child_access
-
-  lifecycle {
-    destroy = false
-  }
-}
-
-removed {
-  from = module.shared_account_access_sandbox_c
-
-  lifecycle {
-    destroy = false
-  }
-}
