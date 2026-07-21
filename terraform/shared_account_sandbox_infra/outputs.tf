@@ -24,7 +24,7 @@ output "sandbox_a_admin_arn" {
 }
 
 output "sandbox_a_ci_arn" {
-  description = "The sandbox_c CI Assume Role ARN"
+  description = "The sandbox_a CI Assume Role ARN"
   value       = module.sandbox_a_child_access.ci_access_role.arn
 }
 
