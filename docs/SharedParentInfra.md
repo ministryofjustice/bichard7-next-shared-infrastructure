@@ -23,8 +23,6 @@ export TF_VAR_sandbox_a_access_key=""
 export TF_VAR_sandbox_a_secret_key=""
 export TF_VAR_sandbox_b_access_key=""
 export TF_VAR_sandbox_b_secret_key=""
-export TF_VAR_sandbox_c_access_key=""
-export TF_VAR_sandbox_c_secret_key=""
 ```
 
 For pathtolive  the production and preprod keys require you to have an account
@@ -53,11 +51,9 @@ ie
 #... truncated .bashrc
 export TF_VAR_sandbox_a_access_key=""
 export TF_VAR_sandbox_b_access_key=""
-export TF_VAR_sandbox_c_access_key=""
 export TF_VAR_parent_secret_key=""
 export TF_VAR_sandbox_a_secret_key=""
 export TF_VAR_sandbox_b_secret_key=""
-export TF_VAR_sandbox_c_secret_key=""
 export TF_VAR_integration_next_access_key=""
 export TF_VAR_integration_next_secret_key=""
 export TF_VAR_integration_baseline_access_key=""
