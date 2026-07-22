@@ -1,6 +1,7 @@
 ## Shared Account Parent Infrastructure
 
 ##### Bootstrap Layer
+
 This layer sets up the prerequisites for all terraform runs.
 
 ```shell
@@ -23,11 +24,9 @@ export TF_VAR_sandbox_a_access_key=""
 export TF_VAR_sandbox_a_secret_key=""
 export TF_VAR_sandbox_b_access_key=""
 export TF_VAR_sandbox_b_secret_key=""
-export TF_VAR_sandbox_c_access_key=""
-export TF_VAR_sandbox_c_secret_key=""
 ```
 
-For pathtolive  the production and preprod keys require you to have an account
+For pathtolive the production and preprod keys require you to have an account
 on the vendor PAAS shared account. Once you have this set up and have the aws keys
 set up in vault as `qsolutions-auth` run the following:- `source ../bichard7-next-infrastructure/scripts/get_qsolution_sts_tokens.sh`.
 
@@ -49,15 +48,14 @@ export TF_VAR_production_session_token=""
 I have found it useful to export my keys into any session by adding the export commands to my ~/.bashrc file
 
 ie
+
 ```shell
 #... truncated .bashrc
 export TF_VAR_sandbox_a_access_key=""
 export TF_VAR_sandbox_b_access_key=""
-export TF_VAR_sandbox_c_access_key=""
 export TF_VAR_parent_secret_key=""
 export TF_VAR_sandbox_a_secret_key=""
 export TF_VAR_sandbox_b_secret_key=""
-export TF_VAR_sandbox_c_secret_key=""
 export TF_VAR_integration_next_access_key=""
 export TF_VAR_integration_next_secret_key=""
 export TF_VAR_integration_baseline_access_key=""
@@ -65,6 +63,7 @@ export TF_VAR_integration_baseline_secret_key=""
 ```
 
 To apply the layer
+
 ```shell
 $ source ../bichard7-next-infra/scripts/get_qsolution_sts_tokens.sh # Optional
 $ cd terraform/shared_account_(pathtolive/sandbox)_infra
@@ -80,6 +79,7 @@ see [this document](./SharedCICD.md) for more information.
 All of the shared jobs are in the [modules subdirectory](../terraform/modules/shared_cd_common_jobs/README.md).
 
 To apply the layer. Please note you need docker installed locally for this to work.
+
 ```shell
 $ cd terraform/shared_account_(pathtolive/sandbox)_infra_ci
 $ aws-vault exec your-shared-parent-credentials -- terraform init -upgrade
