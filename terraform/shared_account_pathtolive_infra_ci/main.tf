@@ -101,3 +101,11 @@ module "common_build_jobs" {
 
   tags = module.label.tags
 }
+
+removed {
+  from = module.allow_sandbox_c_codebuild_bucket
+
+  lifecycle {
+    destroy = false
+  }
+}
