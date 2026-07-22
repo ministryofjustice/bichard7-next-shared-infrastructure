@@ -14,3 +14,8 @@ provider "aws" {
   }
   alias = "sandbox_b"
 }
+
+provider "aws" {
+  alias = "sandbox_c"
+}
+
