@@ -13,3 +13,8 @@ module "shared_account_user_access" {
     aws = aws.shared
   }
 }
+
+import {
+  to = module.shared_account_user_access.aws_s3_bucket.csoc_logs
+  id = "moj-bichard7-aws-logs"
+}

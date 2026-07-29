@@ -170,22 +170,12 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs[0].json
 }
 
-import {
-  to = aws_s3_bucket.csoc_logs
-  id = "moj-bichard7-aws-logs"
-}
-
 resource "aws_s3_bucket" "csoc_logs" {
-  bucket = "moj-bichard7-aws-logs"
-}
-
-import {
-  to = aws_s3_bucket_policy.bucket_policy
-  id = "moj-bichard7-aws-logs"
+  bucket = local.csoc_bucket_name
 }
 
 data "aws_s3_bucket_policy" "csoc_logs" {
-  bucket = aws_s3_bucket.csoc_logs.id
+  bucket = local.csoc_bucket_name
 }
 
 data "aws_iam_policy_document" "combined_policy" {
@@ -227,12 +217,12 @@ data "aws_iam_policy_document" "combined_policy" {
     ]
 
     resources = [
-      "${aws_s3_bucket.csoc_logs.arn}/*"
+      "${local.csoc_bucket_arn}/*"
     ]
   }
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = aws_s3_bucket.csoc_logs.id
+  bucket = local.csoc_bucket_arn
   policy = data.aws_iam_policy_document.combined_policy.json
 }
