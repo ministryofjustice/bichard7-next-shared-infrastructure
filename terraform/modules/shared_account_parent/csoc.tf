@@ -169,3 +169,65 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   queue_url = aws_sqs_queue.csoc_queue[0].url
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs[0].json
 }
+
+import {
+  to = aws_s3_bucket.csoc_logs
+  id = "moj-bichard7-aws-logs"
+}
+
+resource "aws_s3_bucket" "csoc_logs" {
+  bucket = "moj-bichard7-aws-logs"
+}
+
+data "aws_s3_bucket_policy" "csoc_logs" {
+  bucket = aws_s3_bucket.csoc_logs.id
+}
+
+data "aws_iam_policy_document" "combined_policy" {
+  source_policy_documents = [data.aws_s3_bucket_policy.csoc_logs.policy]
+
+  statement {
+    sid = "AllowCrossAccountReplicationBucket"
+    effect = "Allow"
+
+    principals {
+      type = "AWS"
+      identifiers = ["arn:aws:iam::415925668545:role/s3-cross-account-replication-role"]
+    }
+
+    actions = [
+      "s3:GetBucketVersioning",
+      "s3:PutBucketVersioning"
+    ]
+
+    resources = [
+      aws_s3_bucket.csoc_logs.arn
+    ]
+  }
+
+  statement {
+    sid    = "AllowCrossAccountReplicationObjects"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::415925668545:role/s3-cross-account-replication-role"]
+    }
+
+    actions = [
+      "s3:ReplicateObject",
+      "s3:ReplicateDelete",
+      "s3:ReplicateTags",
+      "s3:ObjectOwnerOverrideToBucketOwner"
+    ]
+
+    resources = [
+      "${aws_s3_bucket.csoc_logs.arn}/*"
+    ]
+  }
+}
+
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  bucket = aws_s3_bucket.csoc_logs.id
+  policy = data.aws_iam_policy_document.combined_policy.json
+}
