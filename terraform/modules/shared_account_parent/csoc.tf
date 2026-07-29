@@ -180,7 +180,7 @@ resource "aws_s3_bucket" "csoc_logs" {
 }
 
 data "aws_s3_bucket_policy" "csoc_logs" {
-  bucket = aws_s3_bucket.csoc_logs.id
+  bucket = "moj-bichard7-aws-logs"
 }
 
 data "aws_iam_policy_document" "combined_policy" {
