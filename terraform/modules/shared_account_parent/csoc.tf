@@ -187,11 +187,11 @@ data "aws_iam_policy_document" "combined_policy" {
   source_policy_documents = [data.aws_s3_bucket_policy.csoc_logs.policy]
 
   statement {
-    sid = "AllowCrossAccountReplicationBucket"
+    sid    = "AllowCrossAccountReplicationBucket"
     effect = "Allow"
 
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = ["arn:aws:iam::415925668545:role/s3-cross-account-replication-role"]
     }
 
