@@ -179,8 +179,13 @@ resource "aws_s3_bucket" "csoc_logs" {
   bucket = "moj-bichard7-aws-logs"
 }
 
+import {
+  to = aws_s3_bucket_policy.bucket_policy
+  id = "moj-bichard7-aws-logs"
+}
+
 data "aws_s3_bucket_policy" "csoc_logs" {
-  bucket = "moj-bichard7-aws-logs"
+  bucket = aws_s3_bucket.csoc_logs.id
 }
 
 data "aws_iam_policy_document" "combined_policy" {
