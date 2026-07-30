@@ -104,7 +104,7 @@ class TerraformRunner(object):
 
         print("\n=== DEBUG: Testing S3 Bucket Access ===", flush=True)
         s3_check = subprocess.run(
-            ["aws", "s3api", "head-bucket", "--bucket", "moj-bichard7-aws-logs"],
+            ["aws", "s3api", "head-bucket", "--bucket", "moj-bichard7-aws-logs", "--region", "eu-west-2"],
             capture_output=True,
             text=True
         )
