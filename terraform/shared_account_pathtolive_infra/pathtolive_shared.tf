@@ -19,6 +19,11 @@ import {
   id = "moj-bichard7-aws-logs"
 }
 
+import {
+  to = module.shared_account_user_access.aws_s3_bucket_policy.bucket_policy
+  id = "moj-bichard7-aws-logs"
+}
+
 resource "aws_s3_bucket" "csoc_logs" {
   bucket = "moj-bichard7-aws-logs"
 }

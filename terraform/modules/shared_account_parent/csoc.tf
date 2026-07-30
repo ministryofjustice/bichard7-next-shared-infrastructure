@@ -170,6 +170,8 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs[0].json
 }
 
+
+
 data "aws_s3_bucket_policy" "csoc_logs" {
   bucket = "moj-bichard7-aws-logs"
 }
@@ -192,7 +194,7 @@ data "aws_iam_policy_document" "combined_policy" {
     ]
 
     resources = [
-      data.aws_s3_bucket.csoc_logs[0].arn
+      "arn:aws:s3:::moj-bichard7-aws-logs"
     ]
   }
 
@@ -213,12 +215,12 @@ data "aws_iam_policy_document" "combined_policy" {
     ]
 
     resources = [
-      "${local.csoc_bucket_arn}/*"
+      "arn:aws:s3:::moj-bichard7-aws-logs/*"
     ]
   }
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = local.csoc_bucket_arn
+  bucket = "moj-bichard7-aws-logs"
   policy = data.aws_iam_policy_document.combined_policy.json
 }
