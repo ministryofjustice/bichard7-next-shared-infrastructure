@@ -160,7 +160,6 @@ resource "aws_s3_bucket_notification" "sqs_notification" {
     filter_prefix = "AWSLogs/"
     filter_suffix = ".gz"
   }
-
 }
 
 resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
@@ -170,55 +169,10 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs[0].json
 }
 
-data "aws_s3_bucket_policy" "csoc_logs" {
-  bucket = "moj-bichard7-production-logs"
-}
-
-data "aws_iam_policy_document" "combined_policy" {
-  source_policy_documents = [data.aws_s3_bucket_policy.csoc_logs.policy]
-
-  statement {
-    sid    = "AllowCrossAccountReplicationBucket"
-    effect = "Allow"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::415925668545:role/s3-cross-account-replication-role"]
-    }
-
-    actions = [
-      "s3:GetBucketVersioning",
-      "s3:PutBucketVersioning"
-    ]
-
-    resources = [
-      "arn:aws:s3:::moj-bichard7-production-logs"
-    ]
-  }
-
-  statement {
-    sid    = "AllowCrossAccountReplicationObjects"
-    effect = "Allow"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::415925668545:role/s3-cross-account-replication-role"]
-    }
-
-    actions = [
-      "s3:ReplicateObject",
-      "s3:ReplicateDelete",
-      "s3:ReplicateTags",
-      "s3:ObjectOwnerOverrideToBucketOwner"
-    ]
-
-    resources = [
-      "arn:aws:s3:::moj-bichard7-production-logs/*"
-    ]
-  }
-}
-
 resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = "moj-bichard7-production-logs"
-  policy = data.aws_iam_policy_document.combined_policy.json
+  bucket = local.csoc_bucket_name
+  policy = templatefile("${path.module}/policies/allow_csoc_logs.json.tpl", {
+    bucket_arn       = local.csoc_bucket_arn
+    child_account_id = local.child_account_id
+  })
 }
