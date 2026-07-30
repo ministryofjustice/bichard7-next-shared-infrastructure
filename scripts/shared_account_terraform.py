@@ -98,6 +98,23 @@ class TerraformRunner(object):
         except FileNotFoundError:
             pass
 
+        # debug block
+        print("=== DEBUG: Current AWS Identity ===")
+                subprocess.run(["aws", "sts", "get-caller-identity"])
+
+                print("\n=== DEBUG: Testing S3 Bucket Access ===")
+                s3_check = subprocess.run(
+                    ["aws", "s3api", "head-bucket", "--bucket", "moj-bichard7-aws-logs"],
+                    capture_output=True,
+                    text=True
+                )
+                print(f"S3 Exit Code: {s3_check.returncode}")
+                if s3_check.returncode != 0:
+                    print(f"S3 Error Details:\n{s3_check.stderr}")
+                else:
+                    print("Successfully reached S3 bucket!")
+                print("=====================================\n")
+
         self._run_command(action="init", extra_args=self._init_args())
         self._run_command(action=self._args.action,
                           extra_args=["-auto-approve" if os.getenv("AUTO_APPROVE") == "true" else ""])
