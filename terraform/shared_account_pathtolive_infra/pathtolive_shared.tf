@@ -15,6 +15,10 @@ module "shared_account_user_access" {
 }
 
 import {
-  to = module.shared_account_user_access.aws_s3_bucket.csoc_logs
+  to = aws_s3_bucket.csoc_logs
   id = "moj-bichard7-aws-logs"
+}
+
+resource "aws_s3_bucket" "csoc_logs" {
+  bucket = "moj-bichard7-aws-logs"
 }

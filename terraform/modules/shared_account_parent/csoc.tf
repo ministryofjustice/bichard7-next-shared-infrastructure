@@ -170,10 +170,6 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs[0].json
 }
 
-resource "aws_s3_bucket" "csoc_logs" {
-  bucket = local.csoc_bucket_name
-}
-
 data "aws_s3_bucket_policy" "csoc_logs" {
   bucket = local.csoc_bucket_name
 }
