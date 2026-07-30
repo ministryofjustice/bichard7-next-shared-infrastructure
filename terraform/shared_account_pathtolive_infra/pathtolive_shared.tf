@@ -25,5 +25,6 @@ import {
 }
 
 resource "aws_s3_bucket" "csoc_logs" {
+  provider = aws.shared
   bucket = "moj-bichard7-aws-logs"
 }
