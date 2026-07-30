@@ -192,7 +192,7 @@ data "aws_iam_policy_document" "combined_policy" {
     ]
 
     resources = [
-      data.aws_s3_bucket.csoc_logs.arn
+      data.aws_s3_bucket.csoc_logs[0].arn
     ]
   }
 
