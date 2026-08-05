@@ -40,7 +40,7 @@ resource "aws_s3_bucket_policy" "aws_logs_policy" {
   })
 }
 
-data "aws_iam_policy_document" "s3_replication_assume_role" {
+data "aws_iam_policy_document" "csoc_s3_replication_assume_role" {
   statement {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
@@ -51,13 +51,13 @@ data "aws_iam_policy_document" "s3_replication_assume_role" {
   }
 }
 
-resource "aws_iam_role" "s3_replication" {
+resource "aws_iam_role" "csoc_s3_replication" {
   name               = "${module.label.name}-s3-replication-role"
-  assume_role_policy = data.aws_iam_policy_document.s3_replication_assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.csoc_s3_replication_assume_role.json
   tags               = module.label.tags
 }
 
-resource "aws_iam_policy" "s3_replication" {
+resource "aws_iam_policy" "csoc_s3_replication" {
   name = "${module.label.name}-s3-replication-policy"
   policy = templatefile("${path.module}/policies/s3_replication_iam_policy.json.tpl", {
     aws_logs_bucket_arn = module.aws_logs.bucket_arn
@@ -66,15 +66,15 @@ resource "aws_iam_policy" "s3_replication" {
 }
 
 resource "aws_iam_role_policy_attachment" "s3_replication" {
-  role       = aws_iam_role.s3_replication.name
-  policy_arn = aws_iam_policy.s3_replication.arn
+  role       = aws_iam_role.csoc_s3_replication.name
+  policy_arn = aws_iam_policy.csoc_s3_replication.arn
 }
 
 resource "aws_s3_bucket_replication_configuration" "replication" {
   depends_on = [aws_iam_role_policy_attachment.s3_replication]
 
   bucket = module.aws_logs.aws_logs_bucket
-  role   = aws_iam_role.s3_replication.arn
+  role   = aws_iam_role.csoc_s3_replication.arn
 
   rule {
     id     = "replicate-all-to-parent"
