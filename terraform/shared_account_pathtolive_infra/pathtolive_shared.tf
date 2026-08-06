@@ -13,18 +13,3 @@ module "shared_account_user_access" {
     aws = aws.shared
   }
 }
-
-import {
-  to = aws_s3_bucket.csoc_logs
-  id = "moj-bichard7-production-logs"
-}
-
-import {
-  to = module.shared_account_user_access.aws_s3_bucket_policy.bucket_policy
-  id = "moj-bichard7-production-logs"
-}
-
-resource "aws_s3_bucket" "csoc_logs" {
-  provider = aws.shared
-  bucket   = "moj-bichard7-production-logs"
-}
