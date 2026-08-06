@@ -95,7 +95,7 @@
       "Sid": "AllowCrossAccountReplicationBucket",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::${child_account_id}:role/s3-cross-account-replication-role"
+        "AWS": "arn:aws:iam::${child_account_id}:role/pathtolive-bootstrap-s3-replication-role"
       },
       "Action": [
         "s3:GetBucketVersioning"
@@ -106,7 +106,7 @@
       "Sid": "AllowCrossAccountReplicationObjects",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::${child_account_id}:role/s3-cross-account-replication-role"
+        "AWS": "arn:aws:iam::${child_account_id}:role/pathtolive-bootstrap-s3-replication-role"
       },
       "Action": [
         "s3:ReplicateObject",
