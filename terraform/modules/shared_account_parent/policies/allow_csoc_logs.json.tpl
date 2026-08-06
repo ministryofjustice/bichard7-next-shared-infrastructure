@@ -95,18 +95,27 @@
       "Sid": "AllowCrossAccountReplicationBucket",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::497078235711:role/base-infra-s3-replication-role"
+        "Service": "s3.amazonaws.com"
       },
       "Action": [
         "s3:GetBucketVersioning"
       ],
-      "Resource": "${bucket_arn}"
+      "Resource": "${bucket_arn}",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": [
+            "415925668545",
+            "071486367987",
+            "581823340673"
+          ]
+        }
+      }
     },
     {
       "Sid": "AllowCrossAccountReplicationObjects",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::497078235711:role/base-infra-s3-replication-role"
+        "Service": "s3.amazonaws.com"
       },
       "Action": [
         "s3:ReplicateObject",
@@ -114,7 +123,17 @@
         "s3:ReplicateTags",
         "s3:ObjectOwnerOverrideToBucketOwner"
       ],
-      "Resource": "${bucket_arn}/*"
+      "Resource": "${bucket_arn}/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": [
+            "415925668545",
+            "071486367987",
+            "581823340673"
+          ],
+          "s3:x-amz-acl": "bucket-owner-full-control"
+        }
+      }
     }
   ]
 }
