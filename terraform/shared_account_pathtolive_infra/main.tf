@@ -77,8 +77,11 @@ resource "aws_s3_bucket_replication_configuration" "replication" {
   role   = aws_iam_role.csoc_s3_replication.arn
 
   rule {
-    id     = "replicate-all-to-parent"
+    id     = "replicate-alb-to-parent"
     status = "Enabled"
+    filter {
+      prefix = "alb/"
+    }
 
     destination {
       bucket  = local.parent_bucket_arn
