@@ -36,7 +36,7 @@ module "check_niam_certificate_expiry" {
       value = "30"
     },
     {
-      name = "PAGERDUTY_WARNING_DAYS"
+      name  = "PAGERDUTY_WARNING_DAYS"
       value = "14"
     },
     {
