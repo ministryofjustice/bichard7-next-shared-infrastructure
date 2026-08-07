@@ -160,7 +160,6 @@ resource "aws_s3_bucket_notification" "sqs_notification" {
     filter_prefix = "AWSLogs/"
     filter_suffix = ".gz"
   }
-
 }
 
 resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
@@ -168,4 +167,11 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
 
   queue_url = aws_sqs_queue.csoc_queue[0].url
   policy    = data.aws_iam_policy_document.send_to_csoc_sqs[0].json
+}
+
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  bucket = local.csoc_bucket_name
+  policy = templatefile("${path.module}/policies/allow_csoc_logs.json.tpl", {
+    bucket_arn = local.csoc_bucket_arn
+  })
 }
