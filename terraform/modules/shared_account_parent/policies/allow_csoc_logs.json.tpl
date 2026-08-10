@@ -115,7 +115,11 @@
       "Sid": "AllowCrossAccountReplicationObjects",
       "Effect": "Allow",
       "Principal": {
-        "Service": "s3.amazonaws.com"
+        "AWS": [
+          "arn:aws:iam::415925668545:root",
+          "arn:aws:iam::071486367987:root",
+          "arn:aws:iam::581823340673:root"
+        ]
       },
       "Action": [
         "s3:ReplicateObject",
@@ -125,12 +129,8 @@
       ],
       "Resource": "${bucket_arn}/*",
       "Condition": {
-        "StringEquals": {
-          "aws:SourceAccount": [
-            "415925668545",
-            "071486367987",
-            "581823340673"
-          ]
+        "ArnLike": {
+          "aws:PrincipalArn": "arn:aws:iam::*:role/bichard-7-production-s3-replication-role"
         }
       }
     }
