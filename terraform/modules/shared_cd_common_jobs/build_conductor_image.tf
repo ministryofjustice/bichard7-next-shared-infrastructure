@@ -3,8 +3,8 @@ module "build_conductor_image" {
 
   name              = "build-conductor-image"
   build_description = "Codebuild for Building Conductor Image"
-  repository_name   = "bichard7-next-infrastructure-docker-images"
-  buildspec_file    = "./Conductor/buildspec.yml"
+  repository_name   = "bichard7-next-core"
+  buildspec_file    = "./environment/conductor/buildspec.yml"
 
   environment_variables = var.user_service_cd_env_vars
 
