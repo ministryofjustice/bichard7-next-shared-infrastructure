@@ -4,7 +4,7 @@ module "build_s3_web_proxy" {
   name              = "build-s3-web-proxy"
   build_description = "Codebuild for Building the S3 Web Proxy Image"
   repository_name   = "bichard7-next-infrastructure-docker-images"
-  buildspec_file    = "./S3_Web_Proxy/buildspec.yml"
+  buildspec_file    = "./S3-Web-Proxy/buildspec.yml"
 
   codepipeline_s3_bucket = var.codebuild_s3_bucket
   sns_notification_arn   = var.sns_notifications_arn
