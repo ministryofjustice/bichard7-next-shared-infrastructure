@@ -14,7 +14,6 @@ module "build_s3_web_proxy" {
   tags = var.tags
 }
 
-
 module "build_s3_web_proxy_image_schedule" {
   source          = "../codebuild_schedule"
   codebuild_arn   = module.build_s3_web_proxy.pipeline_arn

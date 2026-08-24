@@ -33,8 +33,6 @@
       type: admin
     - name: tausif_patel
       type: admin
-    - name: irene_grande
-      type: admin
     - name: tom_watkins
       type: admin
     - name: kate_reidy
@@ -55,3 +53,4 @@
       type: admin
 
 - users_removed:
+    - name: irene_grande
