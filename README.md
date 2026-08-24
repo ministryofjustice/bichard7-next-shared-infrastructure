@@ -23,7 +23,7 @@ tfenv use
 ### Install required tooling for terraform checks
 
 ```shell
-brew install tfsec terraform-docs tflint yamllint jq pre-commit
+brew install tfsec terraform-docs terraform-linters/tap/tflint yamllint jq pre-commit
 ```
 
 ### Install the pre-commit hooks
