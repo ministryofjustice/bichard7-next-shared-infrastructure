@@ -48,3 +48,32 @@ resource "aws_ssm_parameter" "nuke_user_secret_access_key" {
 
   tags = var.tags
 }
+
+data "aws_iam_policy_document" "route53_nuke_permissions" {
+  statement {
+    sid    = "Route53CleanupAccess"
+    effect = "Allow"
+
+    actions = [
+      "route53:ListHostedZones",
+      "route53:ListHostedZonesByName",
+      "route53:ListResourceRecordSets",
+      "route53:ChangeResourceRecordSets",
+      "route53:GetHostedZone",
+      "route53:GetChange"
+    ]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "route53_nuke" {
+  name        = "Route53RecordManagementPolicy"
+  description = "Allows listing and deleting DNS record sets in Route 53"
+  policy      = data.aws_iam_policy_document.route53_nuke_permissions.json
+}
+
+resource "aws_iam_group_policy_attachment" "nuke_group_policy_attach" {
+  group      = aws_iam_group.aws_nuke_group
+  policy_arn = aws_iam_policy.route53_nuke.arn
+}
