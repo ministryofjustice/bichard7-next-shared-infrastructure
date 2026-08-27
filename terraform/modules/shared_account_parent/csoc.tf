@@ -170,6 +170,8 @@ resource "aws_sqs_queue_policy" "csoc_allow_cloudwatch" {
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
+  count = var.is_path_to_live ? 1 : 0
+
   bucket = local.csoc_bucket_name
   policy = templatefile("${path.module}/policies/allow_csoc_logs.json.tpl", {
     bucket_arn = local.csoc_bucket_arn
