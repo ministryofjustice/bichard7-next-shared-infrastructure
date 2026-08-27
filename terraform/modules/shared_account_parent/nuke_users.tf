@@ -50,6 +50,8 @@ resource "aws_ssm_parameter" "nuke_user_secret_access_key" {
 }
 
 data "aws_iam_policy_document" "route53_nuke_permissions" {
+  count = (var.create_nuke_user == true) ? 1 : 0
+
   statement {
     sid    = "Route53CleanupAccess"
     effect = "Allow"
@@ -68,12 +70,16 @@ data "aws_iam_policy_document" "route53_nuke_permissions" {
 }
 
 resource "aws_iam_policy" "route53_nuke" {
+  count = (var.create_nuke_user == true) ? 1 : 0
+
   name        = "Route53RecordManagementPolicy"
   description = "Allows listing and deleting DNS record sets in Route 53"
-  policy      = data.aws_iam_policy_document.route53_nuke_permissions.json
+  policy      = data.aws_iam_policy_document.route53_nuke_permissions[0].json
 }
 
 resource "aws_iam_group_policy_attachment" "nuke_group_policy_attach" {
-  group      = aws_iam_group.aws_nuke_group
-  policy_arn = aws_iam_policy.route53_nuke.arn
+  count = (var.create_nuke_user == true) ? 1 : 0
+
+  group      = aws_iam_group.aws_nuke_group[0]
+  policy_arn = aws_iam_policy.route53_nuke[0].arn
 }
