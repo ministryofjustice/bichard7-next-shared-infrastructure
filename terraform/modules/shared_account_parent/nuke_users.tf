@@ -80,6 +80,6 @@ resource "aws_iam_policy" "route53_nuke" {
 resource "aws_iam_group_policy_attachment" "nuke_group_policy_attach" {
   count = (var.create_nuke_user == true) ? 1 : 0
 
-  group      = aws_iam_group.aws_nuke_group[0]
+  group      = aws_iam_group.aws_nuke_group[0].name
   policy_arn = aws_iam_policy.route53_nuke[0].arn
 }
