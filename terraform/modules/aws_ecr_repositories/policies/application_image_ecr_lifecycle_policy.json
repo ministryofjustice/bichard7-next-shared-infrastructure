@@ -14,7 +14,7 @@
     },
     {
       "rulePriority": 2,
-      "description": "Archive old images",
+      "description": "Expire old images",
       "selection": {
         "tagStatus": "any",
         "countType": "sinceImagePushed",
