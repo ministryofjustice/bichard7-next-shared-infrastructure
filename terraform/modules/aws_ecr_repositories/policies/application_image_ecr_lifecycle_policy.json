@@ -11,6 +11,19 @@
       "action": {
         "type": "expire"
       }
+    },
+    {
+      "rulePriority": 2,
+      "description": "Archive old images",
+      "selection": {
+        "tagStatus": "any",
+        "countType": "sinceImagePushed",
+        "countUnit": "days",
+        "countNumber": 180
+      },
+      "action": {
+        "type": "expire"
+      }
     }
   ]
 }
