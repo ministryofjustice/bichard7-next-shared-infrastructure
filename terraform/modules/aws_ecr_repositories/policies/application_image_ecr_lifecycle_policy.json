@@ -11,6 +11,19 @@
       "action": {
         "type": "expire"
       }
+    },
+    {
+      "rulePriority": 2,
+      "description": "Expire old images",
+      "selection": {
+        "tagStatus": "any",
+        "countType": "sinceImagePushed",
+        "countUnit": "days",
+        "countNumber": 365
+      },
+      "action": {
+        "type": "expire"
+      }
     }
   ]
 }
