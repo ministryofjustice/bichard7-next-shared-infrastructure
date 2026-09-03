@@ -19,7 +19,7 @@
         "tagStatus": "any",
         "countType": "sinceImagePushed",
         "countUnit": "days",
-        "countNumber": 180
+        "countNumber": 365
       },
       "action": {
         "type": "expire"
