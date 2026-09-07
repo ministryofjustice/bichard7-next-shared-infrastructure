@@ -10,15 +10,6 @@
         "dynamodb:DescribeTimeToLive",
         "dynamodb:ListTagsOfResource",
         "dynamodb:DeleteTable"
-        "elasticbeanstalk:AbortEnvironmentUpdate",
-        "elasticbeanstalk:Delete*",
-        "elasticbeanstalk:Describe*",
-        "elasticbeanstalk:DisassociateEnvironmentOperationsRole",
-        "elasticbeanstalk:List*",
-        "elasticbeanstalk:RemoveTags",
-        "elasticbeanstalk:RetrieveEnvironmentInfo",
-        "elasticbeanstalk:RequestEnvironmentInfo",
-        "elasticbeanstalk:TerminateEnvironment"
       ],
       "Resource": "*"
     }
