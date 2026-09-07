@@ -5,6 +5,11 @@
       "Sid": "AllowNukePart4",
       "Effect": "Allow",
       "Action": [
+        "dynamodb:ListTables",
+        "dynamodb:DescribeTable",
+        "dynamodb:DescribeTimeToLive",
+        "dynamodb:ListTagsOfResource",
+        "dynamodb:DeleteTable"
         "elasticbeanstalk:AbortEnvironmentUpdate",
         "elasticbeanstalk:Delete*",
         "elasticbeanstalk:Describe*",
