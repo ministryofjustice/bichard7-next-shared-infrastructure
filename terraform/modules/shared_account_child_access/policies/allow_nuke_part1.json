@@ -37,6 +37,7 @@
         "kms:Describe*",
         "kms:Delete*",
         "kms:Decrypt",
+        "kms:ScheduleKeyDeletion",
         "ecr:BatchCheckLayerAvailability",
         "ecr:BatchDeleteImage",
         "ecr:BatchGetImage",
