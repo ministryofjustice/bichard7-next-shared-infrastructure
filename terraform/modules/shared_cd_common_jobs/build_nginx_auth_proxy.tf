@@ -3,8 +3,8 @@ module "build_nginx_auth_proxy_docker_image" {
 
   name              = "build-nginx-auth-proxy-docker"
   build_description = "Codebuild for Building Nginx Authentication Proxy"
-  repository_name   = "bichard7-next-infrastructure-docker-images"
-  buildspec_file    = "./Nginx_Auth_Proxy/buildspec.yml"
+  repository_name   = "bichard7-next-core"
+  buildspec_file    = "./packages/nginx-auth-proxy/buildspec.yml"
 
   environment_variables = var.user_service_cd_env_vars
 
