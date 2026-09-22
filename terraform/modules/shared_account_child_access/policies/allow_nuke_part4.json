@@ -9,7 +9,13 @@
         "dynamodb:DescribeTable",
         "dynamodb:DescribeTimeToLive",
         "dynamodb:ListTagsOfResource",
-        "dynamodb:DeleteTable"
+        "dynamodb:DeleteTable",
+        "ssm:DescribeParameters",
+        "ssm:GetParameter",
+        "ssm:GetParameters",
+        "ssm:ListTagsForResource",
+        "ssm:DeleteParameter",
+        "ssm:DeleteParameters"
       ],
       "Resource": "*"
     }
