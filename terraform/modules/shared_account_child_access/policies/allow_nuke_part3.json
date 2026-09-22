@@ -22,6 +22,7 @@
         "events:Remove*",
         "events:UntagResource",
         "logs:DescribeLogGroups",
+        "logs:DescribeLogStream",
         "logs:DescribeResourcePolicies",
         "logs:DeleteLogGroup",
         "logs:DeleteResourcePolicy",
