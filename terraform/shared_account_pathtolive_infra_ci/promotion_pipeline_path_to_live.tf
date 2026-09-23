@@ -1543,7 +1543,6 @@ module "code_to_be_deployed" {
   buildspec_file         = "buildspecs/code-to-be-deployed.yml"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -1572,7 +1571,7 @@ module "notify_deploying_to_prod" {
   buildspec_file         = "buildspecs/deploying-to-prod-notification.yml"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn
+    module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
   build_environments = [
@@ -1602,7 +1601,6 @@ module "run_prod_smoketests" {
   vpc_config             = module.codebuild_base_resources.codebuild_vpc_config_blocks["production"]
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 

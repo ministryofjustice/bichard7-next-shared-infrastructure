@@ -16,7 +16,6 @@ module "deploy_help_docs" {
   build_timeout = 180
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
