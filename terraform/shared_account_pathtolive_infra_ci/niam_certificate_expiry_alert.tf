@@ -26,7 +26,6 @@ module "check_niam_certificate_expiry" {
   build_environments = local.codebuild_2023_pipeline_build_environments
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 

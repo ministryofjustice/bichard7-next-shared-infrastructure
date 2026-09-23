@@ -32,7 +32,6 @@ module "deploy_production_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     data.aws_ecr_repository.bichard.arn,
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -234,7 +233,6 @@ module "apply_dev_sg_to_prod" {
   deployment_name     = "production"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -289,7 +287,6 @@ module "remove_dev_sg_from_prod" {
   deployment_name     = "production"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -586,7 +583,6 @@ module "optimise_prod_db" {
   deployment_name     = "production"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
