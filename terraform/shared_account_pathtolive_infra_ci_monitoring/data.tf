@@ -7,22 +7,20 @@ data "aws_caller_identity" "current" {
 data "terraform_remote_state" "shared_infra" {
   backend = "s3"
   config = {
-    bucket         = local.remote_bucket_name
-    dynamodb_table = "${local.remote_bucket_name}-lock"
-    use_lockfile   = true
-    key            = "tfstatefile"
-    region         = "eu-west-2"
+    bucket       = local.remote_bucket_name
+    use_lockfile = true
+    key          = "tfstatefile"
+    region       = "eu-west-2"
   }
 }
 
 data "terraform_remote_state" "shared_infra_ci" {
   backend = "s3"
   config = {
-    bucket         = local.remote_bucket_name
-    dynamodb_table = "${local.remote_bucket_name}-lock"
-    use_lockfile   = true
-    key            = "ci/tfstatefile"
-    region         = "eu-west-2"
+    bucket       = local.remote_bucket_name
+    use_lockfile = true
+    key          = "ci/tfstatefile"
+    region       = "eu-west-2"
   }
 }
 
