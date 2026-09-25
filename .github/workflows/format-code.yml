@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4
         with:
+          fetch-depth: 0
           persist-credentials: 'false'
 
       - name: ⛓️ SLSA Supply Chain Security
@@ -17,6 +18,6 @@ jobs:
 
       - uses: ministryofjustice/bichard7-next-core/.github/actions/code-formatter@main
         with:
-          ignore-files: ".python-version,*.py"
+          ignore-files: ".python-version"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
