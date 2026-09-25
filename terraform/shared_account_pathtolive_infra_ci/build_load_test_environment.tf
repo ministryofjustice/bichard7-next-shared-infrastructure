@@ -34,7 +34,6 @@ module "deploy_load_test_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     data.aws_ecr_repository.bichard.arn,
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -235,7 +234,6 @@ module "apply_dev_sg_to_load_test" {
   deployment_name     = "load-test"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -290,7 +288,6 @@ module "remove_dev_sg_from_load_test" {
   deployment_name     = "load-test"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 

@@ -46,16 +46,6 @@ locals {
 
   amazon_linux_2023 = "aws/codebuild/amazonlinux-x86_64-standard:5.0"
 
-  pipeline_build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_MEDIUM"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = true
-      image                       = "${data.aws_ecr_repository.codebuild_base.repository_url}@${data.external.latest_codebuild_base.result.tags}"
-      image_pull_credentials_type = "SERVICE_ROLE"
-    }
-  ]
-
   codebuild_2023_pipeline_build_environments = [
     {
       compute_type                = "BUILD_GENERAL1_MEDIUM"
