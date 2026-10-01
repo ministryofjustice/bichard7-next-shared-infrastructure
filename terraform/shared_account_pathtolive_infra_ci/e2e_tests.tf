@@ -11,7 +11,6 @@ module "run_e2e_tests" {
   event_type_ids = []
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 

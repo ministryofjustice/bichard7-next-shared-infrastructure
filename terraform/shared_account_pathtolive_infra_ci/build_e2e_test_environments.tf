@@ -34,7 +34,6 @@ module "deploy_e2e_test_terraform" {
     module.codebuild_docker_resources.liquibase_repository_arn,
     module.codebuild_docker_resources.amazon_linux_2_repository_arn,
     data.aws_ecr_repository.bichard.arn,
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -265,7 +264,6 @@ module "apply_dev_sg_to_e2e_test" {
   deployment_name     = "e2e-test"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -320,7 +318,6 @@ module "remove_dev_sg_from_e2e_test" {
   deployment_name     = "e2e-test"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
@@ -384,7 +381,6 @@ module "optimise_e2e_test_db" {
   deployment_name     = "e2e-test"
 
   allowed_resource_arns = [
-    data.aws_ecr_repository.codebuild_base.arn,
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
