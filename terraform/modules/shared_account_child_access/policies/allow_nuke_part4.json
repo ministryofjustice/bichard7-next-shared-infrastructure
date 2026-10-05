@@ -49,7 +49,6 @@
         "ssm:ListTagsForResource",
         "ssm:DeleteParameter",
         "ssm:DeleteParameters"
-
       ],
       "Resource": "*"
     }
