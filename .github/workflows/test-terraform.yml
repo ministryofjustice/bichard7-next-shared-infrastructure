@@ -8,11 +8,17 @@ on:
   pull_request:
 
 jobs:
-  test_terraform:
-    name: Test Terraform
+  validate_terraform:
+    name: Validate Terraform
     runs-on: ubuntu-latest
 
     steps:
+      - name: ⛓️ SLSA Supply Chain Security
+        uses: ministryofjustice/devsecops-actions/sca/slsa@7dc13c20e2bf541b8a77fa1320a04983b18846f6 # v1.6.0
+
+      - name: Free up disk space
+        run: sudo rm -rf /usr/local/lib/android
+
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -21,5 +27,32 @@ jobs:
         with:
           terraform_version: .terraform-version
 
-      - name: Validate Terrafrom files (terraform validate)
+      - name: Validate Terraform files
         run: make terraform-validate
+
+  trivy_scan:
+    name: Trivy Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⛓️ SLSA Supply Chain Security
+        uses: ministryofjustice/devsecops-actions/sca/slsa@7dc13c20e2bf541b8a77fa1320a04983b18846f6 # v1.6.0
+        
+      - name: Free up disk space
+        run: sudo rm -rf /usr/local/lib/android
+
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install dependencies
+        run: |
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.70.0/trivy_0.70.0_Linux-64bit.tar.gz -O /tmp/trivy.tar.gz
+          cd /tmp && tar -xzf trivy.tar.gz
+          sudo cp ./trivy /usr/bin/trivy
+          sudo chmod +x /usr/bin/trivy
+
+      - name: Run Trivy on Terraform files
+        run: trivy config --exit-code 0 --tf-exclude-downloaded-modules ./terraform
+
+      - name: Run Trivy on Terraform files (fail on critical)
+        run: trivy config --exit-code 1 --severity CRITICAL --tf-exclude-downloaded-modules ./terraform
