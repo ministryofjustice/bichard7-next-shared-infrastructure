@@ -205,13 +205,25 @@ resource "aws_iam_role_policy" "allow_production_codebuild_bucket" {
   provider = aws.production
 }
 
+resource "aws_iam_user" "github_actions" {
+  name = "github-actions"
+  path = "/system/"
+
+  tags = merge(
+    module.label.tags,
+    {
+      "user-role" = "github-actions"
+    }
+  )
+}
+
 resource "aws_iam_group" "github_actions" {
   name = "GitHubActions"
   path = "/groups/"
 }
 
 resource "aws_iam_user_group_membership" "github_actions_user_membership" {
-  user   = "github-actions"
+  user   = aws_iam_user.github_actions.name
   groups = [aws_iam_group.github_actions.name]
 }
 
