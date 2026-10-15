@@ -51,7 +51,5 @@
       type: admin
     - name: shomik_ahmed
       type: admin
-    - name: github_actions
-      type: github_actions
 
 - users_removed:
