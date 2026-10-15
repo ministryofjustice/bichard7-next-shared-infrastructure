@@ -205,28 +205,6 @@ resource "aws_iam_role_policy" "allow_production_codebuild_bucket" {
   provider = aws.production
 }
 
-resource "aws_iam_user" "github_actions" {
-  name = "github-actions"
-  path = "/system/"
-
-  tags = merge(
-    module.label.tags,
-    {
-      "user-role" = "github-actions"
-    }
-  )
-}
-
-resource "aws_iam_group" "github_actions" {
-  name = "GitHubActions"
-  path = "/groups/"
-}
-
-resource "aws_iam_user_group_membership" "github_actions_user_membership" {
-  user   = aws_iam_user.github_actions.name
-  groups = [aws_iam_group.github_actions.name]
-}
-
 data "aws_iam_policy_document" "ecr_pull_policy" {
   statement {
     sid       = "ECRAuthToken"
@@ -257,7 +235,7 @@ resource "aws_iam_policy" "ecr_pull" {
   policy      = data.aws_iam_policy_document.ecr_pull_policy.json
 }
 
-resource "aws_iam_group_policy_attachment" "attach_ecr_pull" {
-  group      = aws_iam_group.github_actions.name
+resource "aws_iam_role_policy_attachment" "attach_ecr_pull" {
+  role       = data.terraform_remote_state.shared_infra.outputs.github_oidc_role_name
   policy_arn = aws_iam_policy.ecr_pull.arn
 }
