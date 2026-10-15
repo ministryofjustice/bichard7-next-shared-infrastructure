@@ -117,3 +117,18 @@ output "codebuild_2023_base" {
   description = "The ecr repository for our codebuild 2023 image"
   value       = aws_ecr_repository.codebuild_2023_base
 }
+
+output "amazon_linux_2023" {
+  description = "The ecr repository for our amazon_linux_2023 image"
+  value       = aws_ecr_repository.amazon_linux_2023
+}
+
+output "nodejs_24_2023" {
+  description = "The ecr repository for our nodejs_24_2023 image"
+  value       = aws_ecr_repository.nodejs_24_2023
+}
+
+output "nginx_nodejs_24_2023_supervisord" {
+  description = "The ecr repository for our nginx_nodejs_24_2023_supervisord image"
+  value       = aws_ecr_repository.nginx_nodejs_24_2023_supervisord
+}
