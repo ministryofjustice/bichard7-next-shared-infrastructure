@@ -19,6 +19,12 @@
         - IthcReadOnlyAccess
       aws_tags:
         "user-role": ithc
+    github_actions:
+      groups:
+        - EnforceMFA
+        - GitHubActions
+      aws_tags:
+        "user-role": github_actions
 
 - users_enabled:
     - name: ben_pirt
@@ -51,6 +57,7 @@
       type: admin
     - name: shomik_ahmed
       type: admin
+    - name: github_actions
+      type: github_actions
 
 - users_removed:
-    - name: irene_grande
