@@ -233,8 +233,8 @@ data "aws_iam_policy_document" "ecr_pull_policy" {
     ]
     resources = [
       module.codebuild_docker_resources.amazon_linux_2023.arn,
-      module.codebuild_docker_resources.nodejs_24_2023,
-      module.codebuild_docker_resources.nginx_nodejs_24_2023_supervisord
+      module.codebuild_docker_resources.nodejs_24_2023.arn,
+      module.codebuild_docker_resources.nginx_nodejs_24_2023_supervisord.arn
     ]
   }
 }
