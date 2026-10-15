@@ -49,8 +49,3 @@ output "ci_policy_arn" {
   description = "The arn of our ci policy"
   value       = aws_iam_policy.ci_policy.arn
 }
-
-output "github_oidc_role_name" {
-  description = "The Github OIDC role name"
-  value       = aws_iam_role.github_oidc_role.name
-}

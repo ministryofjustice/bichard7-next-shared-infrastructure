@@ -53,3 +53,8 @@ resource "aws_iam_role_policy_attachment" "audit_attach" {
   role       = aws_iam_role.github_oidc_role.name
   policy_arn = aws_iam_policy.iam_read_only_audit.arn
 }
+
+resource "aws_iam_role_policy_attachment" "ecr_pull" {
+  role       = aws_iam_role.github_oidc_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly"
+}

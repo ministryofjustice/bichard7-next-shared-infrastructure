@@ -204,38 +204,3 @@ resource "aws_iam_role_policy" "allow_production_codebuild_bucket" {
 
   provider = aws.production
 }
-
-data "aws_iam_policy_document" "ecr_pull_policy" {
-  statement {
-    sid       = "ECRAuthToken"
-    effect    = "Allow"
-    actions   = ["ecr:GetAuthorizationToken"]
-    resources = ["*"]
-  }
-
-  statement {
-    sid    = "ECRPullActions"
-    effect = "Allow"
-    actions = [
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:BatchGetImage"
-    ]
-    resources = [
-      module.codebuild_docker_resources.amazon_linux_2023.arn,
-      module.codebuild_docker_resources.nodejs_24_2023.arn,
-      module.codebuild_docker_resources.nginx_nodejs_24_2023_supervisord.arn
-    ]
-  }
-}
-
-resource "aws_iam_policy" "ecr_pull" {
-  name        = "ECRImagePullPolicy"
-  description = "Grants minimal permissions to pull images from specific ECR repositories"
-  policy      = data.aws_iam_policy_document.ecr_pull_policy.json
-}
-
-resource "aws_iam_role_policy_attachment" "attach_ecr_pull" {
-  role       = data.terraform_remote_state.shared_infra.outputs.github_oidc_role_name
-  policy_arn = aws_iam_policy.ecr_pull.arn
-}

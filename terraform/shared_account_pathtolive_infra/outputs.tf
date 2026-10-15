@@ -88,8 +88,3 @@ output "production_admin_arn" {
   description = "The production Admin Assume Role ARN"
   value       = module.production_child_access.administrator_access_role.arn
 }
-
-output "github_oidc_role_name" {
-  description = "The Github OIDC role name"
-  value       = module.shared_account_user_access.github_oidc_role_name
-}
