@@ -204,3 +204,48 @@ resource "aws_iam_role_policy" "allow_production_codebuild_bucket" {
 
   provider = aws.production
 }
+
+resource "aws_iam_group" "github_actions" {
+  name = "GitHubActions"
+  path = "/groups/"
+}
+
+resource "aws_iam_user_group_membership" "github_actions_user_membership" {
+  user   = "github-actions"
+  groups = [aws_iam_group.github_actions.name]
+}
+
+data "aws_iam_policy_document" "ecr_pull_policy" {
+  statement {
+    sid       = "ECRAuthToken"
+    effect    = "Allow"
+    actions   = ["ecr:GetAuthorizationToken"]
+    resources = ["*"]
+  }
+
+  statement {
+    sid    = "ECRPullActions"
+    effect = "Allow"
+    actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage"
+    ]
+    resources = [
+      module.codebuild_docker_resources.amazon_linux_2023.arn,
+      module.codebuild_docker_resources.nodejs_24_2023.arn,
+      module.codebuild_docker_resources.nginx_nodejs_24_2023_supervisord.arn
+    ]
+  }
+}
+
+resource "aws_iam_policy" "ecr_pull" {
+  name        = "ECRImagePullPolicy"
+  description = "Grants minimal permissions to pull images from specific ECR repositories"
+  policy      = data.aws_iam_policy_document.ecr_pull_policy.json
+}
+
+resource "aws_iam_group_policy_attachment" "attach_ecr_pull" {
+  group      = aws_iam_group.github_actions.name
+  policy_arn = aws_iam_policy.ecr_pull.arn
+}
