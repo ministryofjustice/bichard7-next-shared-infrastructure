@@ -205,14 +205,14 @@ resource "aws_iam_role_policy" "allow_production_codebuild_bucket" {
   provider = aws.production
 }
 
-resource "aws_iam_group" "ecr_pullers" {
+resource "aws_iam_group" "github_actions" {
   name = "GitHubActions"
   path = "/groups/"
 }
 
-resource "aws_iam_user_group_membership" "ecr_pull_user_membership" {
+resource "aws_iam_user_group_membership" "github_actions_user_membership" {
   user   = "github-actions"
-  groups = [aws_iam_group.ecr_pullers.name]
+  groups = [aws_iam_group.github_actions.name]
 }
 
 data "aws_iam_policy_document" "ecr_pull_policy" {
@@ -246,6 +246,6 @@ resource "aws_iam_policy" "ecr_pull" {
 }
 
 resource "aws_iam_group_policy_attachment" "attach_ecr_pull" {
-  group      = aws_iam_group.ecr_pullers.name
+  group      = aws_iam_group.github_actions.name
   policy_arn = aws_iam_policy.ecr_pull.arn
 }

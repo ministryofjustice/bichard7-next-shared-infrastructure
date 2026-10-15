@@ -21,7 +21,6 @@
         "user-role": ithc
     github_actions:
       groups:
-        - EnforceMFA
         - GitHubActions
       aws_tags:
         "user-role": github_actions
