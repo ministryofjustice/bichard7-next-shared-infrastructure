@@ -78,7 +78,7 @@ resource "aws_iam_role" "github_core_repo_oidc_role" {
         }
         Condition = {
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:${local.github_core_repo}:ref:refs/heads/*"
+            "token.actions.githubusercontent.com:sub" = "repo:${local.github_core_repo}:*"
           }
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
