@@ -89,7 +89,7 @@ resource "aws_iam_role" "github_core_repo_oidc_role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "ecr_pull" {
+resource "aws_iam_role_policy_attachment" "ecr_read_only" {
   role       = aws_iam_role.github_core_repo_oidc_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
