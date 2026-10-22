@@ -14,15 +14,7 @@ module "verify_ecs_tasks" {
     module.codebuild_docker_resources.codebuild_2023_base.arn
   ]
 
-  build_environments = [
-    {
-      compute_type                = "BUILD_GENERAL1_SMALL"
-      type                        = "LINUX_CONTAINER"
-      privileged_mode             = false
-      image                       = local.amazon_linux_2023
-      image_pull_credentials_type = "CODEBUILD"
-    }
-  ]
+  build_environments = local.codebuild_2023_pipeline_build_environments
 
   tags = module.label.tags
 }
