@@ -279,9 +279,11 @@
           "backup:ListRestoreJobs",
           "backup:ListTags",
           "backup:PutBackupVaultAccessPolicy",
+          "backup:PutBackupVaultLockConfiguration",
           "backup:PutBackupVaultNotifications",
           "backup:StartBackupJob",
-          "backup:TagResource"
+          "backup:TagResource",
+          "backup:UpdateBackupPlan"
       ],
       "Resource": [
           "*"
