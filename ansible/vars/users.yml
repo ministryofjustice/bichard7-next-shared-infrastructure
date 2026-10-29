@@ -49,7 +49,6 @@
       type: admin
     - name: caitlin_barnard
       type: admin
-    - name: shomik_ahmed
-      type: admin
 
 - users_removed:
+    - name: shomik_ahmed
