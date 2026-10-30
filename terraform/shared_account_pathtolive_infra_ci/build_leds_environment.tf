@@ -453,12 +453,33 @@ module "run_all_leds_e2e_tests_schedule" {
   source          = "../modules/codebuild_schedule"
   codebuild_arn   = module.run_leds_tests.pipeline_arn
   name            = "run-all-leds-e2e-tests-in-leds-env"
-  cron_expression = "cron(0 23 * * ? *)" # daily at 11pm
+  cron_expression = "cron(0 22 * * ? *)" # daily at 10pm
 
   environment_variable_overrides = [
     {
       name  = "TEST_COMMAND"
-      value = "test:leds:real"
+      value = "test:leds:real:nextUI"
+      }, {
+      name  = "TEST_COMMAND_DESCRIPTION"
+      value = "LEDS e2e-tests against the new UI"
+  }]
+
+  tags = module.label.tags
+}
+
+module "run_all_leds_old_ui_e2e_tests_schedule" {
+  source          = "../modules/codebuild_schedule"
+  codebuild_arn   = module.run_leds_tests.pipeline_arn
+  name            = "run-all-leds-old-ui-e2e-tests-in-leds-env"
+  cron_expression = "cron(0 1 * * ? *)" # daily at 1am
+
+  environment_variable_overrides = [
+    {
+      name  = "TEST_COMMAND"
+      value = "test:leds:real:oldUI"
+      }, {
+      name  = "TEST_COMMAND_DESCRIPTION"
+      value = "LEDS e2e-tests against the old UI"
   }]
 
   tags = module.label.tags
