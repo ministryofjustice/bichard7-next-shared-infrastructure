@@ -203,6 +203,7 @@
         "ssm:GetParameters",
         "ssm:GetParameter",
         "ssm:DeleteParameters",
+        "ssm:GetServiceSetting",
         "ssm:UpdateServiceSetting"
       ],
       "Resource": [
