@@ -202,14 +202,16 @@
         "ssm:GetParametersByPath",
         "ssm:GetParameters",
         "ssm:GetParameter",
-        "ssm:DeleteParameters"
+        "ssm:DeleteParameters",
+        "ssm:UpdateServiceSetting"
       ],
       "Resource": [
         "arn:aws:ssm:*:${account_id}:document/*",
         "arn:aws:ssm:*:${account_id}:parameter/*",
         "arn:aws:ssm:*:${account_id}:patchbaseline/*",
         "arn:aws:ssm:*:${account_id}:maintenancewindow/*",
-        "arn:aws:ssm:*:${account_id}:managed-instance/*"
+        "arn:aws:ssm:*:${account_id}:managed-instance/*",
+        "arn:aws:ssm:*:${account_id}:servicesetting/*"
       ]
     },
     {
