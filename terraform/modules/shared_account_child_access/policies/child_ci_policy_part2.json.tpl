@@ -196,15 +196,11 @@
         "ssm:LabelParameterVersion",
         "ssm:DeleteParameter",
         "ssm:RemoveTagsFromResource",
-        "ssm:GetParameterHistory",
         "ssm:AddTagsToResource",
         "ssm:ListTagsForResource",
-        "ssm:GetParametersByPath",
-        "ssm:GetParameters",
-        "ssm:GetParameter",
+        "ssm:GetParameter*",
         "ssm:DeleteParameters",
-        "ssm:GetServiceSetting",
-        "ssm:UpdateServiceSetting"
+        "ssm:*ServiceSetting"
       ],
       "Resource": [
         "arn:aws:ssm:*:${account_id}:document/*",
