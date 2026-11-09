@@ -138,7 +138,7 @@ module "deploy_uat_terraform" {
     },
     {
       name  = "TF_VAR_aurora_db_version"
-      value = "15.15"
+      value = "15.17"
     },
   ]
 
