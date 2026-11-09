@@ -92,7 +92,7 @@ module "plan_e2e_test_terraform" {
     },
     {
       name  = "TF_VAR_aurora_db_version"
-      value = "15.15"
+      value = "15.17"
     },
     {
       name  = "TF_VAR_bichard_deploy_tag"
